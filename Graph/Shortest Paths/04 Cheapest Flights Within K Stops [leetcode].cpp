@@ -21,7 +21,8 @@ public:
     int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int K) {
         vector<int> dis(n, 1e9);
         dis[src] = 0;
-        for(int i = 0; i <= K; i++){
+        // Run only K+1 times since we want shortest distance in K hops
+        for(int i = 0; i <= K; i++) {
             vector<int> tempDis(dis);
             for(auto x: flights) {
                 int u = x[0];
@@ -42,7 +43,10 @@ public:
 
 
 
-// Method 2
+
+
+
+// Method 2: TLE
 class Solution {
 public:
     static const int N = 1e2+5;
@@ -58,7 +62,7 @@ public:
             return;
         }
         
-        if(k < 0) return;
+        if(k == 0) return;
         
         vis[u] = 1;
         
@@ -78,9 +82,42 @@ public:
             g[i[0]].push_back(i[1]);
             costs[{i[0], i[1]}] = i[2];
         }
-        dfs(src, dst, K, 0);
+        dfs(src, dst, K+1, 0);
         
         if(fareCost == 1e9) return -1;
         return fareCost;
+    }
+};
+
+
+
+
+// Method 3: TLE
+class Solution {
+public:
+    int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int K) {
+        vector<pair<int, int>> g[n+1];
+        for(auto it: flights) {
+            g[it[0]].push_back({it[1], it[2]});
+        }
+        
+        priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
+        pq.push({0, src, K+1}); // cost, vertex, hops
+        
+        while(!pq.empty() ) {
+            auto it = pq.top(); pq.pop();
+            int cost = it[0];
+            int u = it[1];
+            int stops = it[2];
+            
+            if(u == dst) return cost;
+
+            if(stops > 0) {
+                for(auto [v, w]: g[u]) {
+                    pq.push({cost + w, v, stops - 1});
+                }
+            }
+        }
+        return -1;
     }
 };
