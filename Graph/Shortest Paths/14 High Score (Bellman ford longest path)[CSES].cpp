@@ -4,6 +4,11 @@
 // Method 1 (https://youtu.be/WMTIoCkVFw4)
 /*
 We will calculate shortest path by reversing the weights to find the longest weight path.
+But in this problem even if there is a cycle in graph but not a part of path between vertex 1 and n is tolerable.
+So we use g and revG.
+vis[u] is used to check if there exists path from 1 to u.
+revVis[v] is used to check if there exists path from v to n.
+This majorly helps in eliminating relaxation of loops which are not part of 1 to n path.
 */
 void dfs(int u, vector<int>& vis, vector<vector<int>>& g) {
     vis[u] = 1;
