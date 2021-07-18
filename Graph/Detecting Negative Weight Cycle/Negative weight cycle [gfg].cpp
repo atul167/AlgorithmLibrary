@@ -49,11 +49,11 @@ public:
 
 class Solution {
 public:
-	int isNegativeWeightCycle(int n, vector<vector<int>>edges){
-	    vector < long long > dis(n, 1e9);
+    int isNegativeWeightCycle(int n, vector < vector < int >> edges) {
+        vector < long long > dis(n, 1e9);
         int src = 0;
         dis[src] = 0;
-        for (int i = 1; i <= n-1; i++) {
+        for (int i = 1; i <= n - 1; i++) {
             for (auto x: edges) {
                 int u = x[0];
                 int v = x[1];
@@ -61,20 +61,19 @@ public:
                 dis[v] = min(dis[v], dis[u] + d);
             }
         }
-        
+
         for (auto x: edges) {
             int u = x[0];
             int v = x[1];
             int d = x[2];
-            if(dis[v] > dis[u] + d) {
+            if (dis[v] > dis[u] + d) {
                 return true;
             }
         }
-        
-        return false;
-	}
-};
 
+        return false;
+    }
+};
 
 
 
@@ -89,8 +88,8 @@ public:
 
 class Solution {
 public:
-	int isNegativeWeightCycle(int n, vector<vector<int>>edges){
-	    vector < long long > dis(n, 1e9);
+    int isNegativeWeightCycle(int n, vector < vector < int >> edges) {
+        vector < long long > dis(n, 1e9);
         int src = 0;
         dis[src] = 0;
         for (int i = 1; i <= n - 1; i++) {
@@ -103,16 +102,16 @@ public:
             }
             dis = tempDis;
         }
-        
+
         for (auto x: edges) {
             int u = x[0];
             int v = x[1];
             int d = x[2];
-            if(dis[v] > dis[u] + d) {
+            if (dis[v] > dis[u] + d) {
                 return true;
             }
         }
-        
+
         return false;
-	}
+    }
 };
