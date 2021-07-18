@@ -31,11 +31,13 @@ void solve() {
     vector<int> dis(n+1, INF);
     dis[1] = 0;
     bool flag = 0;
-    // loop from 1 to n to keeo track of negative weight cycle on n'th iteration
+    // loop from 1 to n to keep track of negative weight cycle on n'th iteration
     for (int i = 1; i <= n; i++) {
         flag = 0;
         for(auto it: edges) {
             tie(u, v, w) = it;
+            // vis and revVis check is used to check if there exists path from 1 to u and from v to n 
+            // this majorly helps in eliminating relaxation of loops which are not part of 1 to n path
             if(vis[u] and revVis[v] and dis[v] > dis[u] + w) {
                 flag = 1;
                 dis[v] = dis[u] + w;
