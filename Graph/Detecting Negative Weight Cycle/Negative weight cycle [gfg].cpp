@@ -1,3 +1,5 @@
+// https://practice.geeksforgeeks.org/problems/negative-weight-cycle3504/1
+
 /*
 Given a weighted directed graph with n nodes and m edges. 
 Nodes are labeled from 0 to n-1, the task is to check if it contains a negative weight cycle or not.
@@ -15,7 +17,7 @@ public:
                 int u = x[0];
                 int v = x[1];
                 int d = x[2];
-                if (dis[u] != INT_MAX && dis[v] > dis[u] + d) {
+                if (dis[u] != INT_MAX) {
                     dis[v] = min(dis[v], dis[u] + d);
                 }
             }
