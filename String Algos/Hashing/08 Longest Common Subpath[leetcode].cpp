@@ -58,12 +58,13 @@ public:
             if(paths[i].size() < len) {
                 return false;
             }
-            unordered_set<ll> tempS;
+
             ll hash = 0;
             for(ll j = 0; j < len; j++) {
                 hash = (hash + (((paths[i][j] + 1) * p[len - 1 - j]) % MOD)) % MOD;
             }
             
+            unordered_set<ll> tempS;
             if(i == 0) {
                 s.insert(hash);
             } else {
@@ -141,13 +142,14 @@ public:
             if(paths[i].size() < len) {
                 return false;
             }
-            set<pair<ll, ll>> tempS;
+
             ll hash1 = 0, hash2 = 0;
             for(ll j = 0; j < len; j++) {
                 hash1 = (hash1 + (((paths[i][j] + 1) * p1[len - 1 - j]) % MOD1)) % MOD1;
                 hash2 = (hash2 + (((paths[i][j] + 1) * p2[len - 1 - j]) % MOD2)) % MOD2;
             }
             
+            set<pair<ll, ll>> tempS;
             if(i == 0) {
                 s.insert({hash1, hash2});
             } else {
@@ -207,6 +209,6 @@ public:
                 hi = mid - 1;
             }
         }
-        return hi;
+        return lo;
     }
 };
