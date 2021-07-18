@@ -1,8 +1,17 @@
 // https://leetcode.com/problems/cheapest-flights-within-k-stops/
 
 /*
+https://leetcode.com/problems/cheapest-flights-within-k-stops/discuss/662812/C%2B%2B-BFS-or-Bellman-Ford-Algo-or-Dijkstra-Algo
+
 Mangesh:
 Aur tum agar extra vector (tempDis) nhi Lete ho toh ek iteration mai multiple times shortest distance modify ho skta hai
+
+tmp will store the changes made in dis vector, cause we don't want to use the immediate changes in the dist
+Lets take second example:
+n = 3, edges = [[0,1,100],[1,2,100],[0,2,500]], src = 0, dst = 2, k = 0
+if we don't use tmp vector than
+[0, 1, 100] will update dist of dist[1] = 100
+[1, 2, 100] will update dist[2] as 200 but (this is wrong cause we can use at most k i.e 0 here stops but here 0->1->2 will be 1 stops)
 */
 
 
