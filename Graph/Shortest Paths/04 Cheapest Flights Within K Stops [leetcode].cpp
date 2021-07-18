@@ -3,10 +3,11 @@
 /*
 https://leetcode.com/problems/cheapest-flights-within-k-stops/discuss/662812/C%2B%2B-BFS-or-Bellman-Ford-Algo-or-Dijkstra-Algo
 
-Mangesh:
-Aur tum agar extra vector (tempDis) nhi Lete ho toh ek iteration mai multiple times shortest distance modify ho skta hai
+In bellman ford there are possibities of getting our answer for node X distance away before Xth iteration.
+That is why temp is used to eliminate the possibility of getting our ans for node X distance away before Xth iteration.
+That means at Kth iteration only node K distance away can fill.
 
-tmp will store the changes made in dis vector, cause we don't want to use the immediate changes in the dist
+tempDis will store the changes made in dis vector, cause we don't want to use the immediate changes in the dist
 Lets take second example:
 n = 3, edges = [[0,1,100],[1,2,100],[0,2,500]], src = 0, dst = 2, k = 0
 if we don't use tmp vector than
