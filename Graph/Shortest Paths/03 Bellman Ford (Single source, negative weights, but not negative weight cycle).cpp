@@ -42,3 +42,29 @@ void solve() {
         cout << dis[i] << " ";
     }
 }
+
+
+
+
+
+
+
+class Solution {
+public:
+    vector <int> bellmanFord(int n, vector <vector<int>> edges) {
+        vector <int> dis(n, INT_MAX);
+        int src = 0;
+        dis[src] = 0;
+        for (int i = 1; i <= n - 1; i++) {
+            for (auto x: edges) {
+                int u = x[0];
+                int v = x[1];
+                int d = x[2];
+                if (dis[u] != INT_MAX && dis[v] > dis[u] + d) {
+                    dis[v] = min(dis[v], dis[u] + d);
+                }
+            }
+        }
+        return dis;
+    }
+};
