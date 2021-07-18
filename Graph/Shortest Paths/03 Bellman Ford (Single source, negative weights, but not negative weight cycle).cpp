@@ -33,6 +33,29 @@ public:
 };
 
 
+class Solution {
+public:
+    vector <int> bellmanFord(int n, vector <vector<int>> edges) {
+        vector <int> dis(n, INT_MAX);
+        int src = 0;
+        dis[src] = 0;
+        for (int i = 1; i <= n - 1; i++) {
+            vector < int > tempDis(dis);
+            for (auto x: edges) {
+                int u = x[0];
+                int v = x[1];
+                int d = x[2];
+                if (dis[u] < INT_MAX) {
+                    tempDis[v] = min(tempDis[v], dis[u] + d);
+                }
+            }
+            dis = tempDis;
+        }
+        return dis;
+    }
+};
+
+
 
 
 
@@ -76,41 +99,37 @@ public:
 
 
 
-
-
-
-
-
-
-
-
-
-void solve() {
-    ll u, v, w, src;
-    cin >> n >> m;
-    vector < vector < ll >> g;
-    f(i, m) {
-        cin >> u >> v >> w;
-        vector < ll > temp;
-        temp.pb(u);
-        temp.pb(v);
-        temp.pb(w);
-        g.pb(temp);
-    }
-    cin >> src;
-    vector < int > dis(n, INT_MAX);
-    dis[src] = 0;
-    for (int i = 1; i <= n - 1; i++) {
-        vector < int > tempDis(dis);
-        for (auto x: g) {
-            int u = x[0];
-            int v = x[1];
-            int d = x[2];
-            tempDis[v] = min(tempDis[v], dis[u] + d);
+class Solution{
+	public:
+	/*  Function to implement Dijkstra
+    *   adj: vector of vectors which represents the graph
+    *   S: source vertex to start traversing graph with
+    *   V: number of vertices
+    */
+    #define INF 100000000
+    vector <int> bellman_ford(int V, vector<vector<int>> adj, int S) {
+        vector<int> dis(V, INF);
+        dis[S] = 0;
+        
+        for(int i = 0; i < V-1; i++) {
+            bool notUpdate = true;
+            vector < int > tempDis(dis);
+            for (auto edge : adj) {
+                int u = edge[0];
+                int v = edge[1];
+                int w = edge[2];
+                if(dis[u] < INF && tempDis[v] > dis[u] + w) {
+                    tempDis[v] = dis[u] + w;
+                    notUpdate = false; 
+                }
+            }
+            dis = tempDis;
+            
+            if(notUpdate) {
+                break;
+            }
         }
-        dis = tempDis;
+        
+        return dis;
     }
-    for (int i = 0; i < n; i++) {
-        cout << dis[i] << " ";
-    }
-}
+};
