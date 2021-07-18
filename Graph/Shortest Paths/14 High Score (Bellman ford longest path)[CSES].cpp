@@ -1,7 +1,10 @@
 // https://cses.fi/problemset/task/1673/
 
-// https://youtu.be/WMTIoCkVFw4
-// Method 1
+
+// Method 1 (https://youtu.be/WMTIoCkVFw4)
+/*
+We will calculate shortest path by reversing the weights to find the longest weight path.
+*/
 void dfs(int u, vector<int>& vis, vector<vector<int>>& g) {
     vis[u] = 1;
     for(int v: g[u]) {
@@ -36,7 +39,7 @@ void solve() {
         flag = 0;
         for(auto it: edges) {
             tie(u, v, w) = it;
-            // vis and revVis check is used to check if there exists path from 1 to u and from v to n 
+            // vis[u] and revVis[v] check is used to check if there exists path from 1 to u and from v to n 
             // this majorly helps in eliminating relaxation of loops which are not part of 1 to n path
             if(vis[u] and revVis[v] and dis[v] > dis[u] + w) {
                 flag = 1;
