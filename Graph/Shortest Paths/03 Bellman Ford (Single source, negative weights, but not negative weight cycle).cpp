@@ -39,6 +39,48 @@ public:
 
 
 
+// https://practice.geeksforgeeks.org/problems/distance-from-the-source-bellman-ford-algorithm/0/
+class Solution {
+public:
+    /*  Function to implement Dijkstra
+     *   adj: vector of vectors which represents the graph
+     *   S: source vertex to start traversing graph with
+     *   V: number of vertices
+     */
+    #define INF 100000000
+    vector < int > bellman_ford(int V, vector < vector < int >> adj, int S) {
+        vector < int > dis(V, INF);
+        dis[S] = 0;
+
+        for (int i = 0; i < V - 1; i++) {
+            bool notUpdate = true;
+            for (auto edge: adj) {
+                int u = edge[0];
+                int v = edge[1];
+                int w = edge[2];
+                if (dis[u] < INF && dis[v] > dis[u] + w) {
+                    dis[v] = dis[u] + w;
+                    notUpdate = false;
+                }
+            }
+
+            if (notUpdate) {
+                break;
+            }
+        }
+
+        return dis;
+    }
+};
+
+
+
+
+
+
+
+
+
 
 
 
