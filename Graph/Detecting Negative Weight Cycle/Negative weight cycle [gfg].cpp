@@ -17,7 +17,7 @@ public:
                 int u = x[0];
                 int v = x[1];
                 int d = x[2];
-                if (dis[u] != INT_MAX) {
+                if (dis[u] < INT_MAX) {
                     dis[v] = min(dis[v], dis[u] + d);
                 }
             }
