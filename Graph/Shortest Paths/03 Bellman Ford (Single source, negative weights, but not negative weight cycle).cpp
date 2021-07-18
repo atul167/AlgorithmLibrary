@@ -1,15 +1,23 @@
-// It's a dynamic programming solution
+/*
+It's a dynamic programming solution.
 
-// single source shortest path (includes negative edges)
-// this is directed version
-// For questions related to visiting atleast K edges only consider relaxation from 0 to K only instead of (n-1)  
+Inference:
+a) Given the premise that, the longest path in any single source shortest path is |V| - 1 edges long.
+b) If we perform |V| - 1 propagations along all E edges, propagation is complete. We have SSSPs.
+c) Exceptions exists (Negative weight cycle).
+*/
 
-// drawback: If there is a cycle with negative weight, it fails
-// it will work fine for cycles of positive weight
+/*
+Single source shortest path (includes negative edges)
+This is directed version
+For questions related to visiting atleast K edges only consider relaxation from 0 to K only instead of (n-1)  
 
-// therefore after relaxing >= n times, then also path weights are changing that means there is a negative weight cycle in the graph
+Drawback: If there is a cycle with negative weight, it fails
+It will work fine for cycles of positive weight
+Therefore after relaxing >= n times, then also path weights are changing that means there is a negative weight cycle in the graph
 
-// https://leetcode.com/problems/cheapest-flights-within-k-stops/
+https://leetcode.com/problems/cheapest-flights-within-k-stops/
+*/
 
 
 class Solution {
