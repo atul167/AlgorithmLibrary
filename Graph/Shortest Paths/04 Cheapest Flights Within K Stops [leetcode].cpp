@@ -1,5 +1,10 @@
 // https://leetcode.com/problems/cheapest-flights-within-k-stops/
 
+/*
+Mangesh:
+Aur tum agar extra vector (tempDis) nhi Lete ho toh ek iteration mai multiple times shortest distance modify ho skta hai
+*/
+
 
 // Method 1: Bellman Ford
 class Solution {
@@ -9,7 +14,7 @@ public:
         dis[src] = 0;
         for(int i = 0; i <= K; i++){
             vector<int> tempDis(dis);
-            for(auto x: flights){
+            for(auto x: flights) {
                 int u = x[0];
                 int v = x[1];
                 int d = x[2];
