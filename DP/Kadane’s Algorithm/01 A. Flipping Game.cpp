@@ -1,5 +1,11 @@
 // https://codeforces.com/problemset/problem/327/A
 
+/*
+There are n integers a1, a2, ..., an. Each of those integers can be either 0 or 1. 
+You are allowed to do exactly one move: choose two indices i and j (1  ≤ i ≤ j ≤ n) and flips all values of a in range [i, j]. 
+The goal of the game is that after exactly one move to obtain the maximum number of ones.
+*/
+
 
 // Method 1
 void solve() {
@@ -7,22 +13,25 @@ void solve() {
     int a[n];
     f(i, n) cin >> a[i];
 
-    int mx = 0, mxSoFar = 0, ones = 0;
+    int ones = 0;
     f(i, n) {
         if(a[i] == 1) ones++;
-        
+    }
+
+    int mxSoFar = 0, mxEndingHere = 0;
+    f(i, n) {
         if(a[i] == 0) mxSoFar++;
         else mxSoFar--;
 
         if(mxSoFar < 0) mxSoFar = 0;
 
-        mx = max(mx, mxSoFar);
+        mxEndingHere = max(mxEndingHere, mxSoFar);
     }
 
     if(ones == n) {
-        cout << n-1 << endl;
+        cout << n - 1 << endl;
     } else {
-        cout << ones + mx << endl;
+        cout << ones + mxEndingHere << endl;
     }
 }
 
