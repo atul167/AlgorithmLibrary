@@ -1,4 +1,5 @@
 // https://www.techiedelight.com/find-maximum-sequence-of-continuous-1s-can-formed-replacing-k-zeroes-ones/
+// https://leetcode.com/problems/max-consecutive-ones-iii/
  
 /*
 We can solve this problem by using the sliding window technique. 
