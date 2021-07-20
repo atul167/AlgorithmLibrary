@@ -18,14 +18,14 @@ To sort an array of size n in ascending order:
 void insertionSort(int arr[], int n) {
     for (int i = 1; i < n; i++) {
         int key = arr[i];
-        int j = i - 1;
+        int j = i;
 
         // Move elements of arr[0..i-1], that are greater than key, to one position ahead of their current position
-        while (j >= 0 && arr[j] > key) {
-            arr[j + 1] = arr[j];
+        while (j > 0 && arr[j - 1] > key) {
+            arr[j] = arr[j - 1];
             j = j - 1;
         }
-        arr[j + 1] = key;
+        arr[j] = key;
     }
 }
 
