@@ -1,5 +1,10 @@
 // https://www.geeksforgeeks.org/insertion-sort/
 
+/*
+Best time = O(n)
+Worst Time = O(n^2)
+*/
+
 
 /*
 Algorithm 
