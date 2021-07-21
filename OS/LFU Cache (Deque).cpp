@@ -27,7 +27,7 @@ public:
     int get(int key) {
         if (m_values.find(key) == m_values.end() || m_maxCapacity <= 0) return -1;
         
-        // update frequency ans return value
+        // update frequency and return value
         put(key, m_values[key].value);
         return m_values[key].value;
     }
