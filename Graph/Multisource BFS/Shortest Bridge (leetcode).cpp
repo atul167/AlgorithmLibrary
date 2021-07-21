@@ -1,6 +1,13 @@
 // https://leetcode.com/problems/shortest-bridge/
 
 /*
+Problem:
+In a given 2D binary array grid, there are two islands. (An island is a 4-directionally connected group of 1s not connected to any other 1s.)
+Now, we may change 0s to 1s so as to connect the two islands together to form 1 island.
+Return the smallest number of 0s that must be flipped. (It is guaranteed that the answer is at least 1.)
+*/
+
+/*
 The idea I used in this problem is that. (Note that there is exactly two group of islands).
 (1) I will traverse one group of island by DFS and mark this group from number 1 to number 2
     So now the grid has one group of island with number 2 and the other group of island with number 1 and the rest of the grid is number 0.
