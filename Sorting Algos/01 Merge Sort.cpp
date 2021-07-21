@@ -52,3 +52,11 @@ void mergeSort(int * Arr, int start, int end) {
         merge(Arr, start, mid, end);
     }
 }
+
+void solve() {
+    cin >> n;
+    int a[n];
+    f(i, n) cin >> a[i];
+    
+    mergeSort(a, 0, n - 1);
+}
