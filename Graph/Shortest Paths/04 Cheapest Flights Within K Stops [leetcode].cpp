@@ -106,17 +106,17 @@ public:
         pq.push({0, src, K+1}); // cost, vertex, hops
         
         while(!pq.empty() ) {
-            auto it = pq.top(); pq.pop();
+            auto it = pq.top(); 
+            pq.pop();
             int cost = it[0];
             int u = it[1];
             int stops = it[2];
             
             if(u == dst) return cost;
+            if(stops == 0)  continue;
 
-            if(stops > 0) {
-                for(auto [v, w]: g[u]) {
-                    pq.push({cost + w, v, stops - 1});
-                }
+            for(auto [v, w]: g[u]) {
+                pq.push({cost + w, v, stops - 1});
             }
         }
         return -1;
