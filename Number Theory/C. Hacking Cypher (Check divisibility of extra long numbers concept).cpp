@@ -8,7 +8,12 @@ Both parts should be positive integers that have no leading zeros.
 Polycarpus knows values a and b.
 
 Help Polycarpus and find any suitable method to cut the public key.
+
+Constrains:
+String public key — an integer without leading zeroes, its length is in range from 1 to 10^6 digits. 
+Integers a, b — (1  ≤  a,  b  ≤  10^8).
 */
+
 
 /*
 Editorial:
@@ -29,6 +34,7 @@ We can do it if next four conditions performed:
 3) length of prefix and suffix more than 0; 
 3) first digit of suffix is different from 0. If all four conditions performed we found answer. If we did not find any such positions, than print NO.
 */
+
 
 /*
 https://codeforces.com/blog/entry/14849?#comment-580420
