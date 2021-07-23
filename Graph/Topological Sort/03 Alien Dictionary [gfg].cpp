@@ -6,7 +6,7 @@ Find the order of characters in the alien language.
 Note: Many orders may be possible for a particular test case, thus you may return any valid order.
 */
 
-// Kahn
+// Method 1: Kahn
 class Solution {
 public:
     static const int MXN = 26 + 5;
@@ -18,7 +18,7 @@ public:
     string kahn(int n) {
         queue < int > q;
         for (int i = 0; i < n; i++) {
-            if ( in [i] == 0) q.push(i);
+            if (in [i] == 0) q.push(i);
         }
 
         while (!q.empty()) {
@@ -27,7 +27,7 @@ public:
             res.push_back(u);
             for (int v: g[u]) {
                 in [v]--;
-                if ( in [v] == 0) q.push(v);
+                if (in [v] == 0) q.push(v);
             }
         }
 
@@ -70,5 +70,86 @@ public:
         }
 
         return kahn(K);
+    }
+};
+
+
+
+
+
+
+
+
+
+
+// Method 2: DFS
+class Solution {
+public:
+    static const int MXN = 26 + 5;
+    vector < int > g[MXN];
+    int color[MXN];
+    vector < int > res;
+    int impossible;
+
+    void dfs(int u) {
+        color[u] = 1;
+
+        for (int v: g[u]) {
+            if (color[v] == 1) {
+                impossible = 1;
+                return;
+            }
+            if (color[v] == 0) {
+                dfs(v);
+            }
+        }
+
+        color[u] = 2;
+        res.push_back(u);
+    }
+
+    string findOrder(string dict[], int N, int K) {
+        for (int i = 0; i < MXN; i++) {
+            g[i].clear();
+            color[i] = 0;
+        }
+        impossible = 0;
+        res.clear();
+
+        for (int i = 0; i < N - 1; i++) {
+            int j = i + 1;
+            string s1 = dict[i], s2 = dict[j];
+            int m = min(s1.size(), s2.size());
+            int flag = 1;
+            for (int i = 0; i < m; i++) {
+                if (s1[i] != s2[i]) {
+                    flag = 0;
+                    g[s1[i] - 'a'].push_back(s2[i] - 'a');
+                    break;
+                }
+            }
+
+            if (flag && (s1 > s2)) {
+                impossible = 1;
+            }
+        }
+
+        if (impossible) {
+            return "";
+        }
+
+        for (int i = 0; i < K; i++) {
+            if (color[i] == 0) {
+                dfs(i);
+            }
+            if (impossible) {
+                return "";
+            }
+        }
+
+        reverse(res.begin(), res.end());
+        string str = "";
+        for (int x: res) str += (char)(x + 'a');
+        return str;
     }
 };
