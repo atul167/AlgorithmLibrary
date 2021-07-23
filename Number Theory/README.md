@@ -89,3 +89,27 @@
    (a) https://codeforces.com/contest/1512/problem/G \
    (b) https://www.spoj.com/problems/COMDIV/ \
    (c) https://www.spoj.com/problems/DIVSUM/
+
+## Check divisibility of extra long numbers
+   ```
+   void solve() {
+    string number;
+    int divisor;
+    cin >> number;
+    cin >> divisor;
+    n = number.size();
+
+    vector<int> remainder(n);
+    
+    remainder[0] = (number[0] - '0') % divisor;
+    for(int i = 1; i < n; i++) {
+        remainder[i] = (remainder[i - 1] * 10 + (number[i] - '0')) % divisor;
+    }
+
+    if(remainder[n - 1] == 0) {
+        cout << number << " is divisible by " << divisor << endl;
+    } else {
+        cout << number << " is NOT divisible by " << divisor << endl;
+    }
+} 
+   ```
