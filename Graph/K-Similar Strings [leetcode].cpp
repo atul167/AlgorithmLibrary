@@ -2,6 +2,19 @@
 // https://www.youtube.com/watch?v=SAe1UqL2n-o
 
 /*
+Problem:
+Strings s1 and s2 are k-similar (for some non-negative integer k) if we can swap the positions of two letters in s1 exactly k times 
+so that the resulting string equals s2.
+Given two anagrams s1 and s2, return the smallest k for which s1 and s2 are k-similar.
+
+Constraints:
+1 <= s1.length <= 20
+s2.length == s1.length
+s1 and s2 contain only lowercase letters from the set {'a', 'b', 'c', 'd', 'e', 'f'}.
+s2 is an anagram of s1.
+*/
+
+/*
 Logical Thinking:
 In fact, the essence of the problem is to get the minimum number of swaps A needs to make itself equal to B.
 
@@ -22,8 +35,8 @@ class Solution {
 public:
     vector<string> getNeighbours(string A, string B) { 
         vector<string> neighbours;
-        int i = 0;
-        for (; i < A.size(); i++) {
+        int i;
+        for (i = 0; i < A.size(); i++) {
             if (A[i] != B[i]) {
                 break;
             }
@@ -97,8 +110,8 @@ class Solution {
 public:
     vector<string> getNeighbours(string A, string B) { 
         vector<string> neighbours;
-        int i = 0;
-        for (; i < A.size(); i++) {
+        int i;
+        for (i = 0; i < A.size(); i++) {
             if (A[i] != B[i]) {
                 break;
             }
