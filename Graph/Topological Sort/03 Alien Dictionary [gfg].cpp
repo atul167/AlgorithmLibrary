@@ -56,7 +56,8 @@ public:
             for (int i = 0; i < m; i++) {
                 if (s1[i] != s2[i]) {
                     flag = 0;
-                    g[s1[i] - 'a'].push_back(s2[i] - 'a'); in [s2[i] - 'a']++;
+                    g[s1[i] - 'a'].push_back(s2[i] - 'a'); 
+                    in[s2[i] - 'a']++;
                     break;
                 }
             }
