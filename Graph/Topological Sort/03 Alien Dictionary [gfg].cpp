@@ -42,7 +42,8 @@ public:
 
     string findOrder(string dict[], int N, int K) {
         for (int i = 0; i < MXN; i++) {
-            g[i].clear(); in [i] = 0;
+            g[i].clear(); 
+            in[i] = 0;
         }
         int impossible = 0;
         res.clear();
