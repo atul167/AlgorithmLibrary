@@ -119,63 +119,111 @@ void solve() {
 
 // Method 2: (GFG) (Phi is not precomputed initially)
 // C++ Program to find the Sum of GCD of all integers up to N with N itself
-#include <bits/stdc++.h>
-using namespace std;
-
 
 int getCount(int d, int n) {
-	int no = n / d;
+    int no = n / d;
 
-	int result = no;
+    int result = no;
 
-	// Consider all prime factors of no. and subtract their multiples from result
-	for (int p = 2; p * p <= no; ++p) {
+    for (int i = 2; i * i <= no; i++) {
+        if (no % i == 0) {
+            while (no % i == 0) {
+                no /= i;
+            }
+            result -= result / i;
+        }
+    }
 
-		// Check if p is a prime factor
-		if (no % p == 0) {
+    if (no > 1) {
+        result -= result / no;
+    }
 
-			// If yes, then update no and result
-			while (no % p == 0)
-				no /= p;
-			result -= result / p;
-		}
-	}
-
-	// If no has a prime factor greater than sqrt(n) then at-most one such prime factor exists
-	if (no > 1)
-		result -= result / no;
-
-	// Return the result
-	return result;
+    return result;
 }
 
 // Finding GCD of pairs
 int sumOfGCDofPairs(int n) {
-	int res = 0;
+    int res = 0;
 
-	for (int i = 1; i * i <= n; i++) {
-		if (n % i == 0) {
-			// Calculate the divisors
-			int d1 = i;
-			int d2 = n / i;
+    for (int i = 1; i * i <= n; i++) {
+        if (n % i == 0) {
+            // Calculate the divisors
+            int d1 = i;
+            int d2 = n / i;
 
-			// Return count of numbers from 1 to N with GCD d with N
-			res += d1 * getCount(d1, n);
+            // Return count of numbers from 1 to N with GCD d with N
+            res += d1 * getCount(d1, n);
 
-			// Check if d1 and d2 are equal then skip this
-			if (d1 != d2)
-				res += d2 * getCount(d2, n);
-		}
-	}
+            // Check if d1 and d2 are equal then skip this
+            if (d1 != d2) res += d2 * getCount(d2, n);
+        }
+    }
 
-	return res;
+    return res;
 }
 
-// Driver code
-int main() {
-	int n = 12;
+void solve() {
+    int n = 100;
+    cout << sumOfGCDofPairs(n);
+} 
 
-	cout << sumOfGCDofPairs(n);
 
-	return 0;
+
+
+
+
+
+
+
+
+
+
+
+// Method 3: (Method 2 another version)
+int getPhiOfNbyD(int d, int n) {
+    int no = n / d;
+
+    int res = no;
+    for(int i = 2; i * i <= no; i++) {
+        if(no % i == 0) {
+            res *= (i - 1);
+            res /= i;
+
+            while(no % i == 0) {
+                no /= i;
+            }
+        }
+    }
+    if(no > 1) {
+        res *= (no - 1);
+        res /= no;
+    }
+    return res;
+}
+
+// Finding GCD of pairs
+int sumOfGCDofPairs(int n) {
+    int res = 0;
+
+    for (int i = 1; i * i <= n; i++) {
+        if (n % i == 0) {
+            // Calculate the divisors
+            int d1 = i;
+            int d2 = n / i;
+
+            // Return count of numbers from 1 to N with GCD d with N
+            res += d1 * getPhiOfNbyD(d1, n);
+
+            // Check if d1 and d2 are equal then skip this
+            if (d1 != d2) res += d2 * getPhiOfNbyD(d2, n);
+        }
+    }
+
+    return res;
+}
+
+
+void solve() {
+    int n = 100;
+    cout << sumOfGCDofPairs(n);
 }
