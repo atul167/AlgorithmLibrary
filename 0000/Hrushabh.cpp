@@ -1,20 +1,4 @@
-#include<bits/stdc++.h>
-#define ll long long int
-#define ld long double
-#define pb push_back
-#define all(x) x.begin(),x.end()
-#define ff first
-#define ss second
-#define mod 1000000007
-#define dbg if(debug)
-#define size(x) (int)(x).size()
-using namespace std;
-typedef pair<int,int> pii;
-#ifndef ONLINE_JUDGE
-    const bool debug = 1;
-#else
-    const bool debug = 0;
-#endif
+// k bukcet wala
  
 //---------------------- PROVE, THEN WRITE ----------------------//
  
@@ -120,11 +104,7 @@ int main(){
 
 
 
-
-#define ll long long
-#define pii pair<int,int> 
-#define pb push_back
-#define all(x) (x).begin(),(x).end()
+// palindrome wala
 void func(){
     int n;
     cin>>n;
@@ -164,4 +144,70 @@ void func(){
 
     cout<<ans<<'\n';
 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// triangle wala
+void solve() {
+    cin >> n >> m;
+    string s[n];
+    f(i, n) cin >> s[i];
+
+    int cnt[n][m] = {0};
+    int cnt0 = 0;
+
+    f(i, n) {
+        int c = 0;
+        f(j, m) {
+            if(s[i][j] == '0') {
+                c++;
+                cnt0++;
+            } else {
+                c = 0;
+            }
+            cnt[i][j] = c;
+        }
+    }
+
+    int res = 0;
+    f(i, n) {
+        f(j, m) {
+            int k = 0;
+            while(1) {
+                if(i + k >= n || j + k >= m) {
+                    break;
+                }
+
+                if(cnt[i + k][j + k] >= (2*k + 1)) {
+                    k++;
+                } else {
+                    break;
+                }
+            }
+
+            res += k;
+        }
+    }
+
+    cout << res - cnt0 << endl;
 }
