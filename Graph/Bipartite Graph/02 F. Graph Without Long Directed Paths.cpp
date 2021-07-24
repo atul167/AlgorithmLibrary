@@ -3,7 +3,7 @@
 
 /*
 You are given a connected undirected graph consisting of n vertices and m edges. There are no self-loops or multiple edges in the given graph.
-You have to direct its edges in such a way that the obtained directed graph does not contain any paths of length two or greater 
+You have to direct its edges in such a way that the obtained directed graph does not contain any paths of length greater then 1 
 (where the length of path is denoted as the number of traversed edges).
 */
 
@@ -12,7 +12,7 @@ If the graph is not bipartite then the answer is NO.
 
 Otherwise the answer is YES.
 We will now direct the edges from RED->BLUE or from BLUE->RED (anyway will work). 
-This way our new graph will not contain any paths of length >= 2 
+This way our new graph will not contain any paths of length > 1 
 (where the length of path is denoted as the number of traversed edges).
 
 NOTE: Bipartite graphs can contain cycles of even weight only. Odd weight cycle graphs are non bipartite.
