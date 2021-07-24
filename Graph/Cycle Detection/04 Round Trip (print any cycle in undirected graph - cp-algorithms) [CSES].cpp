@@ -1,4 +1,5 @@
 // https://cses.fi/problemset/task/1669
+// https://cp-algorithms.com/graph/finding-cycle.html
 
 /*
 Byteland has n cities and m roads between them. Your task is to design a round trip that begins in a city, goes through two or more other cities, 
