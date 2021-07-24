@@ -2,6 +2,12 @@
 // https://www.youtube.com/watch?v=ZWd1SbJeBV0
 
 /*
+You are given a connected undirected graph consisting of n vertices and m edges. There are no self-loops or multiple edges in the given graph.
+You have to direct its edges in such a way that the obtained directed graph does not contain any paths of length two or greater 
+(where the length of path is denoted as the number of traversed edges).
+*/
+
+/*
 If the graph is not bipartite then the answer is NO.
 
 Otherwise the answer is YES.
