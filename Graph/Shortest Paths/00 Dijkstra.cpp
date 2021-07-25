@@ -26,10 +26,7 @@ void dijkstra(ll source){
     }
 }
 
-int32_t main()
-{
-	IOS
-	ll k,x,y,z,p,q,u,v,ct=0,flag=0;
+void solve() {
 	cin>>n>>m;
 	f(i,m) cin>>u>>v>>x, adj[u].pb({v,x}), adj[v].pb({u,x});
 	cin>>x;
@@ -54,69 +51,97 @@ int32_t main()
 
 
 
+vl g[N], dist;
+ll a[N], b[N], dp[N], in[N], out[N], level[N];
+ll n, m;
 
+vector<pair<ll,ll>> adj[N];
+void dijkstra(ll source){
+    for (ll i = 1; i <= n; i++) dp[i] = INT_MAX;
 
-
-
-
-
-
-const int N = 1e5+5;
-int n, m;
-int dis[N], parent[N];
-vector<pair<int, int> > g[N];
- 
-void dijkstra(int source, int destination) {
-	for(int i = 1; i <= n; i++) {
-		dis[i] = 1e18;
-		parent[i] = -1;
-	}
-
-	dis[source] = 0;
-	priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
-	pq.push({0, source});
-
-	while(!pq.empty()) {
-		auto x = pq.top();
-		pq.pop();
-		int u = x.second;
-
-		for(auto it: g[u]) {
-			int v = it.first;
-			int w = it.second;
-			if(dis[v] > dis[u] + w) {
-				dis[v] = dis[u] + w;
-				pq.push({dis[v], v});
-				parent[v] = u;
-			}
-		}
-	}
-
-	if(dis[destination] == 1e18) {
-		cout << "-1";
-		return;
-	}
-
-	int node = destination;
-	vector<int> ans;
-	while(parent[node] != -1) {
-		ans.push_back(node);
-		node = parent[node];
-	}
-	ans.push_back(source);
-	reverse(ans.begin(), ans.end());
-	for(auto i: ans) {
-		cout << i << " ";
+    dp[source] = 0;
+    set<pair<ll,ll>> s;
+    s.insert({dp[source], source});
+	while (!s.empty()){
+	    ll u = s.begin()->second;
+	    s.erase(s.begin());
+	    for (auto v : adj[u]) {
+	        ll a = v.first, b = v.second;
+	        if (dp[u]+b < dp[a]){
+	        	s.erase({dp[a], a});
+	        	dp[a] = dp[u]+b;
+	        	s.insert({dp[a], a});
+	       	}
+	    }
 	}
 }
- 
+
 void solve() {
-	int u, v, w;
-	cin >> n >> m;
-	for(int i = 1; i <= m; i++) {
-		cin >> u>> v >> w;
-		g[u].push_back({v, w});
-		g[v].push_back({u, w});
+	cin>>n>>m;
+	f(i,m) cin>>u>>v>>k, adj[u].pb({v, k}), adj[v].pb({u, k});
+	cin>>x;
+	dijkstra(x);
+	for(ll i=1; i<=n; i++){
+		cout<<dp[i]<<" ";
 	}
-	dijkstra(1, n);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+vl g[N], dist;
+ll a[N], b[N], dp[N], in[N], out[N], level[N];
+ll n, m;
+ 
+vector<pair<ll,ll>> adj[N];
+void dijkstra(ll source){
+	ll INF=1e18;
+	f(i, n+1) dp[i]=INF;
+	dp[source] = 0;
+
+	set<pair<ll,ll>> s;
+	for(ll i=1;i<=n;i++){
+		if(i!=source)
+		s.insert({INF, i});
+	}
+	s.insert({0, source});
+ 
+	while(!s.empty()){
+       ll a=s.begin()->first;
+       ll u=s.begin()->second;
+       s.erase(s.begin());
+ 
+       for(auto i: adj[u]){																			
+            ll to=i.first;
+            ll w=i.second;
+            if(dp[to] > dp[u] + w){
+            	s.erase({dp[to],to});
+            	dp[to]=dp[u]+w;
+                s.insert({dp[to],to});
+            }
+       }
+	}
+} 
+
+
+void solve() {
+	cin>>n>>m;
+	f(i,m) cin>>u>>v>>k, adj[u].pb({v, k}), adj[v].pb({u, k});
+	cin>>x;
+ 	dijkstra(x);
+	
+	for(ll i=1; i<=n; i++)
+		cout<<dp[i]<<" ";
 }
