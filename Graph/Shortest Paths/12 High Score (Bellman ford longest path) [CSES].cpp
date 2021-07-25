@@ -1,15 +1,41 @@
 // https://cses.fi/problemset/task/1673/
+// https://youtu.be/WMTIoCkVFw4
 
-
-// Method 1 (https://youtu.be/WMTIoCkVFw4)
 /*
-We will calculate shortest path by reversing the weights to find the longest weight path.
+Problem:
+You play a game consisting of n rooms and m tunnels. 
+Your initial score is 0, and each tunnel increases your score by x where x may be both positive or negative. 
+You may go through a tunnel several times.
+Your task is to walk from room 1 to room n. What is the maximum score you can get?
+
+Input:
+The first input line has two integers n and m: the number of rooms and tunnels. The rooms are numbered 1,2,…,n.
+Then, there are m lines describing the tunnels. 
+Each line has three integers a, b and x: the tunnel starts at room a, ends at room b, and it increases your score by x. 
+All tunnels are one-way tunnels.
+You can assume that it is possible to get from room 1 to room n.
+
+Output:
+Print one integer: the maximum score you can get. However, if you can get an arbitrarily large score, print −1.
+
+Constraints:
+1 ≤ 2500 ≤ n
+1 ≤ 5000 ≤ m
+1 ≤ a, b ≤ n
+−10^9 ≤ x ≤ 10^9
+*/
+
+
+
+/*
+We will calculate shortest path by negating the weights to find the longest weight path.
 But in this problem even if there is a cycle in graph but not a part of path between vertex 1 and n is tolerable.
 So we use g and revG.
 vis[u] is used to check if there exists path from 1 to u.
 revVis[v] is used to check if there exists path from v to n.
 This majorly helps in eliminating relaxation of loops which are not part of 1 to n path.
 */
+
 void dfs(int u, vector<int>& vis, vector<vector<int>>& g) {
     vis[u] = 1;
     for(int v: g[u]) {
