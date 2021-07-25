@@ -1,4 +1,5 @@
 // https://cses.fi/problemset/task/1196/
+// https://youtu.be/009PBKHXtyA
 // https://usaco.guide/problems/cses-1196-flight-routes/solution
 
 /*
@@ -33,8 +34,13 @@ Explanation: The cheapest routes are 1→3→4 (price 4), 1→2→3→4 (price 4
 
 
 /*
-Time Complexity: O(m*k*log(m*k))
+Solution:
 
+This problem is about Single Source K Shortest Path whereas Dijkstra is about Single Source (One) Shortest Path.
+In other words this is a more general case of Dijkstra.
+
+
+Time Complexity: O(m*k*log(m*k))
 
 Maintain a priority queue of the `k` best distances found for each vertex while applying normal Dijkstra. 
 We'll iterate through the adjacency list of each vertex at most `k` times.
