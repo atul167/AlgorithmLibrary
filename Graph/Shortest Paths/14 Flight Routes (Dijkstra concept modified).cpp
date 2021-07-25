@@ -7,10 +7,9 @@ Note that there can be several routes with the same price and each of them shoul
 
 Input:
 The first input line has three integers n, m, and k: the number of cities, the number of flights, and the parameter k. 
-The cities are numbered 1,2,…,n.
-After this, the input has m lines describing the flights. Each line has three integers a, b, and c: a flight begins at city a, ends at city b, and its price is c. 
-All flights are one-way flights.
-You may assume that there are at least k distinct routes from Syrjälä to Metsälä.
+The cities are numbered 1,2,…,n. After this, the input has m lines describing the flights. 
+Each line has three integers a, b, and c: a flight begins at city a, ends at city b, and its price is c. 
+All flights are one-way flights. You may assume that there are at least k distinct routes from city 1 to city n.
 
 Output:
 Print k integers: the prices of the k cheapest routes sorted according to their prices.
