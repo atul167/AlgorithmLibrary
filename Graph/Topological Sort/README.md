@@ -7,7 +7,7 @@
    we can perform dynamic programming on the graph if we process the states in an order that guarantees for every edge u->v that u is processed before v.
    Fortunately, this is the exact definition of a topological sort!
    
-   Eg Problem: Longest Flight Route (CSES)
+   Eg Problem: Longest Flight Route (CSES), Game Routes (CSES) 
 
 
 ### Important problem which can be seolved using topological sort 
