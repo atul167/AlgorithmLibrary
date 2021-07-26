@@ -39,7 +39,26 @@ maxFlights[v] = max(maxFlights[v], maxFlights[u] + 1)
 */
 
 
-// Method 1 (vis array is not required in method 2 [using set])
+/*
+Consider priority queue method:
+Let priority queue pq state currently = [{2, node1}, {5, node2}]
+node1 is poped frpm pq
+pq state currently = [{5, node2}]
+Assume node1 relaxes node2 ans pushes {3, node2}
+pq state currently = [{3, node2}, {5, node2}]
+
+This is why we are using vis array in priority queue method so that we do not overcount numOfWays or update minFlights or update maxFlights.
+By vis array we ensure {3, mode2} is popped once and necessary calulations and done and {5, node2} is skipped.
+
+
+Consider set method:
+vis array is not required in set because we do these 2 steps which ensures {5, node2} is deleted and then {3, node2} is inserted 
+st.erase({dis[v], v});
+st.insert({dis[v], v});
+*/
+
+
+// Method 1
 const int N = 2e5+5;
 int n, m;
 
