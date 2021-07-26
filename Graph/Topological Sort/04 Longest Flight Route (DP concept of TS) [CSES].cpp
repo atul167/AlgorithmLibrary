@@ -63,7 +63,7 @@ void topologicalSort(int src) {
         // The below block computes the DP
         int mx = -INF;
         int mxNode = -1;
-        for(int prev : revG[node]) {
+        for(int prev: revG[node]) {
             if(dis[prev] + 1 > mx) {
                 mx = dis[prev] + 1;
                 mxNode = prev;
