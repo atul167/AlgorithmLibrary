@@ -1,4 +1,5 @@
 // https://cses.fi/problemset/result/2576339/
+// https://usaco.guide/gold/toposort?lang=cpp#dynamic-programming
 
 /*
 Problem:
@@ -29,7 +30,7 @@ Fortunately, this is the exact definition of a topological sort!
 In this task, we must find the longest path in a DAG.
 Let dp[v] denote the length of the longest path from src ending at the node v,
 Clearly:
-dp[v] = edge u->v exists {max dp[u]+1} 
+dp[v] = Max{edge u->v exists (dp[u] + 1)} 
         or 1 if v is src node
         
 If we process the states in topological order, it is guaranteed that dp[u] will already have been computed before computing dp[v]
