@@ -2,6 +2,7 @@
 // https://youtu.be/9HMawd5jn9A
 
 /*
+Problem:
 Uolevi has won a contest, and the prize is a free flight trip that can consist of one or more flights through cities. 
 Of course, Uolevi wants to choose a trip that has as many cities as possible.
 Uolevi wants to fly from city 1 to city n so that he visits the maximum number of cities. 
@@ -17,6 +18,11 @@ First print the maximum number of cities on the route. After this, print the cit
 If there are no solutions, print "IMPOSSIBLE".
 */
 
+
+/*
+Dijkstra assumes monotonicity. Monotonicity means a function is either non decreasing or non increasing. 
+This problem satisfies monotonicity.
+*/
 
 const int N = 2e5+5;
 int n, m;
