@@ -1,3 +1,8 @@
+### Resources
+
+1) [usaco.guide](https://usaco.guide/gold/toposort?lang=cpp)
+
+
 ### Important problem which can be seolved using topological sort 
 [Unacademy Pulkit Chhabra (at the end of video)](https://unacademy.com/class/topological-sorting-on-directed-graphs/8IXI7CXE)
 
