@@ -21,6 +21,7 @@ If there are no solutions, print "IMPOSSIBLE".
 
 /*
 Dijkstra assumes monotonicity. Monotonicity means a function is either non decreasing or non increasing. 
+Dijkstra works when distance/cost is monotonic i.e. all positive edges or all negative edges. But there must be absolutely no negative cycles.
 This problem satisfies monotonicity.
 */
 
