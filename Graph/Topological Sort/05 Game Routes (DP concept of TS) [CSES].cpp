@@ -1,8 +1,22 @@
 // https://cses.fi/problemset/task/1681/
 // https://usaco.guide/problems/cses-1681-game-routes/solution
 
+/*
+Problem:
+A game has n levels, connected by m teleporters, and your task is to get from level 1 to level n. 
+The game has been designed so that there are no directed cycles in the underlying graph. In how many ways can you complete the game?
+
+Input:
+The first input line has two integers n and m: the number of levels and teleporters. The levels are numbered 1,2,…,n.
+After this, there are m lines describing the teleporters. Each line has two integers a and b: there is a teleporter from level a to level b.
+
+Output:
+Print one integer: the number of ways you can complete the game. Since the result may be large, print it modulo 10^9+7.
+*/
+
 
 /*
+Solution:
 Time Complexity: O(N + M)
 
 This problem is very similar to the "Longest Flight Route" problem. 
