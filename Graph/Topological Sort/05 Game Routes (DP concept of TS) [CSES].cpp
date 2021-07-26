@@ -10,8 +10,8 @@ Let dp[v] denote the number of paths reaching v.
 
 Clearly: 
 dp[v] = Summation{edge u->v exists dp[u]},
+        or 1 if v is src node
 
-with an exception of dp[src], or the starting node, having a value of 1. 
 We process the nodes topologically so dp[u] will already have been computed before dp[v].
 */
 
