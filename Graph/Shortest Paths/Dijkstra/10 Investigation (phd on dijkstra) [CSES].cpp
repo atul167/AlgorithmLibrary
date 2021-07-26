@@ -38,6 +38,8 @@ minFlights[v] = min(minFlights[v], minFlights[u] + 1)
 maxFlights[v] = max(maxFlights[v], maxFlights[u] + 1)
 */
 
+
+// Method 1 (vis array is not required in method 2 [using set])
 const int N = 2e5+5;
 int n, m;
 
@@ -71,19 +73,105 @@ void djikstra(int src) {
             vis[u] = true;
             for(auto it: g[u]) {
                 int v = it.first, w = it.second;
-                if(dis[v] > dis[u] + w){
+                if(dis[v] > dis[u] + w) {
                     dis[v] = dis[u] + w;
+                    pq.push({dis[v], v});
                     numOfWays[v] = numOfWays[u];
                     minFlights[v] = minFlights[u] + 1;
                     maxFlights[v] = maxFlights[u] + 1;
-                    pq.push({dis[v], v});
                 }
                 else if(dis[u] + w == dis[v]) {
+                    pq.push({dis[v], v});
                     numOfWays[v] = (numOfWays[v] + numOfWays[u]) % MOD;
                     minFlights[v] = min(minFlights[v], minFlights[u] + 1);
                     maxFlights[v] = max(maxFlights[v], maxFlights[u] + 1);
-                    pq.push({dis[v], v});
                 }
+            }
+        }
+    }
+}
+
+void solve() {
+    int u, v, w;
+    cin >> n >> m;
+    f(i, m) {
+        cin >> u >> v >> w;
+        g[u].pb({v, w});
+    }
+
+    djikstra(1);
+    cout << dis[n] << " " << numOfWays[n] << " " << minFlights[n] << " " << maxFlights[n] << endl;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Method 2
+const int N = 2e5+5;
+int n, m;
+
+vector<pair<int, int>> g[N];
+int dis[N]; 
+int numOfWays[N];
+int minFlights[N];
+int maxFlights[N];
+
+void djikstra(int src) {
+    loop(i, 1, n) {
+        dis[i] = INF;
+        numOfWays[i] = 0;
+        minFlights[i] = 0;
+        maxFlights[i] = 0;
+    }
+
+    set<pair<int, int>> st;
+    
+    st.insert({0, src});
+    numOfWays[src] = 1; dis[src] = 0;
+
+    while(!st.empty()) {
+        auto it = *st.begin();
+        st.erase(it);
+
+        int u = it.second;
+
+        for(auto it: g[u]) {
+            int v = it.first, w = it.second;
+            if(dis[v] > dis[u] + w) {
+                st.erase({dis[v], v});
+                dis[v] = dis[u] + w;
+                st.insert({dis[v], v});
+                numOfWays[v] = numOfWays[u];
+                minFlights[v] = minFlights[u] + 1;
+                maxFlights[v] = maxFlights[u] + 1;
+            }
+            else if(dis[u] + w == dis[v]) {
+                st.erase({dis[v], v});
+                st.insert({dis[v], v});
+                numOfWays[v] = (numOfWays[v] + numOfWays[u]) % MOD;
+                minFlights[v] = min(minFlights[v], minFlights[u] + 1);
+                maxFlights[v] = max(maxFlights[v], maxFlights[u] + 1);
             }
         }
     }
