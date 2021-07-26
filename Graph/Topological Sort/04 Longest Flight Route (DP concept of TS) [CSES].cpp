@@ -115,7 +115,7 @@ void solve() {
         return;
     }
     
-    cout << dis[n] << endl;
+    cout << dis[dest] << endl;
 
     reverse(all(res));
     for(int x: res) cout << x << " ";
