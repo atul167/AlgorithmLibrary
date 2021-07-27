@@ -13,14 +13,14 @@ int subtreeSize[N];
 int subtreeRes[N];
 int res[N];
 
-void getSubtreeSize(int u, int par) {
+void dfs(int u, int par) {
     subtreeSize[u] = 1;
     subtreeRes[u] = 0;
 
     for(int v: g[u]) {
         if(v == par) continue;
 
-        getSubtreeSize(v, u);
+        dfs(v, u);
 
         subtreeSize[u] += subtreeSize[v];
         subtreeRes[u] += subtreeSize[v] + subtreeRes[v];
@@ -40,7 +40,7 @@ void solve() {
     cin >> n;
     f(i, n-1) cin >> u >> v, g[u].pb(v), g[v].pb(u);
 
-    getSubtreeSize(1, -1);
+    dfs(1, -1);
 
     getRes(1, -1, 0);
 
