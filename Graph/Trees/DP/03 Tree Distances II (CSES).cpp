@@ -33,6 +33,7 @@ void solve() {
     f(i, n-1) cin >> u >> v, g[u].pb(v), g[v].pb(u);
     getSubtreeSize(1, -1);
 
+    // calculating res[1]
     // sum of distance from root node is the sum of `subtreeSize` except the root itself
     for(int i = 2; i <= n; i++) {
         res[1] += subtreeSize[i];
