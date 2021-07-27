@@ -1,3 +1,8 @@
+// https://cses.fi/problemset/task/1675/
+// Road Reparation - CSES
+
+
+
 /*--------------------DSU BEGIN----------------------------------*/
 int par[N];
 void initialize() {
@@ -20,7 +25,6 @@ void unionSet(int a, int b){
 }
 /*--------------------DSU END------------------------------------*/
 
-
 /*--------------------KRUSKAL'S BEGIN-----------------------------*/
 struct Edge {
     int src;
@@ -35,7 +39,7 @@ bool compare(Edge e1, Edge e2){
 vector<Edge> input;
 vector<Edge> result;
 
-void kruskals() {
+int kruskals() {
     sort(input.begin(), input.end(), compare);
     initialize();
 
@@ -45,12 +49,14 @@ void kruskals() {
         int destParent = findParent(currEdge.dest);
         if(srcParent != destParent) {
             result.pb(currEdge);
+            cost += currEdge.weight;
             unionSet(srcParent, destParent);
         }
     }
+
+    return cost;
 }
 /*--------------------KRUSKAL'S END------------------------------*/
-
 
 void solve() {
     int u, v, x, y;
@@ -60,20 +66,17 @@ void solve() {
         Edge edg = {u, v, x};
         input.pb(edg);
     }
-    kruskals();
-    int cost = 0;
+    
+    int cost = kruskals();
+    
     for(Edge e: result){
         cout << e.src << " " << e.dest << " " << e.weight << endl;
-        cost += e.weight;
     }
-    cout << "Min cost: " << cost;
-}
- 
-int32_t main() {
-    IOS
-    int T = 1;
-    // cin >> T;
-    while(T--)
-    solve();
-    return 0;
+
+    if(result.size() != n - 1) {
+        cout << "IMPOSSIBLE\n";
+        return;
+    }
+
+    cout << cost << endl;
 }
