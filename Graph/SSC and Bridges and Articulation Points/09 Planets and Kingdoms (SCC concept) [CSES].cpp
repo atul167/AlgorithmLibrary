@@ -53,12 +53,10 @@ void solve() {
  
     loop(i, 1, n) vis[i] = 0;
     ll totalSCC = 0;
-    
-    vector<vector<int>> vec;
+
     while(!st.empty()) {
         int node = st.top();
         st.pop();
- 
 
         if(!vis[node]) {
             totalSCC++;
