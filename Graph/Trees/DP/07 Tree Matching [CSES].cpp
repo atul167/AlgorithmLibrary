@@ -34,6 +34,7 @@ Note that we can't take more than one edge leading to a child, because then two 
 dp[u][1] = for all nodes v: max{ (dp[v][0] + 1) + (dp[u][0] - max(dp[v][0], dp[v][1]))) }
 */
 
+// Method 1: DP soln
 const int N = 2e5+5;
 int n, m;
 
@@ -65,4 +66,52 @@ void solve() {
     dfs(1, 0);
  
     cout << max(dp[1][0], dp[1][1]) << endl;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Method 2: Greedy soln
+const int N = 2e5+5;
+int n, m;
+
+vi g[N];
+int marked[N];
+int res = 0;
+
+void dfs(int u, int par) {
+    for(int v: g[u]) {
+        if(v == par) continue;
+        dfs(v, u);
+        if(!marked[u] && !marked[v]) {
+            res++;
+            marked[u] = marked[v] = 1;
+        }
+    }
+}
+ 
+void solve() {
+    int x, y, z;
+    cin >> n;
+    f(i, n-1) cin >> x >> y, g[x].pb(y), g[y].pb(x);
+
+    dfs(1, 0);
+ 
+    cout << res << endl;
 }
