@@ -1,5 +1,6 @@
 // https://cses.fi/problemset/task/1132/
 // https://youtu.be/Rnv4qvoxsTo - Hitesh Tripathi
+// https://usaco.guide/problems/cses-1132-tree-distances-i/solution
 
 /*
 You are given a tree consisting of n nodes.
