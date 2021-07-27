@@ -26,32 +26,32 @@ const int N = 2e5+5;
 int n, m;
 
 const int height = 30;
-int LCA[N][height + 1]; // LCA[node][i] == [node] 's [2^i]th parent
-int parent[N];
+int parent[N][height + 1]; // parent[node][i] == [node] 's [2^i]th parent
+int par[N];
 
 void initLCA() {
     // 2^0
     for(int i = 1; i <= n; i++) {
-        LCA[i][0] = parent[i];
+        parent[i][0] = par[i];
     }
 
     // 2^i
     for(int i = 1; i < height; i++) {
         for(int node = 1; node <= n; node++) {
-            int parNode = LCA[node][i-1];
+            int parNode = parent[node][i-1];
             if(parNode != -1) {
-              LCA[node][i] = LCA[parNode][i-1];
+              parent[node][i] = parent[parNode][i-1];
             } else {
-              LCA[node][i] = -1;
+              parent[node][i] = -1;
             }
         }
     }
 }
 
-int getKthAncestor(int node, int k) {
+int getKthParent(int node, int k) {
     for(int i = 0; i < height; i++) {
         if(k & (1 << i)) {
-            node = LCA[node][i];
+            node = parent[node][i];
             if(node == -1) return -1;
         }
     }
@@ -62,12 +62,12 @@ void solve() {
     int q, x, k;
     cin >> n >> q;
 
-    loop(i, 1, n) cin >> parent[i];
+    loop(i, 1, n) cin >> par[i];
 
     initLCA();
 
     while(q--) {
         cin >> x >> k;
-        cout << getKthAncestor(x, k) << endl;
+        cout << getKthParent(x, k) << endl;
     }
 }
