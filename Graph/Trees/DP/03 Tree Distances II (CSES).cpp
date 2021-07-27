@@ -1,9 +1,9 @@
-// https://youtu.be/nGhE4Ekmzbc
 // https://cses.fi/problemset/task/1133/
-
-
-
+// https://youtu.be/nGhE4Ekmzbc
 // https://youtu.be/lWCZOjUOjRc
+
+
+
 // Method 1 (Re-rooting DP)
 const int N = 2e5+5;
 int n, m;
@@ -19,16 +19,14 @@ void dfs(int u, int par) {
 
     for(int v: g[u]) {
         if(v == par) continue;
-
         dfs(v, u);
-
         subtreeSize[u] += subtreeSize[v];
         subtreeRes[u] += subtreeSize[v] + subtreeRes[v];
     }
 }
 
-void getRes(int u, int par, int parRes) {
-    res[u] = subtreeRes[u] + (parRes + (n - subtreeSize[u]));
+void getRes(int u, int par, int parResWithoutCurChild) {
+    res[u] = subtreeRes[u] + (parResWithoutCurChild + (n - subtreeSize[u]));
     for(int v: g[u]) {
         if(v == par) continue;
         getRes(v, u, res[u] - (subtreeRes[v] + subtreeSize[v]));
@@ -41,16 +39,12 @@ void solve() {
     f(i, n-1) cin >> u >> v, g[u].pb(v), g[v].pb(u);
 
     dfs(1, -1);
-
-    getRes(1, -1, 0);
+    getRes(1, 0, 0);
 
     loop(i, 1, n) {
         cout << res[i] << " ";
     }
 }
-
-
-
 
 
 
