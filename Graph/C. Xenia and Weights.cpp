@@ -1,3 +1,5 @@
+// https://codeforces.com/problemset/problem/339/C
+
 /*
 Xenia has a set of weights and pan scales. Each weight has an integer weight from 1 to 10 kilos. 
 Xenia is going to play with scales and weights a little. For this, she puts weights on the scalepans, one by one. 
