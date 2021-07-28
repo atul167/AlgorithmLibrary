@@ -7,7 +7,6 @@ int n, m;
  
 vector<int> g[N];
 int level[N];
-
 const int height = 30;
 int LCA[N][height + 5];
 
@@ -89,16 +88,18 @@ int getDistance(int a, int b) {
     int lca = getLCA(a, b);
     return (level[a] + level[b] - 2 * level[lca]);
 }
- 
+
 void solve() {
-    int u, v;
-    cin >> n;
+    int u, v, q;
+    cin >> n >> q;
     f(i, n-1) cin >> u >> v, g[u].pb(v), g[v].pb(u);
 
     init();
-    cout << getLCA(7, 4) << endl;
-    cout << getDistance(7, 4) << endl;
 
+    while(q--) {
+        cin >> u >> v;
+        cout << getDistance(u, v) << endl; 
+    }
 } 
 
 /*
