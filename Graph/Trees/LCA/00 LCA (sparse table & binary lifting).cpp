@@ -43,15 +43,23 @@ void init() {
 }
 
 // binary lifting
+int getKthAncestor(int node, int k) {
+    for(int i = height-1; i >= 0; i--) {
+        if(k & (1 << i)) {
+            node = LCA[node][i];
+            if(node == -1) return -1;
+        }
+    }
+    return node;
+}
+
 int getLCA(int a, int b) {
     if(level[b] < level[a]) swap(a, b);
 
     int d = level[b] - level[a];
 
     // method 1
-    for(int i = 0; i < height; i++) {
-        if(d & (1<<i)) b = LCA[b][i];
-    }
+    b = getKthAncestor(b, d);
 
     // method 2
     // for(int i = height-1; i >= 0; i--) {
@@ -74,8 +82,8 @@ int getLCA(int a, int b) {
     // }
 
     // efficient approach O(logn)
-    for(int i = 0; i < height; i++) {
-        if(LCA[a][i] != LCA[b][i]) {
+    for(int i = height - 1; i >= 0; i--) {
+        if (LCA[a][i] != LCA[b][i]) {
             a = LCA[a][i];
             b = LCA[b][i];
         }
