@@ -40,20 +40,12 @@ public:
         // }
         
         // method 2
-        for(int i = 0; i < 20; i++) {
+        for(int i = 20-1; i >= 0; i--) {
             if(k & (1 << i)) {
                 node = LCA[node][i];
                 if(node == -1) return -1;
             }
         }
-        
-        // method 3
-        // for(int i = 20-1; i >= 0; i--) {
-        //     if(k & (1 << i)) {
-        //         node = LCA[node][i];
-        //         if(node == -1) return -1;
-        //     }
-        // }
         
         return node;
     }
