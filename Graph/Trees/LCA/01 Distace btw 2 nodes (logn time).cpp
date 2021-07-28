@@ -2,6 +2,9 @@
 // binary lifting concept
 // Dis(a, b) = level(a) + level(b) - 2*level(lca(a, b))
 
+// https://cses.fi/problemset/task/1135/
+
+
 const int N = 2e5+5;
 int n, m;
  
@@ -101,17 +104,3 @@ void solve() {
         cout << getDistance(u, v) << endl; 
     }
 } 
-
-/*
-INPUT
-7
-1 2
-1 3
-2 4
-2 5
-3 6
-6 7
-OUTPUT
-1
-5
-*/
