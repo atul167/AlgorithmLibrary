@@ -2,6 +2,19 @@
 // https://youtu.be/WmDEZbTHN5c
 
 /*
+For the given sequence with n different elements find the number of increasing subsequences with k + 1 elements. 
+It is guaranteed that the answer is not greater than 8 * 10^18.
+
+Input:
+First line contain two integer values n and k (1 ≤ n ≤ 10^5, 0 ≤ k ≤ 10) — the length of sequence and the number of elements in increasing subsequences.
+Next n lines contains one integer ai (1 ≤ ai ≤ n) each — elements of sequence. All values ai are different.
+
+Output:
+Print one integer — the answer to the problem.
+*/
+
+
+/*
 This question can be generalized as:
 After all operations:
 query(n, y) will give the count of LIS of length y considering whole array [i.e. arr[1], arr[2], ..., arr[n])] where arr is permutation of 1, ..., n
