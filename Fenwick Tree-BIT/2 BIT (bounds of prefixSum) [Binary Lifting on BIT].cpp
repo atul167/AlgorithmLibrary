@@ -1,6 +1,7 @@
 // https://youtu.be/nuUspQ7ORXE
 
 /*
+Note:
 Array must be of non-negative integers
 */
 
