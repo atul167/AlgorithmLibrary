@@ -47,14 +47,14 @@ int query(int i) {
 
 int find(int k) {
     int low = 1, high = N;
-    while(low <= high) {
+    while(low < high) {
         int mid = low + (high - low) / 2;
         int val = query(mid);
  
-        if(val < k) {
-            low = mid + 1;
+        if(val >= k) {
+            high = mid;
         } else {
-            high = mid - 1;
+            low = mid + 1;
         }
     }
 
@@ -128,40 +128,41 @@ int query(int i) {
 }
 
 int prefixSumLB(int prefixSum) {
-	int curr = 0, prevSum = 0;
-	for (int i = log2(N); i >= 0; i--) {
-		if((curr + (1 << i)) < N && BIT[curr + (1 << i)] + prevSum < prefixSum) {
-			curr += (1 << i);
-			prevSum += BIT[curr];
-		}
-	}
-	return curr + 1;
+    int curr = 0, prevSum = 0;
+    for (int i = log2(N); i >= 0; i--) {
+        if((curr + (1 << i)) < N && BIT[curr + (1 << i)] + prevSum < prefixSum) {
+            curr += (1 << i);
+            prevSum += BIT[curr];
+        }
+    }
+    return curr + 1;
 }
 
 void solve() {
-	int q, x;
+    int q, x;
     cin >> n >> q;
     loop(i, 1, n) {
-    	cin >> x;
-    	update(x, 1);
+        cin >> x;
+        update(x, 1);
     }
+    
     while(q--) {
-    	cin >> x;
-    	if(x > 0) {
-    		update(x, 1);
-    	} else {
-    		x = -1*x;
-    		int pos = prefixSumLB(x);
-    		update(pos, -1);
-    	}
+        cin >> x;
+        if(x > 0) {
+            update(x, 1);
+        } else {
+            x = -1*x;
+            int pos = prefixSumLB(x);
+            update(pos, -1);
+        }
     }
  
     // output part
     int res = query(N);
     if(!res) {
-    	cout << 0 << endl;
-    	return;
+        cout << 0 << endl;
+        return;
     }
  
-	cout << prefixSumLB(1) << endl;
-} 
+    cout << prefixSumLB(1) << endl;
+}
