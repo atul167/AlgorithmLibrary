@@ -1,6 +1,7 @@
 // https://youtu.be/wQSnKUs93DU
 
 
+// Method 1
 const int N = 1e6+5;
 int n, m;
  
@@ -89,4 +90,92 @@ void solve() {
 			update(1, 1, n, l, r, val);
 		}
 	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Method 2
+const int N = 1e6+5;
+int n, m;
+ 
+ll st[4*N], lazy[4*N], arr[N];
+
+void build(ll si , ll ss , ll se) {
+    if(ss == se) {
+        st[si] = arr[ss];
+        return;
+    }
+ 
+    ll mid = (ss + se)/2;
+    build(2*si , ss , mid);
+    build(2*si+1 , mid+1 , se);
+ 
+    st[si] = st[2*si] + st[2*si+1];
+}
+
+void propagate(int si, int ss, int se) {
+    ll dx = lazy[si];
+    lazy[si] = 0;
+    st[si] += dx * (se - ss + 1);
+
+    if(ss != se) {
+        lazy[2*si] += dx;
+        lazy[2*si + 1] += dx;
+    }
+}
+
+void update(ll si , ll ss , ll se , ll qs, ll qe, ll val) {
+    if(lazy[si] != 0){
+        propagate(si, ss, se);
+    }
+
+    if(qe < ss || qs > se) return;
+
+    if(ss >= qs && se <= qe){
+        lazy[si] = val;
+        propagate(si, ss, se);
+        return;
+    }
+
+    ll mid = (ss + se) / 2;
+    
+    update(2*si, ss, mid, qs, qe, val);
+    update(2*si + 1, mid + 1, se, qs, qe, val);
+
+    st[si] = st[2*si] + st[2*si + 1];
+}
+
+ll query(ll si , ll ss , ll se , ll qs , ll qe) {
+    if(lazy[si] != 0){
+        propagate(si, ss, se);
+    }
+
+    if(qe < ss || qs > se) return 0;
+ 
+    if(ss >= qs && se <= qe) return st[si];
+ 
+    ll mid = (ss + se)/2;
+    ll l = query(2*si , ss , mid , qs , qe);
+    ll r = query(2*si+1 , mid+1 , se , qs , qe);
+    
+    return l + r;
 }
