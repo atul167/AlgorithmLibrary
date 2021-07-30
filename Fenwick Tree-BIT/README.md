@@ -1,5 +1,6 @@
 ## Quick points
-BIT works by increment and decrement using update(pos, +delta) or update(pos, -delta).
+* BIT works by increment and decrement using update(pos, +delta) or update(pos, -delta)
+* Remember to apply "Coordinate Compression" whenever possible 
 
 ## Resources
 
