@@ -55,15 +55,6 @@ void solve() {
     }
     cout << prefixSumLB(3) << endl;
     cout << prefixSumUB(3) << endl;
-} 
-
-int32_t main() {
-	IOS
-	int T = 1;
-	// cin >> T;
-	while(T--)
-	solve();
-	return 0;
 }
 
 /*
