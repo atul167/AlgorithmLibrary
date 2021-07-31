@@ -7,7 +7,6 @@ and perform n operations. Each operation is one of the following:
 1) Add the integer xi to the first ai elements of the sequence.
 2) Append an integer ki to the end of the sequence. (And hence the size of the sequence increases by 1)
 3) Remove the last element of the sequence. So, the size of the sequence decreases by one. 
-   Note, that this operation can only be done if there are at least two elements in the sequence.
 
 After each operation, the cows would like to know the average of all the numbers in the sequence. Help them!
 */
