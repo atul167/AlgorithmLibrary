@@ -44,9 +44,10 @@ public:
         col1++;
         col2++;
         int res = query(row2, col2) - query(row1-1, col2) - query(row2, col1-1) + query(row1-1, col1-1);
-    	  return res;
+        return res;
     }
 };
+
 
 /**
  * Your NumMatrix object will be instantiated and called as such:
