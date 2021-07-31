@@ -16,8 +16,12 @@ Print one integer — the answer to the problem.
 
 /*
 This question can be generalized as:
-After all operations:
-query(n, y) will give the count of LIS of length y considering whole array [i.e. arr[1], arr[2], ..., arr[n])] where arr is permutation of 1, ..., n
+After all operations-
+query(n, x) will give the count of LIS of length x considering whole array [i.e. arr[1], arr[2], ..., arr[n])] 
+where arr is permutation of 1, ..., n
+
+query(m, x) will give the count of LIS of length x considering only first m array elements [i.e. arr[1], arr[2], ..., arr[m])] 
+where arr is permutation of 1, ..., n
 */
 
 const int N = 1e5+5;
