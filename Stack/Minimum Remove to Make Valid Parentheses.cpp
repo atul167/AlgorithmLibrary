@@ -1,6 +1,35 @@
 // https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/
 
 /*
+Note: This will give TLE
+    string res = "";
+    while(!st.empty()) {
+        char x = st.top();
+        st.pop();
+        if(cnt > 0 && x == '(') {
+            cnt--;
+        } else {
+            res = x + res;
+        }
+    }
+    
+Use this:
+    int n = st.size() - cnt;
+    string res(n, ' ');
+    int idx = n - 1;
+    while(!st.empty()) {
+        char x = st.top();
+        st.pop();
+        if(cnt > 0 && x == '(') {
+            cnt--;
+        } else {
+            res[idx] = x;
+            idx--;
+        }
+    }
+*/
+
+/*
 Example:
 Input: s = "lee(t(c)o)de)"
 Output: "lee(t(c)o)de"
@@ -27,16 +56,16 @@ public:
         }
         
         int n = st.size() - cnt;
-        string res(n, '\0');
-        int idx = 0;
+        string res(n, ' ');
+        int idx = n - 1;
         while(!st.empty()) {
             char x = st.top();
             st.pop();
             if(cnt > 0 && x == '(') {
                 cnt--;
             } else {
-                res[n-1-idx] = x;
-                idx++;
+                res[idx] = x;
+                idx--;
             }
         }
         
