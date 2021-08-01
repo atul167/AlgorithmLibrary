@@ -1,5 +1,11 @@
 // https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/
 
+/*
+Example:
+Input: s = "lee(t(c)o)de)"
+Output: "lee(t(c)o)de"
+*/
+
 class Solution {
 public:
     string minRemoveToMakeValid(string s) {
