@@ -31,30 +31,30 @@ The first element of the stack is a special element that provides index before t
 */
 
 class Solution {
- public:
-     int findMaxLen(string s) {
-         int n = s.size();
+public:
+    int findMaxLen(string s) {
+        int n = s.size();
 
-         stack < int > st;
-         // -1 is inserted to tackle this type of case s = ((()))
-         st.push(-1);
-         int res = 0;
+        stack < int > st;
+        // -1 is inserted to tackle this type of case s = ((()))
+        st.push(-1);
+        int res = 0;
 
-         for (int i = 0; i < n; i++) {
-             if (s[i] == '(') {
-                 st.push(i);
-             } else {
-                 if (!st.empty()) {
-                     st.pop();
-                 }
+        for (int i = 0; i < n; i++) {
+            if (s[i] == '(') {
+                st.push(i);
+            } else {
+                if (!st.empty()) {
+                    st.pop();
+                }
 
-                 if (!st.empty()) {
-                     res = max(res, i - st.top());
-                 } else {
-                     st.push(i);
-                 }
-             }
-         }
-         return res;
-     }
+                if (!st.empty()) {
+                    res = max(res, i - st.top());
+                } else {
+                    st.push(i);
+                }
+            }
+        }
+        return res;
+    }
 };
