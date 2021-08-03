@@ -29,8 +29,7 @@ public:
             f2[s2[i] - 'a']++;
         }
         if(f1 != f2) return dp[key] = false;
-        
-        bool res = false;
+
         for(int i = 1; i < n; i++) {
             bool w = solve(s1.substr(0,i),s2.substr(0,i));
             bool x = solve(s1.substr(i),s2.substr(i));
