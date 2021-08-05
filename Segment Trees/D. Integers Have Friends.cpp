@@ -22,7 +22,7 @@ To solve the problem, we can use a segment tree to find the largest possible sub
 and then max over all subarray answers using sliding window or 2 pointers to get the final answer.
 */
 
-int n, m; 
+int n, m;
 vector<int> tree, dif;
 
 void build(int si, int sl, int sr) {
@@ -48,7 +48,6 @@ int query(int si, int sl, int sr, int ql, int qr) {
 }
 
 void solve() {
-    int x, y, z;
     cin >> n;
     vector<int> a(n);
     dif = vector<int>(n);
@@ -65,15 +64,15 @@ void solve() {
 
     int l = 1, r = 1;
     while(r < n) {
-        x = query(0, 0, n-1, l, r);
-        if(x != 1) {
+        int gcd = query(0, 0, n-1, l, r);
+        if(gcd != 1) {
             res = max(res, (r - l + 1) + 1);
             r++;
         } else {
             l++;
         }
     }
-    
+
     cout << res << endl;
 }
  
