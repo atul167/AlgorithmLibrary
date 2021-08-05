@@ -19,12 +19,12 @@ public:
     string s, t;
     
     int go(int si, int ti, vector<vector<int>>& dp) {
-        if(ti == m && si <= n) {
+        if(ti == m) {
             // since we have to delete the remaining (n-si) trailing letters of s
             return (n - si);
         }
     
-        if(ti < m && si == n) {
+        if(si == n) {
             // since we have to insert the remaining (m-ti) trailing letters of t after s
             return (m - ti);
         }
