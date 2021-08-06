@@ -1,7 +1,7 @@
 // https://leetcode.com/problems/palindrome-partitioning-ii/
 // https://www.geeksforgeeks.org/palindrome-partitioning-dp-17/
 
-// TLE solution (MCM - memoized)
+// TLE solution O(n^3) (MCM - memoized)
 class Solution {
 public:
     vector<vector<bool>> isPalindrome;
@@ -62,7 +62,7 @@ public:
 
 
 
-// TLE solution (MCM - gap method)
+// TLE solution O(n^3) (MCM - gap method)
 class Solution {
 public:
     vector<vector<bool>> isPalindrome;
