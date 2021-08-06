@@ -196,16 +196,13 @@ public:
                     }
                 } else {
                     for (int k = i; k < j; k++) {
-                        int tik = T[i][k] + F[i][k];
-                        int tkj = T[k + 1][j] + F[k + 1][j];
-
                         if (oper[k] == '&') {
                             T[i][j] += T[i][k] * T[k + 1][j];
-                            F[i][j] += tik * tkj - T[i][k] * T[k + 1][j];
+                            F[i][j] += T[i][k] * F[k + 1][j]  + F[i][k] * T[k + 1][j] + F[i][k] * F[k + 1][j];
                         }
                         if (oper[k] == '|') {
                             F[i][j] += F[i][k] * F[k + 1][j];
-                            T[i][j] += tik * tkj - F[i][k] * F[k + 1][j];
+                            T[i][j] += T[i][k] * F[k + 1][j]  + F[i][k] * T[k + 1][j] + T[i][k] * T[k + 1][j];
                         }
                         if (oper[k] == '^') {
                             T[i][j] += F[i][k] * T[k + 1][j] + T[i][k] * F[k + 1][j];
