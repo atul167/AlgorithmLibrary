@@ -40,7 +40,6 @@ public:
         return dp[key] = false;
     }
     bool isScramble(string s1, string s2) {
-        int n = s1.size();
         return solve(s1,s2);
     }
 };
