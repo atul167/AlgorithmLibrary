@@ -80,23 +80,26 @@ public:
 class Solution {
 public:
     int superEggDrop(int k, int n) {
-        int dp[k+1][n+1];
-        for(int i = 0; i <= n; i++) dp[0][i] = INT_MAX;
-        for(int i = 0; i <= n; i++) dp[1][i] = i;
-        for(int i = 0; i <= k; i++) dp[i][0] = 0;
-        for(int i = 0; i <= k; i++) dp[i][1] = 1;
+        int eggs = k, floors = n;
         
-        for(int i = 2; i <= k; i++)
-            for(int j = 2; j <= n; j++){
+        int dp[eggs+1][floors+1];
+        for(int i = 0; i <= floors; i++) dp[0][i] = INT_MAX;
+        for(int i = 0; i <= floors; i++) dp[1][i] = i;
+        for(int i = 0; i <= eggs; i++) dp[i][0] = 0;
+        for(int i = 0; i <= eggs; i++) dp[i][1] = 1;
+        
+        for(int i = 2; i <= eggs; i++) {
+            for(int j = 2; j <= floors; j++) {
                 int curr_ans = INT_MAX;
                 int l = 0, r = j-1;
                 while(l < j && r >= 0){
                     curr_ans = min(curr_ans, max(dp[i-1][l], dp[i][r]));
                     l++; r--;
                 }
-              dp[i][j] = curr_ans+1;
+                dp[i][j] = curr_ans+1;
             }
-        return dp[k][n];
+        }
+        return dp[eggs][floors];
     }
 };
 
@@ -104,26 +107,29 @@ public:
 class Solution {
 public:
     int superEggDrop(int k, int n) {
-        int dp[k+1][n+1];
-        for(int i = 0; i <= n; i++) dp[0][i] = INT_MAX;
-        for(int i = 0; i <= n; i++) dp[1][i] = i;
-        for(int i = 0; i <= k; i++) dp[i][0] = 0;
-        for(int i = 0; i <= k; i++) dp[i][1] = 1;
+        int eggs = k, floors = n;
         
-        for(int i = 2; i <= k; i++)
-            for(int j = 2; j <= n; j++) {
-               int l = 1, r = j, temp = 0, ans = INT_MAX;
-                 while(l <= r) {
+        int dp[eggs+1][floors+1];
+        for(int i = 0; i <= floors; i++) dp[0][i] = INT_MAX;
+        for(int i = 0; i <= floors; i++) dp[1][i] = i;
+        for(int i = 0; i <= eggs; i++) dp[i][0] = 0;
+        for(int i = 0; i <= eggs; i++) dp[i][1] = 1;
+        
+        for(int i = 2; i <= eggs; i++) {
+            for(int j = 2; j <= floors; j++) {
+                int l = 1, r = j, temp = 0, ans = INT_MAX;
+                while(l <= r) {
                     int mid = (l + r)/2;
                     int left = dp[i-1][mid-1]; 
                     int right = dp[i][j-mid];  
                     temp = 1 + max(left,right);         
                     if(left < right) l = mid+1;                       
                     else r = mid-1;
-                    ans = min(ans,temp);               
-                 }
-                 dp[i][j]=ans;
+                    ans = min(ans,temp);
+                }
+                dp[i][j]=ans;
             }
-        return dp[k][n];
+        }
+        return dp[eggs][floors];
     }
 };
