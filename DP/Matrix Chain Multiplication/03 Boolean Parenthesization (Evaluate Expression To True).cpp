@@ -4,6 +4,15 @@
 
 // https://youtu.be/JbRsM2X2_pg
 
+
+/*
+Input: N = 7, S = T|T&F^T
+Output: 4
+Explaination: The expression evaluates to true in 4 ways 
+((T|T)&(F^T)), (T|(T&(F^T))), (((T|T)&F)^T) and (T|((T&F)^T)).
+*/
+
+
 /*
 & operator
 T & T = T
