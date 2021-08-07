@@ -1,3 +1,131 @@
+const int N = 1e5+5;
+int n, m;
+
+const int height = (int)ceil(log2(N));
+vector<pair<int, int>> g[N];
+int level[N];
+vector<vector<int>> LCA(N, vector<int>(height+1)), minWeight(N, vector<int>(height+1));
+
+void dfs(int u, int par, int lvl) {
+    level[u] = lvl;
+    LCA[u][0] = par;
+
+    for (auto it: g[u]) {
+        int v = it.F, w = it.S;
+        if (v != par) {
+            dfs(v, u, lvl + 1);
+        }
+    }
+}
+
+void build(int u, int par, int wt){
+    LCA[u][0] = par;
+    minWeight[u][0] = wt;
+    
+    for(int i = 1; i < height; i++) {
+        int parNode = LCA[u][i - 1];
+        if(parNode != -1) {
+            LCA[u][i] = LCA[parNode][i - 1];
+            minWeight[u][i] = min(minWeight[parNode][i - 1], minWeight[u][i - 1]);
+        } else {
+            LCA[u][i] = -1;
+            minWeight[u][i] = INF;
+        }
+    }
+    for(auto it: g[u]) {
+        int v = it.F, w = it.S;
+        if(v != par) {
+            build(v, u, w);
+        }
+    }
+}
+
+int getLCA(int a, int b) {
+    if(level[a] > level[b]) swap(a, b);
+
+    int mn = INF;
+
+    int d = level[b] - level[a];
+    for(int i = height-1; i >= 0; i--) {
+        if(d & (1 << i)) {
+            mn = min(mn, minWeight[b][i]);
+            b = LCA[b][i];
+        }
+    }
+
+    if (a == b) return mn;
+
+    for(int i = height - 1; i >= 0; i--) {
+        if (LCA[a][i] != LCA[b][i]) {
+            mn = min(mn, minWeight[a][i]);
+            a = LCA[a][i];
+            mn = min(mn, minWeight[b][i]);
+            b = LCA[b][i];
+        }
+    }
+
+    return min({mn, minWeight[a][0], minWeight[b][0]});
+}
+
+void solve() {
+    int u, v, w, q;
+    cin >> n;
+
+    LCA.resize(N, vector<int>(height+1, -1));
+    minWeight.resize(N, vector<int>(height+1, INF));
+
+    f(i, n-1) {
+        cin >> u >> v >> w, g[u].pb({v, w}), g[v].pb({u, w});
+    }
+
+    dfs(1, -1, 0);
+    build(1, -1, INF);
+
+    cin >> q;
+    while(q--) {
+        cin >> u >> v;
+        cout << getLCA(u, v) << endl;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #include<bits/stdc++.h>	
 #define pb push_back
 #define endl "\n"
