@@ -1,3 +1,121 @@
+// Method 1
+const int N = 1e5+5;
+int n, m;
+
+const int height = (int)ceil(log2(N));
+vector<pair<int, int>> g[N];
+int level[N];
+vector<vector<int>> LCA(N, vector<int>(height+1)), minWeight(N, vector<int>(height+1));
+
+void dfs(int u, int par, int lvl, int wt) {
+    level[u] = lvl;
+    LCA[u][0] = par;
+    minWeight[u][0] = wt;
+
+    for (auto it: g[u]) {
+        int v = it.F, w = it.S;
+        if (v != par) {
+            dfs(v, u, lvl + 1, w);
+        }
+    }
+}
+
+void init() {
+    dfs(1, -1, 0, INF);
+
+    for(int i = 1; i <= height; i++) {
+        for(int node = 1; node <= n; node++) {
+            int parNode = LCA[node][i - 1];
+            if(parNode != -1) {
+                LCA[node][i] = LCA[parNode][i - 1];
+                minWeight[node][i] = min(minWeight[parNode][i - 1], minWeight[node][i - 1]);
+            } else {
+                LCA[node][i] = -1;
+                minWeight[node][i] = INF;
+            }
+        }
+    }
+}
+
+int getLCA(int a, int b) {
+    if(level[a] > level[b]) swap(a, b);
+
+    int mn = INF;
+
+    int d = level[b] - level[a];
+    for(int i = height-1; i >= 0; i--) {
+        if(d & (1 << i)) {
+            mn = min(mn, minWeight[b][i]);
+            b = LCA[b][i];
+        }
+    }
+
+    if (a == b) return mn;
+
+    for(int i = height - 1; i >= 0; i--) {
+        if (LCA[a][i] != LCA[b][i]) {
+            mn = min(mn, minWeight[a][i]);
+            a = LCA[a][i];
+            mn = min(mn, minWeight[b][i]);
+            b = LCA[b][i];
+        }
+    }
+
+    return min({mn, minWeight[a][0], minWeight[b][0]});
+}
+
+void solve() {
+    int u, v, w, q;
+    cin >> n;
+
+    LCA.resize(N, vector<int>(height+1, -1));
+    minWeight.resize(N, vector<int>(height+1, INF));
+
+    f(i, n-1) {
+        cin >> u >> v >> w, g[u].pb({v, w}), g[v].pb({u, w});
+    }
+
+    init();
+
+    cin >> q;
+    while(q--) {
+        cin >> u >> v;
+        cout << getLCA(u, v) << endl;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Method 2
 const int N = 1e5+5;
 int n, m;
 
@@ -125,7 +243,7 @@ void solve() {
 
 
 
-
+// Method 3: Sameer Raj
 #include<bits/stdc++.h>	
 #define pb push_back
 #define endl "\n"
