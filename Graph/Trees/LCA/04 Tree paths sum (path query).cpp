@@ -58,7 +58,6 @@ int getLCA(int a, int b) {
     if(level[a] > level[b]) swap(a, b);
 
     int d = level[b] - level[a];
-
     b = getKthAncestor(b, d);
 
     if (a == b) return a;
@@ -137,7 +136,7 @@ signed main() {
 
 
 
-// Method (Generalized)
+// Method 1 (Generalized)
 const int N = 1e5+5;
 int n, m;
 
@@ -222,18 +221,6 @@ void solve() {
         cout << getLCA(u, v) << endl;
     }
 }
- 
-signed main() {
-    IOS
-    clock_t begin = clock();
-    int t = 1;
-    PRECISION(10);
-    // cin >> t;
-    f(i, t) {
-        solve();
-    }
-    cerr<<"Time elapsed: "<<(clock()-begin)*1000.0/CLOCKS_PER_SEC<<"ms"<<'\n';
-}
 
 /*
 Input:
@@ -252,6 +239,7 @@ Input:
 2 5
 1 7
 3 8
+
 Output:
 4
 10
@@ -290,7 +278,7 @@ Output:
 
 
 
-
+// Method 2 (Generalized)
 const int N = 1e5+5;
 int n, m;
 
@@ -360,16 +348,11 @@ int getLCA(int a, int b) {
 }
 
 void solve() {
-    int u, v, w, q, root;
-    cin >> n >> q >> root;
+    int u, v, w, q;
+    cin >> n;
 
-    loop(i, 0, n) {
-        g[i].clear();
-        level[i] = 0;
-    }
-
-    LCA.resize(n+1, vector<int>(height+1, -1));
-    LCASum.resize(n+1, vector<int>(height+1, 0));
+    LCA.resize(N, vector<int>(height+1, -1));
+    LCASum.resize(N, vector<int>(height+1, 0));
 
     f(i, n-1) {
         cin >> u >> v >> w, g[u].pb({v, w}), g[v].pb({u, w});
@@ -378,6 +361,7 @@ void solve() {
     dfs(1, -1, 0);
     build(1, -1, 0);
 
+    cin >> q;
     while(q--) {
         cin >> u >> v;
         cout << getLCA(u, v) << endl;
