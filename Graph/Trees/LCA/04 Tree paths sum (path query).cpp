@@ -136,6 +136,14 @@ signed main() {
 
 
 
+
+
+
+
+
+
+
+
 // Method 1 (Generalized)
 const int N = 1e5+5;
 int n, m;
