@@ -1,3 +1,5 @@
+// https://leetcode.com/problems/diameter-of-binary-tree/
+
 /*
 The question can be solved by small modification to program of Height of tree.
 The idea is quite simple. Max value of Height(leftSubtree)+Height(rightSubtree) (at any node ) is the diameter. 
@@ -21,7 +23,8 @@ public:
         
         diameter = max(diameter, leftSubtreeDepth+rightSubtreeDepth);
         
-        return max(leftSubtreeDepth, rightSubtreeDepth) + 1;
+        int height = max(leftSubtreeDepth, rightSubtreeDepth) + 1;
+        return height;
     }
     int diameterOfBinaryTree(TreeNode* root) {
         if(!root) return 0;
