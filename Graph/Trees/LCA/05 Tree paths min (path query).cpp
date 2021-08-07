@@ -1,11 +1,11 @@
-// Method 1
+// Method 1 (Generalized)
 const int N = 1e5+5;
 int n, m;
 
 const int height = (int)ceil(log2(N));
 vector<pair<int, int>> g[N];
 int level[N];
-vector<vector<int>> LCA(N, vector<int>(height+1)), minWeight(N, vector<int>(height+1));
+vector<vector<int>> LCA, minWeight;
 
 void dfs(int u, int par, int lvl, int wt) {
     level[u] = lvl;
@@ -140,14 +140,14 @@ Output:
 
 
 
-// Method 2
+// Method 2 (Generalized)
 const int N = 1e5+5;
 int n, m;
 
 const int height = (int)ceil(log2(N));
 vector<pair<int, int>> g[N];
 int level[N];
-vector<vector<int>> LCA(N, vector<int>(height+1)), minWeight(N, vector<int>(height+1));
+vector<vector<int>> LCA, minWeight;
 
 void dfs(int u, int par, int lvl) {
     level[u] = lvl;
