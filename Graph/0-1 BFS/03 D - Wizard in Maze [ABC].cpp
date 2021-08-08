@@ -1,5 +1,23 @@
 // https://atcoder.jp/contests/abc176/tasks/abc176_d
 
+/*
+A maze is composed of a grid of N × M squares.
+The square at (i, j) - is a "wall" if S[i][j] is "#" and a "road" if S[i][j] is "." 
+There is a magician in (srcX, srcY) . He can do the following two kinds of moves: 
+Move A: Walk to a road square that is vertically or horizontally adjacent to the square he is currently in. 
+Move B: Use magic to warp himself to a "road square" in the 5 × 5 area centered at the square he is currently in. 
+In either case, he cannot go out of the maze. At least how many times does he need to use the magic to reach (destX, destY) ?
+*/
+
+/*
+Editorial:
+It's a very typical 0-1 BFS, since the cost is 0 if we go along the roads, while the cost is 1 if we cast a magic spell.
+Compared to ordinary BFS, we need to use a deque instead of a single-ended queue. 
+For relaxations that cost 0, we do push_front, while for those cost 1, we do push_back. 
+In this way, the elements in the deque are kept in an non-decreasing order, 
+which means we will happily take the current value as the optimal value when we first reach the target position.
+*/
+
 
 // Method 1
 const int N = 1e3+5;
@@ -103,7 +121,7 @@ void solve() {
 
 
 
-// Method 2
+// Method 2 (using vis array)
 const int N = 1e3+5;
 int n, m;
 
