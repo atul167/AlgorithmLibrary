@@ -22,12 +22,12 @@ public:
     int go(TreeNode* root) {
         if(!root) return 0;
         
-        int leftSubtreeSum = go(root->left);
-        int rightSubtreeSum = go(root->right);
+        int ls = go(root->left);
+        int rs = go(root->right);
         
-        res = max(res, root->val + leftSubtreeSum + rightSubtreeSum);
+        res = max(res, ls + rs + root->val);
         
-        int heightSum = max(leftSubtreeSum, rightSubtreeSum) + root->val;
+        int heightSum = max(ls, rs) + root->val;
         return max(heightSum, 0);
     }
     
