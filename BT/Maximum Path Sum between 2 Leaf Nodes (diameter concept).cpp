@@ -1,6 +1,11 @@
 // https://www.geeksforgeeks.org/find-maximum-path-sum-two-leaves-binary-tree/
 // https://practice.geeksforgeeks.org/problems/maximum-path-sum/1
 
+/*
+Given a binary tree in which each node element contains a number. Find the maximum possible sum from one leaf node to another leaf node.
+NOTE: Here Leaf node is a node which is connected to exactly one different node.
+*/
+
 class Solution {
 public:
     int maxPathSumUtil(struct Node *root, int &res) {
