@@ -12,7 +12,6 @@ First line: T denotes the number of test cases (1 <= T <= 10)
 For each test case:
   First line: n (1 <= n <= 50,000)
   Second line: n integers where the i'th integer is p[i]
-  Note: It is guaranteed that p is a permutation.
 
 Output format
 Print the minimum possible cost.
