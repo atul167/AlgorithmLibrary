@@ -1,5 +1,11 @@
-// Single source shortest path for weighted graphs
-// It fails for negative weights (in that case we can use bellman ford)
+/*
+Single source shortest path for weighted graphs
+It fails for negative weights (in that case we can use bellman ford)
+
+Time Complexity = O(E + VLogV)
+*/
+
+
 
 
 vector<pll> adj[N];
