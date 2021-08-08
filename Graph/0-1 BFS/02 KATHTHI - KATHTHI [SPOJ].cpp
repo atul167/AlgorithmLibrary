@@ -67,7 +67,7 @@ bool isSafe(int x, int y) {
 }
 
 void bfs01() {
-    vector<vector<int>> dis(n+1, vector<int>(m+1, INF));
+    vector<vector<int>> dis(n, vector<int>(m, INF));
     deque<pair<int, int>> dq;
     dq.push_front({0, 0});
     dis[0][0] = 0;
