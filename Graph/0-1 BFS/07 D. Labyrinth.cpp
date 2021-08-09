@@ -61,9 +61,8 @@ void bfs01() {
             }
  
             if(stepDir[z] == 'U' || stepDir[z] == 'D') {
-                int w = 0;
-                if(distLeft[nx][ny] > distLeft[x][y] + w || distRight[nx][ny] > distRight[x][y] + w) {
-                    distLeft[nx][ny] = distLeft[x][y] + w;
+                if(distLeft[nx][ny] > distLeft[x][y] || distRight[nx][ny] > distRight[x][y]) {
+                    distLeft[nx][ny] = distLeft[x][y];
                     distRight[nx][ny] = distRight[x][y];
                     q.push_front({nx, ny});
                 }
