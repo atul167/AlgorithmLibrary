@@ -105,3 +105,15 @@ void solve() {
 
     bfs01();
 }
+
+signed main() {
+    IOS
+    clock_t begin = clock();
+    int t = 1;
+    PRECISION(10);
+    cin >> t;
+    f(i, t) {
+        solve();
+    }
+    cerr<<"Time elapsed: "<<(clock()-begin)*1000.0/CLOCKS_PER_SEC<<"ms"<<'\n';
+}  
