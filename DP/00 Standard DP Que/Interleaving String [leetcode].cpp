@@ -21,6 +21,7 @@ Output: true
 */
 
 
+// Method 1 O(n^3)
 class Solution {
 public:
     int n1, n2, n3;
@@ -51,5 +52,50 @@ public:
         this->s1 = s1, this->s2 = s2, this->s3 = s3;
         memset(dp, -1, sizeof dp);
         return go(0, 0, 0);
+    }
+};
+
+
+
+
+
+
+
+
+
+// Method 2 O(n^2)
+/*
+i3 is redundant since i3 = i1 + i2
+*/
+class Solution {
+public:
+    int n1, n2, n3;
+    string s1, s2, s3;
+    int dp[205][205];
+    
+    bool go(int i1, int i2) {
+        if(i1 + i2 == n3) {
+            return (i1 == n1 && i2 == n2);
+        }
+        
+        if(dp[i1][i2] != -1) return dp[i1][i2];
+        
+        bool res = false;
+        
+        if(i1 < n1 && s1[i1] == s3[i1 + i2]) {
+            res |= go(i1 + 1, i2);
+        }
+        if(i2 < n2 && s2[i2] == s3[i1 + i2]) {
+            res |= go(i1, i2 + 1);
+        }
+        
+        return dp[i1][i2] = res;
+    }
+    
+    bool isInterleave(string s1, string s2, string s3) {
+        n1 = s1.size(), n2 = s2.size(), n3 = s3.size();
+        this->s1 = s1, this->s2 = s2, this->s3 = s3;
+        memset(dp, -1, sizeof dp);
+        return go(0, 0);
     }
 };
