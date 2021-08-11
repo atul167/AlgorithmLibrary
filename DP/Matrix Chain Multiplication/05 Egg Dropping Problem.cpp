@@ -37,46 +37,6 @@ public:
                     dp[i][j] = 1;
                 } else {
                     int mn = INT_MAX;
-                    for (int mj = j - 1, pj = 0; mj >= 0; mj--, pj++) {
-                        // egg breaks
-                        int v2 = dp[i - 1][pj];
-                        // egg survives
-                        int v1 = dp[i][mj];
-
-                        int val = max(v1, v2);
-                        mn = min(mn, val);
-                    }
-
-                    dp[i][j] = mn + 1;
-                }
-            }
-        }
-
-        return dp[eggs][floors];
-    }
-};
-
-
-// TLE Solution
-class Solution {
-public:
-    int superEggDrop(int k, int n) {
-        int eggs = k, floors = n;
-        int dp[eggs + 1][floors + 1];
-        memset(dp, 0, sizeof dp);
-
-        // i = egg, j = floor
-        for (int i = 1; i <= eggs; i++) {
-            for (int j = 1; j <= floors; j++) {
-                // only 1 egg
-                if (i == 1) {
-                    dp[i][j] = j;
-                }
-                // only 1 floor
-                else if (j == 1) {
-                    dp[i][j] = 1;
-                } else {
-                    int mn = INT_MAX;
                     int l = 0, r = j - 1;
                     while(l < j && r >= 0) {
                         // egg breaks
