@@ -100,6 +100,46 @@ public:
                     dp[i][j] = 1;
                 } else {
                     int l = 1, r = j, temp = 0, ans = INT_MAX;
+                    while(l < r) {
+                        int mid = (l + r) / 2;
+                        int left = dp[i - 1][mid - 1];
+                        int right = dp[i][j - mid];
+                        temp = 1 + max(left, right);
+                        if(left < right) 
+                            l = mid + 1;
+                        else 
+                            r = mid;
+                        ans = min(ans, temp);
+                    }
+                    dp[i][j] = ans;
+                }
+            }
+        }
+
+        return dp[eggs][floors];
+    }
+};
+
+
+class Solution {
+public:
+    int superEggDrop(int k, int n) {
+        int eggs = k, floors = n;
+        int dp[eggs + 1][floors + 1];
+        memset(dp, 0, sizeof dp);
+
+        // i = egg, j = floor
+        for (int i = 1; i <= eggs; i++) {
+            for (int j = 1; j <= floors; j++) {
+                // only 1 egg
+                if (i == 1) {
+                    dp[i][j] = j;
+                }
+                // only 1 floor
+                else if (j == 1) {
+                    dp[i][j] = 1;
+                } else {
+                    int l = 1, r = j, temp = 0, ans = INT_MAX;
                     while(l <= r) {
                         int mid = (l + r) / 2;
                         int left = dp[i - 1][mid - 1];
@@ -117,7 +157,6 @@ public:
         return dp[eggs][floors];
     }
 };
-
 
 
 
@@ -183,6 +222,39 @@ public:
         for(int i = 2; i <= eggs; i++) {
             for(int j = 2; j <= floors; j++) {
                 int l = 1, r = j, temp = 0, ans = INT_MAX;
+                while(l < r) {
+                    int mid = (l + r) / 2;
+                    int left = dp[i - 1][mid - 1];
+                    int right = dp[i][j - mid];
+                    temp = 1 + max(left, right);
+                    if(left < right) 
+                        l = mid + 1;
+                    else 
+                        r = mid;
+                    ans = min(ans, temp);
+                }
+                dp[i][j] = ans;
+            }
+        }
+        return dp[eggs][floors];
+    }
+};
+
+
+class Solution {
+public:
+    int superEggDrop(int k, int n) {
+        int eggs = k, floors = n;
+        
+        int dp[eggs+1][floors+1];
+        for(int i = 0; i <= floors; i++) dp[0][i] = INT_MAX;
+        for(int i = 0; i <= floors; i++) dp[1][i] = i;
+        for(int i = 0; i <= eggs; i++) dp[i][0] = 0;
+        for(int i = 0; i <= eggs; i++) dp[i][1] = 1;
+        
+        for(int i = 2; i <= eggs; i++) {
+            for(int j = 2; j <= floors; j++) {
+                int l = 1, r = j, temp = 0, ans = INT_MAX;
                 while(l <= r) {
                     int mid = (l + r) / 2;
                     int left = dp[i - 1][mid - 1];
@@ -198,6 +270,8 @@ public:
         return dp[eggs][floors];
     }
 };
+
+
 
 
 
@@ -258,7 +332,7 @@ public:
         if(dp[eggs][floors] != -1) return dp[eggs][floors];
         
         int res = INT_MAX, low = 0, high = floors, temp = 0;
-        while(low <= high) {
+        while(low < high) {
             int mid = (low + high) / 2;
             
             /*
@@ -278,7 +352,7 @@ public:
             }
             // move to the downward
             else { 
-                high = mid - 1;
+                high = mid;
             }
     
             // best fo the worst
