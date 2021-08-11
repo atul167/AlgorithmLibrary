@@ -34,6 +34,12 @@ Base Conditions:
 2. If the egg will be 1 i.e. k = 1, So we need at minimum n moves to determine what the value of floor is i.e n attempts.
 3. If the n is 0 then no floor 0 attempt.
 4. If the n is 1 then only 1 attempt.
+
+Why Binary Search?
+Notice that for the same K when N goes up, dp[K][N] goes up.
+Then for int left = go(K - 1, i - 1, dp); int right = go(K, N - i, dp); when i goes up, left goes up and right goes down.
+We can use Binary Search here to get the minimum {1 + max(left, right)}, when left and right are as close as possible.
+We come to O(K*N*logN) solution.
 */
 
 
@@ -207,6 +213,7 @@ public:
     }
 };
 
+
 // ✅ Using Binary Search
 class Solution {
 public:
@@ -240,7 +247,6 @@ public:
     }
 };
 
-
 class Solution {
 public:
     int superEggDrop(int k, int n) {
@@ -270,6 +276,9 @@ public:
         return dp[eggs][floors];
     }
 };
+
+
+
 
 
 
