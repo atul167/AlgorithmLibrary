@@ -76,15 +76,17 @@ void solve() {
  
     sort(all(a));
  
-    int right = 0, ans = INF;
-    for(int left = 0; left < n; left++) {
-        while(tree[1] <= 0 && right < n) {
-            update(1, 1, m - 1, a[right].l, a[right].r, 1);
-            right++;
+    // 2 pointer technique
+    int left = 0, ans = INF;
+    for(int right = 0; right < n; right++) {
+        update(1, 1, m - 1, a[right].l, a[right].r, +1);
+
+        while(query(1, 1, m - 1, 1, m - 1) > 0) {
+        // while(tree[1] > 0) {
+            ans = min(ans, a[right].w - a[left].w);
+            update(1, 1, m - 1, a[left].l, a[left].r, -1);
+            left++;
         }
-        if(query(1, 1, m-1, 1, m-1) > 0) ans = min(ans, a[right - 1].w - a[left].w);
-        
-        update(1, 1, m-1, a[left].l, a[left].r, -1);
     }
-    cout << ans;
+    cout << ans << endl;
 }
