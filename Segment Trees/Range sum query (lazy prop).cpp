@@ -113,7 +113,7 @@ void solve() {
 
 
 
-// Method 2
+// Method 2 (propagate function)
 const int N = 1e6+5;
 int n, m;
  
