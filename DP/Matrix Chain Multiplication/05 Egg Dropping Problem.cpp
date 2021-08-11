@@ -57,6 +57,7 @@ public:
 };
 
 
+// TLE Solution
 class Solution {
 public:
     int superEggDrop(int k, int n) {
@@ -94,6 +95,44 @@ public:
     }
 };
 
+
+// AC Solution
+class Solution {
+public:
+    int superEggDrop(int k, int n) {
+        int eggs = k, floors = n;
+        int dp[eggs + 1][floors + 1];
+        memset(dp, 0, sizeof dp);
+
+        // i = egg, j = floor
+        for (int i = 1; i <= eggs; i++) {
+            for (int j = 1; j <= floors; j++) {
+                // only 1 egg
+                if (i == 1) {
+                    dp[i][j] = j;
+                }
+                // only 1 floor
+                else if (j == 1) {
+                    dp[i][j] = 1;
+                } else {
+                    int l = 1, r = j, temp = 0, ans = INT_MAX;
+                    while(l <= r) {
+                        int mid = (l + r) / 2;
+                        int left = dp[i - 1][mid - 1];
+                        int right = dp[i][j - mid];
+                        temp = 1 + max(left, right);
+                        if(left < right) l = mid + 1;
+                        else r = mid - 1;
+                        ans = min(ans, temp);
+                    }
+                    dp[i][j] = ans;
+                }
+            }
+        }
+
+        return dp[eggs][floors];
+    }
+};
 
 
 
