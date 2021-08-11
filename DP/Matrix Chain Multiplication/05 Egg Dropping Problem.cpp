@@ -174,3 +174,99 @@ public:
         return dp[eggs][floors];
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// TLE top - down
+class Solution {
+public:
+    int go(int eggs, int floors, vector<vector<int>>& dp){
+        if(floors == 0 || floors == 1) return floors;
+        if(eggs == 1) return floors;
+        
+        if(dp[eggs][floors] != -1) return dp[eggs][floors];
+        
+        int res = INT_MAX;
+        
+        for(int i = 1; i <= floors; i++) {
+            /*
+            Case 1: if the egg will break, 
+                    No. of eggs will decrease and we have to down from that floor.
+            Case 2: if the egg will not break, 
+                    No. of eggs will not decrease and we have to go above form that floor.
+            */
+            int temp = 1 + max(go(eggs - 1, i - 1, dp), go(eggs, floors - i, dp));
+            // best of the worst
+            res = min(res, temp);
+        }
+        return dp[eggs][floors] = res;
+    }
+    
+    int superEggDrop(int k, int n) {
+        // k = eggs, n = floors
+        vector<vector<int>> dp(k + 1, vector<int>(n + 1, -1));
+        return go(k, n, dp);
+    }
+};
+
+
+
+
+// AC top - down
+class Solution {
+public:
+    int go(int eggs, int floors, vector<vector<int>>& dp){
+        if(floors == 0 || floors == 1) return floors;
+        if(eggs == 1) return floors;
+        
+        if(dp[eggs][floors] != -1) return dp[eggs][floors];
+        
+        int res = INT_MAX, low = 0, high = floors, temp = 0;
+        while(low <= high) {
+            int mid = (low + high) / 2;
+            
+            /*
+            Case 1: if the egg will break, 
+                    No. of eggs will decrease and we have to down from that floor.
+            Case 2: if the egg will not break, 
+                    No. of eggs will not decrease and we have to go above form that floor.
+            */
+            
+            int left = go(eggs - 1, mid - 1, dp);
+            int right = go(eggs, floors - mid, dp);
+            temp = 1 + max(left, right);
+            
+            // since we need more temp value in worst case, so need to go above
+            if(left < right) {
+                low = mid + 1;
+            }
+            // move to the downward
+            else { 
+                high = mid - 1;
+            }
+    
+            // best fo the worst
+            res = min(res, temp);
+        }
+        
+        return dp[eggs][floors] = res;
+    }
+    
+    int superEggDrop(int k, int n) {
+        // k = eggs, n = floors
+        vector<vector<int>> dp(k + 1, vector<int>(n + 1, -1));
+        return go(k, n, dp);
+    }
+};
