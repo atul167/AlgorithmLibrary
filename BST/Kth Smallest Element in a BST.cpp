@@ -1,44 +1,20 @@
+// https://leetcode.com/problems/kth-smallest-element-in-a-bst/
+
 /*Using inorder traversal*/
-
-// iterative
-class Solution {
-public:
-    int kthSmallest(TreeNode* root, int k) {
-        stack<TreeNode*> st;
-        TreeNode *cur = root;
-        while(cur || !st.empty()) {
-            while(cur) {
-                st.push(cur);
-                cur = cur->left;
-            }
-            cur = st.top(); st.pop();
-            k--;
-            if(k == 0) {
-                return cur->val;
-            }
-            cur = cur->right;
-        }
-        return -1;
-    }
-};
-
-
-
-
 
 
 // recursive
 class Solution {
 public:
-    int res, cnt;
+    int res, cnt, k;
     
     void find(TreeNode* node) {
         if(!node) return;
         
         find(node->left);
         
-        cnt--;
-        if(cnt == 0) {
+        cnt++;
+        if(cnt == k) {
             res = node->val;
             return;
         }
@@ -47,14 +23,12 @@ public:
     }
     
     int kthSmallest(TreeNode* root, int k) {
-        cnt = k;
+        this->k = k;
+        cnt = 0;
         find(root);
         return res;
     }
 };
-
-
-
 
 
 
@@ -81,5 +55,31 @@ public:
     int kthSmallest(TreeNode* root, int k) {
         find(root, k);
         return res;
+    }
+};
+
+
+
+
+
+// iterative
+class Solution {
+public:
+    int kthSmallest(TreeNode* root, int k) {
+        stack<TreeNode*> st;
+        TreeNode *cur = root;
+        while(cur || !st.empty()) {
+            while(cur) {
+                st.push(cur);
+                cur = cur->left;
+            }
+            cur = st.top(); st.pop();
+            k--;
+            if(k == 0) {
+                return cur->val;
+            }
+            cur = cur->right;
+        }
+        return -1;
     }
 };
