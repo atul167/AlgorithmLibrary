@@ -1,4 +1,5 @@
 // https://leetcode.com/problems/cherry-pickup/
+// https://youtu.be/ZV0sUzfA7Eg
 
 /*
 You are given an n x n grid representing a field of cherries, each cell is one of three possible integers.
@@ -136,5 +137,67 @@ public:
         res = 0;
         go(0, 0, 0, grid);
         return res;
+    }
+};
+
+
+
+
+
+
+
+
+/*
+DP Solution O(n^4):
+
+Instead of sending a person down and then reversing it's direction to up. 
+What we are doing here is we are hypothetically sending 2 person down.
+
+So if they land on same cherry grid[i][j] we will add only one cherry, 
+and if they land on 2 different grids we will add two cherries corresponding to the grids.
+
+Since there are 2 person thus total 4 moves are possible:
+Person1->Right && Person2->Right
+Person1->Right && Person2->Down
+Person1->Down && Person2->Right
+Person1->Down && Person2->Down
+*/ 
+
+class Solution {
+public:
+    int n;
+    int dp[51][51][51][51];
+    
+    int go(int i1, int j1, int i2, int j2, vector<vector<int>>& grid) {
+        if(i1 < 0 || i1 >= n || j1 < 0 || j1 >= n || grid[i1][j1] == -1) return INT_MIN;
+        if(i2 < 0 || i2 >= n || j2 < 0 || j2 >= n || grid[i2][j2] == -1) return INT_MIN;
+        
+        // here i1 == n - 1 && j1 == n - 1 && i2 == n - 1 && j2 == n - 1 (since they have moved same number of steps)
+        if(i1 == n - 1 && j1 == n - 1) {
+            return grid[i1][j1];
+        }
+        
+        if(dp[i1][j1][i2][j2] != -1) return dp[i1][j1][i2][j2];
+        
+        int cherries = 0;
+        
+        if(i1 == i2 && j1 == j2) {
+            cherries += grid[i1][j1];
+        } else {
+            cherries += grid[i1][j1] + grid[i2][j2];
+        }
+        
+        int res1 = go(i1 + 1, j1, i2 + 1, j2, grid);
+        int res2 = go(i1 + 1, j1, i2, j2 + 1, grid);
+        int res3 = go(i1, j1 + 1, i2 + 1, j2, grid);
+        int res4 = go(i1, j1 + 1, i2, j2 + 1, grid);
+        
+        return dp[i1][j1][i2][j2] = cherries + max({res1, res2, res3, res4});
+    }
+    
+    int cherryPickup(vector<vector<int>>& grid) {
+        n = grid.size();
+        memset(dp, -1, sizeof dp);
+        return max(0, go(0, 0, 0, 0, grid));
     }
 };
