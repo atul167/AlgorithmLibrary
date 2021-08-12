@@ -148,7 +148,7 @@ public:
 
 
 /*
-DP Solution O(n^4):
+DP Solution O(n^4) memory:
 
 Instead of sending a person down and then reversing it's direction to up. 
 What we are doing here is we are hypothetically sending 2 person down.
@@ -199,5 +199,62 @@ public:
         n = grid.size();
         memset(dp, -1, sizeof dp);
         return max(0, go(0, 0, 0, 0, grid));
+    }
+};
+
+
+
+
+
+/*
+DP Solution O(n^3) memory:
+
+Same as above DP solution with one space optimization, using the fact:
+i1 + j1 = i2 + j2 (Since both persons move same number of steps)
+Thus, 
+j2 = i1 + j1 - i2
+*/ 
+
+class Solution {
+public:
+    int n;
+    int dp[51][51][51];
+    
+    int go(int i1, int j1, int i2, vector<vector<int>>& grid) {
+        int j2 = i1 + j1 - i2;
+        
+        if(i1 < 0 || i1 >= n || j1 < 0 || j1 >= n || grid[i1][j1] == -1) return INT_MIN;
+        if(i2 < 0 || i2 >= n || j2 < 0 || j2 >= n || grid[i2][j2] == -1) return INT_MIN;
+        
+        if(i1 == n - 1 && j1 == n - 1) {
+            return grid[i1][j1];
+        }
+        
+        if(dp[i1][j1][i2] != -1) return dp[i1][j1][i2];
+        
+        int cherries = 0;
+        
+        if(i1 == i2 && j1 == j2) {
+            cherries += grid[i1][j1];
+        } else {
+            cherries += grid[i1][j1] + grid[i2][j2];
+        }
+        
+        // int res1 = go(i1 + 1, j1, i2 + 1, j2, grid);
+        // int res2 = go(i1 + 1, j1, i2, j2 + 1, grid);
+        // int res3 = go(i1, j1 + 1, i2 + 1, j2, grid);
+        // int res4 = go(i1, j1 + 1, i2, j2 + 1, grid);
+        int res1 = go(i1 + 1, j1, i2 + 1, grid);
+        int res2 = go(i1 + 1, j1, i2, grid);
+        int res3 = go(i1, j1 + 1, i2 + 1, grid);
+        int res4 = go(i1, j1 + 1, i2, grid);
+        
+        return dp[i1][j1][i2] = cherries + max({res1, res2, res3, res4});
+    }
+    
+    int cherryPickup(vector<vector<int>>& grid) {
+        n = grid.size();
+        memset(dp, -1, sizeof dp);
+        return max(0, go(0, 0, 0, grid));
     }
 };
