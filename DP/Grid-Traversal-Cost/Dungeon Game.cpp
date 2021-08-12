@@ -37,6 +37,7 @@ public:
             return dp[i][j] = min(0, dungeon[i][j] + calculate(i + 1, j, dungeon, dp));
         }
 
+        // max(calculate(i + 1, j), calculate(i, j + 1)) since dp value is negative
         return dp[i][j] = min(0, dungeon[i][j] + max(calculate(i + 1, j, dungeon, dp), calculate(i, j + 1, dungeon, dp)));
     }
     int calculateMinimumHP(vector<vector<int>>& dungeon) {
@@ -56,8 +57,8 @@ public:
         int m = dungeon[0].size();
         vector<vector<int>> dp(n,vector<int>(m));
         
-        for(int i = n-1; i >= 0; --i) {
-            for(int j = m-1; j >= 0; --j) {
+        for(int i = n - 1; i >= 0; i--) {
+            for(int j = m - 1; j >= 0; j--) {
                 //Bottom-Right cell (Princess Cell)
                 if(i == n - 1 && j == m - 1) {
                     dp[i][j] = min(0, dungeon[i][j]);
@@ -71,6 +72,7 @@ public:
                     dp[i][j] = min(0, dungeon[i][j] + dp[i + 1][j]);
                 }
                 else {
+                    //  max(dp[i][j + 1], dp[i + 1][j]) since dp value is negative
                     dp[i][j] = min(0, dungeon[i][j] + max(dp[i][j + 1], dp[i + 1][j]));
                 }
             }
