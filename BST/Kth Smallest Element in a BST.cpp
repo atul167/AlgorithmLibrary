@@ -38,7 +38,6 @@ public:
         find(node->left);
         
         cnt--;
-        
         if(cnt == 0) {
             res = node->val;
             return;
@@ -64,13 +63,13 @@ public:
 class Solution {
 public:
     int res = 0;
+    
     void find(TreeNode* node, int& k) {
         if(!node) return;
         
         find(node->left, k);
         
         k--;
-        
         if(k == 0) {
             res = node->val;
             return;
@@ -78,6 +77,7 @@ public:
         
         find(node->right, k);
     }
+    
     int kthSmallest(TreeNode* root, int k) {
         find(root, k);
         return res;
