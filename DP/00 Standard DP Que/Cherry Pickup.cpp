@@ -27,56 +27,56 @@ public:
                 return grid[i][j];
             }
             
-            int val = grid[i][j], res;
+            int cherry = grid[i][j], res;
             // marked as visited by picking a cherry if any
             grid[i][j] = 0;
             
             if(i == 0) {
-                res = val + go(i, j - 1, 1, grid);
+                res = cherry + go(i, j - 1, 1, grid);
             }
             else if(j == 0) {
-                res = val + go(i - 1, j, 1, grid);
+                res = cherry + go(i - 1, j, 1, grid);
             } 
             else {
-                res = val + max(go(i - 1, j, 1, grid), go(i, j - 1, 1, grid));
+                res = cherry + max(go(i - 1, j, 1, grid), go(i, j - 1, 1, grid));
             }
             
             // backtracking
-            grid[i][j] = val;
+            grid[i][j] = cherry;
             
             return res;
         } else {
             if(grid[i][j] == -1) return INT_MIN;
             
-            int val = grid[i][j], res, x = 0, y = 0;
+            int cherry = grid[i][j], res, x = 0, y = 0;
             // marked as visited by picking a cherry if any
             grid[i][j] = 0;
             
             if(i == n - 1 && j == n - 1) {
-                // res = val + max(go(i - 1, j, 1, grid), go(i, j - 1, 1, grid));
+                // res = cherry + max(go(i - 1, j, 1, grid), go(i, j - 1, 1, grid));
                 
                 // handle case when grid = [[1]] (i.e n = 1, m = 1)
                 if(i - 1 >= 0) {
-                    x = val + go(i - 1, j, 1, grid);
+                    x = cherry + go(i - 1, j, 1, grid);
                 }
                 if(j - 1 >= 0) {
-                    y = val + go(i, j - 1, 1, grid);
+                    y = cherry + go(i, j - 1, 1, grid);
                 }
-                res = max({val, x, y});
+                res = max({cherry, x, y});
             }
             
             else if(i == n - 1) {
-                res = val + go(i, j + 1, 0, grid);
+                res = cherry + go(i, j + 1, 0, grid);
             }
             else if(j == n - 1) {
-                res = val + go(i + 1, j, 0, grid);
+                res = cherry + go(i + 1, j, 0, grid);
             }
             else {
-                res = val + max(go(i + 1, j, 0, grid), go(i, j + 1, 0, grid));
+                res = cherry + max(go(i + 1, j, 0, grid), go(i, j + 1, 0, grid));
             }
             
             // backtracking
-            grid[i][j] = val;
+            grid[i][j] = cherry;
             
             return res;
         }
@@ -86,5 +86,55 @@ public:
         n = grid.size();
         int res = go(0, 0, 0, grid);
         return max(0, res);
+    }
+};
+
+
+
+
+
+
+
+// TLE Backtracking solution
+class Solution {
+public:
+    int n, res;
+    
+    void backTrip(int i, int j, int total, vector<vector<int>>& grid) {
+        if(i < 0 || i >= n || j < 0 || j >= n || grid[i][j] == -1) return;
+        
+        if(i == 0 && j == 0) {
+            res = max(res, total);
+            return;
+        }
+        
+        int cherry = grid[i][j];
+        grid[i][j] = 0;
+        backTrip(i - 1, j, total + cherry, grid);
+        backTrip(i, j - 1, total + cherry, grid);
+        grid[i][j] = cherry;
+    }
+    
+    void go(int i, int j, int total, vector<vector<int>>& grid) {
+        if(i < 0 || i >= n || j < 0 || j >= n || grid[i][j] == -1) return;
+        
+        if(i == n - 1 && j == n - 1) {
+            res = max(res, total + grid[i][j]);
+            backTrip(i, j, total, grid);
+            return;
+        }
+        
+        int cherry = grid[i][j];
+        grid[i][j] = 0;
+        go(i + 1, j, total + cherry, grid);
+        go(i, j + 1, total + cherry, grid);
+        grid[i][j] = cherry;
+    }
+    
+    int cherryPickup(vector<vector<int>>& grid) {
+        n = grid.size();
+        res = 0;
+        go(0, 0, 0, grid);
+        return res;
     }
 };
