@@ -3,6 +3,16 @@
 // https://youtu.be/UvksR0hR9nA
 
 /*
+Abe suno yeh egg dropping problem ke variations me chutiya smghta tha lekin ek baar dekh lo bc sb variation alag trike se solve hota
+
+N floor 1egg (greedy)
+N floor 2 egg (greedy)
+N floor k egg (dp)
+N floor infinite egg (binary search)
+Infinite floor infinite egg (binary search)
+*/
+
+/*
 You are given k identical eggs and you have access to a building with n floors labeled from  1 to n.
 You know that there exists a floor f where 0 <= f <= n such that any egg dropped at a floor higher than f will break, 
 and any egg dropped at or below floor f will not break.
