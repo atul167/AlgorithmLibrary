@@ -13,11 +13,14 @@ public:
         
         find(node->left);
         
+        // inorder part of pushing in vector starts 
+        // instead of pushing in inorder vector, we are maintaining cnt of elements in inorder vector and returning the kth element
         cnt++;
         if(cnt == k) {
             res = node->val;
             return;
         }
+        // ends
         
         find(node->right);
     }
