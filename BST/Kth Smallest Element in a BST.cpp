@@ -1,5 +1,6 @@
-// iterative
+/*Using inorder traversal*/
 
+// iterative
 class Solution {
 public:
     int kthSmallest(TreeNode* root, int k) {
@@ -26,8 +27,7 @@ public:
 
 
 
-
-
+// recursive
 class Solution {
 public:
     int res, cnt;
@@ -59,7 +59,7 @@ public:
 
 
 
-
+// recursive
 class Solution {
 public:
     int res = 0;
