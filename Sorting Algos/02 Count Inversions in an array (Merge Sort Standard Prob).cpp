@@ -1,5 +1,6 @@
 // https://www.geeksforgeeks.org/counting-inversions/
 // https://www.hackerearth.com/practice/algorithms/sorting/merge-sort/tutorial/
+// https://practice.geeksforgeeks.org/problems/inversion-of-array-1587115620/1
 
 /*
 Given an array A on size N, you need to find the number of ordered pairs (i, j) such that i < j  and A[i] > A[j].
@@ -22,63 +23,50 @@ http://www.geeksforgeeks.org/count-inversions-array-set-3-using-bit/ 121
 
 
 // Method 1 (Merge Sort)
-int n, m;
-int res = 0;
-
-void merge(int *a, int start, int mid, int end) {
-    int temp[end - start + 1];
-    int i = start, j = mid + 1, k = 0;
-
-    while (i <= mid && j <= end) {
-        if (a[i] <= a[j]) {
+class Solution {
+public:
+    #define ll long long
+    ll res = 0;
+    
+    void merge(ll a[], ll start, ll mid, ll end) {
+        ll temp[end - start + 1];
+        ll i = start, j = mid + 1, k = 0;
+    
+        while (i <= mid && j <= end) {
+            if (a[i] <= a[j]) {
+                temp[k++] = a[i++];
+            } else {
+                res += (mid - i + 1);
+                temp[k++] = a[j++];
+            }
+        }
+        while (i <= mid) {
             temp[k++] = a[i++];
-        } else {
-            res += (mid - i + 1);
+        }
+        while (j <= end) {
             temp[k++] = a[j++];
         }
-    }
-    while (i <= mid) {
-        temp[k++] = a[i++];
-    }
-    while (j <= end) {
-        temp[k++] = a[j++];
-    }
-
-    for (int i = 0; i < k; i++) {
-        a[start++] = temp[i];
-    }
-}
-
-void mergeSort(int a[], int start, int end) {
-    if (start < end) {
-        int mid = (start + end) / 2;
-        mergeSort(a, start, mid);
-        mergeSort(a, mid + 1, end);
-        merge(a, start, mid, end);
-    }
-}
- 
-void solve() {
-    cin >> n;
-    int a[n];
-    f(i, n) cin >> a[i];
     
-    mergeSort(a, 0, n - 1);
-    cout << res << endl;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
+        for (ll i = 0; i < k; i++) {
+            a[start++] = temp[i];
+        }
+    }
+    
+    void mergeSort(ll a[], ll start, ll end) {
+        if (start < end) {
+            ll mid = (start + end) / 2;
+            mergeSort(a, start, mid);
+            mergeSort(a, mid + 1, end);
+            merge(a, start, mid, end);
+        }
+    }
+    
+    long long int inversionCount(long long a[], long long n) {
+        res = 0;
+        mergeSort(a, 0, n - 1);
+        return res;
+    }
+};
 
 
 
@@ -99,150 +87,52 @@ void solve() {
 
 // Method 2 (Using BIT)
 // https://www.geeksforgeeks.org/count-inversions-array-set-3-using-bit/
-// It only works for whole numbers as array elements and for smaller value of elements
-int n, m;
+class Solution {
+public:
+    #define ll long long
+    vector<ll> BIT;
+    ll n;
 
-void update(int BIT[], int n, int i, int val) {
-    while(i <= n) {
-        BIT[i] += val;
-        i += (i&-i);
+    void update(ll i, ll val) {
+        while(i <= n) {
+            BIT[i] += val;
+            i += (i&-i);
+        }
     }
-}
 
-int query(int BIT[], int i) {
-    int sum = 0;
-    while(i > 0) {
-        sum += BIT[i];
-        i -= (i&-i);
+    ll query(ll i) {
+        ll sum = 0;
+        while(i > 0) {
+            sum += BIT[i];
+            i -= (i&-i);
+        }
+        return sum;
     }
-    return sum;
-}
- 
-void solve() {
-    cin >> n;
-    int a[n];
-    f(i, n) cin >> a[i];
     
-    int invcount = 0; // Initialize result
- 
-    // Find maximum element in a[]
-    int maxElement = 0;
-    for (int i = 0; i < n; i++) {
-        maxElement = max(maxElement, a[i]);
+    long long int inversionCount(long long a[], long long size) {
+        unordered_map<ll, ll> mp;
+        ll rank = 0;
+        set<ll> st(a, a + size);
+        for(ll it: st) {
+            mp[it] = ++rank;
+        }
+        
+        // coordinate compression 
+        for(ll i = 0; i < size; i++) {
+            a[i] = mp[a[i]];
+        }
+
+        // size of BIT array
+        n = rank;
+        BIT = vector<ll>(n + 1, 0);
+
+        ll res = 0;
+        for(ll i = size - 1; i >= 0; i--) {
+            // Get count of elements smaller than a[i]
+            res += query(a[i] - 1);
+            update(a[i], 1);
+        }
+        
+        return res;
     }
- 
-    // Create a BIT with size equal to maxElement+1 (Extra one is used so that elements can be directly be used as index)
-    int BIT[maxElement + 1];
-    for (int i = 1; i <= maxElement; i++) {
-        BIT[i] = 0;
-    }
- 
-    // Traverse all elements from right.
-    for (int i = n - 1; i >= 0; i--) {
-        // Get count of elements smaller than a[i]
-        invcount += query(BIT, a[i] - 1);
- 
-        // Add current element to BIT
-        update(BIT, maxElement, a[i], 1);
-    }
- 
-    cout << invcount << endl;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Method 3: (Using BIT)
-// https://www.geeksforgeeks.org/count-inversions-array-set-3-using-bit/
-int n, m;
-
-void update(int BIT[], int n, int i, int val) {
-    while(i <= n) {
-        BIT[i] += val;
-        i += (i&-i);
-    }
-}
-
-int query(int BIT[], int i) {
-    int sum = 0;
-    while(i > 0) {
-        sum += BIT[i];
-        i -= (i&-i);
-    }
-    return sum;
-}
-
-// Converts an array to an array with values from 1 to n
-// and relative order of smaller and greater elements remains same.
-// For example, {7, -90, 100, 1} is converted to {3, 1, 4 ,2 }
-void convert(int a[], int n) {
-    // Create a copy of a[] in temp and sort the temp array in increasing order
-    int temp[n];
-    for (int i = 0; i < n; i++) {
-        temp[i] = a[i];
-    }
-    sort(temp, temp + n);
- 
-    // Traverse all array elements
-    for (int i = 0; i < n; i++) {
-        // lower_bound() Returns pointer to the first element greater than or equal to a[i]
-        a[i] = lower_bound(temp, temp + n, a[i]) - temp + 1;
-    }
-} 
-
-void solve() {
-    cin >> n;
-    int a[n];
-    f(i, n) cin >> a[i];
-
-    convert(a, n);
-    
-    int invcount = 0; // Initialize result
- 
-    // Find maximum element in a[]
-    int maxElement = 0;
-    for (int i = 0; i < n; i++) {
-        maxElement = max(maxElement, a[i]);
-    }
- 
-    // Create a BIT with size equal to maxElement+1 (Extra one is used so that elements can be directly be used as index)
-    int BIT[maxElement + 1];
-    for (int i = 1; i <= maxElement; i++) {
-        BIT[i] = 0;
-    }
- 
-    // Traverse all elements from right.
-    for (int i = n - 1; i >= 0; i--) {
-        // Get count of elements smaller than a[i]
-        invcount += query(BIT, a[i] - 1);
- 
-        // Add current element to BIT
-        update(BIT, maxElement, a[i], 1);
-    }
- 
-    cout << invcount << endl;
-}
+};
