@@ -8,9 +8,7 @@ This solution also works if array contains duplicate +ve, -ve or zero elements.
 
 class Solution {
 public:
-    static const int N = 1e5+5;
-    int BIT[N+5];
-    unordered_map<int, int> mp;
+    vector<int> BIT;
     int n;
 
     void update(int i, int val) {
@@ -30,6 +28,7 @@ public:
     }
     
     vector<int> countSmaller(vector<int>& nums) {
+        unordered_map<int, int> mp;
         int rank = 0;
         set<int> st(nums.begin(), nums.end());
         for(int it: st) {
@@ -43,6 +42,7 @@ public:
 
         // size of BIT array
         n = rank;
+        BIT = vector<int>(n+1, 0);
 
         vector<int> res(nums.size());
         for(int i = nums.size() - 1; i >= 0; i--) {
