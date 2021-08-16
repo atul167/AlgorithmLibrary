@@ -24,16 +24,16 @@ public:
     
     int kthSmallest(vector<vector<int>>& mat, int k) {
         int n = mat.size();
-        int lb = mat[0][0], ub = mat[n-1][n-1];
+        int lo = mat[0][0], hi = mat[n-1][n-1];
         
-        while(lb < ub) {
-            int mid = lb + (ub - lb) / 2;
+        while(lo < hi) {
+            int mid = lo + (hi - lo) / 2;
             int cnt = countNoOfEleUptoTarget(mat, mid);
             if(cnt >= k)
-                ub = mid;
+                hi = mid;
             else
-                lb = mid + 1;
+                lo = mid + 1;
         }
-        return ub;
+        return lo;
     }
 };
