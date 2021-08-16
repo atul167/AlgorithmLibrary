@@ -20,9 +20,12 @@ public:
             
             int mid = (lo + hi) / 2;
             
+            // left part is monotonic thus pivot lies in right part
             if (nums[lo] <= nums[mid]) {
                 lo = mid + 1;
-            } else {
+            } 
+            // right part is monotonic thus pivot lies in left part
+            else {
                 hi = mid;
             }
         }
