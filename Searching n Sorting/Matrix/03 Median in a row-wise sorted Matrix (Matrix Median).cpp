@@ -14,7 +14,7 @@ Then we can sort the array and find the median element in O(n*m*log(n*m)).
 
 An efficient approach: 
 Use a binary search algorithm. The idea is that for a number to be median there should be exactly (n / 2) numbers which are less than this number. 
-So, we try to find the count of numbers less than all the numbers. 
+So, we try to find the count of numbers less than all the numbers.
 
 Below is the step by step algorithm for this approach: 
 a) First, we find the minimum and maximum elements in the matrix. 
@@ -43,7 +43,7 @@ public:
             int mid = lo + (hi - lo) / 2;
             
             int cnt = 0;
-            // Find count of elements smaller than mid
+            // Find count of elements smaller than or equal to mid
             for (int i = 0; i < n; ++i) {
                 cnt += upper_bound(matrix[i].begin(), matrix[i].end(), mid) - matrix[i].begin();
             }
@@ -64,7 +64,7 @@ public:
 class Solution {
 public:
     bool check(int mid, int desired, vector<vector<int>> &matrix, int n, int m) {
-        // Find count of elements smaller than mid
+        // Find count of elements smaller than or equal to mid
         int cnt = 0;
         for (int i = 0; i < n; ++i) {
             cnt += upper_bound(matrix[i].begin(), matrix[i].end(), mid) - matrix[i].begin();
