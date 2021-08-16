@@ -16,6 +16,9 @@ Use the idea of the merge sort at the time of merging two arrays.
 When higher index element is less than the lower index element, 
 it represents that the higher index element is smaller than all the elements after that lower index because the left part is already sorted. 
 Hence add up to all the elements after the lower index element for the required count. 
+
+The smaller numbers on the right of a number are exactly those that jump from its right to its left during a stable sort. 
+So I do mergesort with added tracking of those right-to-left jumps.
 */
 
 class Solution {
