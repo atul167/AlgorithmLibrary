@@ -30,9 +30,13 @@ public:
             if( (nums[lo] == nums[mid]) && (nums[hi] == nums[mid]) ) {
                 ++lo; --hi;
             }
+            
+            // left part is monotonic thus pivot lies in right part
             else if (nums[lo] <= nums[mid]) {
                 lo = mid + 1;
-            } else {
+            } 
+            // right part is monotonic thus pivot lies in left part
+            else {
                 hi = mid;
             }
         }
