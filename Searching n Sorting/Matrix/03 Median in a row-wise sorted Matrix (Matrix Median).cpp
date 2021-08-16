@@ -61,7 +61,7 @@ public:
 
 
 
-class Solution{   
+class Solution {
 public:
     bool check(int mid, int desired, vector<vector<int>> &matrix, int n, int m) {
         // Find count of elements smaller than mid
