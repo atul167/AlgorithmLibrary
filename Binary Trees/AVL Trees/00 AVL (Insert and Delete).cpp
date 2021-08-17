@@ -119,9 +119,6 @@ Node* insert(Node* node, int key) {
 	return node;
 }
 
-/* Given a non-empty binary search tree,
-return the node with minimum key value found in that tree.
-Note that the entire tree does not need to be searched. */
 Node * minValueNode(Node* node) {
 	Node* current = node;
 
@@ -133,30 +130,26 @@ Node * minValueNode(Node* node) {
 	return current;
 }
 
-// Recursive function to delete a node
-// with given key from subtree with given root.
+// Recursive function to delete a node with given key from subtree with given root.
 // It returns root of the modified subtree.
 Node* deleteNode(Node* root, int key) {
 
 	// STEP 1: PERFORM STANDARD BST DELETE
 	if (root == NULL) return root;
 
-	// If the key to be deleted is smaller
-	// than the root's key, then it lies
-	// in left subtree
+	// If the key to be deleted is smaller than the root's key, 
+	// then it lies in left subtree
 	if ( key < root->key ) {
 		root->left = deleteNode(root->left, key);
 	}
 
-	// If the key to be deleted is greater
-	// than the root's key, then it lies
-	// in right subtree
+	// If the key to be deleted is greater than the root's key, 
+	// then it lies in right subtree
 	else if ( key > root->key ) {
 		root->right = deleteNode(root->right, key);
 	}
 
-	// if key is same as root's key, then
-	// This is the node to be deleted
+	// if key is same as root's key, then this is the node to be deleted
 	else {
 		// node with only one child or no child
 		if ( (root->left == NULL) || (root->right == NULL) ) {
@@ -168,19 +161,17 @@ Node* deleteNode(Node* root, int key) {
 				root = NULL;
 			}
 			// One child case
+			// Copy the contents of the non-empty child
 			else {
-				*root = *temp; // Copy the contents of
+				*root = *temp;
 			}
-			// the non-empty child
 			free(temp);
 		}
 		else {
-			// node with two children: Get the inorder
-			// successor (smallest in the right subtree)
+			// node with two children: Get the inorder successor (smallest in the right subtree)
 			Node* temp = minValueNode(root->right);
 
-			// Copy the inorder successor's
-			// data to this node
+			// Copy the inorder successor's data to this node
 			root->key = temp->key;
 
 			// Delete the inorder successor
@@ -188,20 +179,16 @@ Node* deleteNode(Node* root, int key) {
 		}
 	}
 
-	// If the tree had only one node
-	// then return
+	// If the tree had only one node then return
 	if (root == NULL) return root;
 
 	// STEP 2: UPDATE HEIGHT OF THE CURRENT NODE
 	root->height = 1 + max(height(root->left), height(root->right));
 
-	// STEP 3: GET THE BALANCE FACTOR OF
-	// THIS NODE (to check whether this
-	// node became unbalanced)
+	// STEP 3: GET THE BALANCE FACTOR OF THIS NODE (to check whether this node became unbalanced)
 	int balance = getBalance(root);
 
-	// If this node becomes unbalanced,
-	// then there are 4 cases
+	// If this node becomes unbalanced, then there are 4 cases
 
 	// Left Left Case
 	if (balance > 1 && getBalance(root->left) >= 0) {
