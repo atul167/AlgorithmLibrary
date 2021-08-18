@@ -31,8 +31,7 @@ Node* newNode(int key) {
 }
 
 // A utility function to right rotate subtree rooted with y
-// See the diagram given above.
-Node *rightRotate(Node *y) {
+Node* rightRotate(Node *y) {
 	Node *x = y->left;
 	Node *T2 = x->right;
 
@@ -49,8 +48,7 @@ Node *rightRotate(Node *y) {
 }
 
 // A utility function to left rotate subtree rooted with x
-// See the diagram given above.
-Node *leftRotate(Node *x) {
+Node* leftRotate(Node *x) {
 	Node *y = x->right;
 	Node *T2 = y->left;
 
@@ -119,7 +117,7 @@ Node* insert(Node* node, int key) {
 	return node;
 }
 
-Node * minValueNode(Node* node) {
+Node* minValueNode(Node* node) {
 	Node* current = node;
 
 	/* loop down to find the leftmost leaf */
