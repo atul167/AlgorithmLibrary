@@ -1,4 +1,30 @@
 /*
+Trilogy Innovations (formerly CodeNation Innovation Labs) - 14_Aug_2021
+
+Problem Name: Yet another string operation problem
+
+Given two strings A, B (|A| = |B| <= 1000) and a integer C, you can do 2 types of operations
+set A[i] = B[i], cost = 1
+reverse A[i...j], cost = C (given), this operation can be performed only once
+Find the min cost to make A = B
+
+Sample Input 1:
+abceda
+bdecbo
+1
+Sample Output 1:
+3
+
+Sample Input 2:
+finger 
+ginger
+0
+Sample Output 2:
+1
+*/
+
+
+/*
 Given 2 string a and b of same size and an integer c.
 Find the minimum cost to make a equal to b by applying these operations:
 a) Change a[i] = b[i] with cost = 1 (any number of time)
