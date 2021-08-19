@@ -26,6 +26,74 @@ Case 3: 3
 */
 
 
+const int N = 2e7+5;
+int n, m;
+
+void solve(int testcase) {
+    cin >> n;
+    queue<pair<int, int>> q;
+    q.push({n, 0});
+ 
+    // map is used to visit numbers so that they won't be pushed in queue again
+    map<int, int> vis;
+ 
+    while (!q.empty()) {
+        auto it = q.front();
+        q.pop();
+        int val = it.first, steps = it.second;
+         
+        // if current value is 1, return its steps from n
+        if (val == 1) {
+            cout << "Case " << testcase << ": " << steps << endl;
+            return;
+        }
+ 
+        //  check val - 1, only if it not visited yet
+        if (!vis[val - 1]) {
+            q.push({val - 1, steps + 1});
+            vis[val - 1] = 1;
+        }
+
+        //  check val / 2, only if it not visited yet
+        if (val % 2 == 0 && !vis[val / 2]) {
+            q.push({val / 2, steps + 1});
+            vis[val / 2] = 1;
+        }
+
+        //  check val / 3, only if it not visited yet
+        if (val % 3 == 0 && !vis[val / 3]) {
+            q.push({val / 3, steps + 1});
+            vis[val / 3] = 1;
+        }
+    }
+}
+
+signed main() {
+    IOS
+    clock_t begin = clock();
+    PRECISION(10);
+    int t = 1;
+    cin >> t;
+    f(i, t) {
+        solve(i+1);
+    }
+    cerr << "Time elapsed: " << (clock() - begin) * 1000.0 / CLOCKS_PER_SEC << "ms" << '\n';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 const int N = 2e7+5;
