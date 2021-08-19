@@ -6,6 +6,16 @@ Given a string s that contains parentheses and letters, remove the minimum numbe
 Return all the possible results. You may return the answer in any order.
 */
 
+/*
+The idea is to classify the solution into levels, like
+level 0 - no character removed
+level 1 - 1 character removed
+level 2 - 2 characters removed
+.
+Also each level is traversed completely in one go so that, 
+if solution is obtained there, we need not go to further levels, because we want minimum number of removals.
+*/
+
 
 // Method 1: Full concept of layer
 class Solution {
