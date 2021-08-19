@@ -1,4 +1,10 @@
+// https://leetcode.com/problems/remove-invalid-parentheses/
 // https://youtu.be/EE_9U798nvQ
+
+/*
+Given a string s that contains parentheses and letters, remove the minimum number of invalid parentheses to make the input string valid.
+Return all the possible results. You may return the answer in any order.
+*/
 
 
 // Method 1
