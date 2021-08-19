@@ -2,6 +2,16 @@
 // https://youtu.be/nGhE4Ekmzbc
 // https://youtu.be/lWCZOjUOjRc
 
+/*
+You are given a tree consisting of n nodes.
+Your task is to determine for each node the sum of the distances from the node to all other nodes.
+
+Input:
+The first input line contains an integer n: the number of nodes. The nodes are numbered 1,2,…,n.
+Then there are n−1 lines describing the edges. 
+Each line contains two integers a and b: there is an edge between nodes a and b.
+*/
+
 
 
 // Method 1 (Re-rooting DP)
