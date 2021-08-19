@@ -22,7 +22,7 @@ Let's use DP on trees to do this.
 Root the tree at node 1, allowing us to define the subtree of each node.
 
 Case 1: Taking No Edges:
-dp[u][0] = maximum matching of the subtree of u such that we don't take any edges leading to some child of u
+dp[u][0] = maximum matching of the subtree of u such that we don't take any edges leading to some child v of u
 
 dp[u][0] = ∑ max(dp[v][0], dp[v][1])
 
