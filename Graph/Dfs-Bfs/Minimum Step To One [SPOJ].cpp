@@ -1,4 +1,5 @@
 // https://www.spoj.com/problems/MST1/
+// https://www.geeksforgeeks.org/minimum-steps-minimize-n-per-given-condition/
 
 /*
 Problem Statement:
@@ -26,6 +27,7 @@ Case 3: 3
 */
 
 
+// Method 1: BFS Solution
 const int N = 2e7+5;
 int n, m;
 
@@ -95,57 +97,27 @@ signed main() {
 
 
 
-
+// Method 2: DP Solution
 const int N = 2e7+5;
 int n, m;
+int dp[N];
 
-void solve(int testcase) {
-    cin >> n;
-    queue<pair<int, int>> q;
-    q.push({n, 0});
- 
-    // set is used to visit numbers so that they won't be pushed in queue again
-    set<int> vis;
- 
-    while (!q.empty()) {
-        auto it = q.front();
-        q.pop();
-        int val = it.first, steps = it.second;
-         
-        // if current value is 1, return its steps from n
-        if (val == 1) {
-            cout << "Case " << testcase << ": " << steps << endl;
-            return;
-        }
- 
-        //  check val - 1, only if it not visited yet
-        if (vis.find(val - 1) == vis.end()) {
-            q.push({val - 1, steps + 1});
-            vis.insert(val - 1);
-        }
+void precompute() {
+    dp[1] = 0;
 
-        //  check val / 2, only if it not visited yet
-        if (val % 2 == 0 && vis.find(val / 2) == vis.end()) {
-            q.push({val / 2, steps + 1});
-            vis.insert(val / 2);
-        }
-
-        //  check val / 3, only if it not visited yet
-        if (val % 3 == 0 && vis.find(val / 3) == vis.end()) {
-            q.push({val / 3, steps + 1});
-            vis.insert(val / 3);
-        }
+    for (int i = 2; i < N; i++) {
+        dp[i] =  1 + dp[i - 1];
+        if (i % 2 == 0) dp[i] = min(dp[i], 1 + dp[i / 2]);
+        if (i % 3 == 0) dp[i] = min(dp[i], 1 + dp[i / 3]);
     }
 }
 
-signed main() {
-    IOS
-    clock_t begin = clock();
-    PRECISION(10);
-    int t = 1;
+void solve() {
+    precompute();
+    int t;
     cin >> t;
-    f(i, t) {
-        solve(i+1);
+    loop(i, 1, t) {
+        cin >> n;
+        cout << "Case " << i << ": " << dp[n] << endl;
     }
-    cerr << "Time elapsed: " << (clock() - begin) * 1000.0 / CLOCKS_PER_SEC << "ms" << '\n';
 }
