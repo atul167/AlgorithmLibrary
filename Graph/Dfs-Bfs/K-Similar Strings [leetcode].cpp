@@ -89,19 +89,7 @@ public:
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Method 2: BFS with whole level at a time
 class Solution {
 public:
     vector<string> getNeighbours(string A, string B) { 
