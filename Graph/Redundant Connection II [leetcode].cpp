@@ -66,7 +66,7 @@ public:
                 // first visted edge
                 edge1 = {parents[v], v};
                 // current(later) visted edge
-                edge2 = {edge[0], edge[1]};
+                edge2 = {u, v};
                 
                 // Delete the later edge
                 edge[0] = edge[1] = -1;
