@@ -25,9 +25,7 @@ public:
         vector<pair<int, int>> wall;
         for(auto it: buildings) {
             int left = it[0], right = it[1], height = it[2];
-            
-            // Negative value means left wall will be inserted first
-            // for the same abscissa(x) as right wall
+            // Negative value means left wall will be inserted first for the same abscissa(x) as right wall
             wall.push_back({left, -height});
             wall.push_back({right, height});
         }
