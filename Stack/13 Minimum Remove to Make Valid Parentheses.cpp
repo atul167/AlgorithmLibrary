@@ -108,20 +108,17 @@ public:
         return (cnt == 0);
     }
     
-    map<string, bool> vis;
-    
     string minRemoveToMakeValid(string s) {
         queue<string> q;
+        map<string, bool> vis;
         q.push(s);
+        vis[s] = 1;
         
         while(!q.empty()) {
             int n = q.size();
             for(int i = 0; i < n; i++) {
                 string u = q.front();
                 q.pop();
-                
-                if(vis[u]) continue;
-                vis[u] = 1;
 
                 if(isBalanced(u)) {
                     return u;
@@ -130,7 +127,10 @@ public:
                 for(int i = 0; i < u.size(); i++) {
                     if(s[i] == '(' or s[i] == ')') {
                         string v = u.substr(0, i) + u.substr(i+1);
-                        q.push(v);
+                        if(!vis[v]) {
+                            q.push(v);
+                            vis[v] = 1;
+                        }
                     }
                 }
             }
