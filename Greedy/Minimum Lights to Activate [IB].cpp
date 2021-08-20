@@ -78,7 +78,7 @@ int Solution::solve(vector<int>& A, int B) {
             return -1;
         }
         
-        int max_range = range[i].second;
+        int max_range = 0;
         while( i < m && range[i].first <= target ) {
             max_range = max(max_range,  range[i].second);
             i++;
