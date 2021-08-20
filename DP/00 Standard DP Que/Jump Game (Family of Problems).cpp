@@ -1,6 +1,11 @@
+// https://leetcode.com/problems/jump-game/
+// https://leetcode.com/problems/jump-game-ii/
+
 /*
-https://leetcode.com/problems/jump-game/
-https://leetcode.com/problems/jump-game-ii/
+Jump game I:
+You are given an integer array nums. You are initially positioned at the array's first index, 
+and each element in the array represents your maximum jump length at that position.
+Return true if you can reach the last index, or false otherwise.
 */
 
 // Jump game I
@@ -25,6 +30,15 @@ public:
 
 
 
+
+
+
+/*
+Given an array of non-negative integers nums, you are initially positioned at the first index of the array.
+Each element in the array represents your maximum jump length at that position.
+Your goal is to reach the last index in the minimum number of jumps.
+You can assume that you can always reach the last index.
+*/
 
 
 // Jump game II - Method 1
