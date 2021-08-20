@@ -44,7 +44,7 @@ class Solution{
                 return -1;
             }
             
-            int max_range = range[i].second;
+            int max_range = 0;
             while( i < m && range[i].first <= target ) {
                 max_range = max(max_range,  range[i].second);
                 i++;
@@ -56,52 +56,6 @@ class Solution{
             
             res++;
             target = max_range + 1;
-        }
-        
-        return res;
-    }
-};
-
-
-
-
-
-
-
-
-class Solution{
-    public:
-    int min_sprinklers(int gallery[], int n) {
-        vector<pair<int,int>> range;
-
-        for(int i = 0; i < n; i++) {
-            if(gallery[i] != -1) {
-                range.push_back({i - gallery[i], i + gallery[i]});
-            }
-        }
-        
-        sort(range.begin(), range.end());
-        int m = range.size();
-        
-        int i = 0, target = 0, res = 0;
-        while(target <= n-1) {
-            if(i == m || range[i].first > target) {
-                return -1;
-            }
-            
-            int max_range = range[i].second;
-            while( i + 1 < m && range[i+1].first <= target ) {
-                max_range = max(max_range,  range[i+1].second);
-                i++;
-            }
-
-            if(max_range < target) {
-                return -1;
-            }
-            
-            res++;
-            target = max_range + 1;
-            i++;
         }
         
         return res;
