@@ -34,6 +34,40 @@ void solve() {
 
 
 
+void solve() {
+    int x, y;
+    cin >> n;
+    vector<pair<int, int>> points;
+    f(i, n) {
+        cin >> x >> y;
+        points.pb({x, y});
+    }
+
+    // sorting so that all x coordinates are in order to reduce complexity little bit
+    sort(all(points));
+
+    map<pair<int, int>, int> count;
+    int res = 0;
+
+    for(int i = 0; i < n; i++) {
+        for(int j = i+1; j < n; j++) {
+            auto p = points[i];
+            auto p_above = points[j];
+            // check if these 2 points are on the same vertical line
+            if(p.first == p_above.first && p.second < p_above.second) {
+                // count all 2 points pairs which are on the same vertical line
+                res += count[{p.second, p_above.second}];
+                count[{p.second, p_above.second}]++;
+            } else {
+                break;
+            }
+        }
+    }
+
+    cout << res << endl;
+}
+
+
 
 
 
