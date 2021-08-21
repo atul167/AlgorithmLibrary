@@ -1,7 +1,13 @@
 // https://youtu.be/EuPSibuIKIg
+// Google Coding Interview of Errichto by Clement
 
 /*
 Find number of rectangles from a given set of coordinates. The edges of rectangle should be parallel to coordinate axes.
+*/
+
+/*
+(x, y), (x, y2), (x2, y), (x2, y2) -> points of rectangle
+x != x2 && y != y2
 */
 
 void solve() {
