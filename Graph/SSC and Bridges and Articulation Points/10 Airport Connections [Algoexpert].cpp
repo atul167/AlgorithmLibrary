@@ -72,6 +72,18 @@ Sample output:
 
 
 
+/*
+Steps:
+1) process the input and build the directed graph
+2) find the SCCs
+3) compress the graph based on SCCs
+4) find the no of nodes in condensed graph which has indegree = 0 and is not the startingNode 
+   (this is our result, since we have to add these many edges from startingNode to these nodes [or any other node with indegree > 0 to these nodes ])
+*/
+
+
+
+
 const int N = 2e5+5;
 int n, m;
 
@@ -179,6 +191,7 @@ void solve() {
         int u = strToInt[it[0]], v = strToInt[it[1]];
         u = sccParent[u];
         v = sccParent[v];
+        // u != v means it is a edge between two different SCC
         if(u != v) {
             compressedG[u].pb(v);
             indegree[v]++;
