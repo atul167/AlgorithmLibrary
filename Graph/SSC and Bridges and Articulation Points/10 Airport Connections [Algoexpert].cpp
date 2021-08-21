@@ -1,3 +1,6 @@
+// https://youtu.be/qz9tKlF431k
+// Google Coding Interview of Willian Lin by Clement
+
 /*
 Algo Expert Extremely Hard 2
 Airport Connections - Extremely Hard 2
@@ -31,8 +34,8 @@ airports = [
 "SFO",
 "SIN",
 "TLV",
-"BUD,
-],
+"BUD"
+]
 
 routes = [
 ["DSM","ORD"],
@@ -54,7 +57,7 @@ routes = [
 ["SFO","SAN"],
 ["SFO", "DSM"],
 ["SAN","EYW"]
-],
+]
 
 startingAirport = "LGA"
 
@@ -63,6 +66,7 @@ startingAirport = "LGA"
 Sample output:
 3
 */
+
 
 
 
@@ -93,30 +97,46 @@ void revDfs(int u, int sccPar) {
 
 void solve() {
     /*******************Input starts***********************/
-    vector<string> airports = {"BGI", "CDG", "DEL", "DOH", "DSM", "EWR", 
-            "EYW", "HND", "ICN", "JFK", "LGA", "LHR", 
-            "ORD", "SAN", "SFO", "SIN", "TLV", "BUD"};
+    vector<string> airports = {
+                            "BGI",
+                            "CDG",
+                            "DEL",
+                            "DOH",
+                            "DSM",
+                            "EWR",
+                            "EYW",
+                            "HDN",
+                            "ICN",
+                            "JFK",
+                            "LGA",
+                            "LHR",
+                            "ORD",
+                            "SAN",
+                            "SFO",
+                            "SIN",
+                            "TLV",
+                            "BUD"};
 
     vector<vector<string>> routes = {
-            {"DSM", "ORD"},
-            {"ORD", "BGI"},
-            {"BGI", "LGA"},
-            {"SIN", "CDG"},
-            {"CDG", "SIN"},
-            {"CDG", "BUD"},
-            {"DEL", "DOH"},
-            {"DEL", "CDG"},
-            {"TLV", "DEL"},
-            {"EWR", "HND"},
-            {"HND", "ICN"},
-            {"HND", "JFK"},
-            {"ICN", "JFK"},
-            {"JFK", "LGA"},
-            {"EYW", "LHR"},
-            {"LHR", "SFO"},
-            {"SFO", "SAN"},
-            {"SFO", "DSM"},
-            {"SAN", "EYW"}};
+                            {"DSM","ORD"},
+                            {"ORD","BGI"},
+                            {"BGI","LGA"},
+                            {"SIN","CDG"},
+                            {"CDG","SIN"},
+                            {"CDG","BUD"},
+                            {"DEL","DOH"},
+                            {"DEL","CDG"},
+                            {"TLV","DEL"},
+                            {"EWR","HND"},
+                            {"HND","ICN"},
+                            {"HND","JFK"},
+                            {"ICN","JFK"},
+                            {"JFK","LGA"},
+                            {"EYW","LHR"},
+                            {"LHR","SFO"},
+                            {"SFO","SAN"},
+                            {"SFO", "DSM"},
+                            {"SAN","EYW"}};
 
     string startingAirport = "LGA";
     /*******************Input ends************************/
