@@ -4,8 +4,6 @@
 Find number of rectangles from a given set of coordinates. The edges of rectangle should be parallel to coordinate axes.
 */
 
-int n, m;
-
 void solve() {
     int x, y;
     cin >> n;
@@ -20,7 +18,9 @@ void solve() {
 
     for(auto p: points) {
         for(auto p_above: points) {
+            // check if these 2 points are on the same vertical line
             if(p.first == p_above.first && p.second < p_above.second) {
+                // count all 2 points pairs which are on the same vertical line
                 res += count[{p.second, p_above.second}];
                 count[{p.second, p_above.second}]++;
             }
@@ -45,14 +45,11 @@ void solve() {
 
 
 
-
 /*
 For every pair of points, say (x1, y1) and (x2, y2) consider it to be the diagonal of some rectangle. 
 If there exist points (x1, y2) and (x2, y1) in the initial set then we have found our rectangle. 
 It should be noted that there will exist 2 diagonals which will represent the same rectangle so we divide the final answer by 2.
 */
-
-int n, m;
 
 void solve() {
     int x, y;
