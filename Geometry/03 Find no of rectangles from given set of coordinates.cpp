@@ -27,7 +27,7 @@ void solve() {
         }
     }
 
-    cout << res;
+    cout << res << endl;
 }
 
 
@@ -88,5 +88,5 @@ void solve() {
         }
     }
 
-    cout << res / 2;
+    cout << res / 2 << endl;
 }
