@@ -76,7 +76,7 @@ Sample output:
 Steps:
 1) process the input and build the directed graph
 2) find the SCCs
-3) compress the graph based on SCCs
+3) compress the graph based on SCCs (we assign any one node of each SCC to represent the SCC)
 4) find the no of nodes in condensed graph which has indegree = 0 and is not the startingNode 
    (this is our result, since we have to add these many edges from startingNode to these nodes [or any other node with indegree > 0 to these nodes ])
 */
