@@ -1,4 +1,4 @@
-```
+```cpp
 struct Hashing {
     ll add(ll a, ll b, ll mod) {
         ll res = (a + b) % mod;
