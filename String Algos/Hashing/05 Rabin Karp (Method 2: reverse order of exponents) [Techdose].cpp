@@ -48,7 +48,7 @@ void search(string str, string pat, int q) {
         // Calculate hash value for next window of text: 
         // Remove leading digit, add trailing digit 
         if ( i < n-m ) { 
-            hashStr = ((hashStr - str[i] * h) * d + str[i+m]) % q; 
+            hashStr = ((hashStr - (str[i] * h)) * d + str[i+m]) % q; 
 
             // We might get negative value of t, converting it to positive 
             if (hashStr < 0) 
