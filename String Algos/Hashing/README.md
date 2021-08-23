@@ -23,8 +23,7 @@ struct Hashing {
     }
     /**********************************/
 
-    ll n;
-    ll base = 256, mod = 1e9L + 9;
+    ll base = 256, mod = 1e9L + 9, n;
     vector<ll> p, p_inv, hash;
 
     void init(string s) {
