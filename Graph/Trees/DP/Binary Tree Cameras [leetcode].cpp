@@ -8,6 +8,19 @@ Return the minimum number of cameras needed to monitor all nodes of the tree.
 */
 
 
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+ 
+
 class Solution {
 public:
     #define inf 1e9
@@ -35,7 +48,7 @@ public:
             } else {
                 int op1 = fun(root->left, 1, 0) + min(fun(root->right, 0, 0), fun(root->right, 1, 0));
                 int op2 = fun(root->right, 1, 0) + min(fun(root->left, 0, 0), fun(root->left, 1, 0));
-                x = min(op1, op2);
+                z = min(op1, op2);
             }
         }
         
