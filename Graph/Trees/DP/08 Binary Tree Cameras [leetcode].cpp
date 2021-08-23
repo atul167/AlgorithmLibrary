@@ -19,11 +19,6 @@ public:
             if(isCam) return inf;
             return 0;
         }
-        if(!root->left && !root->right) {
-            if(isCam) return 1;
-            if(isParCam) return 0;
-            return inf;
-        }
  
         if(dp.count({root, {isCam, isParCam}})) return dp[{root, {isCam, isParCam}}];
         
@@ -79,11 +74,6 @@ public:
         if(!root) {
             if(isCam) return inf;
             return 0;
-        }
-        if(!root->left && !root->right) {
-            if(isCam) return 1;
-            if(isParCam) return 0;
-            return inf;
         }
  
         if(dp.count({root, {isCam, isParCam}})) return dp[{root, {isCam, isParCam}}];
