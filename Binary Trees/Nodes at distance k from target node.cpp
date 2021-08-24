@@ -1,15 +1,73 @@
 // https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/
 // https://www.geeksforgeeks.org/print-nodes-distance-k-given-node-binary-tree/
 
-
-
-
-
 /*
 Given the root of a binary tree, the value of a target node target, and an integer k, 
 return an array of the values of all nodes that have a distance k from the target node.
 You can return the answer in any order.
 */
+
+
+// Method 1: (Naive memory)
+class Solution {
+public:
+    vector<int> res;   
+    map<TreeNode*, TreeNode*> parent;  
+    map<TreeNode*, int> vis;
+    
+    void findParent(TreeNode* node) {
+        if(!node ) return;
+        
+        if(node->left) {
+            parent[node->left] = node;
+            findParent(node->left);
+        }
+        if(node->right) {
+            parent[node->right] = node;
+            findParent(node->right);
+        }
+    }
+    
+    void dfs(TreeNode* node, int k) {
+        if(vis[node]) return;
+        
+        vis[node] = 1;
+        
+        if(k == 0) {
+            res.push_back(node->val);
+            return;
+        }
+        
+        if(node->left) {
+            dfs(node->left, k - 1);
+        }
+        if(node->right) {
+            dfs(node->right, k - 1);
+        }
+        
+        TreeNode* par = parent[node];
+        if(par) dfs(par, k - 1);
+    }
+    
+    vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
+        if( !root ) return {};
+        findParent(root);
+        
+        dfs(target, k);
+        return res;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+// Method 2: (Optimized)
 
 /*
              20
