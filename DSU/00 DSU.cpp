@@ -30,10 +30,6 @@ void unionSet(int a, int b){
 
 
 
-
-
-
-
 struct DSU {
     vector<int> par;
     void init(int n) {
@@ -72,56 +68,33 @@ struct DSU {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-unordered_map<ll,ll> par, size;
-
-void initialize(){
-	for(ll i=1; i<=n; i++){
-		par[i]=i;
-		size[i]=1;
-	}
-}
-
-ll find_par(ll a){
-	if(par[a]==a)
-		return a;
-	return find_par(par[a]);
-}
-
-void union_set(ll a, ll b){
-	a=find_par(a);
-	b=find_par(b);
-	if(a==b)
-		return;
-	if(size[a]<size[b])
-		swap(a,b);
-	par[b]=a;
-	size[a]+=size[b];
-}
-
-int32_t main()
-{
-	IOS
-	ll t,k,x,y,z,p,q,u,v,ct=0,flag=0;
-	cin>>n;
-	initialize();
-	cin>>t;
-	while(t--){
-		cin>>x>>y;
-		cout<<find_par(x)<<" "<<find_par(y)<<endl;
-		union_set(x,y);
-		cout<<find_par(x)<<" "<<find_par(y)<<endl;
-	}
-}
+struct DSU {
+    vector<int> par, rank;
+    void init(int n) {
+        par.resize(n+1);
+        rank.resize(n+1);
+        for(int i = 0; i <= n; i++) {
+            par[i] = i;
+            rank[i] = 1;
+        }
+    }
+    int findParent(int a) {
+        if(par[a] == a) return a;
+        return par[a] = findParent(par[a]);
+    }
+    bool unionSet(int a, int b) {
+        a = findParent(a);
+        b = findParent(b);
+        if(a == b) return 0;
+        if(rank[a] < rank[b])
+            swap(a, b);
+        par[b] = a;
+        rank[a] += rank[b];
+    }
+    bool sameSet(int x, int y) { 
+        return findParent(x) == findParent(y); 
+    }
+    int size(int x) { 
+        return rank[findParent(x)]; 
+    }
+};
