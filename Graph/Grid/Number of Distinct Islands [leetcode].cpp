@@ -32,7 +32,7 @@ public:
     int dx[4] = {0, 1, 0, -1};
     int dy[4] = { -1, 0, 1, 0};
     vector<vector<int>> vis;
-    map<vector<pair<int, int>>, int> mp;
+    set<vector<pair<int, int>>> st;
     vector<pair<int, int>> a;
 
     bool isSafe(int i, int j, vector<vector<int>>& grid) {
@@ -50,7 +50,7 @@ public:
             it.second -= y;
         }
 
-        mp[a]++;
+        st.insert(a);
     }
 
     void dfs(int i, int j, vector<vector<int>>& grid) {
@@ -67,7 +67,7 @@ public:
     int numberofDistinctIslands(vector<vector<int>> &grid) {
         n = grid.size(), m = grid[0].size();
         vis = vector<vector<int>>(n, vector<int>(m, 0)); 
-        mp.clear();
+        st.clear();
 
         for(int i = 0; i < n; i++) {
             for(int j = 0; j < m; j++) {
@@ -79,6 +79,6 @@ public:
             }
         }
 
-        return mp.size();
+        return st.size();
     }
 };
