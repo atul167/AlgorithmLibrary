@@ -55,13 +55,12 @@ public:
             return;
         }
 
-        kdistanceNodeDown(root->left, k-1);
-        kdistanceNodeDown(root->right, k-1);
+        kdistanceNodeDown(root->left, k - 1);
+        kdistanceNodeDown(root->right, k - 1);
     }
 
-    // Prints all nodes at distance k from a given target node. The k distant nodes may be upward or downward.  
     // This function returns distance of root from target node, 
-    // it returns -1 if target node is not present in tree rooted with root.
+    // It returns -1 if target node is not present in tree rooted with root.
     int kdistanceNode(TreeNode* root, TreeNode* target , int k) {
         // Base Case: If tree is empty, return -1
         if (!root) return -1;
