@@ -90,6 +90,7 @@ struct DSU {
             swap(a, b);
         par[b] = a;
         rank[a] += rank[b];
+        return 1;
     }
     bool sameSet(int x, int y) { 
         return findParent(x) == findParent(y); 
