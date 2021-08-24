@@ -41,7 +41,7 @@ public:
         return true;
     }
 
-    void setAns() {
+    void normalize() {
         // shifting the origin to (0, 0)
         sort(a.begin(), a.end());
         int x = a[0].first, y = a[0].second;
@@ -74,7 +74,7 @@ public:
                 if(!vis[i][j] && grid[i][j] == 1) {
                     a.clear();
                     dfs(i, j, grid);
-                    setAns();
+                    normalize();
                 }
             }
         }
