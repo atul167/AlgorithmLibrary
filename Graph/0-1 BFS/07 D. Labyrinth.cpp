@@ -277,8 +277,8 @@ void bfs01() {
             if(!isSafe(nx, ny)) continue;
 
             if(stepDir[z] == 'L') {
-                distLeft[x][y-1] = distLeft[x][y] + 1;
-                distRight[x][y-1] = distRight[x][y];
+                distLeft[nx][ny] = distLeft[x][y] + 1;
+                distRight[nx][ny] = distRight[x][y];
                 q.pb({x, y-1});
                 vis[x][y-1] = 1;   
             }
