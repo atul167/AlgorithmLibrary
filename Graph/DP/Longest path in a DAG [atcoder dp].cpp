@@ -93,7 +93,6 @@ void solve() {
 
 
 
-// https://www.geeksforgeeks.org/longest-path-in-a-directed-acyclic-graph-dynamic-programming/
 // Method 2
 const int N = 3e5+5;
 int n, m;
