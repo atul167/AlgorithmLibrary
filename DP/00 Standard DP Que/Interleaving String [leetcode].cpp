@@ -37,10 +37,10 @@ public:
         
         bool res = false;
         
-        if(i1 < n1 && s1[i1] == s3[i3]) {
+        if(s1[i1] == s3[i3]) {
             res |= go(i1+1, i2, i3 + 1);
         }
-        if(i2 < n2 && s2[i2] == s3[i3]) {
+        if(s2[i2] == s3[i3]) {
             res |= go(i1, i2 + 1, i3 + 1);
         }
         
@@ -74,6 +74,7 @@ public:
     int dp[205][205];
     
     bool go(int i1, int i2) {
+        int i3 = i1 + i2;
         if(i1 + i2 == n3) {
             return (i1 == n1 && i2 == n2);
         }
@@ -82,10 +83,10 @@ public:
         
         bool res = false;
         
-        if(i1 < n1 && s1[i1] == s3[i1 + i2]) {
+        if(s1[i1] == s3[i3]) {
             res |= go(i1 + 1, i2);
         }
-        if(i2 < n2 && s2[i2] == s3[i1 + i2]) {
+        if(s2[i2] == s3[i3]) {
             res |= go(i1, i2 + 1);
         }
         
