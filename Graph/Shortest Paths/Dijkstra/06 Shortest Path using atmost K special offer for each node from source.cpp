@@ -37,13 +37,7 @@ dp[v][j+1] = dp[u][j]
 */
 
 
-/*
-priority version method is faster than set method
-Time of method 1 = 5.2sec
-Time of method 2 = 8.5sec
-Time of method 3 = 3.8sec
-Time of method 4 = 5.8sec
-*/
+
 
 
 // Method 1
@@ -55,10 +49,10 @@ int k;
 int dp[N][20];
 
 void dijkstra() {
-	int source = 1;
+    int source = 1;
     for (int i = 1; i <= n; i++) {
-    	for (int j = 0; j <= k; j++)
-    		dp[i][j] = INF;
+        for (int j = 0; j <= k; j++)
+            dp[i][j] = INF;
     }
 
     dp[source][0] = 0;
@@ -66,28 +60,28 @@ void dijkstra() {
     set<pair<int, pair<int, int>>> s;
     s.insert({dp[source][0], {source, 0}});
 
-	while (!s.empty()) {
-	    int u = s.begin()->second.first;
-	    int j = s.begin()->second.second;
-	    s.erase(s.begin());
+    while (!s.empty()) {
+        int u = s.begin()->second.first;
+        int j = s.begin()->second.second;
+        s.erase(s.begin());
 
-	    for (auto x : g[u]) {
-	        int v = x.first, w = x.second;
-	        if (dp[v][j] > dp[u][j] + w) {
-	        	s.erase({dp[v][j], {v, j}});
-	        	dp[v][j] = dp[u][j] + w;
-	        	s.insert({dp[v][j], {v, j}});
-	       	}
-	       	// now setting w = 0, if possible
-	       	if (j < k && dp[v][j + 1] > dp[u][j]) {
-	        	s.erase({dp[v][j + 1], {v, j + 1}});
-	        	dp[v][j + 1] = dp[u][j];
-	        	s.insert({dp[v][j + 1], {v, j + 1}});
-	       	}
-	    }
-	}
+        for (auto x : g[u]) {
+            int v = x.first, w = x.second;
+            if (dp[v][j] > dp[u][j] + w) {
+                s.erase({dp[v][j], {v, j}});
+                dp[v][j] = dp[u][j] + w;
+                s.insert({dp[v][j], {v, j}});
+            }
+            // now setting w = 0, if possible
+            if (j < k && dp[v][j + 1] > dp[u][j]) {
+                s.erase({dp[v][j + 1], {v, j + 1}});
+                dp[v][j + 1] = dp[u][j];
+                s.insert({dp[v][j + 1], {v, j + 1}});
+            }
+        }
+    }
 
-	for (int i = 1; i <= n; i++) {
+    for (int i = 1; i <= n; i++) {
         int res = INF;
         for (int j = 0; j <= k; j++) {
             res = min(res, dp[i][j]);
@@ -97,11 +91,11 @@ void dijkstra() {
 }
  
 void solve() {
-	int u, v, w;
-	cin >> n >> m >> k;
+    int u, v, w;
+    cin >> n >> m >> k;
 
     f(i, m) {
-    	cin >> u >> v >> w, g[u].pb({v, w}), g[v].pb({u, w});
+        cin >> u >> v >> w, g[u].pb({v, w}), g[v].pb({u, w});
     }
 
     dijkstra();
@@ -139,10 +133,10 @@ int k;
 int dp[N][20];
 
 void dijkstra() {
-	int source = 1;
+    int source = 1;
     for (int i = 1; i <= n; i++) {
-    	for (int j = 0; j <= k; j++)
-    		dp[i][j] = INF;
+        for (int j = 0; j <= k; j++)
+            dp[i][j] = INF;
     }
 
     dp[source][0] = 0;
@@ -150,29 +144,29 @@ void dijkstra() {
     set<vector<int>> s;
     s.insert({dp[source][0], source, 0});
 
-	while (!s.empty()) {
-		auto it = *s.begin();
-	    int u = it[1];
-	    int j = it[2];
-	    s.erase(s.begin());
+    while (!s.empty()) {
+        auto it = *s.begin();
+        int u = it[1];
+        int j = it[2];
+        s.erase(s.begin());
 
-	    for (auto x : g[u]) {
-	        int v = x.first, w = x.second;
-	        if (dp[v][j] > dp[u][j] + w) {
-	        	s.erase({dp[v][j], v, j});
-	        	dp[v][j] = dp[u][j] + w;
-	        	s.insert({dp[v][j], v, j});
-	       	}
-	       	// now setting w = 0, if possible
-	       	if (j < k && dp[v][j + 1] > dp[u][j]) {
-	        	s.erase({dp[v][j + 1], v, j + 1});
-	        	dp[v][j + 1] = dp[u][j];
-	        	s.insert({dp[v][j + 1], v, j + 1});
-	       	}
-	    }
-	}
+        for (auto x : g[u]) {
+            int v = x.first, w = x.second;
+            if (dp[v][j] > dp[u][j] + w) {
+                s.erase({dp[v][j], v, j});
+                dp[v][j] = dp[u][j] + w;
+                s.insert({dp[v][j], v, j});
+            }
+            // now setting w = 0, if possible
+            if (j < k && dp[v][j + 1] > dp[u][j]) {
+                s.erase({dp[v][j + 1], v, j + 1});
+                dp[v][j + 1] = dp[u][j];
+                s.insert({dp[v][j + 1], v, j + 1});
+            }
+        }
+    }
 
-	for (int i = 1; i <= n; i++) {
+    for (int i = 1; i <= n; i++) {
         int res = INF;
         for (int j = 0; j <= k; j++) {
             res = min(res, dp[i][j]);
@@ -182,11 +176,11 @@ void dijkstra() {
 }
  
 void solve() {
-	int u, v, w;
-	cin >> n >> m >> k;
+    int u, v, w;
+    cin >> n >> m >> k;
 
     f(i, m) {
-    	cin >> u >> v >> w, g[u].pb({v, w}), g[v].pb({u, w});
+        cin >> u >> v >> w, g[u].pb({v, w}), g[v].pb({u, w});
     }
 
     dijkstra();
@@ -331,26 +325,29 @@ void dijkstra() {
 
     dp[source][0] = 0;
 
-    // {distance, node, j}, where j <= k
-    priority_queue <vector<int>, vector<vector<int>>, greater<vector<int>> > pq;
-    pq.push({dp[source][0], source, 0});
+    // {distance, {node, j}}, where j <= k
+    priority_queue < pair<int, pair<int, int>> , vector < pair<int, pair<int, int>>> , greater < pair<int, pair <int, int>>> > pq;
+    pq.push({dp[source][0], {source, 0}});
 
     while (!pq.empty()) {
         auto it = pq.top();
         pq.pop();
-        int u = it[1];
-        int j = it[2];
+        int u = it.second.first;
+        int j = it.second.second;
+        int cost = it.first;
+
+        if(cost > dp[u][j]) continue;
 
         for (auto x: g[u]) {
             int v = x.first, w = x.second;
             if (dp[v][j] > dp[u][j] + w) {
                 dp[v][j] = dp[u][j] + w;
-                pq.push({dp[v][j], v, j});
+                pq.push({dp[v][j], {v, j}});
             }
             // now setting w = 0, if possible
             if (j < k && dp[v][j + 1] > dp[u][j]) {
                 dp[v][j + 1] = dp[u][j];
-                pq.push({dp[v][j + 1], v, j + 1});
+                pq.push({dp[v][j + 1], {v, j + 1}});
             }
         }
     }
