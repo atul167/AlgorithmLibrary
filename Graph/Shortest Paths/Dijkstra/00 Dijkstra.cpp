@@ -8,9 +8,12 @@ Time Complexity = O(E + VLogV)
 
 
 
+const int N = 1e5+5;
+int n, m;
+
 vector<pll> adj[N];
 void dijkstra(ll source){
-	f(i,n+1) dp[i]=inf;
+    f(i,n+1) dp[i]=inf;
     priority_queue <pll, vector<pll>, greater<pll> > pq;
     pq.push({0, source});
     dp[source] = 0;
@@ -20,8 +23,9 @@ void dijkstra(ll source){
         pq.pop();
 
         ll u = x.second;
+        ll cost = x.first;
 
-        // if(dp[u] < x.first) continue;
+        if(cost > dp[u]) continue;
 
         for(pll y: adj[u]){
             if(dp[y.first] > dp[u] + y.second){
@@ -30,16 +34,6 @@ void dijkstra(ll source){
             }
         }
     }
-}
-
-void solve() {
-	cin>>n>>m;
-	f(i,m) cin>>u>>v>>x, adj[u].pb({v,x}), adj[v].pb({u,x});
-	cin>>x;
-	dijkstra(x);
-	for(ll i=1; i<=n; i++){
-		cout<<"Distance of "<<i<<" from "<<x<<" is "<<dp[i]<<endl;
-	}
 }
 
 
