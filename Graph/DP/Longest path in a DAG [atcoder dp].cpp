@@ -5,7 +5,6 @@
 // Method 1.1
 const int N = 3e5+5;
 int n, m;
-
 vi g[N];
 int dp[N];
 
@@ -46,7 +45,6 @@ void solve() {
 // Method 1.2
 const int N = 3e5+5;
 int n, m;
-
 vi g[N];
 int dp[N];
 
@@ -81,6 +79,41 @@ void solve() {
 
 
 
+// Method 1.3
+const int N = 3e5+5;
+int n, m;
+vi g[N];
+int dp[N];
+
+void solve() {
+    int u, v;
+    cin >> n >> m;
+    f(i, m) cin >> u >> v, g[u].pb(v);
+
+    memset(dp, 0, sizeof dp);
+
+    std::function<int(int)> dfs = [&] (int u) {
+        if (dp[u]) return dp[u];
+        
+        for (int v: g[u]) {
+            dp[u] = max(dp[u], 1 + dfs(v));
+        }
+        
+        return dp[u];
+    };
+
+    int res = 0;
+    for (int i = 1; i <= n; i++) {
+        res = max(res, dfs(i));
+    }
+
+    cout << res << endl;
+}
+
+
+
+
+
 
 
 
@@ -96,7 +129,6 @@ void solve() {
 // Method 2
 const int N = 3e5+5;
 int n, m;
-
 vi g[N];
 int vis[N];
 int dp[N];
