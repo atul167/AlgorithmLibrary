@@ -145,3 +145,84 @@ void solve() {
 
     dijkstra();
 }  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const int N = 2e5+5;
+int n, m;
+
+vector<pair<int,int>> g[N];
+int dp[N][2];
+
+using node = pair<int, pair<int, int>>;
+
+void dijkstra() {
+    int source = 1;
+    for (int i = 1; i <= n; i++) {
+        dp[i][0] = dp[i][1] = INF;
+    }
+
+    dp[source][0] = 0;
+    // {distance, {node, j}}, where j = 0 or 1
+    priority_queue<node, vector<node>, greater<node>> pq;
+    pq.push({dp[source][0], {source, 0}});
+
+    while (!pq.empty()) {
+        int u = pq.top().second.first;
+        int j = pq.top().second.second;
+        int cost = pq.top().first;
+        pq.pop();
+
+        if(cost > dp[u][j]) continue;
+
+        for (auto x : g[u]) {
+            int v = x.first, w = x.second;
+            if (dp[v][j] > dp[u][j] + w) {
+                dp[v][j] = dp[u][j] + w;
+                pq.push({dp[v][j], {v, j}});
+            }
+            // now setting w = 0, if possible
+            if (j < 1 && dp[v][j + 1] > dp[u][j] + (w / 2)) {
+                dp[v][j + 1] = dp[u][j] + (w / 2);
+                pq.push({dp[v][j + 1], {v, j + 1}});
+            }
+        }
+    }
+
+    int res = min(dp[n][0], dp[n][1]);
+    cout << res << " ";
+}
+
+void solve() {
+    int u, v, w;
+    cin >> n >> m;
+
+    f(i, m) {
+        cin >> u >> v >> w, g[u].pb({v, w});
+    }
+
+    dijkstra();
+} 
