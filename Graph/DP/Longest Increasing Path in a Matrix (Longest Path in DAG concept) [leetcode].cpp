@@ -194,7 +194,7 @@ public:
             }
         }
 
-        int path_len = 0;
+        int level = 0;
         while(!q.empty()) {
             int sz = q.size();
             for(int i = 0; i < sz; i++) {
@@ -212,9 +212,9 @@ public:
                     }
                 }
             }
-            path_len += 1;
+            level++;
         }
-        return path_len;
+        return level;
     }
     
     int longestIncreasingPath(vector<vector<int>>& matrix) {
