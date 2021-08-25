@@ -64,7 +64,8 @@ void solve() {
 
         int cost = it.first;
         int u = it.second;
-
+        
+        // this is imp else TLE
         if (cost > bestDis[u].top()) {
             continue;
         }
