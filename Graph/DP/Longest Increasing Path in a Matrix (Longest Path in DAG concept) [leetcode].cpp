@@ -171,9 +171,90 @@ public:
 
 
 
+// Method 2: Topological Sort
+class Solution {
+public:
+    int n, m;
+    int dx[4] = {0, 1, 0, -1};
+    int dy[4] = { -1, 0, 1, 0};
+    vector<vector<int>> indegree;
+    
+
+    bool isSafe(int i, int j) {
+        if(i < 0 || i >= n || j < 0 || j >= m)
+            return false;
+        return true;
+    }
+    
+    int kahn(vector<vector<int>>& matrix) {
+        queue<pair<int, int>> q;
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < m; j++) {
+                if(indegree[i][j] == 0) q.push({i, j});
+            }
+        }
+
+        int path_len = 0;
+        while(!q.empty()) {
+            int sz = q.size();
+            for(int i = 0; i < sz; i++) {
+                auto it = q.front();
+                q.pop();
+                int x = it.first, y = it.second;
+
+                for (int z = 0; z < 4; z++) {
+                    int nx = x + dx[z], ny = y + dy[z];
+                    if(!isSafe(nx, ny)) continue;
+                    if (matrix[nx][ny] <= matrix[x][y]) continue;
+                    indegree[nx][ny]--;
+                    if(indegree[nx][ny] == 0) {
+                        q.push({nx, ny});
+                    }
+                }
+            }
+            path_len += 1;
+        }
+        return path_len;
+    }
+    
+    int longestIncreasingPath(vector<vector<int>>& matrix) {
+        n = matrix.size(), m = matrix[0].size();
+        indegree = vector<vector<int>>(n, vector<int>(m, 0));
+
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < m; j++) {
+                for (int z = 0; z < 4; z++) {
+                    int ni = i + dx[z], nj = j + dy[z];
+                    if(!isSafe(ni, nj)) continue;
+                    if (matrix[ni][nj] <= matrix[i][j]) continue;
+                    indegree[ni][nj]++;
+                }
+            }
+        }
+        return kahn(matrix);
+    }
+};
 
 
-// Method 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Method 3
 class Solution {
 public:
     int n, m;
