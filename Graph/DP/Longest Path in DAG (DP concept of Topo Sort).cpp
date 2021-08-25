@@ -1,4 +1,4 @@
-// https://cses.fi/problemset/result/2576339/
+// https://cses.fi/problemset/task/1680/
 // https://usaco.guide/gold/toposort?lang=cpp#dynamic-programming
 
 /*
