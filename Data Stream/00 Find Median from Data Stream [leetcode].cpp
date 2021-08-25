@@ -24,11 +24,11 @@ public:
             right.push(num); 
         
         // rebalance the two halfs to make sure the length difference is no larger than 1
-        if(left.size() > (right.size() + 1)) {
+        if(left.size() > right.size() + 1) {
             right.push(left.top());
             left.pop();
         }
-        if(left.size() + 1 < right.size()) {
+        if(right.size() > left.size() + 1) {
             left.push(right.top());
             right.pop();
         }
