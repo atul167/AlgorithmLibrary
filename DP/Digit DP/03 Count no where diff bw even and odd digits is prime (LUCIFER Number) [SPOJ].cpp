@@ -2,6 +2,21 @@
 // https://youtu.be/XfeWIsrCS1o
 
 
+/*
+Any number is LUCIFER NUMBER  if the Difference between Sum of digits at even location and Sum of digits at odd location is prime number.
+For eg. 20314210 is lucifer number since:
+digits at odd location 0,2,1,0
+digits at even location 1,4,3,2
+diff = (1 + 4 + 3 + 2) - (0 + 2 + 1 + 0) = 10 - 3 = 7 (a prime number).
+
+Input
+First line will have a number 't' denoting the number of test cases.
+each of the following t lines will have 2 numbers 'a' , 'b'
+
+Output
+Print single number per test case, depicting the count of Lucifer numbers in the range a,b inclusive.
+*/
+
 
 bool isPrime(int x) {
     if(x <= 1) return false;
