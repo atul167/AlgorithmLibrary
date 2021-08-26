@@ -58,69 +58,84 @@ public:
 
 
 
-class MedianFinder {
-public:
-    /** initialize your data structure here. */
-    priority_queue<int> left;
-    priority_queue<int, vector<int>, greater<int>> right;
 
-    MedianFinder() {
-        
-    }
+
+
+
+
+
+
+
+
+
+
+// https://leetcode.com/problems/sliding-window-median/
+// Sliding Window Median
+class Solution {
+public:
+    using ld = long double;
+    multiset<int, greater<int>> left;
+    multiset<int> right;
+    vector<double> res;
     
-    void addNum(int num) {
-        if(left.empty()) {
-            left.push(num);
-        } else if(right.empty()) {
-            if(left.top() > num) {
-                right.push(left.top());
-                left.pop();
-                left.push(num);
-            } else {
-                right.push(num);
-            }
+    void addEle(int val) {
+        if(left.empty() || (*left.begin()) > val) {
+            left.insert(val);
         } else {
-            if(left.size() == right.size()) {
-                if(num <= right.top()) {
-                    left.push(num);
-                } else {
-                    right.push(num);
-                }
-            }
-            else if(left.size() < right.size()) {
-                if(num <= right.top()) {
-                    left.push(num);
-                } else {
-                    left.push(right.top());
-                    right.pop();
-                    right.push(num);
-                }
-            } else {
-                if(num >= left.top()) {
-                    right.push(num);
-                } else {
-                    right.push(left.top());
-                    left.pop();
-                    left.push(num);
-                }
-            }
+            right.insert(val);
         }
     }
     
-    double findMedian() {
+    void reshuffle() {
+        if(left.size() > right.size() + 1) {
+            right.insert(*left.begin());
+            left.erase(left.begin());
+        }
+        if(right.size() > left.size() + 1) {
+            left.insert(*right.begin());
+            right.erase(right.begin());
+        }
+    }
+    
+    void setAnswer() {
         if(left.size() == right.size()) {
-            return (left.top() + right.top()) / 2.0;
+            ld median = ((ld)(*left.begin()) + (ld)(*right.begin())) / 2.0;
+            res.push_back(median);
         } else if(left.size() < right.size()) {
-            return right.top();
+            res.push_back(*right.begin());
         } else {
-            return left.top();
+            res.push_back(*left.begin());
         }
+    }
+    
+    vector<double> medianSlidingWindow(vector<int>& nums, int k) {
+        int n = nums.size();
+        res.clear();
+        left.clear(), right.clear();
+        
+        
+        for(int i = 0; i < k; i++) {
+            addEle(nums[i]);
+            reshuffle();
+            
+        }
+        setAnswer();
+        
+        for(int i = k; i < n; i++) {
+            int x = nums[i - k];
+            if(left.find(x) != left.end()) {
+                left.erase(left.find(x));
+            } else {
+                right.erase(right.find(x));
+            }
+            reshuffle();
+            
+            addEle(nums[i]);
+            reshuffle();
+            
+            setAnswer();
+        }
+        
+        return res;
     }
 };
-
-/**
- * Your MedianFinder object will be instantiated and called as such:
- * MedianFinder* obj = new MedianFinder();
- * obj->addNum(num);
- * double param_2 = obj->findMedian();
- */
