@@ -2,9 +2,11 @@
 // https://www.spoj.com/problems/PR003004/
  
 
-ll dp[18][150][2];
 
-ll digit_dp(string str, ll pos, ll sum, ll tight){
+int dp[18][150][2];
+string str;
+
+int digit_dp(int pos, int sum, int tight){
     if(pos == str.length()) return sum;
 
     if(dp[pos][sum][tight] != -1) return dp[pos][sum][tight];
@@ -13,16 +15,16 @@ ll digit_dp(string str, ll pos, ll sum, ll tight){
     int ub = tight ? (str[pos] - '0') : 9;
 
     for(int i = 0; i <= ub; i++) {
-        res += digit_dp(str, pos + 1, sum + i, (tight & (i == ub)));
+        res += digit_dp(pos + 1, sum + i, (tight & (i == ub)));
     }
     
     return dp[pos][sum][tight] = res;
 }
 
 int go(int num) {
-    string str = to_string(num);
+    str = to_string(num);
     memset(dp, -1, sizeof(dp));
-    return digit_dp(str, 0, 0, 1);
+    return digit_dp(0, 0, 1);
 }
 
 void solve() {
@@ -30,7 +32,6 @@ void solve() {
     cin >> l >> r;
     cout << go(r) - go(l - 1) << endl;
 }
-
 
 signed main() {
     IOS
