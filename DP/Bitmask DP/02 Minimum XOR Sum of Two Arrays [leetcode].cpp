@@ -14,6 +14,37 @@ n == nums2.length
 0 <= nums1[i], nums2[i] <= 10^7
 */
 
+
+// Method 1: Space = O(n * 2^n)
+class Solution {
+public:
+    int dp[1 << 20][20];
+    int n;
+
+    int go(int mask, int i, vector<int>& nums1, vector<int>& nums2) {
+        if(i == n) return 0;
+
+        if (dp[mask][i] != -1) { 
+            return dp[mask][i];
+        }
+
+        int ans = INT_MAX;
+        for (int j = 0; j < n; j++) {
+            if (!(mask & (1 << j))) {
+                ans = min(ans, (nums1[i] ^ nums2[j]) + go(mask | (1 << j), i + 1, nums1, nums2));
+            }
+        }
+        return dp[mask][i] = ans;
+    }
+    int minimumXORSum(vector<int>& nums1, vector<int>& nums2) {
+        n = nums1.size();
+        memset(dp, -1, sizeof dp);
+        return go(0, 0, nums1, nums2);
+    }
+};
+
+
+// Method 2: Space = O(2^n)
 class Solution {
 public:
     int dp[1 << 20];
