@@ -62,7 +62,7 @@ public:
         int ans = INT_MAX;
         for (int j = 0; j < n; j++) {
             if (!(mask & (1 << j))) {
-                ans = min(ans, (nums1[i]^nums2[j]) + go(mask | (1 << j), nums1, nums2));
+                ans = min(ans, (nums1[i] ^ nums2[j]) + go(mask | (1 << j), nums1, nums2));
             }
         }
         return dp[mask] = ans;
