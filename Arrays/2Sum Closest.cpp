@@ -11,6 +11,7 @@ class Solution {
             if (abs(sum - target) < diff) {
                res = sum;
                diff = abs(sum - target);
+               if(diff == 0) return res;
             }
 
             if (sum > target) {
