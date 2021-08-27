@@ -7,6 +7,12 @@ return the number of distinct subsequences of s which equals t.
 Concept of standard "Edit Distance" DP problem is used
 */
 
+
+/*
+dp[i][j] = no of subsequences of s[0...i] which are equal to substring t[0...j]
+*/
+
+
 // Bottom Up 1
 class Solution {
 public:
@@ -14,6 +20,7 @@ public:
         int n = s.size(), m = t.size();
         
         vector<vector<long>> dp(n + 1, vector<long>(m + 1, 0));
+        // dp[i][j] = no of subsequences of s[0...i] which are equal to substring t[0...j]
         
         // base case: when t is empty
         for(int i = 0; i <= n; i++) dp[i][0] = 1;
@@ -38,7 +45,9 @@ class Solution {
 public:
     int numDistinct(string s, string t) {
         int n = s.size(), m = t.size();
+        
         vector<vector<uint32_t>> dp(n + 1, vector<uint32_t>(m + 1, 0));
+        // dp[i][j] = no of subsequences of s[0...i] which are equal to substring t[0...j]
         
         // base case: when t is empty
         for (int i = 0; i <= n; ++i) {
