@@ -20,20 +20,26 @@ void solve() {
 /*
 5
 0 0 1 1 1
-
 lo, hi are: 2, 2
 
 
 
 5
 0 0 0 0 0
-
 lo, hi are: 5, 5
 
 
 5
 1 1 1 1 1
+lo, hi are: 0, 0
 
+1
+0
+lo, hi are: 1, 1
+
+
+1
+1
 lo, hi are: 0, 0
 */
 
@@ -76,19 +82,26 @@ void solve() {
 /*
 5
 1 1 0 0 0
-
 lo, hi are: 1, 1
 
 
 
 5
 0 0 0 0 0
-
 lo, hi are: -1, -1
 
 
 5
 1 1 1 1 1
-
 lo, hi are: 4, 4
+
+
+1
+0
+lo, hi are: -1, -1
+
+
+1
+1
+lo, hi are: 0, 0
 */
