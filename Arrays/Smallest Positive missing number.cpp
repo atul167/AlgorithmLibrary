@@ -1,4 +1,4 @@
-// https://www.geeksforgeeks.org/find-duplicates-in-on-time-and-constant-extra-space/
+// https://www.geeksforgeeks.org/find-the-smallest-positive-number-missing-from-an-unsorted-array/
 // https://practice.geeksforgeeks.org/problems/smallest-positive-missing-number-1587115621/1
 
 class Solution {
