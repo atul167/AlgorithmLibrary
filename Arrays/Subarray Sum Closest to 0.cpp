@@ -44,30 +44,30 @@ public:
         int n = nums.size();
         int min_diff = INT_MAX, left = -1, right = -1;
     
-        vector<pair<int, int>> pre_sum(n + 1);
+        vector<pair<int, int>> pref_sum;
     
         // To consider the case of subarray starting from beginning of the array
-        pre_sum[0] = {0, -1};
+        pref_sum.push_back({0, -1});
     
         int sum = 0;
         // Store prefix sum with index
         for (int i = 0; i < n; i++) {
             sum += nums[i];
-            pre_sum[i+1] = {sum, i};
+            pref_sum.push_back({sum, i});
         }
     
         // Sort on the basis of pref sum
-        sort(pre_sum.begin(), pre_sum.end());
+        sort(pref_sum.begin(), pref_sum.end());
 
     
         // Find two consecutive elements with minimum difference
-        for (int i = 0; i < n; i++) {
-            int diff = pre_sum[i+1].first - pre_sum[i].first;
+        for (int i = 0; i < pref_sum.size() - 1; i++) {
+            int diff = pref_sum[i+1].first - pref_sum[i].first;
     
             if (min_diff > diff) {
                 min_diff = diff;
-                left = min(pre_sum[i].second, pre_sum[i+1].second);
-                right = max(pre_sum[i].second, pre_sum[i+1].second);
+                left = min(pref_sum[i].second, pref_sum[i+1].second);
+                right = max(pref_sum[i].second, pref_sum[i+1].second);
             }
         }
 
