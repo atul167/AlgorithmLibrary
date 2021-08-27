@@ -49,6 +49,15 @@ public:
 
 
 
+
+
+/*
+dp[i][0] = when first character is 'u'
+dp[i][1] = when first character is 'o'
+dp[i][2] = when first character is 'i'
+dp[i][3] = when first character is 'e'
+dp[i][4] = when first character is 'a'
+*/
 class Solution {
 public:
     int countVowelStrings(int n) {
