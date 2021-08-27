@@ -24,6 +24,29 @@ Constraints:
 
 Output:
 Output n lines. In the ith line, output the minimum distance from city 1 to the ith city. If there exists no such path, output -1.
+
+
+
+Sample Input:
+6 5
+2 4 3
+2 3 4
+2 1 2
+2 5 6
+1 5 2
+
+Sample Output:
+0
+2
+10
+8
+2
+-1
+
+Explanation:
+Shortest path from 1 to 3 is (1->2->3)  with total weight= 1*2+2*4=10
+Shortest path from 1 to 5 is (1->5)  with total weight= 1*2=2
+There doesn't exist any path from 1 to 6 so print -1
 */
 
 
