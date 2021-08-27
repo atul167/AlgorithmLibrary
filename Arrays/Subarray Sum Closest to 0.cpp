@@ -18,6 +18,21 @@ Expected O(nlogn) time.
 
 
 
+/*
+a) Maintain a Prefix sum array. Also maintain indexes in the prefix sum array.
+b) Sort the prefix sum array on the basis of sum.
+c) Find the two elements in a prefix sum array with minimum difference. 
+ 
+i.e.  Find min(pre_sum[i] - pre_sum[i-1]) 
+
+d) Return indexes of pre_sum with minimum difference.
+e) Subarray with (lower_index+1, upper_index) will have the sum closest to 0.
+
+Taking lower_index+1 because on subtracting value at lower_index we get the sum closest to 0. That’s why lower_index need not to be included.
+*/
+
+
+
 class Solution {
 public:
     /*
