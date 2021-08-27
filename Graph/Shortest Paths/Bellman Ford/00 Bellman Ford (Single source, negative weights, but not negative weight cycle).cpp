@@ -20,6 +20,54 @@ https://leetcode.com/problems/cheapest-flights-within-k-stops/
 */
 
 
+
+
+/*
+Note: 
+g.pb({u, v, w});
+// ignore below line if directed graph
+g.pb({v, u, w});
+*/
+
+void solve() {
+    int u, v, w;
+    cin >> n >> m;
+    vector<vector<int>> g;
+    f(i, m) {
+        cin >> u >> v >> w;
+        g.pb({u, v, w});
+        // ignore below line if directed graph
+        g.pb({v, u, w});
+    }
+
+
+    vector<int> dis(n+1, INF);
+    dis[1] = 0;
+    for(int i = 1; i < n; i++) {
+        for(auto x: g) {
+            int u = x[0];
+            int v = x[1];
+            int d = x[2];
+            if(dis[u] < INF) {
+                dis[v] = min(dis[v], dis[u] + d);
+            }
+        }
+    }
+    loop(i, 1, n) cout << (dis[i] == INF ? -1 : dis[i]) << endl;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Solution {
 public:
     vector <int> bellmanFord(int n, vector <vector<int>> edges) {
