@@ -3,74 +3,73 @@
 
 
 
-/*--------------------DSU BEGIN----------------------------------*/
-int par[N];
-void initialize() {
-    for(int i = 0; i < N; i++) {
-        par[i] = -1;
-    }
-}
-int findParent(int a) {
-    if(par[a] < 0)
-        return a;
-    return par[a] = findParent(par[a]);
-}
-void unionSet(int a, int b){
-    a = findParent(a);
-    b = findParent(b);
-    if(a == b) return;
-    if(par[a] > par[b]) swap(a,b);
-    par[a] += par[b];
-    par[b] = a;
-}
-/*--------------------DSU END------------------------------------*/
 
-/*--------------------KRUSKAL'S BEGIN-----------------------------*/
-struct Edge {
-    int src;
-    int dest;
-    int weight;
+const int N = 1e5+5;
+int n, m;
+
+struct DSU {
+    vector<int> par;
+    void init(int n) {
+        par.resize(n+1, -1);
+    }
+    int findParent(int a) {
+        if(par[a] < 0) return a;
+        return par[a] = findParent(par[a]);
+    }
+    bool unionSet(int a, int b){
+        a = findParent(a);
+        b = findParent(b);
+        if(a == b) return 0;
+        if(par[a] > par[b]) swap(a,b);
+        par[a] += par[b];
+        par[b] = a;
+        return 1;
+    }
+    bool sameSet(int x, int y) { 
+        return findParent(x) == findParent(y); 
+    }
+    int size (int x) { 
+        return -par[findParent(x)]; 
+    }
 };
 
-bool compare(Edge e1, Edge e2){
-    return e1.weight < e2.weight;
-}
 
-vector<Edge> input;
-vector<Edge> result;
+vector<vector<int>> input;
+vector<vector<int>> result;
 
 int kruskals() {
-    sort(input.begin(), input.end(), compare);
-    initialize();
+    sort(input.begin(), input.end());
+    DSU dsu;
+    dsu.init(n+1);
 
     int cost = 0;
-    for(Edge currEdge: input) {
-        int srcParent = findParent(currEdge.src);
-        int destParent = findParent(currEdge.dest);
-        if(srcParent != destParent) {
-            result.pb(currEdge);
-            cost += currEdge.weight;
-            unionSet(srcParent, destParent);
+    for(auto it: input) {
+        int w = it[0], u = it[1], v = it[2];
+        int uParent = dsu.findParent(u);
+        int vParent = dsu.findParent(v);
+        if(uParent != vParent) {
+            result.pb(it);
+            cost += w;
+            dsu.unionSet(uParent, vParent);
         }
     }
 
     return cost;
 }
-/*--------------------KRUSKAL'S END------------------------------*/
 
 void solve() {
-    int u, v, x, y;
+    int u, v, w;
     cin >> n >> m;
     f(i, m) {
-        cin >> u >> v >> x;
-        Edge edg = {u, v, x};
-        input.pb(edg);
+        cin >> u >> v >> w;
+        input.pb({w, u, v});
     }
     
     int cost = kruskals();
     
-    for(Edge e: result){
-        cout << e.src << " " << e.dest << " " << e.weight << endl;
+    for(auto it: result) {
+        int w = it[0], u = it[1], v = it[2];
+        cout << u << " " << v << " " << w << endl;
     }
 
     if(result.size() != n - 1) {
