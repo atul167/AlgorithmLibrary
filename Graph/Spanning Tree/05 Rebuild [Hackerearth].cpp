@@ -27,27 +27,32 @@ This continues on until the last city n.
 const int N = 2e5+5;
 int n, m;
 
-/*--------------------DSU BEGIN----------------------------------*/
-int par[N];
-void initialize() {
-    for(int i = 0; i < N; i++) {
-        par[i] = -1;
+struct DSU {
+    vector<int> par;
+    void init(int n) {
+        par.resize(n+1, -1);
     }
-}
-int findParent(int a) {
-    if(par[a] < 0)
-        return a;
-    return par[a] = findParent(par[a]);
-}
-void unionSet(int a, int b){
-    a = findParent(a);
-    b = findParent(b);
-    if(a == b) return;
-    if(par[a] > par[b]) swap(a,b);
-    par[a] += par[b];
-    par[b] = a;
-}
-/*--------------------DSU END------------------------------------*/
+    int findParent(int a) {
+        if(par[a] < 0) return a;
+        return par[a] = findParent(par[a]);
+    }
+    bool unionSet(int a, int b){
+        a = findParent(a);
+        b = findParent(b);
+        if(a == b) return 0;
+        if(par[a] > par[b]) swap(a,b);
+        par[a] += par[b];
+        par[b] = a;
+        return 1;
+    }
+    bool sameSet(int x, int y) { 
+        return findParent(x) == findParent(y); 
+    }
+    int size (int x) { 
+        return -par[findParent(x)]; 
+    }
+};
+
 
 
 /*--------------------KRUSKAL'S BEGIN-----------------------------*/
@@ -75,15 +80,16 @@ vector<Edge> result;
 
 void kruskals() {
     sort(input.begin(), input.end(), compare);
-    initialize();
+    DSU dsu;
+    dsu.init(n+1);
 
     int cost = 0;
     for(Edge currEdge: input) {
-        int srcParent = findParent(currEdge.src);
-        int destParent = findParent(currEdge.dest);
+        int srcParent = dsu.findParent(currEdge.src);
+        int destParent = dsu.findParent(currEdge.dest);
         if(srcParent != destParent) {
             result.pb(currEdge);
-            unionSet(srcParent, destParent);
+            dsu.unionSet(srcParent, destParent);
         }
     }
 }
@@ -123,154 +129,11 @@ void solve() {
 signed main() {
     IOS
     clock_t begin = clock();
+    PRECISION(10);
     int t = 1;
     cin >> t;
     f(i, t) {
         solve();
     }
-    cerr<<"Time elapsed: "<<(clock()-begin)*1000.0/CLOCKS_PER_SEC<<"ms"<<'\n';
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*--------------------DSU BEGIN----------------------------------*/
-int par[N];
-void initialize() {
-    for(int i = 0; i < N; i++) {
-        par[i] = -1;
-    }
-}
-int findParent(int a) {
-    if(par[a] < 0)
-        return a;
-    return par[a] = findParent(par[a]);
-}
-void unionSet(int a, int b){
-    a = findParent(a);
-    b = findParent(b);
-    if(a == b) return;
-    if(par[a] > par[b]) swap(a,b);
-    par[a] += par[b];
-    par[b] = a;
-}
-/*--------------------DSU END------------------------------------*/
-
-
-/*--------------------KRUSKAL'S BEGIN-----------------------------*/
-// NOTE: src should be less then dest
-struct Edge {
-    int src;
-    int dest;
-    int weight;
-};
-
-// NOTE: src should be less then dest
-bool compare(Edge e1, Edge e2) {
-    if(e1.weight == e2.weight) {
-        if(e1.src == e2.src) {
-            return e1.dest > e2.dest;
-        }
-        return e1.src > e2.src;
-    }
-    return e1.weight < e2.weight;
-}
-
-
-vector<Edge> input;
-vector<Edge> result;
-
-void kruskals() {
-    sort(input.begin(), input.end(), compare);
-    initialize();
-
-    int cost = 0;
-    for(Edge currEdge: input) {
-        int srcParent = findParent(currEdge.src);
-        int destParent = findParent(currEdge.dest);
-        if(srcParent != destParent) {
-            result.pb(currEdge);
-            unionSet(srcParent, destParent);
-        }
-    }
-}
-/*--------------------KRUSKAL'S END------------------------------*/
-
-
-void solve() {
-    int u, v, w;
-    input.clear();
-    result.clear();
-
-    cin >> n >> m;
-
-    f(i, m) {
-        cin >> u >> v >> w;
-        // important
-        if(u > v) swap(u, v);
-        Edge edg = {u, v, w};
-        input.pb(edg);
-    }
-
-    kruskals();
-
-    int cost = 0;
-    vector<int> g[n+1];
-    for(Edge e: result){
-        g[e.src].pb(e.dest);
-        g[e.dest].pb(e.src);
-        cost += e.weight;
-    }
-    cout << cost << endl;
-
-    loop(i, 1, n) cout << g[i].size() << " ";
-    cout << endl;
-}
-
-signed main() {
-    IOS
-    clock_t begin = clock();
-    int t = 1;
-    cin >> t;
-    f(i, t) {
-        solve();
-    }
-    cerr<<"Time elapsed: "<<(clock()-begin)*1000.0/CLOCKS_PER_SEC<<"ms"<<'\n';
+    cerr << "Time elapsed: " << (clock() - begin) * 1000.0 / CLOCKS_PER_SEC << "ms" << '\n';
 }
