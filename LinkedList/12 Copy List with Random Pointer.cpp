@@ -50,3 +50,51 @@ public:
         return cloned;
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Solution {
+public:
+    unordered_map<Node*, Node*> vis;
+    
+    void cloneRandom(Node* head, Node* clonedRoot) {
+        if(!head) return;
+        
+        if(head->random) {
+            clonedRoot->random =  vis[head->random];
+        }
+        
+        cloneRandom(head->next, clonedRoot->next);
+    }
+    
+    Node* copyRandomList(Node* head) {
+        if(!head) return head;
+        
+        Node* cloned = new Node(head->val);
+        Node *temphead = head, *tempcloned = cloned;
+        vis[head] = cloned;
+        
+        while(temphead->next) {
+            tempcloned->next = new Node(temphead->next->val);
+            vis[temphead->next] = tempcloned->next;
+            temphead = temphead->next;
+            tempcloned = tempcloned->next;
+        }
+
+        cloneRandom(head, cloned);
+        return cloned;
+    }
+};
