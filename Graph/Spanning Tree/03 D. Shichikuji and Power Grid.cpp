@@ -31,46 +31,35 @@ struct DSU {
     }
 };
 
-/*--------------------KRUSKAL'S----------------------------------*/
-struct Edge {
-    int src;
-    int dest;
-    int weight;
-};
 
-bool compare(Edge e1, Edge e2){
-    return e1.weight < e2.weight;
-}
-
-vector<Edge> input;
-vector<Edge> result;
+vector<vector<int>> input, result;
 
 int kruskals() {
-    sort(input.begin(), input.end(), compare);
+    sort(input.begin(), input.end());
     DSU dsu;
     dsu.init(n);
 
     int cost = 0;
-    for(Edge currEdge: input) {
-        int srcParent = dsu.findParent(currEdge.src);
-        int destParent = dsu.findParent(currEdge.dest);
-        if(srcParent != destParent) {
-            result.pb(currEdge);
-            cost += currEdge.weight;
-            dsu.unionSet(srcParent, destParent);
+    for(auto it: input) {
+        int w = it[0], u = it[1], v = it[2];
+        int uParent = dsu.findParent(u);
+        int vParent = dsu.findParent(v);
+        if(uParent != vParent) {
+            result.pb(it);
+            cost += w;
+            dsu.unionSet(uParent, vParent);
         }
     }
 
     return cost;
 }
-/*--------------------KRUSKAL'S END------------------------------*/
+
 
 int x[N], y[N], c[N], k[N];
 
 int distance(int i, int j) {
     return abs(x[i] - x[j]) + abs(y[i] - y[j]);
 }
-
 
 void solve() {
     cin >> n;
@@ -80,28 +69,26 @@ void solve() {
     loop(i, 1, n) cin >> k[i];
 
     loop(i, 1, n) {
-        Edge e = {0, i, c[i]};
-        input.pb(e);
+        input.pb({c[i], 0, i});
     }
 
     for(int i = 1; i <= n; i++) {
         for(int j = i+1; j <=n ; j++) {
-            Edge e = {i, j, (k[i] + k[j]) * distance(i, j)};
-            input.pb(e);
+            input.pb({(k[i] + k[j]) * distance(i, j), i, j});
         }
     }
 
     int res = kruskals();
-
     cout << res << endl;
 
     vector<int> v1;
     vector<pair<int, int>> v2;
-    for(Edge i: result) {
-        if(i.src == 0) {
-            v1.pb(i.dest);
+    for(auto it: result) {
+        int w = it[0], u = it[1], v = it[2];
+        if(u == 0) {
+            v1.pb(v);
         } else {
-            v2.pb({i.src, i.dest});
+            v2.pb({u, v});
         }
     }
 
