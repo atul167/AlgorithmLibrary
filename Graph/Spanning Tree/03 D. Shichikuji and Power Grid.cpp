@@ -1,31 +1,35 @@
 // https://codeforces.com/contest/1245/problem/D
 
 
+
 const int N = 2e3+5;
 int n, m;
 
-/*--------------------DSU--------------------------------------*/
-int par[N];
-void initialize() {
-    for(int i = 0; i < N; i++){
-        par[i] = -1;
+struct DSU {
+    vector<int> par;
+    void init(int n) {
+        par.resize(n+1, -1);
     }
-}
-int findParent(int a) {
-    if(par[a] < 0)
-        return a;
-    return par[a] = findParent(par[a]);
-}
-void unionSet(int a, int b){
-    a = findParent(a);
-    b = findParent(b);
-    if(a == b) return;
-    if(par[a] > par[b]) swap(a,b);
-    par[a] += par[b];
-    par[b] = a;
-}
-/*--------------------DSU End----------------------------------*/
-
+    int findParent(int a) {
+        if(par[a] < 0) return a;
+        return par[a] = findParent(par[a]);
+    }
+    bool unionSet(int a, int b){
+        a = findParent(a);
+        b = findParent(b);
+        if(a == b) return 0;
+        if(par[a] > par[b]) swap(a,b);
+        par[a] += par[b];
+        par[b] = a;
+        return 1;
+    }
+    bool sameSet(int x, int y) { 
+        return findParent(x) == findParent(y); 
+    }
+    int size (int x) { 
+        return -par[findParent(x)]; 
+    }
+};
 
 /*--------------------KRUSKAL'S----------------------------------*/
 struct Edge {
@@ -43,16 +47,17 @@ vector<Edge> result;
 
 int kruskals() {
     sort(input.begin(), input.end(), compare);
-    initialize();
+    DSU dsu;
+    dsu.init(n);
 
     int cost = 0;
     for(Edge currEdge: input) {
-        int srcParent = findParent(currEdge.src);
-        int destParent = findParent(currEdge.dest);
+        int srcParent = dsu.findParent(currEdge.src);
+        int destParent = dsu.findParent(currEdge.dest);
         if(srcParent != destParent) {
             result.pb(currEdge);
             cost += currEdge.weight;
-            unionSet(srcParent, destParent);
+            dsu.unionSet(srcParent, destParent);
         }
     }
 
