@@ -16,6 +16,7 @@ public:
 };
 */
 
+// Recursive - Time = O(n), Space = O(n)
 class Solution {
 public:
     unordered_map<Node*, Node*> vis;
@@ -65,20 +66,10 @@ public:
 
 
 
-
+// Iterative - Time = O(n), Space = O(n)
 class Solution {
 public:
     unordered_map<Node*, Node*> vis;
-    
-    void cloneRandom(Node* head, Node* clonedRoot) {
-        if(!head) return;
-        
-        if(head->random) {
-            clonedRoot->random =  vis[head->random];
-        }
-        
-        cloneRandom(head->next, clonedRoot->next);
-    }
     
     Node* copyRandomList(Node* head) {
         if(!head) return head;
@@ -93,8 +84,16 @@ public:
             temphead = temphead->next;
             tempcloned = tempcloned->next;
         }
+        
+        temphead = head, tempcloned = cloned;
+        while(temphead) {
+            if(temphead->random) {
+                tempcloned->random =  vis[temphead->random];
+            }
+            temphead = temphead->next;
+            tempcloned = tempcloned->next;
+        }
 
-        cloneRandom(head, cloned);
         return cloned;
     }
 };
