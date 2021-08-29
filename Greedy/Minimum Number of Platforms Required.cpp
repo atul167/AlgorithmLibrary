@@ -117,28 +117,28 @@ void solve() {
 
 
 // Method 3: Cumulative Sum
-void solve() {
-    int u, v;
-    vi arr = { 900, 940, 950, 1100, 1500, 1800 };
-    vi dep = { 910, 1200, 1120, 1130, 1900, 2000 };
-
-    int n = arr.size();
-
-    int mp[N] = {0};
-
-    f(i, n) {
-        mp[arr[i]]++;
-        mp[dep[i]]--;
+class Solution{
+public:
+    // Function to find the minimum number of platforms required at the railway station such that no train waits.
+    const int N = 1e5;
+    
+    int findPlatform(int arr[], int dep[], int n) {
+        int mp[N] = {0};
+    
+        for(int i = 0; i < n; i++) {
+            mp[arr[i]]++;
+            mp[dep[i]+1]--;
+        }
+    
+        for(int i = 1; i < N; i++) {
+            mp[i] += mp[i-1];
+        }
+    
+        int res = 0;
+        for(int i = 0; i < N; i++) {
+            res = max(res, mp[i]);
+        }
+    
+        return res;
     }
-
-    fa(i, 1, N) {
-        mp[i] += mp[i-1];
-    }
-
-    int res = 0;
-    fa(i, 1, N) {
-        res = max(res, mp[i]);
-    }
-
-    debug(res)
-}
+};
