@@ -22,6 +22,7 @@ public:
 
     int dfs(int u, vector<int>& informTime) {
         if(dp[u]) return dp[u];
+        dp[u] = informTime[u];
 
         for (int v: g[u]) {
             dp[u] = max(dp[u], informTime[u] + dfs(v, informTime));
@@ -71,6 +72,7 @@ public:
 
     void dfs(int u, vector<int>& informTime) {
         if(dp[u]) return;
+        dp[u] = informTime[u];
 
         for (int v: g[u]) {
             dfs(v, informTime);
