@@ -21,50 +21,6 @@ In this case, min time would be 11 sec.
 
 
 
-const int N = 3e5+5;
-int n, m;
-
-vi g[N];
-int indegree[N], taskTime[N];
-
-
-void kahn() {
-    queue<int> q;
-    loop(i, 1, n) {
-        if(indegree[i] == 0) q.push(i);
-    }
-
-    int res = 0;
-    while(!q.empty()) {
-        int sz = q.size();
-        int mxTime = 0;
-        f(i, sz) {
-            int u = q.front();
-            q.pop();
-            mxTime = max(mxTime, taskTime[u]);
-
-            for(int v: g[u]) {
-                indegree[v]--;
-                if(indegree[v] == 0) q.push(v);
-            }
-        }
-        res += mxTime;
-    }
-    cout << res << endl;
-}
-
-void solve() {
-    int u, v;
-    cin >> n >> m;
-    f(i, m) {
-        cin >> u >> v;
-        g[u].pb(v);
-        indegree[v]++;
-    }
-
-    loop(i, 1, n) cin >> taskTime[i];
-    kahn();
-}
 
 
 
@@ -80,19 +36,6 @@ Output:
 Output:
 11
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 const int N = 2e5+5;
@@ -121,7 +64,7 @@ int topologicalSort() {
         }
 
         // The below block computes the DP
-        int mx = -INF;
+        int mx = 0;
         bool flag = false;
         for(int prev: revG[node]) {
             mx = max(mx, dp[prev] + taskTime[node]);
@@ -174,13 +117,6 @@ void solve() {
 
 
 
-
-
-
-
-
-
-
 const int N = 2e5+5;
 int n, m;
 
@@ -193,7 +129,7 @@ int topologicalSort() {
     loop(i, 1, n) {
         if(inDegree[i] == 0) {
             q.push(i);
-            dp[i] = 0;
+            dp[i] = taskTime[node];
         }
     }
 
@@ -242,4 +178,68 @@ void solve() {
     loop(i, 1, n) cin >> taskTime[i];
 
     cout << topologicalSort();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// This method gave wrong output in Time Needed to Inform All Employees [leetcode].cpp
+const int N = 3e5+5;
+int n, m;
+vi g[N];
+int indegree[N], taskTime[N];
+
+void kahn() {
+    queue<int> q;
+    loop(i, 1, n) {
+        if(indegree[i] == 0) q.push(i);
+    }
+
+    int res = 0;
+    while(!q.empty()) {
+        int sz = q.size();
+        int mxTime = 0;
+        f(i, sz) {
+            int u = q.front();
+            q.pop();
+            mxTime = max(mxTime, taskTime[u]);
+
+            for(int v: g[u]) {
+                indegree[v]--;
+                if(indegree[v] == 0) q.push(v);
+            }
+        }
+        res += mxTime;
+    }
+    cout << res << endl;
+}
+
+void solve() {
+    int u, v;
+    cin >> n >> m;
+    f(i, m) {
+        cin >> u >> v;
+        g[u].pb(v);
+        indegree[v]++;
+    }
+
+    loop(i, 1, n) cin >> taskTime[i];
+    kahn();
 }
