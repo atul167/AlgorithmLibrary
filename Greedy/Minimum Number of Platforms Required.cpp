@@ -116,7 +116,7 @@ void solve() {
 
 
 
-// Method 3: Cumulative Sum
+// Method 3.1: Cumulative Sum
 class Solution{
 public:
     // Function to find the minimum number of platforms required at the railway station such that no train waits.
@@ -137,6 +137,41 @@ public:
         int res = 0;
         for(int i = 0; i < N; i++) {
             res = max(res, mp[i]);
+        }
+    
+        return res;
+    }
+};
+
+
+
+// Method 3.2: Cumulative Sum
+class Solution{
+public:
+    // Function to find the minimum number of platforms required at the railway station such that no train waits.
+    int findPlatform(int arr[], int dep[], int n) {
+        map<int, int> mp;
+    
+        for(int i = 0; i < n; i++) {
+            mp[arr[i]]++;
+            mp[dep[i]+1]--;
+        }
+        
+        int flag = 0;
+        auto prevItr = mp.begin();
+        for(auto it = mp.begin(); it != mp.end(); it++) {
+            if(flag == 0) {
+                flag = 1;
+                prevItr = it;
+            } else {
+                mp[it->first] += mp[prevItr->first];
+                prevItr = it;
+            }
+        }
+    
+        int res = 0;
+        for(auto it: mp) {
+            res = max(res, it.second);
         }
     
         return res;
