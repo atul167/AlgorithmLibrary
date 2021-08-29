@@ -10,6 +10,7 @@ int dp[N];
 
 int dfs(int u) {
     if(dp[u]) return dp[u];
+    dp[u] = 0;
 
     for (int v: g[u]) {
         dp[u] = max(dp[u], 1 + dfs(v));
@@ -123,7 +124,7 @@ void solve() {
 
 
 
-// Method 2.1: Topological Sort
+// Method 2: Topological Sort
 const int N = 3e5+5;
 int n, m;
 
@@ -173,7 +174,7 @@ void solve() {
 
 
 
-// Method 2.2: Topological Sort
+// Method 3: Topological Sort
 const int N = 2e5+5;
 int n, m;
 
@@ -249,7 +250,7 @@ void solve() {
 
 
 
-// Method 3
+// Method 4
 const int N = 3e5+5;
 int n, m;
 vi g[N];
