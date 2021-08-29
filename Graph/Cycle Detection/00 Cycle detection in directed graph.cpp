@@ -3,10 +3,8 @@
 
 ll cycleDetected=0;
 ll color[N]; // all white
-map<ll,ll>vis;
 
 void dfs(ll u){
-    vis[u]=1;
     color[u]=1; // grey
     for(ll v: g[u]){
         if(color[v] == 1){
@@ -23,7 +21,7 @@ void solve() {
     cin>>n>>m;
     f(i,m) cin>>u>>v, g[u].pb(v);
     loop(i, 1, n){
-        if(!vis[i]){
+        if(color[i] == 0){
             dfs(i);
         }
     }
