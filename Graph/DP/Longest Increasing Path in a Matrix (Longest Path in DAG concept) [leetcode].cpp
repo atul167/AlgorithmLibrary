@@ -34,6 +34,7 @@ public:
     
     int dfs(int i, int j, vector<vector<int>>& matrix) {
         if(dp[i][j]) return dp[i][j];
+        dp[i][j] = 0;
         
         for(int z = 0; z < 4; z++) {
             int ni = i + dx[z], nj = j + dy[z];
