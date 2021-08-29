@@ -123,7 +123,7 @@ void solve() {
 
 
 
-// Method 2: Topological Sort
+// Method 2.1: Topological Sort
 const int N = 3e5+5;
 int n, m;
 
@@ -164,6 +164,76 @@ void solve() {
     kahn();
 }
 
+
+
+
+
+
+
+
+
+
+// Method 2.2: Topological Sort
+const int N = 2e5+5;
+int n, m;
+
+vector<int> g[N];
+vector<int> revG[N];
+int dis[N], inDegree[N];
+
+int topologicalSort() {
+    queue<int> q;
+    loop(i, 1, n) {
+        if(inDegree[i] == 0) {
+            q.push(i);
+            dis[i] = 0;
+        }
+    }
+
+    while(!q.empty()) {
+        int node = q.front();
+        q.pop();
+
+        for(int next: g[node]) {
+            inDegree[next]--;
+            if(inDegree[next] == 0) q.push(next);
+        }
+
+        // The below block computes the DP
+        int mx = 0;
+        for(int prev: revG[node]) {
+            mx = max(mx, dis[prev] + 1);
+        }
+
+        dis[node] = mx;
+    }
+
+    int res = 0;
+    loop(i, 1, n) {
+        res = max(res, dis[i]);
+    }
+    return res;
+}
+
+void solve() {
+    int u, v;
+    cin >> n >> m;
+
+    loop(i, 1, n) {
+        dis[i] = -INF;
+        inDegree[i] = 0;
+    }
+
+    f(i, m) {
+        cin >> u >> v;
+        inDegree[v]++;
+
+        g[u].pb(v);
+        revG[v].pb(u);
+    }
+
+    cout << topologicalSort();
+}
 
 
 
