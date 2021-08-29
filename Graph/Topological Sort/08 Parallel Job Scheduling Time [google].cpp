@@ -80,3 +80,166 @@ Output:
 Output:
 11
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const int N = 2e5+5;
+int n, m;
+
+vector<int> g[N];
+vector<int> revG[N];
+int dp[N], inDegree[N], taskTime[N];
+
+int topologicalSort() {
+    queue<int> q;
+    loop(i, 1, n) {
+        if(inDegree[i] == 0) {
+            q.push(i);
+            dp[i] = taskTime[i];
+        }
+    }
+
+    while(!q.empty()) {
+        int node = q.front();
+        q.pop();
+
+        for(int next: g[node]) {
+            inDegree[next]--;
+            if(inDegree[next] == 0) q.push(next);
+        }
+
+        // The below block computes the DP
+        int mx = -INF;
+        bool flag = false;
+        for(int prev: revG[node]) {
+            mx = max(mx, dp[prev] + taskTime[node]);
+            flag = true;
+        }
+
+        if(flag)
+            dp[node] = mx;
+    }
+
+    int res = 0;
+    loop(i, 1, n) {
+        res = max(res, dp[i]);
+    }
+    return res;
+}
+
+void solve() {
+    int u, v;
+    cin >> n >> m;
+
+    loop(i, 1, n) {
+        dp[i] = 0;
+        inDegree[i] = 0;
+    }
+
+    f(i, m) {
+        cin >> u >> v;
+        inDegree[v]++;
+
+        g[u].pb(v);
+        revG[v].pb(u);
+    }
+
+    loop(i, 1, n) cin >> taskTime[i];
+
+    cout << topologicalSort();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const int N = 2e5+5;
+int n, m;
+
+vector<int> g[N];
+vector<int> revG[N];
+int dp[N], inDegree[N], taskTime[N];
+
+int topologicalSort() {
+    queue<int> q;
+    loop(i, 1, n) {
+        if(inDegree[i] == 0) {
+            q.push(i);
+            dp[i] = 0;
+        }
+    }
+
+    while(!q.empty()) {
+        int node = q.front();
+        q.pop();
+
+        for(int next: g[node]) {
+            inDegree[next]--;
+            if(inDegree[next] == 0) q.push(next);
+        }
+
+        // The below block computes the DP
+        int mx = taskTime[node];
+        for(int prev: revG[node]) {
+            mx = max(mx, dp[prev] + taskTime[node]);
+        }
+
+        dp[node] = mx;
+    }
+
+    int res = 0;
+    loop(i, 1, n) {
+        res = max(res, dp[i]);
+    }
+    return res;
+}
+
+void solve() {
+    int u, v;
+    cin >> n >> m;
+
+    loop(i, 1, n) {
+        dp[i] = 0;
+        inDegree[i] = 0;
+    }
+
+    f(i, m) {
+        cin >> u >> v;
+        inDegree[v]++;
+
+        g[u].pb(v);
+        revG[v].pb(u);
+    }
+
+    loop(i, 1, n) cin >> taskTime[i];
+
+    cout << topologicalSort();
+}
