@@ -17,7 +17,6 @@ Return the number of minutes needed to inform all the employees about the urgent
 class Solution {
 public:
     int n, m;
-
     vector<vector<int>> g;
     vector<int> dp;
 
@@ -67,7 +66,6 @@ public:
 class Solution {
 public:
     int n, m;
-
     vector<vector<int>> g;
     vector<int> dp;
 
@@ -121,7 +119,6 @@ public:
 class Solution {
 public:
     int n, m;
-
     vector<vector<int>> g;
     vector<int> dp;
 
