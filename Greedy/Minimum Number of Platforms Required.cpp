@@ -1,5 +1,6 @@
 // https://youtu.be/dxVcMDI7vyI
 // https://www.geeksforgeeks.org/minimum-number-platforms-required-railwaybus-station/
+// https://practice.geeksforgeeks.org/problems/minimum-platforms-1587115620/1
 
 /*
 Method 1:
@@ -64,44 +65,40 @@ O(n log n)
 The idea is to consider all events in sorted order. 
 Once the events are in sorted order, trace the number of trains at any time keeping track of trains that have arrived, but not departed.
 */
-void solve() {
-    int n;
-    cin >> n;
-    int arr[n], dep[n];
-    for (int i = 0; i < n; i++) {
-        cin >> arr[i];
-    }
-    for (int i = 0; i < n; i++) {
-        cin >> dep[i];
-    }
-
-    // Sort arrival and departure arrays
-    sort(arr, arr + n);
-    sort(dep, dep + n);
-
-    // plat_needed indicates number of platforms needed at a time
-    int plat_needed = 1, result = 1;
-    int i = 1, j = 0;
-
-    // Similar to merge in merge sort to process all events in sorted order
-    while (i < n && j < n) {
-        // If next event in sorted order is arrival, increment count of platforms needed
-        // if (arr[i] <= dep[j]) { // use this if necessary
-        if (arr[i] < dep[j]) {
-            plat_needed++;
-            i++;
+class Solution{
+public:
+    // Function to find the minimum number of platforms required at the railway station such that no train waits.
+    const int N = 1e5;
+    
+    int findPlatform(int arr[], int dep[], int n) {
+        // Sort arrival and departure arrays
+        sort(arr, arr + n);
+        sort(dep, dep + n);
+    
+        // plat_needed indicates number of platforms needed at a time
+        int plat_needed = 1, result = 1;
+        int i = 1, j = 0;
+    
+        // Similar to merge in merge sort to process all events in sorted order
+        while (i < n && j < n) {
+            // If next event in sorted order is arrival, increment count of platforms needed
+            // if (arr[i] <= dep[j]) { // use this if necessary
+            if (arr[i] <= dep[j]) {
+                plat_needed++;
+                i++;
+            }
+            // Else decrement count of platforms needed
+            else {
+                plat_needed--;
+                j++;
+            }
+    
+            result = max(result, plat_needed);
         }
-        // Else decrement count of platforms needed
-        else {
-            plat_needed--;
-            j++;
-        }
-
-        result = max(result, plat_needed);
+    
+        return result;
     }
-
-    cout << result << endl;
-}
+};
 
 
 
