@@ -26,6 +26,7 @@ void dijkstra(int src, int dest) {
     }
 
     dis[src][fuelStationCapacity] = 0;
+    // dis[src][0] = 0;
     set<vector<int>> s;
     s.insert({0, src, 0});
  
