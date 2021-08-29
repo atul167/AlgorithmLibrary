@@ -1,5 +1,4 @@
 // https://leetcode.com/problems/non-overlapping-intervals/
-// similar to classic interval scheduling problem
 
 class Solution {
 public:
