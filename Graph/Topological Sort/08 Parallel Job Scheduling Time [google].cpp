@@ -38,6 +38,7 @@ Output:
 */
 
 
+// Method 1.1
 const int N = 2e5+5;
 int n, m;
 
@@ -114,9 +115,7 @@ void solve() {
 
 
 
-
-
-
+// Method 1.2
 const int N = 2e5+5;
 int n, m;
 
@@ -181,6 +180,53 @@ void solve() {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+// Method 2.1
+const int N = 2e5+5;
+int n, m;
+
+vector<int> g[N];
+int dp[N], taskTime[N];
+
+int dfs(int u) {
+    if(dp[u]) return dp[u];
+    dp[u] = taskTime[u];
+
+    for (int v: g[u]) {
+        dp[u] = max(dp[u], taskTime[u] + dfs(v));
+    }
+
+    return dp[u];
+}
+
+void solve() {
+    int u, v;
+    cin >> n >> m;
+
+    f(i, m) {
+        cin >> u >> v;
+        g[u].pb(v);
+    }
+
+    loop(i, 1, n) cin >> taskTime[i];
+
+    int res = 0;
+    loop(i, 1, n) {
+        res = max(res, dfs(i));
+    }
+
+    cout << res;
+}
 
 
 
