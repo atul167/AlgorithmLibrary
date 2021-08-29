@@ -102,3 +102,43 @@ void solve() {
 
     cout << result << endl;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Method 3: Cumulative Sum
+void solve() {
+    int u, v;
+    vi arr = { 900, 940, 950, 1100, 1500, 1800 };
+    vi dep = { 910, 1200, 1120, 1130, 1900, 2000 };
+
+    int n = arr.size();
+
+    int mp[N] = {0};
+
+    f(i, n) {
+        mp[arr[i]]++;
+        mp[dep[i]]--;
+    }
+
+    fa(i, 1, N) {
+        mp[i] += mp[i-1];
+    }
+
+    int res = 0;
+    fa(i, 1, N) {
+        res = max(res, mp[i]);
+    }
+
+    debug(res)
+}
