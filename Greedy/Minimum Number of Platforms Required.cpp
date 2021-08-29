@@ -123,20 +123,20 @@ public:
     const int N = 1e5;
     
     int findPlatform(int arr[], int dep[], int n) {
-        int mp[N] = {0};
+        int pref[N] = {0};
     
         for(int i = 0; i < n; i++) {
-            mp[arr[i]]++;
-            mp[dep[i]+1]--;
+            pref[arr[i]]++;
+            pref[dep[i]+1]--;
         }
     
         for(int i = 1; i < N; i++) {
-            mp[i] += mp[i-1];
+            pref[i] += pref[i-1];
         }
     
         int res = 0;
         for(int i = 0; i < N; i++) {
-            res = max(res, mp[i]);
+            res = max(res, pref[i]);
         }
     
         return res;
@@ -150,27 +150,27 @@ class Solution{
 public:
     // Function to find the minimum number of platforms required at the railway station such that no train waits.
     int findPlatform(int arr[], int dep[], int n) {
-        map<int, int> mp;
+        map<int, int> prefix;
     
         for(int i = 0; i < n; i++) {
-            mp[arr[i]]++;
-            mp[dep[i]+1]--;
+            prefix[arr[i]]++;
+            prefix[dep[i]+1]--;
         }
         
         int flag = 0;
-        auto prevItr = mp.begin();
-        for(auto it = mp.begin(); it != mp.end(); it++) {
+        auto prevItr = prefix.begin();
+        for(auto it = prefix.begin(); it != prefix.end(); it++) {
             if(flag == 0) {
                 flag = 1;
                 prevItr = it;
             } else {
-                mp[it->first] += mp[prevItr->first];
+                prefix[it->first] += prefix[prevItr->first];
                 prevItr = it;
             }
         }
     
         int res = 0;
-        for(auto it: mp) {
+        for(auto it: prefix) {
             res = max(res, it.second);
         }
     
