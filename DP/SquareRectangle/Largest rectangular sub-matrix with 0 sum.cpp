@@ -3,12 +3,12 @@ using namespace std;
  
 int n, m;
 
-bool maxZeroSumSubarray(vector<int>& arr, int& left, int& right) {
+bool maxZeroSumSubarray(vector<int>& arr, int& left, int& right, int m) {
     map<int, int> prefSumPos;
     int sum = 0;
     int max_length = 0;
  
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < m; i++) {
         sum += arr[i];
  
         if (arr[i] == 0 && max_length == 0) {
@@ -54,7 +54,7 @@ void findZeroSum(vector<vector<int>>& matrix) {
                 arr[j] += matrix[bottom][j];
             }
  
-            bool isZeroSum = maxZeroSumSubarray(arr, left, right);
+            bool isZeroSum = maxZeroSumSubarray(arr, left, right, m);
             int curArea = (bottom - top + 1) * (right - left + 1);
  
             if (isZeroSum && curArea > maxArea) {
@@ -82,5 +82,4 @@ int main() {
                                 { 7, -2, 0, 10 } };
     n = matrix.size(), m = matrix[0].size();
     findZeroSum(matrix);
-    return 0;
 }
