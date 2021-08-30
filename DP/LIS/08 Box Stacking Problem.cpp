@@ -10,49 +10,19 @@ It is also allowable to use multiple instances of the same type of box.
 */
 
 
+
 /*
-NOTE: this will give error as pointed out by HrishabhRaj.
+arr[0] = length
+arr[1] = width
+arr[2] = height
 
-for(int i = 0; i < n; i++) {
-    arr.push_back({height[i], width[i], length[i]});
-    arr.push_back({height[i], length[i], width[i]});
-    arr.push_back({width[i], length[i], height[i]});
-}
-Consider only base area of two boxes:-
-Dimension of outer box = (3 * 4)
-Dimension of inner box = (3 * 2)
-And as shown below this will not be valid as heights of both boxes are same
-
--------------------
-|    |       |    |
-|    |       |    |
-|    |       |    |
--------------------
-
-Now consider of we rotate the inner box.
-Dimension of outer box = (3 * 4)
-Dimension of inner box = (2 * 3)
-
-And thus the same boxes pair become valid
--------------------
-|                 |
-|  |-----------|  |
-|  |           |  |
-|  |-----------|  |
-|                 |
--------------------
-
-And that's why we used this:
-for(int i = 0; i < n; i++) {
-    arr.push_back({max(height[i], width[i]), min(height[i], width[i]), length[i]});
-    arr.push_back({max(height[i], length[i]), min(height[i], length[i]), width[i]});
-    arr.push_back({max(width[i], length[i]), min(width[i], length[i]), height[i]});
-}
+base area = a[0] * a[1]
 */
 
 class Solution {
     public:
     
+    // sorting based on base area
     static bool compare(vector<int>& a, vector<int>& b) {
         return a[0]*a[1] < b[0]*b[1];
     }
