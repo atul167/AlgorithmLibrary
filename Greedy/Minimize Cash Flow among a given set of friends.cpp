@@ -77,6 +77,7 @@ int main() {
     while(!st.empty()) {
         tie(poor, x) = *st.begin(); st.erase(st.begin());
         tie(rich, y) = *st.rbegin(); st.erase(prev(st.end()));
+        // value of poor is negative
         int amount = min(-poor, rich);
         
         transactions++;
