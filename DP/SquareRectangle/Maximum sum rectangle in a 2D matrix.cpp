@@ -7,7 +7,7 @@ using namespace std;
  
 int n, m;
 
-int kadane(vector<int>& arr, int& left, int& right) {
+int kadane(vector<int>& arr, int& left, int& right, int m) {
     // initialize sum, maxSum and
     int sum = 0, maxSum = INT_MIN;
  
@@ -62,7 +62,7 @@ void findMaxSum(vector<vector<int>>& matrix) {
                 arr[j] += matrix[bottom][j];
             }
  
-            int curSum = kadane(arr, left, right);
+            int curSum = kadane(arr, left, right, m);
  
             if (curSum > maxSum) {
                 maxSum = curSum;
@@ -124,7 +124,7 @@ class Solution {
 public:
     int n, m;
     
-    int kadane(vector<int>& arr, int& left, int& right) {
+    int kadane(vector<int>& arr, int& left, int& right, int m) {
         // initialize sum, maxSum and
         int sum = 0, maxSum = INT_MIN;
      
@@ -180,7 +180,7 @@ public:
                     arr[j] += matrix[bottom][j];
                 }
      
-                int curSum = kadane(arr, left, right);
+                int curSum = kadane(arr, left, right, m);
      
                 if (curSum > maxSum) {
                     maxSum = curSum;
