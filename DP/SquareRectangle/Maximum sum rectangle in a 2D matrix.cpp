@@ -7,40 +7,40 @@ using namespace std;
  
 int n, m;
 
-int kadane(vector<int>& arr, int& start, int& finish) {
+int kadane(vector<int>& arr, int& left, int& right) {
     // initialize sum, maxSum and
-    int sum = 0, maxSum = INT_MIN, i;
+    int sum = 0, maxSum = INT_MIN;
  
     // Just some initial value to check for all negative values case
-    finish = -1;
+    right = -1;
  
     // local variable
-    int local_start = 0;
+    int local_left = 0;
  
-    for (i = 0; i < n; ++i) {
+    for (int i = 0; i < m; ++i) {
         sum += arr[i];
         if (sum < 0) {
             sum = 0;
-            local_start = i + 1;
+            local_left = i + 1;
         } else if (sum > maxSum) {
             maxSum = sum;
-            start = local_start;
-            finish = i;
+            left = local_left;
+            right = i;
         }
     }
  
     // There is at-least one non-negative number
-    if (finish != -1) return maxSum;
+    if (right != -1) return maxSum;
  
     // Special Case: When all numbers in arr[] are negative
     maxSum = arr[0];
-    start = finish = 0;
+    left = right = 0;
  
     // Find the maximum element in array
-    for (i = 1; i < n; i++) {
+    for (int i = 1; i < m; i++) {
         if (arr[i] > maxSum) {
             maxSum = arr[i];
-            start = finish = i;
+            left = right = i;
         }
     }
     return maxSum;
@@ -50,33 +50,38 @@ void findMaxSum(vector<vector<int>>& matrix) {
     int maxSum = INT_MIN;
     int maxLeft, maxRight, maxTop, maxBottom;
  
-    int left, right, start, finish;
+    int left, right, top, bottom;
     vector<int> arr;
  
-    for (left = 0; left < m; ++left) {
-        arr = vector<int>(n, 0);
+    for (top = 0; top < n; top++) {
+        arr = vector<int>(m, 0);
  
-        for (right = left; right < m; ++right) {
+        for (bottom = top; bottom < n; bottom++) {
 
-            for (int i = 0; i < n; ++i) {
-                arr[i] += matrix[i][right];
+            for (int j = 0; j < m; j++) {
+                arr[j] += matrix[bottom][j];
             }
  
-            int curSum = kadane(arr, start, finish);
+            int curSum = kadane(arr, left, right);
  
             if (curSum > maxSum) {
                 maxSum = curSum;
                 maxLeft = left;
                 maxRight = right;
-                maxTop = start;
-                maxBottom = finish;
+                maxTop = top;
+                maxBottom = bottom;
             }
         }
     }
  
-    cout << "(Top, Left) (" << maxTop << ", " << maxLeft << ")" << endl;
-    cout << "(Bottom, Right) (" << maxBottom << ", " << maxRight << ")" << endl;
     cout << "Max sum is: " << maxSum << endl;
+
+    for(int i = maxTop; i <= maxBottom; i++) {
+        for(int j = maxLeft; j <= maxRight; j++) {
+            cout << matrix[i][j] << " ";
+        }
+        cout << endl;
+    }
 }
  
 int main() {
@@ -86,7 +91,6 @@ int main() {
                                  { -4, -1, 1, 7, -6 } };
     n = matrix.size(), m = matrix[0].size();
     findMaxSum(matrix);
-    return 0;
 }
 
 
@@ -120,40 +124,40 @@ class Solution {
 public:
     int n, m;
     
-    int kadane(vector<int>& arr, int& start, int& finish) {
+    int kadane(vector<int>& arr, int& left, int& right) {
         // initialize sum, maxSum and
-        int sum = 0, maxSum = INT_MIN, i;
+        int sum = 0, maxSum = INT_MIN;
      
         // Just some initial value to check for all negative values case
-        finish = -1;
+        right = -1;
      
         // local variable
-        int local_start = 0;
+        int local_left = 0;
      
-        for (i = 0; i < n; ++i) {
+        for (int i = 0; i < m; ++i) {
             sum += arr[i];
             if (sum < 0) {
                 sum = 0;
-                local_start = i + 1;
+                local_left = i + 1;
             } else if (sum > maxSum) {
                 maxSum = sum;
-                start = local_start;
-                finish = i;
+                left = local_left;
+                right = i;
             }
         }
      
         // There is at-least one non-negative number
-        if (finish != -1) return maxSum;
+        if (right != -1) return maxSum;
      
         // Special Case: When all numbers in arr[] are negative
         maxSum = arr[0];
-        start = finish = 0;
+        left = right = 0;
      
         // Find the maximum element in array
-        for (i = 1; i < n; i++) {
+        for (int i = 1; i < m; i++) {
             if (arr[i] > maxSum) {
                 maxSum = arr[i];
-                start = finish = i;
+                left = right = i;
             }
         }
         return maxSum;
@@ -164,29 +168,29 @@ public:
         int maxSum = INT_MIN;
         int maxLeft, maxRight, maxTop, maxBottom;
      
-        int left, right, start, finish;
+        int left, right, top, bottom;
         vector<int> arr;
      
-        for (left = 0; left < m; ++left) {
-            arr = vector<int>(n, 0);
+        for (top = 0; top < n; top++) {
+            arr = vector<int>(m, 0);
      
-            for (right = left; right < m; ++right) {
-                for (int i = 0; i < n; ++i) {
-                    arr[i] += matrix[i][right];
+            for (bottom = top; bottom < n; bottom++) {
+    
+                for (int j = 0; j < m; j++) {
+                    arr[j] += matrix[bottom][j];
                 }
      
-                int curSum = kadane(arr, start, finish);
+                int curSum = kadane(arr, left, right);
      
                 if (curSum > maxSum) {
                     maxSum = curSum;
                     maxLeft = left;
                     maxRight = right;
-                    maxTop = start;
-                    maxBottom = finish;
+                    maxTop = top;
+                    maxBottom = bottom;
                 }
             }
         }
-     
         return maxSum;
     }
 };
