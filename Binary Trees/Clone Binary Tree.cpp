@@ -20,15 +20,10 @@ public:
      * @return: root of new tree
      */
     
-    unordered_map<TreeNode*, TreeNode*> vis;
-    
     TreeNode* dfs(TreeNode* root) {
         if(!root) return root;
         
-        if(vis[root]) return vis[root];
-        
         TreeNode* cloned = new TreeNode(root->val);
-        vis[root] = cloned;
         
         if(root->left) {
             cloned->left = dfs(root->left);
@@ -36,7 +31,7 @@ public:
         if(root->right) {
             cloned->right = dfs(root->right);
         }
-        
+
         return cloned;
     }
 
