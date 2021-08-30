@@ -7,7 +7,7 @@ using namespace std;
  
 int n, m;
 
-int kadane(vector<int> arr, int& start, int& finish) {
+int kadane(vector<int>& arr, int& start, int& finish) {
     // initialize sum, maxSum and
     int sum = 0, maxSum = INT_MIN, i;
  
@@ -48,34 +48,34 @@ int kadane(vector<int> arr, int& start, int& finish) {
  
 void findMaxSum(vector<vector<int>>& matrix) {
     int maxSum = INT_MIN;
-    int finalLeft, finalRight, finalTop, finalBottom;
+    int maxLeft, maxRight, maxTop, maxBottom;
  
-    int left, right, i;
-    int curSum, start, finish;
+    int left, right, start, finish;
     vector<int> arr;
  
     for (left = 0; left < m; ++left) {
         arr = vector<int>(n, 0);
  
         for (right = left; right < m; ++right) {
-            for (i = 0; i < n; ++i) {
+
+            for (int i = 0; i < n; ++i) {
                 arr[i] += matrix[i][right];
             }
  
-            curSum = kadane(arr, start, finish);
+            int curSum = kadane(arr, start, finish);
  
             if (curSum > maxSum) {
                 maxSum = curSum;
-                finalLeft = left;
-                finalRight = right;
-                finalTop = start;
-                finalBottom = finish;
+                maxLeft = left;
+                maxRight = right;
+                maxTop = start;
+                maxBottom = finish;
             }
         }
     }
  
-    cout << "(Top, Left) (" << finalTop << ", " << finalLeft << ")" << endl;
-    cout << "(Bottom, Right) (" << finalBottom << ", " << finalRight << ")" << endl;
+    cout << "(Top, Left) (" << maxTop << ", " << maxLeft << ")" << endl;
+    cout << "(Bottom, Right) (" << maxBottom << ", " << maxRight << ")" << endl;
     cout << "Max sum is: " << maxSum << endl;
 }
  
@@ -116,12 +116,11 @@ int main() {
 
 
 
-
 class Solution {
 public:
     int n, m;
     
-    int kadane(vector<int> arr, int& start, int& finish) {
+    int kadane(vector<int>& arr, int& start, int& finish) {
         // initialize sum, maxSum and
         int sum = 0, maxSum = INT_MIN, i;
      
@@ -163,28 +162,27 @@ public:
     int maximumSumRectangle(int n, int m, vector<vector<int>> matrix) {
         this->n = n, this->m = m;
         int maxSum = INT_MIN;
-        int finalLeft, finalRight, finalTop, finalBottom;
+        int maxLeft, maxRight, maxTop, maxBottom;
      
-        int left, right, i;
-        int curSum, start, finish;
+        int left, right, start, finish;
         vector<int> arr;
      
         for (left = 0; left < m; ++left) {
             arr = vector<int>(n, 0);
      
             for (right = left; right < m; ++right) {
-                for (i = 0; i < n; ++i) {
+                for (int i = 0; i < n; ++i) {
                     arr[i] += matrix[i][right];
                 }
      
-                curSum = kadane(arr, start, finish);
+                int curSum = kadane(arr, start, finish);
      
                 if (curSum > maxSum) {
                     maxSum = curSum;
-                    finalLeft = left;
-                    finalRight = right;
-                    finalTop = start;
-                    finalBottom = finish;
+                    maxLeft = left;
+                    maxRight = right;
+                    maxTop = start;
+                    maxBottom = finish;
                 }
             }
         }
