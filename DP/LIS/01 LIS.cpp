@@ -115,46 +115,49 @@ public:
 // Using BIT 
 // https://codeforces.com/problemset/problem/340/D
 // O(nlog(n))          [Increasing Subsequence]
-class Solution {
-public:
-    static const int N = 1e5+5;
-    int BIT[N];
-    int n;
+const int N = 2e5+5;
+int n, m;
+int BIT[N];
+
+void update(int i, int val) {
+    while(i <= n) {
+        BIT[i] = max(BIT[i], val);
+        i += (i&-i);
+    }
+}
+int query(int i) {
+    int mx = 0;
+    while(i > 0) {
+        mx = max(mx, BIT[i]);
+        i -= (i&-i);
+    }
+    return mx;
+}
+
+void solve() {
+    cin >> n;
+    vi nums(n);
+    f(i, n) cin >> nums[i];
     
-    void update(int i, int val) {
-        while(i <= n) {
-            BIT[i] = max(BIT[i], val);
-            i += (i&-i);
+    // coordinate compression in sorted order
+    vi temp = nums;
+    sort(all(temp));
+    map<int, int> mp;
+    int c = 1;
+    f(i, n) {
+        if(mp.count(temp[i]) == 0) {
+            mp[temp[i]] = c++;
         }
-    }
-    int query(int i) {
-        int mx = 0;
-        while(i > 0) {
-            mx = max(mx, BIT[i]);
-            i -= (i&-i);
-        }
-        return mx;
     }
 
-    int lengthOfLIS(vector<int>& nums) {
-        n = nums.size();
-        if(n == 0) return 0;
-        
-        // this preprocessing is done to make all the nums element unique
-        vector<pair<int,int> > v;
-        for(int i = 0; i < n; i++) v.push_back({nums[i], -i});
-        sort(v.begin(), v.end());
-        map<pair<int, int>, int> mp;
-        int c = 1;
-        for(auto i: v) mp[i] = c++;
-        
-        int LIS = 0;
-        for(int i = 0; i < n; i++) {
-            int x = query(mp[{nums[i], -i}]);
-            update(mp[{nums[i], -i}], x + 1);
-            LIS = max(LIS, x + 1);
-        }
-
-        return LIS;
+    f(i, n) nums[i] = mp[nums[i]];
+    
+    int LIS = 0;
+    for(int i = 0; i < n; i++) {
+        int x = query(nums[i]);
+        update(nums[i], x + 1);
+        LIS = max(LIS, x + 1);
     }
-};
+
+    cout << LIS;
+}
