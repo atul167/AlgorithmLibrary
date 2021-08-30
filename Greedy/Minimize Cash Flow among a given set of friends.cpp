@@ -27,7 +27,7 @@ Do following for every person Pi where i is from 0 to n-1.
 using namespace std;
 
 int main() {
-    int n, m, u, v, w, poor, x, rich, y;
+    int n, m, u, v, w, poorValue, poorGuy, richValue, richGuy;
     cin >> n >> m;
 
     vector<int> balance(n+1, 0);
@@ -46,19 +46,19 @@ int main() {
        
     int transactions = 0;
     while(!st.empty()) {
-        tie(poor, x) = *st.begin(); st.erase(st.begin());
-        tie(rich, y) = *st.rbegin(); st.erase(prev(st.end()));
+        tie(poorValue, poorGuy) = *st.begin(); st.erase(st.begin());
+        tie(richValue, richGuy) = *st.rbegin(); st.erase(prev(st.end()));
         // value of poor is negative
-        int amount = min(-poor, rich);
+        int amount = min(-poorValue , richValue);
         
         transactions++;
         // poor pays amount "amount" to rich
-        cout << x << " pays-> " << y << " (amoutn = " << amount << ")" << endl;
-        poor += amount;
-        rich -= amount;
+        cout << poorGuy << " pays-> " << richGuy << " (amoutn = " << amount << ")" << endl;
+        poorValue += amount;
+        richValue -= amount;
         
-        if (poor) st.insert(make_tuple(poor, x));
-        if (rich) st.insert(make_tuple(rich, y));
+        if (poorValue) st.insert(make_tuple(poorValue, poorGuy));
+        if (richValue) st.insert(make_tuple(richValue, richGuy));
     }
     
     cout << "No of transactions: " << transactions << endl;
