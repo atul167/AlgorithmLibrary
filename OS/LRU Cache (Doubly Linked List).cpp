@@ -45,19 +45,20 @@ public:
     }
     
     int get(int key) {
-        if (cache.find(key) == cache.end()) return -1;
+        if (!cache.count(key)) return -1;
 
         node* resnode = cache[key];
         int value = resnode->val;
         cache.erase(key);
         deleteNode(resnode);
+        
         addNode(new node(key, value));
         cache[key] = head->next;
         return value;
     }
     
     void put(int key, int value) {
-        if(cache.find(key) != cache.end()) {
+        if(cache.count(key)) {
             node* existingnode = cache[key];
             cache.erase(key);
             deleteNode(existingnode);
@@ -78,6 +79,8 @@ public:
  * int param_1 = obj->get(key);
  * obj->put(key,value);
  */
+
+
 
 
 
