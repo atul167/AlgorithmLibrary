@@ -18,7 +18,7 @@ The functions get and put must each run in O(1) average time complexity.
 class LRUCache {
 public:
     struct Node {
-        int value;
+        int val;
         list<int>::iterator itr;
     };
     unordered_map<int, Node> cache;
@@ -33,10 +33,13 @@ public:
     int get(int key) {
         if (!cache.count(key)) return -1;
         
+        int value = cache[key].val;
         dq.erase(cache[key].itr);
+        cache.erase(key);
+        
         dq.push_front(key);
-        cache[key].itr = dq.begin();
-        return cache[key].value;
+        cache[key] = {value, dq.begin()};
+        return value;
     }
 
     void put(int key, int value) {
