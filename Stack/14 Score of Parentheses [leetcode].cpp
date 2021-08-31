@@ -24,20 +24,17 @@ Output: 6
 // Time: O(n), Space: O(1)
 class Solution {
 public:
-    int scoreOfParentheses(string S) {
-        int ans = 0, bal = 0;
-        for (int i = 0; i < S.size(); ++i) {
-            if (S[i] == '(') {
-                bal++;
-            } else {
-                bal--;
-                if (S[i-1] == '(') {
-                    ans += (1 << bal);
-                }
+    int scoreOfParentheses(string s) {
+        int cnt = 0, res = 0;
+        for(int i = 0; i < s.size(); i++) {
+            if(s[i] == '(') cnt++;
+            if(s[i] == ')') cnt--;
+            
+            if(i > 0 && s[i-1] == '(' && s[i] == ')') {
+                res += pow(2, cnt);
             }
         }
-
-        return ans;
+        return res;
     }
 };
 
