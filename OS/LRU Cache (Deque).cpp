@@ -40,14 +40,15 @@ public:
     }
 
     void put(int key, int value) {
-        if (!cache.count(key)) {
-            if (cache.size() == cap) {
-                cache.erase(dq.back());
-                dq.pop_back();
-            }
-        } else {
+        if (cache.count(key)) {
             dq.erase(cache[key].itr);
+            cache.erase(key);
         }
+        if (cache.size() == cap) {
+            cache.erase(dq.back());
+            dq.pop_back();
+        }
+
         dq.push_front(key);
         cache[key] = {value, dq.begin()};
     }
