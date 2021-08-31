@@ -1,6 +1,7 @@
+// https://leetcode.com/problems/lru-cache/
 // https://youtu.be/xDEuM5qa0zg
 
-// https://leetcode.com/problems/lru-cache/
+
 class LRUCache {
 private:
     struct node {
@@ -34,6 +35,7 @@ private:
         node* delnext = delnode->next;
         delprev->next = delnext;
         delnext->prev = delprev;
+        delete delnode;
     }
 public:
     LRUCache(int capacity) {
@@ -46,12 +48,12 @@ public:
         if (cache.find(key) == cache.end()) return -1;
 
         node* resnode = cache[key];
-        int res = resnode->val;
+        int value = resnode->val;
         cache.erase(key);
         deleteNode(resnode);
-        addNode(resnode);
+        addNode(new node(key, value));
         cache[key] = head->next;
-        return res;
+        return value;
     }
     
     void put(int key, int value) {
