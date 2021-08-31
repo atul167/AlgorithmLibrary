@@ -44,6 +44,13 @@ public:
 // https://leetcode.com/problems/ugly-number-ii/
 
 /*
+Ugly numbers are numbers whose only prime factors are 2, 3 or 5. 
+The sequence 1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, … shows the first 11 ugly numbers. By convention, 1 is included. 
+Given a number n, the task is to find n’th Ugly number.
+*/
+
+
+/*
 We have an array a of first n ugly number. We only know, at the beginning, the first one, which is 1. 
 a[0] = 1
 Then,
@@ -94,6 +101,23 @@ public:
     }
 };
 
+
+class Solution {
+public:
+    int nthUglyNumber(int n) {
+        vector<int> a(n+1);
+        a[1] = 1;
+        int t2 = 1, t3 = 1, t5 = 1; //pointers for 2, 3, 5
+        
+        for(int i = 2; i <= n ; i++) {
+            a[i] = min({a[t2]*2, a[t3]*3, a[t5]*5});
+            if(a[i] == a[t2]*2) t2++; 
+            if(a[i] == a[t3]*3) t3++;
+            if(a[i] == a[t5]*5) t5++;
+        }
+        return a[n];
+    }
+};
 
 
 
