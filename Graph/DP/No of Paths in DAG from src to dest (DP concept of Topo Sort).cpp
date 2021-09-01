@@ -24,6 +24,7 @@ dp[v] = Summation{edge u->v exists dp[u]},
 We process the nodes topologically so dp[u] will already have been computed before dp[v].
 */
 
+// Method 1
 const int N = 2e5+5;
 int n, m;
 
@@ -80,3 +81,66 @@ void solve() {
 
     cout << dp[dest] << endl;
 }  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Method 2
+const int N = 3e5+5;
+int n, m;
+
+vector<int> g[N];
+vector<int> dp(N, -1);
+
+void dfs(int u) {
+    if(dp[u] != -1) return;
+
+    dp[u] = 0;
+    
+    for(int v: g[u]) {
+        dfs(v);
+
+        dp[u] += dp[v];
+        dp[u] %= MOD;
+        if(dp[u] < 0) dp[u] += MOD;
+    }
+}
+ 
+void solve() {
+    int x, y;
+    cin >> n >> m;
+    for(int i = 0; i < m; ++i) {
+        cin >> x >> y;
+        g[x].pb(y);
+    }
+
+    dp[n] = 1;
+    dfs(1);
+
+    cout << dp[1] << "\n";
+}
