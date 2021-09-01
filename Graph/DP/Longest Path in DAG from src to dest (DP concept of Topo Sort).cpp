@@ -150,8 +150,6 @@ void solve() {
 
 
 // Method 2
-
-
 const int N = 3e5+5;
 int n, m;
 
