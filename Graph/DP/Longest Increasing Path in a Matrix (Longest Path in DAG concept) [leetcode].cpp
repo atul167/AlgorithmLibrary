@@ -18,55 +18,7 @@ Output: 4
 Explanation: The longest increasing path is [3, 4, 5, 6]. Moving diagonally is not allowed.
 */
 
-// Method 1.1
-class Solution {
-public:
-    int n, m;
-    int dx[4] = {0, 1, 0, -1};
-    int dy[4] = { -1, 0, 1, 0};
-    vector<vector<int>> dp;
-
-    bool isSafe(int i, int j) {
-        if(i < 0 || i >= n || j < 0 || j >= m)
-            return false;
-        return true;
-    }
-    
-    int dfs(int i, int j, vector<vector<int>>& matrix) {
-        if(dp[i][j]) return dp[i][j];
-        dp[i][j] = 0;
-        
-        for(int z = 0; z < 4; z++) {
-            int ni = i + dx[z], nj = j + dy[z];
-            if(!isSafe(ni, nj)) continue;
-            if (matrix[ni][nj] <= matrix[i][j]) continue;
-            
-            dp[i][j] = max(dp[i][j], 1 + dfs(ni, nj, matrix));
-        }
-        
-        return dp[i][j];
-    }
-    
-    int longestIncreasingPath(vector<vector<int>>& matrix) {
-        n = matrix.size(), m = matrix[0].size();
-        dp = vector<vector<int>>(n, vector<int>(m, 0));
-        
-        int res = 0;
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < m; j++) {
-                res = max(res, dfs(i, j, matrix));
-            }
-        }
-        return res + 1;
-    }
-};
-
-
-
-
-
-
-// Method 1.2
+// Method 1
 class Solution {
 public:
     int n, m;
@@ -89,7 +41,9 @@ public:
             if(!isSafe(ni, nj)) continue;
             if (matrix[ni][nj] <= matrix[i][j]) continue;
             
-            dp[i][j] = max(dp[i][j], 1 + dfs(ni, nj, matrix));
+            dfs(ni, nj, matrix);
+                
+            dp[i][j] = max(dp[i][j], 1 + dp[ni][nj]);
         }
         
         return dp[i][j];
@@ -109,51 +63,6 @@ public:
     }
 };
 
-
-
-
-
-// Method 1.3
-class Solution {
-public:
-    int n, m;
-    int dx[4] = {0, 1, 0, -1};
-    int dy[4] = { -1, 0, 1, 0};
-    
-
-    bool isSafe(int i, int j) {
-        if(i < 0 || i >= n || j < 0 || j >= m)
-            return false;
-        return true;
-    }
-    
-    int longestIncreasingPath(vector<vector<int>>& matrix) {
-        n = matrix.size(), m = matrix[0].size();
-        vector<vector<int>> dp(n, vector<int>(m, 0));
-        
-        std::function<int(int, int)> dfs = [&] (int i, int j) {
-            if (dp[i][j]) return dp[i][j];
-            
-            for (int z = 0; z < 4; z++) {
-                int ni = i + dx[z], nj = j + dy[z];
-                if(!isSafe(ni, nj)) continue;
-                if (matrix[ni][nj] <= matrix[i][j]) continue;
-
-                dp[i][j] = max(dp[i][j], 1 + dfs(ni, nj));
-            }
-            
-            return dp[i][j];
-        };
-        
-        int res = 0;
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < m; j++) {
-                res = max(res, dfs(i, j));
-            }
-        }
-        return res + 1;
-    }
-};
 
 
 
