@@ -191,7 +191,56 @@ void solve() {
 
 
 
+
+
 // Method 2.1
+const int N = 2e5+5;
+int n, m;
+
+vector<int> g[N];
+int dp[N], taskTime[N];
+
+int dfs(int u) {
+    if(dp[u] != -1) return dp[u];
+    dp[u] = taskTime[u];
+
+    for (int v: g[u]) {
+        dfs(v);
+        dp[u] = max(dp[u], taskTime[u] + dp[v]);
+    }
+
+    return dp[u];
+}
+
+void solve() {
+    int u, v;
+    cin >> n >> m;
+
+    f(i, m) {
+        cin >> u >> v;
+        g[u].pb(v);
+    }
+
+    loop(i, 1, n) cin >> taskTime[i];
+
+    memset(dp, -1, sizeof dp);
+
+    int res = 0;
+    loop(i, 1, n) {
+        res = max(res, dfs(i));
+    }
+
+    cout << res;
+}
+
+
+
+
+
+
+
+
+// Method 2.2
 const int N = 2e5+5;
 int n, m;
 
@@ -227,9 +276,6 @@ void solve() {
 
     cout << res;
 }
-
-
-
 
 
 
