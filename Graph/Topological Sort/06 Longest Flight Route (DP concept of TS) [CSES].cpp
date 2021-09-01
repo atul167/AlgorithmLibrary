@@ -37,6 +37,8 @@ dp[v] = Max{edge u->v exists (dp[u] + 1)}
 If we process the states in topological order, it is guaranteed that dp[u] will already have been computed before computing dp[v]
 */
 
+
+// Method 1
 const int N = 2e5+5;
 int n, m;
 
@@ -121,4 +123,80 @@ void solve() {
 
     reverse(all(res));
     for(int x: res) cout << x << " ";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Method 2
+
+
+const int N = 3e5+5;
+int n, m;
+
+vector<int> g[N];
+vector<int> dp(N, -1), child(N, -1);
+
+void dfs(int u) {
+    if(dp[u] != -1) return;
+
+    dp[u] = 0;
+    
+    for(int v: g[u]) {
+        dfs(v);
+
+        if(dp[v] > dp[u]) {
+            dp[u] = dp[v];
+            child[u] = v;
+        }
+    }
+    if(dp[u] > 0) dp[u]++;
+}
+ 
+void solve() {
+    int x, y;
+    cin >> n >> m;
+    for(int i = 0; i < m; ++i) {
+        cin >> x >> y;
+        g[x].pb(y);
+    }
+
+    dp[n] = 1;
+    dfs(1);
+
+    if(dp[1] == 0) {
+        cout << "IMPOSSIBLE\n";
+        return;
+    } 
+
+    cout << dp[1] << "\n";
+    int u = 1;
+    while(u != -1) {
+        cout << u << " ";
+        u = child[u];
+    }
 }
