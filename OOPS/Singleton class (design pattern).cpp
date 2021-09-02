@@ -71,3 +71,43 @@ Private Constructor
 100
 100
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+class SingletonClass {
+private:
+    static SingletonClass *instance;
+    SingletonClass() {
+        cout << "Private Constructor\n";
+    }
+public:
+    int id = 5;
+    SingletonClass* getInstance() {
+        if(!instance) instance = new SingletonClass;
+        return instance;
+    }    
+};
+
+SingletonClass *SingletonClass::instance = NULL;
+ 
+int main() {
+   SingletonClass *obj;
+   obj = obj->getInstance();
+   cout << obj->id << endl;
+}
