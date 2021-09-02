@@ -5,6 +5,7 @@ i.e. dp[i] is storing the value of LIS including nums[i] as the last element of 
 */
 
 // O(n.log(n))
+// https://youtu.be/TocJOW6vx_I
 // https://youtu.be/66w10xKzbRM
 
 
