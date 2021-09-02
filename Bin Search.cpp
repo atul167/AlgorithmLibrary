@@ -105,3 +105,52 @@ lo, hi are: -1, -1
 1
 lo, hi are: 0, 0
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void lowerBound(vector<int>& a, int x) {
+    int n = a.size();
+    int lo = 0, hi = n;
+    while(lo < hi) {
+        int mid = (lo + hi) / 2;
+        if(a[mid] >= x) {
+            hi = mid;
+        } else {
+            lo = mid + 1;
+        }
+    }
+    debug2(lo, hi)
+}
+
+void upperBound(vector<int>& a, int x) {
+    int n = a.size();
+    int lo = 0, hi = n;
+    while(lo < hi) {
+        int mid = (lo + hi) / 2;
+        if(a[mid] > x) {
+            hi = mid;
+        } else {
+            lo = mid + 1;
+        }
+    }
+    debug2(lo, hi)
+}
