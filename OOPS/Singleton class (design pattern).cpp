@@ -9,6 +9,16 @@ For example, if you are using a logger, that writes logs to a file, you can use 
 You can create a singleton class using the following code −
 */
 
+
+/*
+Private Constructor allows us to create objects of that class only inside the class. 
+So outside any class we cant create object of that class.
+This type of constructor is used in Singleton class. 
+In which the class variable is created only inside a class or inside a public member function of that class. 
+So that if we want to access a member of a class using that public member function we can access it.
+*/
+
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -17,7 +27,6 @@ private:
     static Singleton *instance;
     int data;
  
-   // Private constructor so that no objects can be created.
     Singleton() {
         data = 0;
         cout << "Private Constructor\n";
@@ -38,11 +47,12 @@ public:
     }
 };
 
-//Initialize pointer to zero so that it can be initialized in first call to getInstance
-Singleton *Singleton::instance = 0;
+// Initialize pointer to NULL so that it can be initialized in first call to getInstance
+Singleton *Singleton::instance = NULL;
 
 int main() {
-   Singleton *s = s->getInstance();
+   Singleton *s;
+   s = s->getInstance();
    cout << s->getData() << endl;
    s->setData(100);
    cout << s->getData() << endl;
@@ -53,6 +63,7 @@ int main() {
 }
 
 // Note that constructor is called only once.
+
 /*
 Output:
 Private Constructor
