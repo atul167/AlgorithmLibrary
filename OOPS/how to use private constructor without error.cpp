@@ -1,31 +1,20 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 class ash {
 private:
-	ash(){}
-	
+    ash(){}
+    
 public:
-	ash* fun() {
-		ash* temp_instance = new ash;
-		return temp_instance;
-	}
-
-	int id = 5;
-	
+    int id = 5;
+    ash* initFun() {
+        ash* temp_instance = new ash;
+        return temp_instance;
+    }    
 };
  
-void solve() {
-   ash* as;
-   as = as->fun();
+int main() {
+   ash *as;
+   as = as->initFun();
    cout << as->id << endl;
-}
-
-signed main() {
-    IOS
-    int T = 1;
-    // cin >> T;
-    while (T--)
-    	solve();
-    return 0;
 }
