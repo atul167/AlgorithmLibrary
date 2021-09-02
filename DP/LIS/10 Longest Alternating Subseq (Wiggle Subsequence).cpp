@@ -44,8 +44,6 @@ Constraints:
 
 
 
-// same concept of valley as in 'buy and sell stocks at any number of times' problem 
-
 
 // Method 1 
 // Time Complexity: O(n^2), Auxiliary Space: O(n)
@@ -94,7 +92,9 @@ public:
 
 
 
-
+/*
+same concept of valley as in "buy and sell stocks at any number of times" problem 
+*/
 
 // Method 2
 // Time Complexity: O(n), Auxiliary Space: O(n)
