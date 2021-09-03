@@ -208,3 +208,99 @@ int main() {
     x = 15;
     cout << "Rank of " << x << " in stream is: " << root->getRank(root, x) << endl;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    int data, leftSize;
+    Node *left, *right;
+    Node(int d) {
+        data = d;
+        leftSize = 0;
+        left = right = NULL;
+    }
+};
+
+void insert(Node*& root, int data) {
+    if (!root) {
+        root = new Node(data);
+        return;
+    }
+
+    if (data <= root->data) {
+        insert(root->left, data);
+        // Updating size of left subtree.
+        root->leftSize++;
+    } else {
+        insert(root->right, data);
+    }
+}
+
+// Function to get Rank of a Node x.
+int getRank(Node* root, int x) {
+    if(!root) return -1;
+
+    if (root->data == x) return root->leftSize;
+
+    if (x < root->data) {
+        return getRank(root->left, x);
+    } else {
+        int rightSize = getRank(root->right, x);
+        if(rightSize == -1 ) return -1;
+        return (root->leftSize + 1 + rightSize);
+    }
+}
+
+// Driver code
+int main() {
+    int arr[] = { 1, 3, 4, 4, 4, 5 };
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    Node* root = NULL;
+    for (int i = 0; i < n; i++) {
+        insert(root, arr[i]);
+    }
+
+    int x = 4;
+    cout << "Rank of " << x << " in stream is: " << getRank(root, x) << endl;
+
+    x = 13;
+    cout << "Rank of " << x << " in stream is: " << getRank(root, x) << endl;
+
+    x = 13;
+    insert(root, x);
+    cout << "Rank of " << x << " in stream is: " << getRank(root, x) << endl;
+
+    x = 3;
+    insert(root, x);
+    cout << "Rank of " << x << " in stream is: " << getRank(root, x) << endl;
+
+    insert(root, 15);
+    x = 15;
+    cout << "Rank of " << x << " in stream is: " << getRank(root, x) << endl;
+}
