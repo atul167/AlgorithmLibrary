@@ -87,8 +87,11 @@ Car shift gear
 
 
 /*
-Solution of above problem:
+The issue in above problem was that inspite of using adress of ferrari, maruti shiftGear ki called due to early binding.
+But we want that if we are using adress of ferrari then ferrari shiftGear should be called.
 
+Solution of above problem:
+-------------------------------
 Early binding ki jagah late binding (dynamic binding) ho. Runtime pe pointer ka content se decide krke late binding kia jae. 
 Jab program execute ho rha hai tab shiftgear function ki binding ho.
 
@@ -131,6 +134,64 @@ int main() {
     ferrari.shiftGear();
 
     ptr = &ferrari;
+    ptr->shiftGear();
+}
+
+/*
+Car shift gear
+Sports car shift gear
+Sports car shift gear
+*/
+
+
+
+
+
+
+/*
+Note:
+Agar parent class me shiftGear ko virtual declare kar dia hai to child class ke shiftGear me aapko alag se virtual likhne ki zaroorat nahi hai.
+shiftGear function child class me bhi virtual function hi hai.
+Infact Car class ki kisi bhi descendant class me agar shiftGear function kisi prototype ke sath banaya jaega to vo virtual function hi mana jaega.
+Ek class me kai virtual function ho sakte hai.
+*/
+
+// This code also works fine
+#include <bits/stdc++.h>
+using namespace std;
+
+class Car {
+public:
+    Car() {
+
+    }
+    virtual void shiftGear() {
+        cout << "Car shift gear\n";
+    }
+};
+
+class SportsCar: public Car {
+public:
+    SportsCar() {
+
+    }
+    virtual void shiftGear() {
+        cout << "Sports car shift gear\n";
+    }
+};
+
+
+int main() {
+    Car *ptr, maruti;
+    SportsCar ferrari;
+
+    maruti.shiftGear();
+    
+    ferrari.shiftGear();
+
+    ptr = &ferrari;
+
+    // late binding
     ptr->shiftGear();
 }
 
