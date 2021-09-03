@@ -21,14 +21,14 @@ int partition(vector<int>& arr, int start, int end) {
     int pivot = arr[end];
     int pIndex = start;
 
-    for (int j = start; j <= end - 1; j++) {
+    for (int i = start; i <= end - 1; i++) {
         // If current element is smaller than or equal to pivot
-        if (arr[j] <= pivot) {
-            swap(arr[pIndex], arr[j]);
+        if (arr[i] <= pivot) {
+            swap(arr[i], arr[pIndex]);
             pIndex++;
         }
     }
-    swap(arr[pIndex], arr[end]);
+    swap(arr[end], arr[pIndex]);
     return pIndex;
 }
 
