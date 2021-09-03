@@ -8,17 +8,15 @@
 using namespace std;
 
 class SocialWebsite{
-private:
-protected:
 public:
-    virtual void secret() {} ;
+    virtual void secret() {
+    }
 };
 
 class Facebook: public SocialWebsite{
 private:
     string fbPassword;
-    
-    void secret(){
+    void secret() {
         cout << "The Facebook password is: " << fbPassword << endl;
         cout << "Its risky, but its fine to print here as it's a private function\n";
     }
@@ -28,10 +26,14 @@ public:
     }
 };
 
-int main()
-{
+int main() {
     Facebook f("Rachit95@fb");
     
     SocialWebsite *ptr = &f;
     ptr->secret();
 }
+
+/*
+The Facebook password is: Rachit95@fb
+Its risky, but its fine to print here as it's a private function
+*/
