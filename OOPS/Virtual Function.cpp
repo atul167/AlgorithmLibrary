@@ -93,6 +93,9 @@ Early binding ki jagah late binding (dynamic binding) ho. Runtime pe pointer ka 
 Jab program execute ho rha hai tab shiftgear function ki binding ho.
 
 Late binding karne ke lie compiler ko batane ke lie parent class me jo function hai uske pehle "virtual" keyword use kia jata hai.
+
+Thus ek shiftGear parent class me hai and ek shiftGear child class me hai. 
+And ye funcion overriding hi hai and funcion overriding ke case me hi aapko virtual keyword lagane ki zaroorat padegi.
 */
 
 #include <bits/stdc++.h>
