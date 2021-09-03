@@ -11,6 +11,7 @@ Rank of an integer in-stream is “Total number of elements less than or equal t
 If an element is not found in the stream or is smallest in stream, return -1. 
 */
 
+
 /*
 Method 1: Use BIT if elements range is <= 1e6
 
@@ -101,4 +102,109 @@ int main() {
     root = insert(root, 15);
     x = 15;
     cout << "Rank of " << x << " in stream is: " << getRank(root, x) << endl;
+}
+
+/*
+Rank of 4 in stream is: 4
+Rank of 13 in stream is: -1
+Rank of 13 in stream is: 6
+Rank of 3 in stream is: 2
+Rank of 15 in stream is: 8
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node {
+private:
+    int data, leftSize;
+    Node *left, *right;
+public:
+    Node(int d) {
+        data = d;
+        leftSize = 0;
+        left = right = NULL;
+    }
+
+    Node* insert(Node* root, int data) {
+        if (!root)
+            return new Node(data);
+
+        if (data <= root->data) {
+            root->left = insert(root->left, data);
+            // Updating size of left subtree.
+            root->leftSize++;
+        } else {
+            root->right = insert(root->right, data);
+        }
+
+        return root;
+    }
+
+    // Function to get Rank of a Node x.
+    int getRank(Node* root, int x) {
+        if(!root) return -1;
+
+        if (root->data == x) return root->leftSize;
+
+        if (x < root->data) {
+            return getRank(root->left, x);
+        } else {
+            int rightSize = getRank(root->right, x);
+            if(rightSize == -1 ) return -1;
+            return (root->leftSize + 1 + rightSize);
+        }
+    }
+};
+
+// Driver code
+int main() {
+    int arr[] = { 1, 3, 4, 4, 4, 5 };
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    Node* root = NULL;
+    for (int i = 0; i < n; i++) {
+        root = root->insert(root, arr[i]);
+    }
+
+    int x = 4;
+    cout << "Rank of " << x << " in stream is: " << root->getRank(root, x) << endl;
+
+    x = 13;
+    cout << "Rank of " << x << " in stream is: " << root->getRank(root, x) << endl;
+
+    x = 13;
+    root = root->insert(root, x);
+    cout << "Rank of " << x << " in stream is: " << root->getRank(root, x) << endl;
+
+    x = 3;
+    root = root->insert(root, x);
+    cout << "Rank of " << x << " in stream is: " << root->getRank(root, x) << endl;
+
+    root = root->insert(root, 15);
+    x = 15;
+    cout << "Rank of " << x << " in stream is: " << root->getRank(root, x) << endl;
 }
