@@ -184,16 +184,6 @@ int main() {
 }
 
 /*
-OUTPUT
-------------
-Preorder:
-7 5 4 6 8 9 
-Inorder:
-4 5 6 7 8 9 
-Postorder:
-4 6 5 9 8 7 
-Levelorder:
-7 5 8 4 6 9 
 Right View:
 7 8 9 
 Left View:
