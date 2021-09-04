@@ -1,3 +1,7 @@
+/*
+Note: Base class pointer can point to the objet of derived class but not vice versa
+*/
+
 // Not correct behaviour due to early binding
 
 #include <bits/stdc++.h>
