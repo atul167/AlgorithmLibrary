@@ -54,17 +54,17 @@ void inorder(TreeNode* root) {
 	inorder(root->right);
 }
 
-TreeNode* insert(TreeNode *root, int data){
-    if(!root) {
-        root = new TreeNode(data);
-        return root;
-    }
-    if(data <= root->data) {
-        root->left = insert(root->left, data);
-    } else {
-        root->right = insert(root->right, data);
-    }
-    return root;
+TreeNode* insert(TreeNode *root, int data) {
+	if (!root) {
+		root = new TreeNode(data);
+		return root;
+	}
+	if (data <= root->data) {
+		root->left = insert(root->left, data);
+	} else {
+		root->right = insert(root->right, data);
+	}
+	return root;
 }
 
 
@@ -78,7 +78,7 @@ TreeNode* minValueNode(TreeNode *root) {
 	return temp;
 }
 
-/* Given a binary search tree root and a data, 
+/* Given a binary search tree root and a data,
 this function deletes the data and returns the new root */
 TreeNode* deleteNode(TreeNode *root, int data) {
 	// base case
@@ -103,6 +103,7 @@ TreeNode* deleteNode(TreeNode *root, int data) {
 			delete root;
 			return NULL;
 		}
+
 		// Case 2: node with only one child
 		else if (!root->left) {
 			TreeNode* temp = root->right;
@@ -114,15 +115,17 @@ TreeNode* deleteNode(TreeNode *root, int data) {
 			return temp;
 		}
 
-		// Case 3: node with two children: 
+		// Case 3: node with two children:
 		// Get the inorder successor (smallest in the right subtree)
-		TreeNode* temp = minValueNode(root->right);
+		else {
+			TreeNode* temp = minValueNode(root->right);
 
-		// Copy the inorder successor's content to this node
-		root->data = temp->data;
+			// Copy the inorder successor's content to this node
+			root->data = temp->data;
 
-		// Delete the inorder successor
-		root->right = deleteNode(root->right, temp->data);
+			// Delete the inorder successor
+			root->right = deleteNode(root->right, temp->data);
+		}
 	}
 
 	return root;
@@ -130,13 +133,13 @@ TreeNode* deleteNode(TreeNode *root, int data) {
 
 // Driver Code
 int main() {
-	/* 
+	/*
 	Let us create following BST
 		  50
 		 /	\
 		30	 70
 	   / \   / \
-	  20 40 60  80 
+	  20 40 60  80
 	*/
 	TreeNode* root = NULL;
 	root = insert(root, 50);
@@ -153,14 +156,14 @@ int main() {
 
 	cout << "\nDelete 20\n";
 	root = deleteNode(root, 20);
-	
+
 	cout << "Inorder traversal:\n";
 	inorder(root);
 	cout << endl;
 
 	cout << "\nDelete 30\n";
 	root = deleteNode(root, 30);
-	
+
 	cout << "Inorder traversal:\n";
 	inorder(root);
 	cout << endl;
@@ -174,19 +177,19 @@ int main() {
 
 /*
 Inorder traversal:
-20 30 40 50 60 70 80 
+20 30 40 50 60 70 80
 
 Delete 20
 Inorder traversal:
-30 40 50 60 70 80 
+30 40 50 60 70 80
 
 Delete 30
 Inorder traversal:
-40 50 60 70 80 
+40 50 60 70 80
 
 Delete 50
 Inorder traversal:
-40 60 70 80 
+40 60 70 80
 */
 
 
