@@ -3,6 +3,8 @@
 /*
 Deleting a derived class object using a pointer of base class type that has a non-virtual destructor results in undefined behavior. 
 To correct this situation, the base class should be defined with a virtual destructor. 
+
+Note: Base class pointer can point to the objet of derived class but not vice versa
 */
 
 /*
