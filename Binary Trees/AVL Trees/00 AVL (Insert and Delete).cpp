@@ -1,6 +1,28 @@
 // https://www.geeksforgeeks.org/avl-tree-set-1-insertion/
 // https://www.geeksforgeeks.org/avl-tree-set-2-deletion/
 
+
+/*
+Insertion 
+To make sure that the given tree remains AVL after every insertion, we must augment the standard BST insert operation to perform some re-balancing. Following are two basic operations that can be performed to re-balance a BST without violating the BST property (keys(left) < key(root) < keys(right)). 
+1) Left Rotation 
+2) Right Rotation
+
+
+T1, T2 and T3 are subtrees of the tree 
+rooted with y (on the left side) or x (on 
+the right side)           
+     y                               x
+    / \     Right Rotation          /  \
+   x   T3   - - - - - - - >        T1   y 
+  / \       < - - - - - - -            / \
+ T1  T2     Left Rotation            T2  T3
+Keys in both of the above trees follow the 
+following order 
+ keys(T1) < key(x) < keys(T2) < key(y) < keys(T3)
+So BST property is not violated anywhere.
+*/
+
 #include<bits/stdc++.h>
 using namespace std;
 
