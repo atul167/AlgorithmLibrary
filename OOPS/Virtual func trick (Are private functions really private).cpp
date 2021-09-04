@@ -4,6 +4,10 @@
 // g++  5.4.0
 // Are private functions really private? Well...
 
+/*
+Note: Base class pointer can point to the objet of derived class but not vice versa
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 
