@@ -142,11 +142,31 @@ public:
 // https://leetcode.com/problems/ugly-number-iii/discuss/387539/cpp-Binary-Search-with-picture-and-Binary-Search-Template
 
 /*
+An ugly number is a positive integer that is divisible by a, b, or c.
+Given four integers n, a, b, and c, return the nth ugly number.
+
+Example 1:
+Input: n = 3, a = 2, b = 3, c = 5
+Output: 4
+Explanation: The ugly numbers are 2, 3, 4, 5, 6, 8, 9, 10... The 3rd is 4.
+
+Example 2:
+Input: n = 4, a = 2, b = 3, c = 4
+Output: 6
+Explanation: The ugly numbers are 2, 3, 4, 6, 8, 9, 10, 12... The 4th is 6.
+ 
+
+Constraints:
+1 <= n, a, b, c <= 10^9
+1 <= a * b * c <= 10^18
+It is guaranteed that the result will be in range [1, 2 * 109].
+*/
+
+
+/*
 For every integer N, 
 F(N) = (total number of positive integers <= N which are divisible by a or b or c.)
-
 F(N) = a + b + c - a ∩ c - a ∩ b - b ∩ c + a ∩ b ∩ c
-
 F(N) = N/a + N/b + N/c - N/lcm(a, b) - N/lcm(b, c) - N/lcm(c, a) + N/lcm(a, b, c)
 */
 
