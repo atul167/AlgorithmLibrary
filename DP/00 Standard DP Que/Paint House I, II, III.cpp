@@ -141,3 +141,70 @@ public:
         return min1;
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Paint House III
+// https://leetcode.com/problems/paint-house-iii/
+/*
+There is a row of m houses in a small city, each house must be painted with one of the n colors (labeled from 1 to n), 
+some houses that have been painted last summer should not be painted again.
+
+A neighborhood is a maximal group of continuous houses that are painted with the same color.
+
+For example: houses = [1,2,2,3,3,2,1,1] contains 5 neighborhoods [{1}, {2,2}, {3,3}, {2}, {1,1}].
+Given an array houses, an m x n matrix cost and an integer target where:
+
+houses[i]: is the color of the house i, and 0 if the house is not painted yet.
+cost[i][j]: is the cost of paint the house i with the color j + 1.
+Return the minimum cost of painting all the remaining houses in such a way that there are exactly target neighborhoods. 
+If it is not possible, return -1.
+*/
+
+class Solution {
+public:
+    const int INF = 1e9;
+    int dp[101][101][21];
+    int n, m, target;
+    
+    int dfs(int i, int cnt, int prevHouseColor, vector<int>& houses, vector<vector<int>>& cost) {
+        if (i >= m || cnt > target) {
+            return cnt == target ? 0 : INF;
+        }
+        
+        if (dp[i][cnt][prevHouseColor] != -1) return dp[i][cnt][prevHouseColor];
+        
+        // already painted last year
+        if (houses[i] != 0) {
+            return dp[i][cnt][prevHouseColor] = dfs(i + 1, cnt + (prevHouseColor != houses[i]), houses[i], houses, cost);
+        }
+        
+        int res = INF;
+        for (auto color = 1; color <= n; color++) {
+            int x = cost[i][color - 1]  + dfs(i + 1, cnt + (prevHouseColor != color), color, houses, cost);
+            res = min(res, x);
+        }
+        return dp[i][cnt][prevHouseColor] = res;
+    }
+    int minCost(vector<int>& houses, vector<vector<int>>& cost, int m, int n, int target) {
+        this->m = m, this->n = n, this->target = target;
+        memset(dp, -1, sizeof dp);
+        int res = dfs(0, 0, 0, houses, cost);
+        return res == INF ? -1 : res;
+    }
+};
