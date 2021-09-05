@@ -5,7 +5,15 @@ Deleting a derived class object using a pointer of base class type that has a no
 To correct this situation, the base class should be defined with a virtual destructor. 
 
 Note: Base class pointer can point to the objet of derived class but not vice versa
+
+Note:
+There is nothing like Virtual Constructor. 
+Making constructors virtual doesn't make sense as constructor is responsible for creating an object 
+and it can’t be delegated to any other object by virtual keyword means.
 */
+
+
+
 
 /*
 CPP program without virtual destructor causing undefined behavior due to early binding concept.
@@ -39,6 +47,12 @@ int main() {
     base *b = d;
     delete b;
 }
+
+/*
+Constructing base
+Constructing derived
+Destructing base
+*/
 
 
 
@@ -84,3 +98,10 @@ int main() {
     base *b = d;
     delete b;
 }
+
+/*
+Constructing base 
+Constructing derived 
+Destructing derived 
+Destructing base 
+*/
