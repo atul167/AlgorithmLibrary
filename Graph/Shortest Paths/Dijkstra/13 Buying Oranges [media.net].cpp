@@ -2,7 +2,7 @@
 You are given n cities (1...n) with m bidirectional roads. Price[i] = price of buying oranges at the i'th city.
 For each city you have to calculate the minimum amount of money required to buy oranges and return back to the city.
 (You have to buy oranges in exactly one city in the path from city to other cities and then coming back yo the city. 
-You can buy oranges on the same city if this is the minimum cost.)
+You can buy oranges on the same city without going anywhere else if this is the minimum cost.)
 
 You have to follow the given constraints:
 
