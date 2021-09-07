@@ -1,5 +1,10 @@
 // https://youtu.be/ySp2epYvgTE
 
+/*
+Time = O(3*n)
+Space = O(4*n)
+*/
+
 void preInPostTraversal(TreeNode* root) {
     if(root == NULL) return;
 
