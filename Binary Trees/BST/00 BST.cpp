@@ -6,6 +6,7 @@
          4   6   9
 */
 
+
 struct BstNode {
     int data;
     BstNode *left;
@@ -156,6 +157,55 @@ void DFS_traversal_postorder_using_2Stacks(BstNode* root) {
     cout << endl;
 }
 
+void preInPostTraversal(BstNode* root) {
+    stack<pair<BstNode*,int>> st; 
+    st.push({root, 1}); 
+    vector<int> pre, in, post;
+    if(root == NULL) return;
+
+    while(!st.empty()) {
+        auto it = st.top(); 
+        st.pop(); 
+
+        // this is part of "pre"
+        // increment 1 to 2 
+        // push the left side of the tree
+        if(it.second == 1) {
+            pre.push_back(it.first->data); 
+            it.second++; 
+            st.push(it); 
+
+            if(it.first->left != NULL) {
+                st.push({it.first->left, 1}); 
+            }
+        }
+
+        // this is a part of "in" 
+        // increment 2 to 3 
+        // push right 
+        else if(it.second == 2) {
+            in.push_back(it.first->data); 
+            it.second++; 
+            st.push(it); 
+
+            if(it.first->right != NULL) {
+                st.push({it.first->right, 1}); 
+            }
+        }
+        // don't push it back again 
+        else {
+            post.push_back(it.first->data); 
+        }
+    } 
+
+    for(int x: pre) cout << x << " ";
+    cout << endl;
+    for(int x: in) cout << x << " ";
+    cout << endl;
+    for(int x: post) cout << x << " ";
+    cout << endl;
+}
+
 bool isValidBST(BstNode* root, long min, long max) {
     if(!root) return true;
     if(root->data > min && root->data < max) {
@@ -190,6 +240,14 @@ bool isValidBST2(BstNode* root) {
     return true;
 }
 
+/*
+             7
+            / \
+           5   8
+          / \   \
+         4   6   9
+*/
+
 void solve() {
     ll t, k, d, x, y, z;
     BstNode* root = NULL;
@@ -218,6 +276,9 @@ void solve() {
     cout << "Postorder Traversal:\n";
     DFS_traversal_postorder_using_1Stack(root);
     DFS_traversal_postorder_using_2Stacks(root);
+
+    cout << "Pre In Post Traversal:\n";
+    preInPostTraversal(root);
 
     cout << "Is valid BST = " << isValidBST(root, INT_MIN, INT_MAX) << endl;
     cout << "Is valid BST = " << isValidBST2(root) << endl;
