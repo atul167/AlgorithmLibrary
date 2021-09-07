@@ -1,3 +1,10 @@
+/*
+             7
+            / \
+           5   8
+          / \   \
+         4   6   9
+*/
 
 struct BstNode {
     int data;
@@ -51,7 +58,6 @@ int minimum_number(BstNode* root) {
 }
 
 void BFS_traversal(BstNode* root) {
-    //check if root is empty or not
     if (root == NULL) return;
 
     queue<BstNode*> q;
@@ -71,7 +77,6 @@ void BFS_traversal(BstNode* root) {
 }
 
 void DFS_traversal_preorder(BstNode* root) {
-    //check if root is empty or not
     if (root == NULL) return;
 
     stack<BstNode*> st;
@@ -88,7 +93,6 @@ void DFS_traversal_preorder(BstNode* root) {
 }
 
 void DFS_traversal_inorder(BstNode* root) {
-    //check if root is empty or not
     if (root == NULL) return;
 
     stack<BstNode*> st;
@@ -108,7 +112,27 @@ void DFS_traversal_inorder(BstNode* root) {
 }
 
 void DFS_traversal_postorder_using_1Stack(BstNode* root) {
+    if(root == NULL) return;
 
+    BstNode* temp = root, *temp2 = NULL;
+    stack<BstNode*> st;
+
+    while(temp != NULL || !st.empty()) {
+        while(temp != NULL) {
+            st.push(temp);
+            temp = temp->left;
+        }
+        temp = st.top();
+        if(temp->right == NULL || temp->right == temp2){
+            cout << temp->data << "\t";
+            st.pop();
+            temp2 = temp;
+            temp = NULL;
+        } else {
+            temp = temp->right;
+        }
+    }
+    cout << endl;
 }
 
 void DFS_traversal_postorder_using_2Stacks(BstNode* root) {
@@ -166,14 +190,6 @@ bool isValidBST2(BstNode* root) {
     return true;
 }
 
-/*
-             7
-            / \
-           5   8
-          / \   \
-         4   6   9
-*/
-
 void solve() {
     ll t, k, d, x, y, z;
     BstNode* root = NULL;
@@ -201,8 +217,7 @@ void solve() {
 
     cout << "Postorder Traversal:\n";
     DFS_traversal_postorder_using_1Stack(root);
-
-    // DFS_traversal_postorder_using_2Stacks(root);
+    DFS_traversal_postorder_using_2Stacks(root);
 
     cout << "Is valid BST = " << isValidBST(root, INT_MIN, INT_MAX) << endl;
     cout << "Is valid BST = " << isValidBST2(root) << endl;
