@@ -1,194 +1,209 @@
-struct BstNode{
+
+struct BstNode {
     int data;
     BstNode *left;
     BstNode *right;
+    BstNode(int d) {
+        data = d;
+        left = right = NULL;
+    }
 };
 
-BstNode* GetNewNode(int data) {
-    BstNode *newNode = new BstNode();
-    newNode->data = data;
-    newNode->left = newNode->right = NULL;
-    return newNode;
-}
-
-void Insert(BstNode*& root, int data) {
-    if(root == NULL) {
-        root = GetNewNode(data);
-    }else if(data <= root->data) {
-        Insert(root->left, data);
-    }else {
-        Insert(root->right,data);
+BstNode* Insert(BstNode* root, int data) {
+    if (root == NULL) {
+        root = new BstNode(data);
+    } else if (data <= root->data) {
+        root->left = Insert(root->left, data);
+    } else {
+        root->right = Insert(root->right, data);
     }
+    return root;
 }
 
 bool Search(BstNode* root, int data) {
-    if(root == NULL) {
+    if (root == NULL) {
         return false;
-    }else if(root->data == data) {
+    } else if (root->data == data) {
         return true;
-    }else if(data <= root->data) {
-        return Search(root->left,data);
-    }else{
-        return Search(root->right,data);
+    } else if (data <= root->data) {
+        return Search(root->left, data);
+    } else {
+        return Search(root->right, data);
     }
 }
 
 int maximum_number(BstNode* root) {
-    BstNode *tempRoot = root, *tempRoot_value = NULL;
-    while(tempRoot != NULL){
-        tempRoot_value = tempRoot;
-        tempRoot = tempRoot->right;
+    BstNode *temp = root, *temp_value = NULL;
+    while (temp != NULL) {
+        temp_value = temp;
+        temp = temp->right;
     }
-    return tempRoot_value->data;
+    return temp_value->data;
 }
 
 int minimum_number(BstNode* root) {
-    BstNode *tempRoot = root, *tempRoot_value = NULL;
-    while(tempRoot!=NULL){
-        tempRoot_value = tempRoot;
-        tempRoot = tempRoot->left;
+    BstNode *temp = root, *temp_value = NULL;
+    while (temp != NULL) {
+        temp_value = temp;
+        temp = temp->left;
     }
-    return tempRoot_value->data;
+    return temp_value->data;
 }
 
 void BFS_traversal(BstNode* root) {
     //check if root is empty or not
-    if(root == NULL) return;
+    if (root == NULL) return;
 
     queue<BstNode*> q;
     q.push(root);
 
-    BstNode* tempRoot;
+    BstNode* temp;
 
-    while(!q.empty()) {
-        tempRoot = q.front();
+    while (!q.empty()) {
+        temp = q.front();
         q.pop();
 
-        cout << tempRoot->data << "\t";
-        if(tempRoot->left != NULL) q.push(tempRoot->left);
-        if(tempRoot->right != NULL) q.push(tempRoot->right);
+        cout << temp->data << "\t";
+        if (temp->left != NULL) q.push(temp->left);
+        if (temp->right != NULL) q.push(temp->right);
     }
     cout << endl;
 }
 
 void DFS_traversal_preorder(BstNode* root) {
     //check if root is empty or not
-    if(root == NULL) return;
+    if (root == NULL) return;
 
-    stack<BstNode*> s;
-    s.push(root);
+    stack<BstNode*> st;
+    st.push(root);
 
-    while(!s.empty()) {
-        BstNode *tempRoot = s.top();
-        s.pop();
-        cout << tempRoot->data << "\t";
-        if(tempRoot->right != NULL) s.push(tempRoot->right);
-        if(tempRoot->left != NULL) s.push(tempRoot->left);
+    while (!st.empty()) {
+        BstNode *temp = st.top();
+        st.pop();
+        cout << temp->data << "\t";
+        if (temp->right != NULL) st.push(temp->right);
+        if (temp->left != NULL) st.push(temp->left);
     }
     cout << endl;
 }
 
 void DFS_traversal_inorder(BstNode* root) {
     //check if root is empty or not
-    if(root == NULL) return;
+    if (root == NULL) return;
 
-    stack<BstNode*> s;
-    BstNode* tempRoot = root;
+    stack<BstNode*> st;
+    BstNode* temp = root;
 
-    while(tempRoot != NULL || !s.empty()) {
-        while(tempRoot != NULL) {
-            s.push(tempRoot);
-            tempRoot = tempRoot->left;
+    while (temp != NULL || !st.empty()) {
+        while (temp != NULL) {
+            st.push(temp);
+            temp = temp->left;
         }
-        tempRoot = s.top();
-        s.pop();
-        cout << tempRoot->data << "\t";
-        tempRoot = tempRoot->right;
+        temp = st.top();
+        st.pop();
+        cout << temp->data << "\t";
+        temp = temp->right;
     }
     cout << endl;
 }
 
 void DFS_traversal_postorder_using_1Stack(BstNode* root) {
-    
+
 }
 
 void DFS_traversal_postorder_using_2Stacks(BstNode* root) {
-    stack<BstNode*> s1;
-    s1.push(root);
+    stack<BstNode*> st1, st2;
+    st1.push(root);
 
-    stack<BstNode*> s2;
+    BstNode *temp;
 
-    BstNode *tempRoot;
-
-    while(!s1.empty()){
-        tempRoot = s1.top();
-        s1.pop();
-        s2.push(tempRoot);
-        if(tempRoot->left!=NULL) s1.push(tempRoot->left);
-        if(tempRoot->right!=NULL) s1.push(tempRoot->right);
+    while (!st1.empty()) {
+        temp = st1.top();
+        st1.pop();
+        st2.push(temp);
+        if (temp->left != NULL) st1.push(temp->left);
+        if (temp->right != NULL) st1.push(temp->right);
     }
-    while(!s2.empty()){
-        tempRoot = s2.top();
-        s2.pop();
-        cout << tempRoot->data << "\t";
+    while (!st2.empty()) {
+        temp = st2.top();
+        st2.pop();
+        cout << temp->data << "\t";
     }
     cout << endl;
 }
 
-bool IsBST(BstNode* root) {
-    if(root == NULL) return false;
+bool isValidBST(BstNode* root, long min, long max) {
+    if(!root) return true;
+    if(root->data > min && root->data < max) {
+         return isValidBST(root->left, min, root->data) && isValidBST(root->right, root->data, max);
+    }
+    return false;
+}
+
+bool isValidBST2(BstNode* root) {
+    if (root == NULL) return false;
 
     // 1. do inorder traversal
     vector<int> result;
     stack<BstNode*> s;
-    BstNode* tempRoot = root;
+    BstNode* temp = root;
 
-    while(tempRoot != NULL || !s.empty()) {
-        while(tempRoot != NULL) {
-            s.push(tempRoot);
-            tempRoot = tempRoot->left;
+    while (temp != NULL || !s.empty()) {
+        while (temp != NULL) {
+            s.push(temp);
+            temp = temp->left;
         }
-        tempRoot = s.top();
+        temp = s.top();
         s.pop();
-        result.pb(tempRoot->data);
-        tempRoot = tempRoot->right;
+        result.pb(temp->data);
+        temp = temp->right;
     }
 
-    // 2. if arr is sorted then it is a binary tree  else not 
-    for(int i=0; i < result.size() - 1; i++){
-        if(result[i] > result[i+1]) return false;
+    // 2. if arr is sorted then it is a binary tree  else not
+    for (int i = 0; i < result.size() - 1; i++) {
+        if (result[i] > result[i + 1]) return false;
     }
     return true;
 }
 
+/*
+             7
+            / \
+           5   8
+          / \   \
+         4   6   9
+*/
 
 void solve() {
     ll t, k, d, x, y, z;
     BstNode* root = NULL;
-    Insert(root, 15);
-    Insert(root, 10);
-    Insert(root, 20);
-    Insert(root, 25);
-    Insert(root, 8);
-    Insert(root, 12);
+    root = Insert(root, 7);
+    root = Insert(root, 5);
+    root = Insert(root, 4);
+    root = Insert(root, 6);
+    root = Insert(root, 8);
+    root = Insert(root, 9);
 
-    if(Search(root, 8)) cout << "Found\n";
+    if (Search(root, 8)) cout << "Found\n";
     else cout << "Not Found\n";
 
-    cout << maximum_number(root) << endl;
+    cout << "Max node = " << maximum_number(root) << endl;
+    cout << "Min node = " << minimum_number(root) << endl;
 
-    cout << minimum_number(root) << endl;
-
+    cout << "BFS Traversal:\n";
     BFS_traversal(root);
 
+    cout << "Preorder Traversal:\n";
     DFS_traversal_preorder(root);
 
+    cout << "Inorder Traversal:\n";
     DFS_traversal_inorder(root);
 
+    cout << "Postorder Traversal:\n";
     DFS_traversal_postorder_using_1Stack(root);
 
-    DFS_traversal_postorder_using_2Stacks(root);
+    // DFS_traversal_postorder_using_2Stacks(root);
 
-    cout << IsBST(root) << endl;
-    
+    cout << "Is valid BST = " << isValidBST(root, INT_MIN, INT_MAX) << endl;
+    cout << "Is valid BST = " << isValidBST2(root) << endl;
 }
