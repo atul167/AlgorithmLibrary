@@ -1,103 +1,95 @@
-/*
-             7
-            / \
-           5   8
-          / \   \
-         4   6   9
-*/
 
-
-struct BstNode {
-    int data;
-    BstNode *left;
-    BstNode *right;
-    BstNode(int d) {
-        data = d;
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode(int v) {
+        val = v;
         left = right = NULL;
     }
 };
 
-BstNode* Insert(BstNode* root, int data) {
+TreeNode* Insert(TreeNode* root, int val) {
     if (root == NULL) {
-        root = new BstNode(data);
-    } else if (data <= root->data) {
-        root->left = Insert(root->left, data);
+        root = new TreeNode(val);
+    } else if (val <= root->val) {
+        root->left = Insert(root->left, val);
     } else {
-        root->right = Insert(root->right, data);
+        root->right = Insert(root->right, val);
     }
     return root;
 }
 
-bool Search(BstNode* root, int data) {
+bool Search(TreeNode* root, int val) {
     if (root == NULL) {
         return false;
-    } else if (root->data == data) {
+    } else if (root->val == val) {
         return true;
-    } else if (data <= root->data) {
-        return Search(root->left, data);
+    } else if (val <= root->val) {
+        return Search(root->left, val);
     } else {
-        return Search(root->right, data);
+        return Search(root->right, val);
     }
 }
 
-int maximum_number(BstNode* root) {
-    BstNode *temp = root, *temp_value = NULL;
+int maximum_number(TreeNode* root) {
+    TreeNode *temp = root, *temp_value = NULL;
     while (temp != NULL) {
         temp_value = temp;
         temp = temp->right;
     }
-    return temp_value->data;
+    return temp_value->val;
 }
 
-int minimum_number(BstNode* root) {
-    BstNode *temp = root, *temp_value = NULL;
+int minimum_number(TreeNode* root) {
+    TreeNode *temp = root, *temp_value = NULL;
     while (temp != NULL) {
         temp_value = temp;
         temp = temp->left;
     }
-    return temp_value->data;
+    return temp_value->val;
 }
 
-void BFS_traversal(BstNode* root) {
+void BFS_traversal(TreeNode* root) {
     if (root == NULL) return;
 
-    queue<BstNode*> q;
+    queue<TreeNode*> q;
     q.push(root);
 
-    BstNode* temp;
+    TreeNode* temp;
 
     while (!q.empty()) {
         temp = q.front();
         q.pop();
 
-        cout << temp->data << "\t";
+        cout << temp->val << "\t";
         if (temp->left != NULL) q.push(temp->left);
         if (temp->right != NULL) q.push(temp->right);
     }
     cout << endl;
 }
 
-void DFS_traversal_preorder(BstNode* root) {
+void DFS_traversal_preorder(TreeNode* root) {
     if (root == NULL) return;
 
-    stack<BstNode*> st;
+    stack<TreeNode*> st;
     st.push(root);
 
     while (!st.empty()) {
-        BstNode *temp = st.top();
+        TreeNode *temp = st.top();
         st.pop();
-        cout << temp->data << "\t";
+        cout << temp->val << "\t";
         if (temp->right != NULL) st.push(temp->right);
         if (temp->left != NULL) st.push(temp->left);
     }
     cout << endl;
 }
 
-void DFS_traversal_inorder(BstNode* root) {
+void DFS_traversal_inorder(TreeNode* root) {
     if (root == NULL) return;
 
-    stack<BstNode*> st;
-    BstNode* temp = root;
+    stack<TreeNode*> st;
+    TreeNode* temp = root;
 
     while (temp != NULL || !st.empty()) {
         while (temp != NULL) {
@@ -106,17 +98,17 @@ void DFS_traversal_inorder(BstNode* root) {
         }
         temp = st.top();
         st.pop();
-        cout << temp->data << "\t";
+        cout << temp->val << "\t";
         temp = temp->right;
     }
     cout << endl;
 }
 
-void DFS_traversal_postorder_using_1Stack(BstNode* root) {
+void DFS_traversal_postorder_using_1Stack(TreeNode* root) {
     if(root == NULL) return;
 
-    BstNode* temp = root, *temp2 = NULL;
-    stack<BstNode*> st;
+    TreeNode* temp = root, *temp2 = NULL;
+    stack<TreeNode*> st;
 
     while(temp != NULL || !st.empty()) {
         while(temp != NULL) {
@@ -125,7 +117,7 @@ void DFS_traversal_postorder_using_1Stack(BstNode* root) {
         }
         temp = st.top();
         if(temp->right == NULL || temp->right == temp2){
-            cout << temp->data << "\t";
+            cout << temp->val << "\t";
             st.pop();
             temp2 = temp;
             temp = NULL;
@@ -136,11 +128,11 @@ void DFS_traversal_postorder_using_1Stack(BstNode* root) {
     cout << endl;
 }
 
-void DFS_traversal_postorder_using_2Stacks(BstNode* root) {
-    stack<BstNode*> st1, st2;
+void DFS_traversal_postorder_using_2Stacks(TreeNode* root) {
+    stack<TreeNode*> st1, st2;
     st1.push(root);
 
-    BstNode *temp;
+    TreeNode *temp;
 
     while (!st1.empty()) {
         temp = st1.top();
@@ -152,13 +144,13 @@ void DFS_traversal_postorder_using_2Stacks(BstNode* root) {
     while (!st2.empty()) {
         temp = st2.top();
         st2.pop();
-        cout << temp->data << "\t";
+        cout << temp->val << "\t";
     }
     cout << endl;
 }
 
-void preInPostTraversal(BstNode* root) {
-    stack<pair<BstNode*,int>> st; 
+void preInPostTraversal(TreeNode* root) {
+    stack<pair<TreeNode*,int>> st; 
     st.push({root, 1}); 
     vector<int> pre, in, post;
     if(root == NULL) return;
@@ -171,7 +163,7 @@ void preInPostTraversal(BstNode* root) {
         // increment 1 to 2 
         // push the left side of the tree
         if(it.second == 1) {
-            pre.push_back(it.first->data); 
+            pre.push_back(it.first->val); 
             it.second++; 
             st.push(it); 
 
@@ -184,7 +176,7 @@ void preInPostTraversal(BstNode* root) {
         // increment 2 to 3 
         // push right 
         else if(it.second == 2) {
-            in.push_back(it.first->data); 
+            in.push_back(it.first->val); 
             it.second++; 
             st.push(it); 
 
@@ -194,7 +186,7 @@ void preInPostTraversal(BstNode* root) {
         }
         // don't push it back again 
         else {
-            post.push_back(it.first->data); 
+            post.push_back(it.first->val); 
         }
     } 
 
@@ -206,21 +198,21 @@ void preInPostTraversal(BstNode* root) {
     cout << endl;
 }
 
-bool isValidBST(BstNode* root, long min, long max) {
+bool isValidBST(TreeNode* root, long min, long max) {
     if(!root) return true;
-    if(root->data > min && root->data < max) {
-         return isValidBST(root->left, min, root->data) && isValidBST(root->right, root->data, max);
+    if(root->val > min && root->val < max) {
+         return isValidBST(root->left, min, root->val) && isValidBST(root->right, root->val, max);
     }
     return false;
 }
 
-bool isValidBST2(BstNode* root) {
+bool isValidBST2(TreeNode* root) {
     if (root == NULL) return false;
 
     // 1. do inorder traversal
     vector<int> result;
-    stack<BstNode*> s;
-    BstNode* temp = root;
+    stack<TreeNode*> s;
+    TreeNode* temp = root;
 
     while (temp != NULL || !s.empty()) {
         while (temp != NULL) {
@@ -229,7 +221,7 @@ bool isValidBST2(BstNode* root) {
         }
         temp = s.top();
         s.pop();
-        result.pb(temp->data);
+        result.pb(temp->val);
         temp = temp->right;
     }
 
@@ -250,7 +242,7 @@ bool isValidBST2(BstNode* root) {
 
 void solve() {
     ll t, k, d, x, y, z;
-    BstNode* root = NULL;
+    TreeNode* root = NULL;
     root = Insert(root, 7);
     root = Insert(root, 5);
     root = Insert(root, 4);
