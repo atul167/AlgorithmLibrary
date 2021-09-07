@@ -1,3 +1,5 @@
+// https://youtu.be/Ot-VR3jzQMY
+
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
