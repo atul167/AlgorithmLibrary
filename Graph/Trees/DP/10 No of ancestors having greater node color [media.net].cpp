@@ -39,7 +39,6 @@ void solve() {
         res[i] = ct;
     }
 
-
     loop(i, 1, n) cout << res[i] << " ";
 } 
 
