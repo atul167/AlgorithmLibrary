@@ -150,10 +150,11 @@ void DFS_traversal_postorder_using_2Stacks(TreeNode* root) {
 }
 
 void preInPostTraversal(TreeNode* root) {
+    if(root == NULL) return;
+
+    vector<int> pre, in, post;
     stack<pair<TreeNode*,int>> st; 
     st.push({root, 1}); 
-    vector<int> pre, in, post;
-    if(root == NULL) return;
 
     while(!st.empty()) {
         auto it = st.top(); 
