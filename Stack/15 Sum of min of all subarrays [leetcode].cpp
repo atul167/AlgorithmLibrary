@@ -35,7 +35,10 @@ We make two arrays left[ ] and right[ ] such that:
 left[i] + 1 equals to the number of subarrays ending with A[i], and A[i] is only single minimum. 
 Similarly, right[i] + 1 equals to the number of subarrays starting with A[i], and A[i] is first minimum.
 Finally, f(i) = (left[i]) * (right[i]), where f[i] equals total number of subarrays in which A[i] is minimum.
-Below is the implementation of above approach 
+Below is the implementation of above approach.
+
+The last thing that needs to be mentioned for handling duplicate elements:
+Method: Set strict less/greater and non-strict less/greater. The order doesn't matter.
 */
 
 
