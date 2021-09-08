@@ -40,6 +40,23 @@ Below is the implementation of above approach
 
 
 
+/*
+Note equality and inequality can be included in either left or right side but not on both sides.
+
+To understand why we cannot take equality on both sides:
+nums = {1, 1, 1}
+
+If we take equality on both sides:
+res = 1*3 + 2*2 + 3*1 = 10
+which is wrong
+
+Correct (equality on right side)
+res = 1*3 + 1*2 + 1*1 = 6
+
+Correct (equality on left side)
+res = 1*1 + 1*2 + 1*3 = 6
+*/
+
 class Solution {
 public:
     int sumSubarrayMins(vector<int>& nums) {
@@ -103,9 +120,6 @@ public:
 
 
 
-
-
-// Note equality and inequality can be included in either left or right side but not on both sides
 
 class Solution {
 public:
