@@ -8,6 +8,27 @@ The width of one level is defined as the length between the end-nodes (the leftm
 where the null nodes between the end-nodes are also counted into the length calculation.
 */
 
+
+/*
+int cur_id = q.front().second - mn;
+here mn is used to normalize node index to 0 to prevent integer overflow for deeper nodes sice 2*i+1 will increase exponentially.
+
+If mn is not used then indexing would be like this
+                         0
+                        / \
+                      1     2
+                    /  \   / \
+                   3    4  5   6
+                   
+When mn is used then indexing would be like this
+                         0
+                        / \
+                      0     1
+                    /  \   / \
+                   0    1  2   3
+
+*/
+
 class Solution {
 public:
     int widthOfBinaryTree(TreeNode* root) {
