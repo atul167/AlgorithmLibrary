@@ -17,23 +17,21 @@ Note :
 
 
 /*************************************************************
+Following is the Binary Tree node structure
 
-    Following is the Binary Tree node structure
+template<typename T>
+class BinaryTreeNode {
+public :
+    T data;
+    BinaryTreeNode < T > *left;
+    BinaryTreeNode < T > *right;
 
-    class BinaryTreeNode
-    {
-    public :
-        T data;
-        BinaryTreeNode < T > *left;
-        BinaryTreeNode < T > *right;
-
-        BinaryTreeNode(T data) {
-            this -> data = data;
-            left = NULL;
-            right = NULL;
-        }
-    };
-
+    BinaryTreeNode(T data) {
+        this -> data = data;
+        left = NULL;
+        right = NULL;
+    }
+};
 *************************************************************/
 
 int getChildSum(BinaryTreeNode < int > * root) {
