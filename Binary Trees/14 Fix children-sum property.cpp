@@ -1,4 +1,4 @@
-// https://github.com/striver79/FreeKaTreeSeries/blob/main/L29_childrenSumProblemCpp
+// https://www.codingninjas.com/codestudio/problems/childrensumproperty_790723
 // https://youtu.be/fnmisPM6cVo
 // https://www.techiedelight.com/fix-children-sum-property-binary-tree/
 
