@@ -11,7 +11,7 @@ where the null nodes between the end-nodes are also counted into the length calc
 
 /*
 int cur_id = q.front().second - mn;
-here mn is used to normalize node index to 0 to prevent integer overflow for deeper nodes sice 2*i+1 will increase exponentially.
+here mn is used to normalize node index to 0 in each level to prevent integer overflow for deeper nodes sice 2*i+1 will increase exponentially.
 
 If mn is not used then indexing would be like this
                          0
