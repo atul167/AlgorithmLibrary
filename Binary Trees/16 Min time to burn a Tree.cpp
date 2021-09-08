@@ -18,6 +18,7 @@ Output: 2
 */
 
 
+
 template<typename T>
 class BinaryTreeNode {
 public :
@@ -62,7 +63,6 @@ void bfs() {
         q.pop();
         BinaryTreeNode<int> *temp = it.first;
         int dis = it.second;
-        debug2(temp->data, dis)
         res = max(res, dis);
         
         if(temp->left && !vis[temp->left]) {
@@ -87,4 +87,14 @@ int timeToBurnTree(BinaryTreeNode<int>* root, int start) {
     res = 0;
     bfs();
     return res;
+}
+
+
+void solve() {
+    BinaryTreeNode<int> *root = new BinaryTreeNode<int>(1);
+    root->left = new BinaryTreeNode<int>(2);
+    root->right = new BinaryTreeNode<int>(3);
+    root->left->left = new BinaryTreeNode<int>(4);
+    root->left->right = new BinaryTreeNode<int>(5);
+    cout << timeToBurnTree(root, 2) << endl;
 }
