@@ -1,4 +1,7 @@
 // https://codeforces.com/problemset/problem/817/D
+// D. Imbalanced Array
+// https://youtu.be/ST408u9EnVg
+
 
 /*
 You are given an array a consisting of n elements. 
@@ -25,12 +28,22 @@ Print one integer — the imbalance value of a.
 
 
 
+// Method 1: Time = O(n^2*logn)
+/*
+For all subarrays find min and max using segment tree
+*/
+
+
+
+
+
+
+// Method 2: Time = O(n)
 /*
 Let different subarrays be a1, a2, a3, ...
 res = [max(a1) - min(a1)] + [max(a2) - min(a2)] + [max(a3) - min(a3)] + ...
 res = [max(a1) + max(a2) + max(a3) + ...] - [min(a1) + min(a2) + min(a3) + ...]
 */
-
 
 const int N = 1e5 + 5;
 int n, m;
