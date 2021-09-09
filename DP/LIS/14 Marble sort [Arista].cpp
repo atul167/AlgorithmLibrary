@@ -84,3 +84,15 @@ void solve() {
     Solution obj;
     cout << obj.solveFun(a1, a2, a3);
 }
+
+
+/*
+Input:
+2 3 2
+2 3
+1 4 6
+5 7
+
+Output:
+2
+*/
