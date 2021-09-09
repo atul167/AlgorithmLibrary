@@ -24,6 +24,14 @@ Print one integer — the imbalance value of a.
 
 
 
+
+/*
+Let different subarrays be a1, a2, a3, ...
+res = [max(a1) - min(a1)] + [max(a2) - min(a2)] + [max(a3) - min(a3)] + ...
+res = [max(a1) + max(a2) + max(a3) + ...] - [min(a1) + min(a2) + min(a3) + ...]
+*/
+
+
 const int N = 1e5 + 5;
 int n, m;
 
