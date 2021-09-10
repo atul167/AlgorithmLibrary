@@ -1,4 +1,3 @@
-// Add all the given decimal strings
 
 string addDecimalStrings(string s1, string s2) {
     string res = "";
@@ -25,32 +24,6 @@ string addDecimalStrings(string s1, string s2) {
 }
 
 void solve() {
-    cin >> n;
-    vector<string> a(n);
-    f(i, n) cin >> a[i];
-
-    string res = "0";
-    f(i, n) {
-        res = addDecimalStrings(res, a[i]);
-    }
-    cout << res;
+    string a = "5346365464", b = "54645645";
+    cout << addDecimalStrings(a, b);
 }
-
-
-
-/*
-Input:
-9
-213124234234
-43
-5346365464
-54645645
-56456456457457
-54647457
-7457
-4575675756785685
-66797075677
-
-Output:
-4632417590219119
-*/
