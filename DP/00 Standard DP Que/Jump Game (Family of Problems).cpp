@@ -8,7 +8,6 @@ and each element in the array represents your maximum jump length at that positi
 Return true if you can reach the last index, or false otherwise.
 */
 
-// Jump game I
 class Solution {
 public:
     bool canJump(vector<int>& nums) {
@@ -33,6 +32,7 @@ public:
 
 
 
+// Jump game II
 /*
 Given an array of non-negative integers nums, you are initially positioned at the first index of the array.
 Each element in the array represents your maximum jump length at that position.
@@ -40,8 +40,7 @@ Your goal is to reach the last index in the minimum number of jumps.
 You can assume that you can always reach the last index.
 */
 
-
-// Jump game II - Method 1
+// Method 1
 class Solution {
 public:
     int INF = 1e9;
@@ -61,7 +60,7 @@ public:
     }
 };
 
-// Jump game II - Method 2
+// Method 2
 class Solution {
 public:
     int INF = 1e9;
@@ -89,5 +88,29 @@ public:
         n = nums.size();
         vector<int> dp(n+5, -1);
         return go(0, nums, dp);
+    }
+};
+
+
+// Method 3
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int n = nums.size();
+        int jumps = 0, curEnd = 0, curFar = 0;
+        
+        for(int i = 0; i < n - 1; i++) {
+            curFar = max(curFar, i + nums[i]);
+            if(i == curEnd) {
+                jumps++;
+                curEnd = curFar;
+            }
+            if(curEnd >= n-1) {
+                break;
+            }
+        }
+        
+        if(curEnd < n-1) return -1;
+        return jumps;
     }
 };
