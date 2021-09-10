@@ -1,3 +1,4 @@
+
 // add n strings of given base
 
 string addStringsOfBase(string s1, string s2, int base) {
@@ -25,13 +26,14 @@ string addStringsOfBase(string s1, string s2, int base) {
 }
 
 void solve() {
-    cin >> n;
+    int n, base;
+    cin >> n >> base;
     vector<string> a(n);
     f(i, n) cin >> a[i];
 
     string res = "0";
     f(i, n) {
-        res = addStringsOfBase(res, a[i], 10);
+        res = addStringsOfBase(res, a[i], base);
     }
     cout << res;
 }
@@ -39,7 +41,7 @@ void solve() {
 
 /*
 Input:
-9
+9 10
 213124234234
 43
 5346365464
