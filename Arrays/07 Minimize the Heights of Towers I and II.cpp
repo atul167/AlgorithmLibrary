@@ -1,6 +1,27 @@
 // https://youtu.be/Av7vSnPSCtw
 
 
+/*
+First, we try to sort the array and make each height of the tower maximum. 
+We do this by decreasing the height of all the towers towards the right by k and increasing all the height of the towers towards the left (by k). 
+It is also possible that the tower you are trying to increase the height doesn’t have the maximum height. 
+Therefore we only need to check whether it has the maximum height or not by comparing it with the last element towards the right side which is a[n]-k. 
+Since the array is sorted if the tower’s height is greater than the a[n]-k then it’s the tallest tower available. 
+Similar reasoning can also be applied for finding the shortest tower.  
+
+Note:
+For Minimize the Heights II
+We need not consider where a[i] < k because the height of the tower can’t be negative so we have to neglect that case.
+*/
+
+
+
+
+
+
+
+
+
 // Minimize the Heights I 
 // https://practice.geeksforgeeks.org/problems/minimize-the-heights-i/0/
 
