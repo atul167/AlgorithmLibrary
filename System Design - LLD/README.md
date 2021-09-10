@@ -104,6 +104,9 @@ class Developer extends Person {
     Developer(String name, int age, Gender gender, Car car) {
         super(name, age, gender, car);
     }
+	public void fun() {
+        System.out.println("fun child");
+    }
 }
 
 public class Main {
@@ -116,6 +119,8 @@ public class Main {
 
         Person c = new Developer("c", 12, Gender.FEMALE, new Car("carname3", "carmodel3"));
         c.display();
+
+		a.fun();
 
         System.out.println(Person.count);
     }
