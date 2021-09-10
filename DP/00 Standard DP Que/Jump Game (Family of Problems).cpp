@@ -40,7 +40,7 @@ Your goal is to reach the last index in the minimum number of jumps.
 You can assume that you can always reach the last index.
 */
 
-// Method 1
+// Method 1: Time = O(n^2), Space = O(n)
 class Solution {
 public:
     int INF = 1e9;
@@ -60,7 +60,7 @@ public:
     }
 };
 
-// Method 2
+// Method 2: Time = O(n^2), Space = O(n)
 class Solution {
 public:
     int INF = 1e9;
@@ -92,25 +92,33 @@ public:
 };
 
 
-// Method 3
+// Method 3: Time = O(n), Space = O(1)
 class Solution {
 public:
     int jump(vector<int>& nums) {
         int n = nums.size();
-        int jumps = 0, curEnd = 0, curFar = 0;
+        int jumps = 0, currjmp = 0, mxjmp = 0;
+        
+        /*
+        We are taking jump from 0th index to the range mxjump
+        currjump = we can take jump from particular index
+		mxjump = we cango up to maximum
+		jumps = to count no. of jumps
+        */
         
         for(int i = 0; i < n - 1; i++) {
-            curFar = max(curFar, i + nums[i]);
-            if(i == curEnd) {
+            mxjmp = max(mxjmp, i + nums[i]);
+            // we have to take jump now because our currjump now ends
+            if(i == currjmp) {
                 jumps++;
-                curEnd = curFar;
+                currjmp = mxjmp;
             }
-            if(curEnd >= n-1) {
+            if(currjmp >= n-1) {
                 break;
             }
         }
         
-        if(curEnd < n-1) return -1;
+        if(currjmp < n-1) return -1;
         return jumps;
     }
 };
