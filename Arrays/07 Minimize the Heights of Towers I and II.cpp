@@ -46,6 +46,9 @@ Given an array arr[] denoting heights of N towers and a positive integer K,
 you have to modify the height of each tower either by increasing or decreasing them by K only once. 
 After modifying, height should be a non-negative integer. 
 Find out what could be the possible minimum difference of the height of shortest and longest towers after you have modified each tower.
+
+(It is mandatory to either decrease or increase height of every tower by k.
+In case height becomes negative after decreasing then we do not have to decrease and have to only increase th height of this tower)
 */
 
 class Solution {
