@@ -47,3 +47,29 @@ void solve() {
     
     cout << res;
 }
+
+
+
+
+
+
+
+
+const int N = 1e6+5;
+int n, m;
+
+void solve() {
+    cin >> n;
+    vector<int> a(n);
+    f(i, n) cin >> a[i];
+    
+    unordered_map<int, int> dp;
+    int res = 1;
+
+    for(int x: a) {
+        dp[x] = dp[x - 1] + 1;
+        res = max(res, dp[x]);
+    }
+    
+    cout << res;
+}
