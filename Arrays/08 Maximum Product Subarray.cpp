@@ -17,6 +17,53 @@ Same problem can be extended to calculate Minimum Product Subarray
 */
 
 
+
+// Method 1
+class Solution {
+public:
+    long long maxProduct(vector<int> arr, int n) {
+        // base case
+        if (n == 0) {
+            return 0;
+        }
+
+        // maintain two variables to store the maximum and minimum product ending at the current index
+        long long max_ending = arr[0], min_ending = arr[0];
+
+        // to store the maximum product subarray found so far
+        long long max_so_far = arr[0];
+
+        // traverse the given array
+        for (int i = 1; i < n; i++) {
+            long long temp = max_ending;
+
+            // update the maximum product ending at the current index
+            max_ending = max<long long>({arr[i], arr[i] * max_ending, arr[i] * min_ending});
+
+            // update the minimum product ending at the current index
+            min_ending = min<long long>({arr[i], arr[i] * temp, arr[i] * min_ending});
+
+            max_so_far = max<long long>(max_so_far, max_ending);
+        }
+
+        // return maximum product
+        return max_so_far;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Method 2
 // Maximum Product Subarray
 class Solution {
 public:
@@ -36,9 +83,7 @@ public:
 
 
 
-
-
-
+// Method 2
 // Minimum Product Subarray
 class Solution {
 public:
