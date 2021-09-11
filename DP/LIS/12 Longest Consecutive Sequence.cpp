@@ -18,6 +18,8 @@ Constraints:
 -10^9 <= nums[i] <= 10^9
 */
 
+
+
 // O(nlogn)
 class Solution {
 public:
@@ -41,6 +43,53 @@ public:
         return mx;
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+// O(n)
+class Solution {
+public:
+    int longestConsecutive(vector<int>& nums) {
+        unordered_set<int> st(nums.begin(), nums.end());
+        int max_len = 0;
+
+        for (int x: nums) {
+            // check if the current element `x` is a candidate for starting a sequence,
+            // i.e., the previous element `x-1` doesn't exist in the set
+            if (st.find(x - 1) == st.end()) {
+                // stores the length of subsequence, starting with the current element
+                int len = 1;
+
+                // check for presence of elements `e+1`, `e+2`, `e+3`, … ,`e+len` in `S`
+                while (st.find(x + len) != st.end()) {
+                    len++;
+                }
+
+                // update result with the length of current consecutive subsequence
+                max_len = max(max_len, len);
+            }
+        }
+
+        // return result
+        return max_len;
+    }
+};
+
+
+
+
+
+
+
+
 
 
 
@@ -126,47 +175,12 @@ public:
 
 
 
-#include<bits/stdc++.h>
-#include<vector>
-using namespace std;
- 
-#define ll long long int
-#define IOS ios::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-#define FRE freopen("input.txt","r",stdin); freopen("output.txt","w",stdout);
-#define f(i,n) for(ll i=0;i<n;i++)
-#define fa(i,a,n) for(ll i=a;a<n?i<n:i>n;a<n?i+=1:i-=1)
-#define pb push_back
-#define F first
-#define S second
-#define all(x) x.begin(), x.end()
-#define clr(x) memset(x, 0, sizeof(x))
-#define sortall(x) sort(all(x))
-#define PI 3.1415926535897932384626
-#define MOD 1000000007
- 
-typedef pair<int, int> pii;
-typedef pair<ll, ll> pll;
-typedef vector<int>	vi;
-typedef vector<ll> vl;
-typedef vector<pii> vpii;
-typedef vector<pll> vpll;
-typedef vector<vi> vvi;
-typedef vector<vl> vvl;
-typedef long double ld;
-
-const ll mod = 1000000007;
-const ll N = 1e6+5, M = N, ninf = -2e5, inf = 10000000;
-vl g[N], dist;
-ll a[N], b[N], dp[N], in[N], out[N], level[N];
-ll n, m;
 
 
 
-int32_t main()
-{
-	IOS
-	ll t,k,x,y,z,p,q,u,v,ct=0,flag=0;
-	cin>>n;
+
+void solve() {
+	cin >> n;
 	f(i,n) cin>>a[i];
 	map<ll, ll>dp;
 	f(i,n){
