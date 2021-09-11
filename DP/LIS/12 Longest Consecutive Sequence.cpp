@@ -53,6 +53,21 @@ public:
 
 
 
+/*
+Efficient solution: 
+This problem can be solved in O(n) time using an Efficient Solution. 
+The idea is to use Hashing. We first insert all elements in a HashSet. Then check all the possible starts of consecutive subsequences.
+
+Algorithm: 
+1) Create an empty hash.
+2) Insert all array elements to hash.
+3) Do following for every element arr[i]
+4) Check if this element is the starting point of a subsequence. 
+   To check this, simply look for arr[i] - 1 in the hash, if not found, then this is the first element a subsequence.
+5) If this element is the first element, then count the number of elements in the consecutive starting with this element. 
+   Iterate from arr[i] + 1 till the last element that can be found.
+6) If the count is more than the previous longest subsequence found, then update this.
+*/
 
 // O(n)
 class Solution {
@@ -82,6 +97,10 @@ public:
         return max_len;
     }
 };
+
+
+
+
 
 
 
@@ -164,56 +183,3 @@ public:
         return res;
     }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-void solve() {
-	cin >> n;
-	f(i,n) cin>>a[i];
-	map<ll, ll>dp;
-	f(i,n){
-		dp[a[i]]=max(dp[a[i]], dp[a[i]-1]+1);
-	}
-	ll mx=0;
-	ll ele;
-	for(auto it: dp){
-		if(it.S>mx){
-			mx=it.S;
-			ele=it.F;
-		}
-	}
-	cout<<mx<<endl;
-	ll pos;
-	for(ll i=n-1;i>=0;i--){
-		if(a[i]==ele){
-			pos=i;
-			break;
-		}
-	}
-	ll end=ele-mx+1;
-	list<ll> ans;
-	for(ll i=pos;i>=0;i--){
-		if(ele<end){
-			break;
-		}
-		if(a[i]==ele){
-			ans.push_front(i+1);
-			ele--;
-		}
-	}
-	for(ll x: ans){
-		cout<<x<<" ";
-	}
-}
