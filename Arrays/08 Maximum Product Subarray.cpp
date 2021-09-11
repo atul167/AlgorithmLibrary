@@ -1,6 +1,18 @@
 // https://www.geeksforgeeks.org/maximum-product-subarray/
 
 
+/*
+When we are at index j:
+
+maxp = maximum product of suffix (i, i+1, ..., j) ending at index j (i.e. including arr[j])
+     = (arr[i] * arr[i+1] * ... * arr[j]), where i <= j
+minp = minimum product of suffix (i, i+1, ..., j) ending at index j (i.e. including arr[j])
+     = (arr[i] * arr[i+1] * ... * arr[j]), where i <= j
+
+(last index j is included same as we do in dp LIS) 
+*/
+
+
 class Solution {
 public:
     long long maxProduct(vector<int> arr, int n) {
