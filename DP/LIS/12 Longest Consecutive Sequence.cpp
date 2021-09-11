@@ -93,7 +93,6 @@ public:
             }
         }
 
-        // return result
         return max_len;
     }
 };
