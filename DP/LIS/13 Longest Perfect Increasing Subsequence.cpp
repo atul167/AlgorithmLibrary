@@ -73,3 +73,58 @@ void solve() {
     
     cout << res;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Print Longest Perfect Increasing Subsequence
+
+#include <bits/stdc++.h>
+using namespace std;
+
+// Function for LIS
+int findLIS(int a[], int n) {
+    unordered_map<int, int> dp;
+
+    // Initialize result
+    int LIS_size = 1;
+    int LIS_index = 0;
+
+    dp[a[0]] = 1;
+
+    for (int i = 1; i < n; i++) {
+        dp[a[i]] = dp[a[i] - 1] + 1;
+        if (LIS_size < dp[a[i]]) {
+            LIS_size = dp[a[i]];
+            LIS_index = a[i];
+        }
+    }
+
+    // print LIS size
+    cout << "LIS_size = " << LIS_size << "\n";
+
+    // print LIS after setting start element
+    cout << "LIS : ";
+    int start = LIS_index - LIS_size + 1;
+    while (start <= LIS_index) {
+        cout << start << " ";
+        start++;
+    }
+}
+
+int main() {
+    int a[] = { 2, 5, 3, 7, 4, 8, 5, 13, 6 };
+    int n = sizeof(a) / sizeof(a[0]);
+    findLIS(a, n);
+    return 0;
+}
