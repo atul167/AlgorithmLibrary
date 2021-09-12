@@ -92,33 +92,38 @@ public:
 };
 
 
+
+
+
+
 // Method 3: Time = O(n), Space = O(1)
 class Solution {
 public:
     int jump(vector<int>& nums) {
         int n = nums.size();
-        int jumps = 0, currjmp = 0, mxjmp = 0;
-        
+        int jumps = 0, curReach = 0, maxReach = 0;
+
         /*
         We are taking jump from 0th index to the range mxjump
         currjump = we can take jump from particular index
-		mxjump = we cango up to maximum
-		jumps = to count no. of jumps
+        mxjump = we cango up to maximum
+        jumps = to count no. of jumps
         */
-        
-        for(int i = 0; i < n - 1; i++) {
-            mxjmp = max(mxjmp, i + nums[i]);
+
+        // NOTE: < n-1
+        for (int i = 0; i < n - 1; i++) {
+            maxReach = max(maxReach, i + nums[i]);
             // we have to take jump now because our currjump now ends
-            if(i == currjmp) {
+            if (i == curReach) {
                 jumps++;
-                currjmp = mxjmp;
+                curReach = maxReach;
             }
-            if(currjmp >= n-1) {
+            if (curReach >= n - 1) {
                 break;
             }
         }
-        
-        if(currjmp < n-1) return -1;
+
+        if (curReach < n - 1) return -1;
         return jumps;
     }
 };
