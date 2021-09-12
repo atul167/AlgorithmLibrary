@@ -97,6 +97,8 @@ public:
 
 
 // Method 3: Time = O(n), Space = O(1)
+
+// https://youtu.be/a9r98S-pDvk
 class Solution {
 public:
     int jump(vector<int>& nums) {
@@ -104,9 +106,10 @@ public:
         int jumps = 0, curReach = 0, maxReach = 0;
 
         /*
-        We are taking jump from 0th index to the range mxjump
-        currjump = we can take jump from particular index
-        mxjump = we cango up to maximum
+        We are taking jump from 0th index to the range maxReach
+        
+        curReach = we can take jump from particular index
+        maxReach = we cango up to maximum
         jumps = to count no. of jumps
         */
 
