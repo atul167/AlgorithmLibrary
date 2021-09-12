@@ -154,16 +154,15 @@ public:
             prefix[dep[i]+1]--;
         }
         
-        int flag = 0;
+        int cnt = 0;
         auto prevItr = prefix.begin();
         for(auto it = prefix.begin(); it != prefix.end(); it++) {
-            if(flag == 0) {
-                flag = 1;
-                prevItr = it;
-            } else {
-                prefix[it->first] += prefix[prevItr->first];
-                prevItr = it;
+            if(cnt == 0) {
+                cnt++;
+                continue;
             }
+            prefix[it->first] += prefix[prevItr->first];
+            prevItr = it;
         }
     
         int res = 0;
