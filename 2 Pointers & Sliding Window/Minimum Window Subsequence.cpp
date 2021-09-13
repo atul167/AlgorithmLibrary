@@ -27,6 +27,10 @@ Note: "deb" is not a smaller window because the elements of T in the window must
 
 
 
+/*
+dp[i][j] = START POSITION of the minimum windows subsequnce for the first i charactgers from S and first j characters from T.
+*/
+
 
 class Solution {
 public:
