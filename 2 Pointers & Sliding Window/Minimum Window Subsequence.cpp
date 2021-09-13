@@ -1,6 +1,8 @@
 // https://www.lintcode.com/problem/857/
 // http://buttercola.blogspot.com/2018/11/leetcode-727-minimum-window-subsequence.html
 // https://anshika-bhargava0202.medium.com/leetcode-727-minimum-window-subsequence-21c40baff689
+// https://leetcode.ca/2017-11-26-727-Minimum-Window-Subsequence/
+// https://leetcode.com/discuss/interview-question/algorithms/125014/microsoft-minimum-window-subsequence
 
 
 /*
