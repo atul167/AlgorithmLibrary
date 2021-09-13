@@ -6,12 +6,12 @@ class Solution  {
     int celebrity(vector<vector<int> >& M, int n) {
         int i = 0, j = n - 1;
         while (i < j) {
-            // j knows i
-            if (M[j][i] == 1)
-                j--;
-            // i knows j
-            else
+            // i knows j, thus i cannot be celebrity
+            if (M[i][j] == 1)
                 i++;
+            // i does not know j, thus j cannot be celebrity
+            else
+                j--;
         }
         
         // i points to our celebrity candidate
