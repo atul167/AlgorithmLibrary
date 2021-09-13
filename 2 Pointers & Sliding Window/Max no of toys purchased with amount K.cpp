@@ -2,6 +2,28 @@
 
 
 // Method 1: O(nlogn)
+class Solution{
+public:
+    int toyCount(int n, int k, vector<int> arr) {
+        sort(arr.begin(), arr.end());
+        int res = 0, sum = 0;
+    
+        for(int i = 0; i < n; i++) {
+            if(sum + arr[i] <= k) {
+                sum += arr[i];
+                res++;
+            } else {
+                break;
+            }
+        }
+    
+        return res;
+    }
+};
+
+
+
+// Method 2: O(nlogn)
 class Solution {
 public:
     int toyCount(int n, int k, vector<int> arr) {
@@ -28,13 +50,7 @@ public:
 
 
 
-
-
-
-
-
-
-// Method 1: O(n^2) [0-1 Knapsack Concept]
+// Method 3: O(n^2) [0-1 Knapsack Concept]
 class Solution {
 public:
     int toyCount(int n, int k, vector<int> arr) {
