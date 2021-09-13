@@ -13,15 +13,13 @@ Constraints:
 1 <= |T| <= 100
 All the strings in the input will only contain lowercase letters.
 
-Example 1:
-Input：S="jmeqksfrsdcmsiwvaovztaqenprpvnbstl"，T="u"
-Output：""
-Explanation： unable to match
-
-Example 2:
-Input：S = "abcdebdde"， T = "bde"
-Output："bcde"
-Explanation："bcde" is the answer and "deb" is not a smaller window because the elements of T in the window must occur in order.
+Example 1: 
+Input：S = "abcdebdde", T = "bde"
+Output: "bcde"
+Explanation: 
+There are many substrings with "bde" but the smallest amongst them is "bcde" and "bdde" of length 4. 
+Out of these 2, "bcde" occurs first, Hence it is the answer.
+Note: "deb" is not a smaller window because the elements of T in the window must occur in exact order.
 */
 
 
