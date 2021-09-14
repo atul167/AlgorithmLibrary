@@ -39,39 +39,41 @@ public:
         int a = A.size(), b = B.size();
         // Making LPS array using string B
         vector<int>lps = prefix_function(B);
-        
+
         // Search pattern 'B' in string 'A' in a circular fashion
         // 'i' represents the starting index of pattern 'B' in string 'A'
         // 'j' points to the current index in both strings 'A' and 'B'
         // (i + j) % a represents circular next index in 'A', as if it were linearly repeted
-        
+
         int i = 0, j = 0;
         while (i < a) {
             // check for next in both
             if (B[j] == A[(i + j) % a]) {
                 j++;
+            } else {
+                // even if no match found for the first letter of the pattern increment 'i'
+                if (j == 0) {
+                    i++;
+                } else {
+                    /* This else part is for case like:
+                       A = "aaac", B = "aac"
+                       A = "aaac", B = "aacaaac"
+                    */
+                    // updating 'i' here helps to keep pointed to the same position in 'A'
+                    i += (j - lps[j - 1]);
+                    j = lps[j - 1];
+                    cout << i << " " << j << " ";
+                }
             }
-            
-            // returns suitable answer
+
             if (j == b) {
                 if ((i + j) % a) {
                     return (i + j) / a + 1;
                 }
                 return (i + j) / a;
             }
-            
-            if (i < a and B[j] != A[(i + j) % a]) {
-                // even if no match found for the first letter of the pattern increment 'i'
-                if (j == 0) {
-                    i++;
-                } else {
-                    // updating 'i' here helps to keep pointed to the same position in 'A'
-                    i += (j - lps[j - 1]);
-                    j = lps[j - 1];
-                }
-            }
         }
-        
+
         return -1;
     }
 };
