@@ -40,7 +40,7 @@ dp[i][j] means the minimum cost to stick all sticks between A[i] and A[j]
 
 Complexity
 Time O(N^3)
-Space O(N^2), can be imporved to O(N)
+Space O(N^2)
 */
 
 
