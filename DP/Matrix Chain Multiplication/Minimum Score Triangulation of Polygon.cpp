@@ -4,6 +4,8 @@
 
 
 /*
+Check the letcode link for diagrams.
+
 You have a convex n-sided polygon where each vertex has an integer value. 
 You are given an integer array values where values[i] is the value of the ith vertex (i.e., clockwise order).
 You will triangulate the polygon into n - 2 triangles. 
