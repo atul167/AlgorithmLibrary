@@ -2,6 +2,11 @@
 // https://leetcode.com/problems/minimum-score-triangulation-of-polygon/
 // tags = { gap strategy, catalan number, Ways of Polygon Triangulation }
 
+/*
+A convex polygon with n sides (n >= 3) can be cut into triangles by connecting vertices with non-crossing line segments (a form of polygon triangulation). 
+The number of triangles formed is (n - 2) and the number of different ways that this can be achieved is Catalan(n - 2).
+*/
+
 
 /*
 Check the letcode link for diagrams.
