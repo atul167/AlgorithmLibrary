@@ -52,11 +52,13 @@ public:
         if(head == NULL) return head; 
         if(head->next == NULL && n == 1) return NULL;
         
-        ListNode *start = new ListNode();
-        start->next = head;
-        ListNode *slow = start, *fast = start;
+        ListNode *slow = head, *fast = head;
         
-        for(int i = 1; i <= n; i++) fast = fast->next;
+        for(int i = 0; i < n; i++) fast = fast->next;
+        
+        if(fast == NULL)  {
+            return head->next;
+        }
         
         while(fast->next != NULL) {
             fast = fast->next;
@@ -65,6 +67,6 @@ public:
         
         slow->next = slow->next->next;
         
-        return start->next;
+        return head;
     }
 };
