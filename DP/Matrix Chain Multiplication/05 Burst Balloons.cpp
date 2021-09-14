@@ -20,6 +20,19 @@ Output: 10
 */
 
 
+
+/*
+dp[i][j]: coins obtained from bursting all the balloons between index i and j (including i or j)
+
+dp[i][j] = max(nums[i - 1] * nums[k] * nums[j + 1] + dp[i][k - 1] + dp[k + 1][j])
+
+Note:
+It is nums[i - 1] * nums[k] * nums[j + 1]
+and not nums[i] * nums[k] * nums[j] since i'th and j'th ballons and all the ballons from i to j are already burst.
+*/
+
+
+
 class Solution {
 public:
     int maxCoins(vector<int>& nums) {
