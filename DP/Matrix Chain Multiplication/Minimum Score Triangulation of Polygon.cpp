@@ -1,5 +1,5 @@
-// https://youtu.be/tmIhmeL8WRo
 // https://leetcode.com/problems/minimum-score-triangulation-of-polygon/
+// https://youtu.be/tmIhmeL8WRo
 // tags = { gap strategy, catalan number, Ways of Polygon Triangulation }
 
 /*
@@ -9,7 +9,8 @@ The number of triangles formed is (n - 2) and the number of different ways that 
 
 
 /*
-Check the letcode link for diagrams.
+See this for solution insights:
+https://leetcode.com/problems/minimum-score-triangulation-of-polygon/discuss/286753/C%2B%2B-with-picture
 
 You have a convex n-sided polygon where each vertex has an integer value. 
 You are given an integer array values where values[i] is the value of the ith vertex (i.e., clockwise order).
