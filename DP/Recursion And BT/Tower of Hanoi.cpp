@@ -5,10 +5,8 @@
 using namespace std;
 
 void towerOfHanoi(int n, char src, char dest, char aux_rod) {
-    if (n == 1) {
-        cout << "Move disk " << n << " from rod " << src << " to rod " << dest << endl;
-        return;
-    }
+    if(n == 0) return;
+
     towerOfHanoi(n - 1, src, aux_rod, dest);
     cout << "Move disk " << n << " from rod " << src << " to rod " << dest << endl;
     towerOfHanoi(n - 1, aux_rod, dest, src);
@@ -21,6 +19,7 @@ int main() {
     towerOfHanoi(n, 'A', 'C', 'B');
     return 0;
 }
+
 
 
 /*
