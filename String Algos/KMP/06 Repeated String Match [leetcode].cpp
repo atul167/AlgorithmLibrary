@@ -17,6 +17,68 @@ Output: 2
 */
 
 
+/*
+First of all, we need tmp (repeats of A) to be at least as long as B:
+A: "abc"
+tmp: "abc" "abc"
+B: "abc abc" - in this case we need 2 copies of a;
+
+A:"abc"
+tmp:"abc" "abc" "abc"
+B: "c abc ab" - in this case we need 3 copies of a
+
+We can tell we need at least 1 extra copy, B.length() / A.length() + 1 works fine when a.len / a.len == 0
+But:
+a: "abc"
+tmp: "abc" "abc" "abc"
+b: "c abc a" - in this case we still need 3 copies of a, but a.len / b.len (5/3) only give you 1
+That's why we want to add at least 2 copies.
+
+
+
+Note: std::find() for string used KMP inbuilt 
+*/
+
+
+class Solution {
+public:
+    int repeatedStringMatch(string A, string B) {
+        string tmp = A;
+        int res = 1;
+        while(tmp.size() < B.size()) {
+            tmp += A;
+            res++;
+        }
+        
+        if(tmp.find(B) != string::npos) {
+            return res;
+        }
+        
+        tmp += A;
+        res++;
+        if(tmp.find(B) != string::npos) {
+            return res;
+        }
+            
+        return -1;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Solution {
 public:
     vector<int> prefix_function(string &s) {
