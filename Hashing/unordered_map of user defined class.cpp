@@ -24,7 +24,6 @@ struct Person {
 
 class MyHashFunction {
 public:
-
     // Use sum of lengths of first and last names as hash function.
     size_t operator()(const Person& p) const {
         return p.first.length() + p.last.length();
@@ -37,10 +36,12 @@ int main() {
     Person p1("kartik", "kapoor");
     Person p2("Ram", "Singh");
     Person p3("Laxman", "Prasad");
+    Person p4("Ram", "Singh");
 
     um[p1] = 100;
     um[p2] = 200;
     um[p3] = 100;
+    um[p4] = 500;
 
     for (auto e : um) {
         cout << "[" << e.first.first << ", " << e.first.last << "] = > " << e.second << '\n';
