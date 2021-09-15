@@ -6,7 +6,7 @@ using namespace std;
 
 void towerOfHanoi(int n, char src, char dest, char aux_rod) {
     if (n == 1) {
-        cout << "Move disk 1 from rod " << src << " to rod " << dest << endl;
+        cout << "Move disk " << n << " from rod " << src << " to rod " << dest << endl;
         return;
     }
     towerOfHanoi(n - 1, src, aux_rod, dest);
@@ -21,6 +21,7 @@ int main() {
     towerOfHanoi(n, 'A', 'C', 'B');
     return 0;
 }
+
 
 /*
 Move disk 1 from rod A to rod C
