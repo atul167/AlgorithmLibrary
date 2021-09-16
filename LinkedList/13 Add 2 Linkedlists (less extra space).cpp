@@ -7,16 +7,13 @@ Returning answer by modifying linkedlist 1 for space utilization
 using namespace std;
 
 struct Node {
-    int val;
-    Node* next;
+    int data;
+    struct Node* next;
+    Node(int x) {
+        data = x;
+        next = NULL;
+    }
 };
-
-Node* newNode(int val) {
-    Node* temp = new Node;
-    temp->val = val;
-    temp->next = NULL;
-    return temp;
-}
 
 Node* reverseList(Node* head) {
     if (!head) return head;
@@ -41,8 +38,8 @@ Node* Add(Node* h1, Node* h2) {
     Node *res = l1, *prev;
 
     while (l1 && l2) {
-        total = l1->val + l2->val + carry;
-        l1->val = total % 10;
+        total = l1->data + l2->data + carry;
+        l1->data = total % 10;
         carry = total / 10;
 
         prev = l1;
@@ -50,23 +47,23 @@ Node* Add(Node* h1, Node* h2) {
         l2 = l2->next;
     }
     while (l1) {
-        total = l1->val + carry;
-        l1->val = total % 10;
+        total = l1->data + carry;
+        l1->data = total % 10;
         carry = total / 10;
 
         prev = l1;
         l1 = l1->next;
     }
     while (l2) {
-        total = l2->val + carry;
-        prev->next = newNode(total % 10);
+        total = l2->data + carry;
+        prev->next = new Node(total % 10);
         carry = total / 10;
 
         prev = prev->next;
         l2 = l2->next;
     }
     while (carry) {
-        prev->next = newNode(carry % 10);
+        prev->next = new Node(carry % 10);
         carry /= 10;
 
         prev = prev->next;
@@ -77,21 +74,21 @@ Node* Add(Node* h1, Node* h2) {
 }
 
 int32_t main() {
-    Node* head1 = newNode(1);
-    head1->next = newNode(2);
-    head1->next->next = newNode(3);
+    Node* head1 = new Node(1);
+    head1->next = new Node(2);
+    head1->next->next = new Node(3);
 
-    Node* head2 = newNode(1);
-    head2->next = newNode(2);
-    head2->next->next = newNode(0);
-    head2->next->next->next = newNode(0);
+    Node* head2 = new Node(1);
+    head2->next = new Node(2);
+    head2->next->next = new Node(0);
+    head2->next->next->next = new Node(0);
 
     head1 = Add(head1, head2);
 
     if (!head1) cout << 0 << endl;
 
     while (head1) {
-        cout << head1 -> val << " ";
+        cout << head1 -> data << " ";
         head1 = head1 -> next;
     }
 }
