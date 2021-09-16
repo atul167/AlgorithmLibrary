@@ -22,6 +22,20 @@ https://youtu.be/ww4V7vRIzSk
 The greedy strategy is:
 1) Either of odd index elements sum or even index elements sum is greater than other.
 2) Thus after checking which sum is greater, player1 can always force the opponent (player2) to choose the other parity elements.
+
+
+
+
+
+Thus for this question we can also write as:
+
+bool PredictTheWinner(vector<int>& nums) {
+    int n = nums.size();
+    if(n % 2 == 0) return true;
+
+    vector<vector<vector<int>>> dp(n+5, vector<vector<int>>(n+5, vector<int>(2, -1)));
+    return minimax(0, n - 1, 1, nums, dp) >= 0;
+}
 */
 
 
