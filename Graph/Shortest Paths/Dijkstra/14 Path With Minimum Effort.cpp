@@ -1,4 +1,5 @@
 // https://leetcode.com/problems/path-with-minimum-effort/
+// https://leetcode.com/problems/path-with-minimum-effort/discuss/909017/JavaPython-Dijikstra-Binary-search-Clean-and-Concise
 
 
 /*
