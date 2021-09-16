@@ -13,6 +13,18 @@ You may assume that both players are playing optimally.
 */
 
 
+/*
+Note: In this question array length can be either odd or even.
+
+But if it would have been the case that array length is always even then player1 can always win the game as explained by sumit sir in this video 
+https://youtu.be/ww4V7vRIzSk
+
+The greedy strategy is:
+1) Either of odd index elements sum or even index elements sum is greater than other.
+2) Thus after checking which sum is greater, player1 can always force the opponent (player2) to choose the other parity elements.
+*/
+
+
 class Solution {
 public:
     int minimax(int left, int right, bool isMax, vector<int>& nums, vector<vector<vector<int>>>& dp) {
