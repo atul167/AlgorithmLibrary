@@ -1,4 +1,6 @@
 // https://practice.geeksforgeeks.org/problems/optimal-strategy-for-a-game-1587115620/1
+// https://www.techiedelight.com/pots-gold-game-dynamic-programming/
+
 
 /*
 You are given an array A of size N. The array contains integers and is of even length. 
@@ -25,7 +27,109 @@ Explanation: The user collects maximum value as 22(7 + 15)
 
 
 
-// Method 1: (TLE)
+
+// Method 1: Top Down
+class Solution {
+public:
+    #define ll long long
+
+    // Recursive function to maximize the number of coins collected by a player, assuming that the opponent also plays optimally
+    ll findMaxCoins(int i, int j, int nums[], vector<vector<ll>>& dp) {
+        // base case: one pot left, only one choice possible
+        if (i == j) {
+            return nums[i];
+        }
+
+        // if we are left with only two pots, choose one with maximum coins
+        if (i + 1 == j) {
+            return max(nums[i], nums[j]);
+        }
+
+        if (dp[i][j] != -1) return dp[i][j];
+
+        // if a player chooses the front pot `i`, the opponent is left to choose from `[i+1, j]`.
+        // 1. If the opponent chooses front pot `i+1`, recur for `[i+2, j]`
+        // 2. If the opponent chooses rear pot `j`, recur for `[i+1, j-1]`
+        ll start = nums[i] + min(findMaxCoins(i + 2, j, nums, dp), findMaxCoins(i + 1, j - 1, nums, dp));
+
+        // if a player chooses rear pot `j`, the opponent is left to choose from `[i, j-1]`.
+        // 1. If the opponent chooses front pot `i`, recur for `[i+1, j-1]`
+        // 2. If the opponent chooses rear pot `j-1`, recur for `[i, j-2]`
+        ll end = nums[j] + min(findMaxCoins(i + 1, j - 1, nums, dp), findMaxCoins(i, j - 2, nums, dp));
+
+        // return the maximum of two choices
+        return dp[i][j] = max(start, end);
+    }
+
+    long long maximumAmount(int arr[], int n) {
+        vector<vector<ll>> dp(n + 5, vector<ll>(n + 5, -1));
+        ll x = findMaxCoins(0, n - 1, arr, dp);
+        return x;
+    }
+};
+
+
+
+
+
+// Method 1: Bottom Up
+class Solution {
+public:
+#define ll long long
+
+    int calculate(int i, int j, vector<vector<ll>>& dp) {
+        if (i <= j) return dp[i][j];
+        return 0;
+    }
+
+    long long maximumAmount(int coin[], int n) {
+        vector<vector<ll>> dp(n, vector<ll>(n));
+
+        // Fill the matrix in a diagonal manner
+        for (int gap = 0; gap < n; gap++) {
+            for (int i = 0, j = gap; j < n; i++, j++) {
+                if (gap == 0) {
+                    dp[i][j] = coin[i];
+                } else if (gap == 1) {
+                    dp[i][j] = max(coin[i], coin[i + 1]);
+                } else {
+                    // if a player chooses the front pot `i`, the opponent is left to choose from `[i+1, j]`.
+                    // 1. If the opponent chooses front pot `i+1`, recur for `[i+2, j]`
+                    // 2. If the opponent chooses rear pot `j`, recur for `[i+1, j-1]`
+
+                    ll start = coin[i] + min(calculate(i + 2, j, dp), calculate(i + 1, j - 1, dp));
+
+                    // if a player chooses rear pot `j`, the opponent is left to choose from `[i, j-1]`.
+                    // 1. If the opponent chooses front pot `i`, recur for `[i+1, j-1]`
+                    // 2. If the opponent chooses rear pot `j-1`, recur for `[i, j-2]`
+
+                    ll end = coin[j] + min(calculate(i + 1, j - 1, dp), calculate(i, j - 2, dp));
+
+                    dp[i][j] = max(start, end);
+                }
+            }
+        }
+
+        return dp[0][n - 1];
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Method 2.1: (TLE)
 class Solution {
 public:
     #define ll long long
@@ -78,7 +182,7 @@ public:
 
 
 
-// Method 2: (TLE)
+// Method 2.2: (TLE)
 class Solution {
 public:
 #define ll long long
