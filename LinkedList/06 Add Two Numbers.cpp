@@ -85,7 +85,6 @@ public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         if(!l1) return l2;
         if(!l2) return l1;
-        if(!l1 && !l2) return NULL;
         
         int carry = 0, total = 0; 
         ListNode *res = l1, *prev;
