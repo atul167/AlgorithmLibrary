@@ -149,6 +149,19 @@ struct Node {
     }
 };
 
+Node* addNode(int x, Node *head) {
+    if (!head) {
+        head = new Node(x);
+        return head;
+    }
+    Node *temp = head;
+    while (temp->next) {
+        temp = temp->next;
+    }
+    temp->next = new Node(x);
+    return head;
+}
+
 int Size(Node *head) {
     int cnt = 0;
     while (head) {
@@ -238,19 +251,6 @@ Node* subLinkedList(Node* l1, Node* l2) {
     return Subtract(l1, l2);
 }
 
-Node* addNode(int x, Node *head) {
-    if (!head) {
-        head = new Node(x);
-        return head;
-    }
-    Node *temp = head;
-    while (temp->next) {
-        temp = temp->next;
-    }
-    temp->next = new Node(x);
-    return head;
-}
-
 int32_t main() {
     Node* head1 = NULL, *head2 = NULL;
 
@@ -276,7 +276,6 @@ int32_t main() {
         head1 = head1 -> next;
     }
 }
-
 
 /*
 Input:
