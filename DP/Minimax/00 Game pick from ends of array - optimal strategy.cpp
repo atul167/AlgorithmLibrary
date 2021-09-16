@@ -10,54 +10,7 @@ Return true if Player 1 can win the game. If the scores of both players are equa
 You may assume that both players are playing optimally.
 */
 
-// Not memoized AC
-class Solution {
-public:
-    int minimax(int left, int right, bool isMax, vector<int>& nums) {
-        // Terminating condition
-        if (left > right) {
-            return 0;
-        }
-        
-        //  If current move is maximizer, find the maximum attainable value
-        if (isMax) {
-            int l = nums[left] + minimax(left + 1, right, false, nums);
-            int r = nums[right] + minimax(left, right - 1, false, nums);
-           return max(l, r);
-        }
 
-        // Else (If current move is Minimizer), find the minimum attainable value
-        else {
-            int l = -nums[left] + minimax(left + 1, right, true, nums);
-            int r = -nums[right] + minimax(left, right - 1, true, nums);
-            return min(l, r);
-        }
-    }
-    bool PredictTheWinner(vector<int>& nums) {
-        int n = nums.size();
-        return minimax(0, n - 1, 1, nums) >= 0;
-    }
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Memoized AC
 class Solution {
 public:
     int minimax(int left, int right, bool isMax, vector<int>& nums, vector<vector<vector<int>>>& dp) {
