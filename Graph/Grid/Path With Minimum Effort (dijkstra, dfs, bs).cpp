@@ -44,7 +44,7 @@ Explanation: This route does not require any effort.
 
 
 /*
-// Method 1: Dijikstra
+Solution 1: Dijikstra
 
 Idea:
 If we observe, this problem is to find the shortest path from a source cell (0, 0) to a destination cell (m-1, n-1). 
