@@ -39,6 +39,7 @@ bool PredictTheWinner(vector<int>& nums) {
 */
 
 
+// Method 1: Minimax Algo
 class Solution {
 public:
     int minimax(int left, int right, bool isMax, vector<int>& nums, vector<vector<vector<int>>>& dp) {
@@ -67,5 +68,57 @@ public:
         int n = nums.size();
         vector<vector<vector<int>>> dp(n+5, vector<vector<int>>(n+5, vector<int>(2, -1)));
         return minimax(0, n - 1, 1, nums, dp) >= 0;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+// Method 2: Gap
+class Solution {
+public:
+    int calculate(int i, int j, vector<vector<int>>& dp) {
+        if (i <= j) return dp[i][j];
+        return 0;
+    }
+
+    bool PredictTheWinner(vector<int>& nums) {
+        int n = nums.size();
+        if (n % 2 == 0) return true;
+
+        int sum = accumulate(nums.begin(), nums.end(), 0);
+
+        vector<vector<int>> dp(n, vector<int>(n));
+
+        // Fill the matrix in a diagonal manner
+        for (int gap = 0; gap < n; gap++) {
+            for (int i = 0, j = gap; j < n; i++, j++) {
+                // if a player chooses the front pot `i`, the opponent is left to choose from `[i+1, j]`.
+                // 1. If the opponent chooses front pot `i+1`, recur for `[i+2, j]`
+                // 2. If the opponent chooses rear pot `j`, recur for `[i+1, j-1]`
+                int start = nums[i] + min(calculate(i + 2, j, dp), calculate(i + 1, j - 1, dp));
+
+                // if a player chooses rear pot `j`, the opponent is left to choose from `[i, j-1]`.
+                // 1. If the opponent chooses front pot `i`, recur for `[i+1, j-1]`
+                // 2. If the opponent chooses rear pot `j-1`, recur for `[i, j-2]`
+                int end = nums[j] + min(calculate(i + 1, j - 1, dp), calculate(i, j - 2, dp));
+
+                dp[i][j] = max(start, end);
+            }
+        }
+
+        int player1 = dp[0][n - 1];
+        int player2 = sum - player1;
+
+        return player1 >= player2;
+
     }
 };
