@@ -72,7 +72,7 @@ public:
 
 
 
-// Method 1: Bottom Up
+// Method 1.1: Bottom Up
 class Solution {
 public:
 #define ll long long
@@ -113,6 +113,51 @@ public:
         return dp[0][n - 1];
     }
 };
+
+
+
+
+
+
+// Method 1.2: Bottom Up
+class Solution {
+public:
+#define ll long long
+
+    int calculate(int i, int j, vector<vector<ll>>& dp) {
+        if (i <= j) return dp[i][j];
+        return 0;
+    }
+
+    long long maximumAmount(int coin[], int n) {
+        vector<vector<ll>> dp(n, vector<ll>(n));
+
+        // Fill the matrix in a diagonal manner
+        for (int gap = 0; gap < n; gap++) {
+            for (int i = 0, j = gap; j < n; i++, j++) {
+                // if a player chooses the front pot `i`, the opponent is left to choose from `[i+1, j]`.
+                // 1. If the opponent chooses front pot `i+1`, recur for `[i+2, j]`
+                // 2. If the opponent chooses rear pot `j`, recur for `[i+1, j-1]`
+
+                ll start = coin[i] + min(calculate(i + 2, j, dp), calculate(i + 1, j - 1, dp));
+
+                // if a player chooses rear pot `j`, the opponent is left to choose from `[i, j-1]`.
+                // 1. If the opponent chooses front pot `i`, recur for `[i+1, j-1]`
+                // 2. If the opponent chooses rear pot `j-1`, recur for `[i, j-2]`
+
+                ll end = coin[j] + min(calculate(i + 1, j - 1, dp), calculate(i, j - 2, dp));
+
+                dp[i][j] = max(start, end);
+            }
+        }
+
+        return dp[0][n - 1];
+    }
+};
+
+
+
+
 
 
 
