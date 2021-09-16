@@ -1,3 +1,8 @@
+/*
+Assumption:
+head1 linkedlist numeric value >= head2 linkedlist numeric value
+*/
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -16,24 +21,23 @@ Node* newNode(int data) {
 Node* reverseList(Node* head) {
     if (!head) return head;
 
-    Node* PREV = NULL, *NEXT;
-    while (head->next) {
-        NEXT = head->next;
-        head->next = PREV;
-        PREV = head;
-        head = NEXT;
+    Node *prev = NULL, *cur = head, *nxt = NULL;
+    while (cur) {
+        nxt = cur->next;
+        cur->next = prev;
+        prev = cur;
+        cur = nxt;
     }
-    head->next = PREV;
-    return head;
+    return prev;
 }
 
-struct Node* Subtract(struct Node* h1, struct Node* h2) {
+Node* Subtract(Node* h1, Node* h2) {
     if (!h1 || !h2) return h1;
     Node *rH1 = reverseList(h1);
     Node *rH2 = reverseList(h2);
     Node *temp1 = rH1;
     Node *temp2 = rH2;
-    
+
     int carry = 0;
     while (temp1 && temp2) {
         int cur1 = (temp1 -> data);
@@ -43,8 +47,8 @@ struct Node* Subtract(struct Node* h1, struct Node* h2) {
             carry = 0;
         }
         if (cur1 < cur2) {
-            carry = 1;
             cur1 += 10;
+            carry = 1;
         }
 
         int res = cur1 - cur2;
@@ -68,7 +72,9 @@ struct Node* Subtract(struct Node* h1, struct Node* h2) {
         temp1 -> data = res;
         temp1 = temp1 -> next;
     }
+
     rH1 = reverseList(rH1);
+    // removing leading zeros from answer
     while (rH1 -> next && rH1 -> data == 0) {
         rH1 = rH1 -> next;
     }
@@ -93,3 +99,11 @@ int32_t main() {
         head1 = head1 -> next;
     }
 }
+
+
+/*
+10040
+42
+
+3 
+*/
