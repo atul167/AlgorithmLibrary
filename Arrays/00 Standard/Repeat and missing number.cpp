@@ -3,6 +3,34 @@
 
 
 
+// C++ program to Find the repeating
+// and missing elements
+
+#include <bits/stdc++.h>
+using namespace std;
+
+void printTwoElements(int arr[], int n) {
+    for (int i = 0; i < n; i++) {
+        while (arr[i] != i + 1) {
+            if (arr[i] == arr[arr[i] - 1]) {
+                cout << "Repeating: " << arr[i] << endl;
+                cout << "Missing: " << i + 1 << endl;
+                return;
+            }
+
+            swap(arr[i], arr[arr[i] - 1]);
+        }
+    }
+}
+
+int main() {
+    int arr[] = { 7, 3, 4, 5, 5, 6, 2 };
+    int n = sizeof(arr) / sizeof(arr[0]);
+    printTwoElements(arr, n);
+}
+
+
+
 
 
 
