@@ -8,16 +8,21 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void printTwoElements(int arr[], int n) {
+void printRepeatingAndMissing(int arr[], int n) {
     for (int i = 0; i < n; i++) {
         while (arr[i] != i + 1) {
             if (arr[i] == arr[arr[i] - 1]) {
                 cout << "Repeating: " << arr[i] << endl;
-                cout << "Missing: " << i + 1 << endl;
-                return;
+                break;
             }
 
             swap(arr[i], arr[arr[i] - 1]);
+        }
+    }
+
+    for (int i = 0; i < n; i++) {
+        if (arr[i] != i + 1) {
+            cout << "Missing: " << i + 1 << endl;
         }
     }
 }
@@ -25,8 +30,39 @@ void printTwoElements(int arr[], int n) {
 int main() {
     int arr[] = { 7, 3, 4, 5, 5, 6, 2 };
     int n = sizeof(arr) / sizeof(arr[0]);
-    printTwoElements(arr, n);
+    printRepeatingAndMissing(arr, n);
 }
+
+
+
+
+
+class Solution {
+public:
+    int *findTwoElement(int *arr, int n) {
+        int *res = new int[2];
+        for (int i = 0; i < n; i++) {
+            while (arr[i] != i + 1) {
+                if (arr[i] == arr[arr[i] - 1]) {
+                    res[0] = arr[i];
+                    break;
+                }
+
+                swap(arr[i], arr[arr[i] - 1]);
+            }
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (arr[i] != i + 1) res[1] = i + 1;
+        }
+
+        return res;
+    }
+};
+
+
+
+
 
 
 
