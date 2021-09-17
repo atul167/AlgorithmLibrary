@@ -3,8 +3,7 @@
 
 
 
-// C++ program to Find the repeating
-// and missing elements
+// C++ program to Find the repeating and missing elements
 
 #include <bits/stdc++.h>
 using namespace std;
