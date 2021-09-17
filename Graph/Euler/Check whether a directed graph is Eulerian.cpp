@@ -1,4 +1,4 @@
-// https://www.techiedelight.com/eulerian-path-undirected-graph/
+// https://www.techiedelight.com/eulerian-path-directed-graph/
 
 
 #include <iostream>
