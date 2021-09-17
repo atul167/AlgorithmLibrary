@@ -1,26 +1,24 @@
+// https://www.geeksforgeeks.org/find-a-repeating-and-a-missing-number/
+
+
+
+
+
+
+
+
 // https://www.interviewbit.com/problems/repeat-and-missing-number-array/
 
 /*
 You are given a read only array of n integers from 1 to n.
-
 Each integer appears exactly once except A which appears twice and B which is missing.
-
 Return A and B.
-
 Note: Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
 
-Note that in your output A should precede B.
-
 Example:
-
 Input:[3 1 2 5 3] 
-
 Output:[3, 4] 
-
-A = 3, B = 4
 */
-
-
 
 
 
@@ -57,7 +55,7 @@ vector<int> Solution::repeatedNumber(const vector<int> &A) {
     int setbit = xo & (~(xo - 1));
     int x = 0, y = 0;
     for (int i = 0; i < n; i++) {
-        if (A[i]&setbit)
+        if (A[i] & setbit)
             x = x ^ A[i];
         else
             y = y ^ A[i];
@@ -71,8 +69,7 @@ vector<int> Solution::repeatedNumber(const vector<int> &A) {
             res[0] = x;
             res[1] = y;
             break;
-        }
-        else if (A[i] == y) {
+        } else if (A[i] == y) {
             res[0] = y;
             res[1] = x;
             break;
