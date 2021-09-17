@@ -7,9 +7,21 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
 // https://www.interviewbit.com/problems/repeat-and-missing-number-array/
 
 /*
+Note: vector is immutable (i.e we cannot aply swap sort)
+
 You are given a read only array of n integers from 1 to n.
 Each integer appears exactly once except A which appears twice and B which is missing.
 Return A and B.
