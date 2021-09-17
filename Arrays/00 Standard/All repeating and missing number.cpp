@@ -1,13 +1,11 @@
+// C++ program to Find the repeating and missing elements
+
 #include <bits/stdc++.h>
 using namespace std;
 
 void printRepeatingAndMissing(int arr[], int n) {
     for (int i = 0; i < n; i++) {
-        while (arr[i] != i + 1) {
-            if (arr[i] == arr[arr[i] - 1]) {
-                // cout << "Repeating: " << arr[i] << endl;
-                break;
-            }
+        while (arr[i] != arr[arr[i] - 1]) {
             swap(arr[i], arr[arr[i] - 1]);
         }
     }
