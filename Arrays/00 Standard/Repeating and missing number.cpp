@@ -2,36 +2,30 @@
 
 
 
-
-// C++ program to Find the repeating and missing elements
-
 #include <bits/stdc++.h>
 using namespace std;
 
 void printRepeatingAndMissing(int arr[], int n) {
     for (int i = 0; i < n; i++) {
-        while (arr[i] != i + 1) {
-            if (arr[i] == arr[arr[i] - 1]) {
-                cout << "Repeating: " << arr[i] << endl;
-                break;
-            }
-
+        while (arr[i] != arr[arr[i] - 1]) {
             swap(arr[i], arr[arr[i] - 1]);
         }
     }
 
     for (int i = 0; i < n; i++) {
         if (arr[i] != i + 1) {
+            cout << "Repeating: " << arr[i] << endl;
             cout << "Missing: " << i + 1 << endl;
         }
     }
 }
 
 int main() {
-    int arr[] = { 7, 3, 4, 5, 5, 6, 2 };
+    int arr[] = { 1, 2, 3, 8, 2, 3, 5, 1 };
     int n = sizeof(arr) / sizeof(arr[0]);
     printRepeatingAndMissing(arr, n);
 }
+
 
 
 
@@ -42,18 +36,16 @@ public:
     int *findTwoElement(int *arr, int n) {
         int *res = new int[2];
         for (int i = 0; i < n; i++) {
-            while (arr[i] != i + 1) {
-                if (arr[i] == arr[arr[i] - 1]) {
-                    res[0] = arr[i];
-                    break;
-                }
-
+            while (arr[i] != arr[arr[i] - 1]) {
                 swap(arr[i], arr[arr[i] - 1]);
             }
         }
 
         for (int i = 0; i < n; i++) {
-            if (arr[i] != i + 1) res[1] = i + 1;
+            if (arr[i] != i + 1) {
+                res[0] = arr[i];
+                res[1] = i + 1;
+            }
         }
 
         return res;
