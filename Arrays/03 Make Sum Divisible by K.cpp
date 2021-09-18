@@ -15,6 +15,63 @@ We can remove the subarray [4], and the sum of the remaining elements is 6, whic
 */
 
 
+
+
+class Solution {
+public:
+    int minSubarray(vector<int>& nums, int k) {
+        int n = nums.size();
+
+        // Remainder when total_sum is divided by K
+        int total_sum_rem = 0;
+        for (int i = 0; i < n; i++) {
+            total_sum_rem = (total_sum_rem + nums[i]) % k;
+        }
+
+        // If given array is already divisible by K
+        if (total_sum_rem == 0) return 0;
+
+        // Stores curr_remainder and the most recent index at which curr_remainder has occured
+        unordered_map<int, int> mp;
+        mp[0] = -1;
+
+        int curr_remainder = 0;
+
+        // Stores required answer
+        int res = n;
+
+        for (int i = 0; i < n; i++) {
+            curr_remainder = (curr_remainder + nums[i]) % k;
+
+            // Update current remainder index
+            mp[curr_remainder] = i;
+
+            int mod = (curr_remainder - total_sum_rem + k) % k;
+
+            // If mod already exists in map the subarray exists
+            if (mp.count(mod)) res = min(res, i - mp[mod]);
+        }
+
+        return res < n ? res : -1;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Solution {
 public:
     int minSubarray(vector<int>& nums, int p) {
