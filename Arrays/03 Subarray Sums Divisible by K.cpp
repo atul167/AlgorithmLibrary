@@ -16,14 +16,38 @@ public:
         map<int, int> mp;
         mp[0] = 1;
         
-        int prefix = 0, res = 0;
+        int prefSumMod = 0, res = 0;
         
         for (int x: nums) {
-            prefix = (prefix + x + k) % k;
-            if(prefix < 0) prefix += k;
+            prefSumMod = (prefSumMod + x + k) % k;
+            if(prefSumMod < 0) prefSumMod += k;
             
-            res += mp[prefix];
-            mp[prefix]++;
+            res += mp[prefSumMod];
+            mp[prefSumMod]++;
+        }
+        return res;
+    }
+};
+
+
+
+
+
+class Solution {
+public:
+    int subarraysDivByK(vector<int>& nums, int k) {
+        map<int, int> mp;
+        
+        int prefSumMod = 0, res = 0;
+        
+        for (int x: nums) {
+            prefSumMod = (prefSumMod + x + k) % k;
+            if(prefSumMod < 0) prefSumMod += k;
+            
+            if(prefSumMod == 0) res++;
+            
+            res += mp[prefSumMod];
+            mp[prefSumMod]++;
         }
         return res;
     }
