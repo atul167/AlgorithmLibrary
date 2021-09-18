@@ -15,6 +15,67 @@ We can remove the subarray [4], and the sum of the remaining elements is 6, whic
 */
 
 
+/*
+// https://leetcode.com/problems/make-sum-divisible-by-p/discuss/854166/JavaPython-3-O(n)-code-w-brief-explanation-analysis-and-similar-problems.
+
+I think there are two parts to recognize in this question after thinking about for a long time. 
+It helps to think about this question if P was just a target value to sum to.
+
+1) After getting the sum of the entire array % p. This is the new target to find in a subarray. 
+   You can now think of the question as regular subarray target finding problem. Maybe this is obvious, but took me a while...
+
+2) Key calculation: key = (preSum - remainder + p) % p;
+   The current sum - our target would be the target in a normal prefix sum problem. But we have modulus, so we need to offset by p.
+   Let says P = 2000, target = 1000, and current sum = 600; This current sum could be 2600, 4600.....etc. Key = 600 - 1000 + 2000 = 1600. 
+   If we found some prefix of 1600, then the rest of the array would sum to 1000, which is our target.
+*/
+
+class Solution {
+public:
+    int minSubarray(vector<int>& nums, int p) {
+        int n = nums.size();
+        int remainder = 0;
+
+        for (int num : nums) {
+            remainder = (remainder + num) % p;
+        }
+
+        map<int, int> prefixSumToIndex;
+        prefixSumToIndex[0] = -1;
+
+        int prefixSum = 0, res = n;
+
+        for (int i = 0; i < n; ++i) {
+            prefixSum = (prefixSum + nums[i]) % p;
+            prefixSumToIndex[prefixSum] = i;
+
+            int key = (prefixSum - remainder + p) % p;
+
+            if (prefixSumToIndex.count(key)) {
+                res = min(res, i - prefixSumToIndex[key]);
+            }
+        }
+
+        return res < n ? res : -1;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 class Solution {
@@ -55,15 +116,6 @@ public:
         return res < n ? res : -1;
     }
 };
-
-
-
-
-
-
-
-
-
 
 
 
