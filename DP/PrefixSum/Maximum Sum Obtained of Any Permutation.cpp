@@ -29,6 +29,61 @@ requests[i].length == 2
 */
 
 
+/*
+Hint:
+Indexes with higher frequencies should be bound with larger values of nums.
+*/
+
+
+class Solution {
+public:
+    const int mod = 1e9 + 7;
+
+    int maxSumRangeQuery(vector<int>& nums, vector<vector<int>>& requests) {
+        int n = nums.size();
+        vector<int> freq(n);
+
+        for (auto it : requests) {
+            freq[it[0]]++;
+            if (it[1] + 1 < n) freq[it[1] + 1]--;
+        }
+
+        for (int i = 1; i < n; i++) {
+            freq[i] += freq[i - 1];
+        }
+
+        sort(freq.begin(), freq.end());
+        sort(nums.begin(), nums.end());
+
+        long sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += ((long)freq[i] * (long)nums[i]);
+
+            sum %= mod;
+            if (sum < 0) sum += mod;
+        }
+
+        return (int)sum;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class Solution {
 public:
     const int mod = 1e9 + 7;
