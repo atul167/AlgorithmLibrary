@@ -21,9 +21,11 @@ public:
             prefSumMod = (prefSumMod + arr[i]) % k;
             if (prefSumMod < 0) prefSumMod += k;
 
-            if (mp.find(prefSumMod) == mp.end()) mp[prefSumMod] = i;
-
-            res = max(res, i - mp[prefSumMod]);
+            if (mp.find(prefSumMod) != mp.end()) {
+                res = max(res, i - mp[prefSumMod]);
+            } else {
+                mp[prefSumMod] = i;
+            }
         }
 
         return res;
