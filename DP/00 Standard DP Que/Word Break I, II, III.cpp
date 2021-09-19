@@ -150,3 +150,81 @@ public:
         return res;
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+Word Break III
+
+Give a dictionary of words and a sentence with all whitespace removed, 
+return the number of sentences you can form by inserting whitespaces to the sentence so that each word can be found in the dictionary.
+Note: Ignore case.
+
+Example1
+Input:
+"CatMat"
+["Cat", "Mat", "Ca", "tM", "at", "C", "Dog", "og", "Do"]
+Output: 3
+Explanation:
+we can form 3 sentences, as follows:
+"CatMat" = "Cat" + "Mat"
+"CatMat" = "Ca" + "tM" + "at"
+"CatMat" = "C" + "at" + "Mat"
+*/
+
+class Solution {
+public:
+    /**
+     * @param s: A string
+     * @param dict: A set of word
+     * @return: the number of possible sentences.
+     */
+
+    int n;
+    unordered_set<string> words;
+
+    int go(int pos, string s, vector<int>& dp) {
+        if (pos == n)  return 1;
+        if (pos > n) return 0;
+
+        if (dp[pos] != -1) return dp[pos];
+
+        int res = 0;
+        for (int i = pos; i < n; i++) {
+            if (words.count(s.substr(pos, i - pos + 1))) {
+                res +=  go(i + 1, s, dp);
+            }
+        }
+        return dp[pos] = res;
+    }
+
+    int wordBreak3(string &s, unordered_set<string> &dict) {
+        // ignoring case
+        for (auto &it : dict) {
+            string tmp = it;
+            transform(tmp.begin(), tmp.end(), tmp.begin(), ::tolower);
+            words.insert(tmp);
+        }
+        transform(s.begin(), s.end(), s.begin(), ::tolower);
+
+        n = s.size();
+        vector<int> dp(n, -1);
+        return go(0, s, dp);
+    }
+};
