@@ -1,6 +1,10 @@
 // https://leetcode.com/problems/word-break/
+// https://leetcode.com/problems/word-break-ii/
+
 
 /*
+Word Break I
+
 Given a string s and a dictionary of strings wordDict, return true if s can be segmented into a space-separated sequence of one or more dictionary words.
 Note that the same word in the dictionary may be reused multiple times in the segmentation.
 
@@ -14,16 +18,10 @@ Example 2:
 Input: s = "applepenapple", wordDict = ["apple","pen"]
 Output: true
 Explanation: Return true because "applepenapple" can be segmented as "apple pen apple".
-Note that you are allowed to reuse a dictionary word.
-
-Example 3:
-Input: s = "catsandog", wordDict = ["cats","dog","sand","and","cat"]
-Output: false
 */
 
 
 
-// https://leetcode.com/problems/word-break/
 
 // Method: Top-down
 class Solution {
@@ -83,5 +81,72 @@ public:
         }
         
         return dp[n];
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+Word Break II
+
+Given a string s and a dictionary of strings wordDict, add spaces in s to construct a sentence where each word is a valid dictionary word. 
+Return all such possible sentences in any order.
+Note that the same word in the dictionary may be reused multiple times in the segmentation.
+
+Example 1:
+Input: s = "catsanddog", wordDict = ["cat","cats","and","sand","dog"]
+Output: ["cats and dog","cat sand dog"]
+*/
+
+
+class Solution {
+public:
+    vector<string> res;
+    int n;
+    unordered_set<string> wordSet;
+
+    void go(int pos, string temp, string& s) {
+        if (pos == n)  {
+            // remove extra space
+            temp = temp.substr(0, temp.size() - 1);
+            res.push_back(temp);
+            return;
+        }
+
+        for (int i = pos; i < n; i++) {
+            if (wordSet.count(s.substr(pos, i - pos + 1))) {
+                go(i + 1, temp + s.substr(pos, i - pos + 1) + " ", s);
+            }
+        }
+    }
+
+
+    vector<string> wordBreak(string s, vector<string>& wordDict) {
+        n = s.size();
+        for (string s : wordDict) {
+            wordSet.insert(s);
+        }
+        go(0, "", s);
+        return res;
     }
 };
