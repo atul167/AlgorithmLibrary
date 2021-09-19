@@ -35,51 +35,42 @@ Output: false
 class Solution {
 public:
     string str, pat;
-    int n, m;
-    
+
     bool go(int s, int p, vector<vector<int>>& dp) {
-        if(p == pat.length()) {
+        if (p == pat.length()) {
             return dp[s][p] = (s == str.length());
         }
-        if(s == str.length()) {
-            for(int i = p; i < pat.length(); i++) {
-                if(pat[i] != '*') {
+        if (s == str.length()) {
+            for (int i = p; i < pat.length(); i++) {
+                if (pat[i] != '*') {
                     return (dp[s][p] = 0);
                 }
             }
             return (dp[s][p] = 1);
         }
 
-        if(dp[s][p] != -1) return dp[s][p];
+        if (dp[s][p] != -1) return dp[s][p];
 
         // ? -> match one
-        if(pat[p] == '?' or pat[p] == str[s]) {
-            return dp[s][p] = go(s+1, p+1, dp);
+        if (pat[p] == '?' or pat[p] == str[s]) {
+            return dp[s][p] = go(s + 1, p + 1, dp);
         }
 
         // * -> match all or match none
-        if(pat[p] == '*') {
-            return dp[s][p] = go(s+1, p, dp) or go(s, p+1, dp);
+        if (pat[p] == '*') {
+            return dp[s][p] = go(s + 1, p, dp) or go(s, p + 1, dp);
         }
 
         return dp[s][p] = 0;
     }
-    
+
     bool isMatch(string str, string pattern) {
         this->str = str, this->pat = pattern;
-        n = str.size(), m = pattern.size();
-        vector<vector<int>> dp(n+1, vector<int>(m+1, -1));
+        int n = str.size(), m = pattern.size();
+        vector<vector<int>> dp(n + 1, vector<int>(m + 1, -1));
         return go(0, 0, dp);
     }
 };
-
-
-
-
-
-
-
-
 
 
 
