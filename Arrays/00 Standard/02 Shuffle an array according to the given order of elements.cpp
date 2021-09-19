@@ -1,6 +1,17 @@
 // https://www.techiedelight.com/shuffle-array-according-to-given-order/
 
 
+/*
+Given an array of distinct integers, shuffle it according to the given order of elements.
+
+Input:
+arr[] = { 1, 2, 3, 4, 5 }
+pos[] = { 3, 2, 4, 1, 0 }
+ 
+Output:
+arr[] = { 5, 4, 2, 1, 3 }
+*/
+
 
 #include <iostream>
 #include <vector>
@@ -62,10 +73,8 @@ int main() {
 
 
 
+// naive solution
 
-#include <stdio.h>
-
-// Function to shuffle an array according to the given order of elements
 void shuffle(int arr[], int pos[], int n) {
     // create an auxiliary array of size `n`
     int aux[n];
@@ -81,7 +90,7 @@ void shuffle(int arr[], int pos[], int n) {
     }
 }
 
-int main(void) {
+int main() {
     // input array
     int arr[] = { 1, 2, 3, 4, 5 };
 
@@ -95,6 +104,4 @@ int main(void) {
     for (int i = 0; i < n; i++) {
         printf("%d ", arr[i]);
     }
-
-    return 0;
 }
