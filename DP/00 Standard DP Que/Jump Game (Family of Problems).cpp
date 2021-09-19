@@ -1,6 +1,7 @@
 // https://leetcode.com/problems/jump-game/
 // https://leetcode.com/problems/jump-game-ii/
 // https://leetcode.com/problems/jump-game-iii/
+// https://leetcode.com/problems/jump-game-iv/
 
 
 
@@ -58,7 +59,6 @@ public:
         vector<int> dp(n, INF);
         dp[0] = 0;
         for(int i = 0; i < n; i++) {
-            if(nums[i] == 0) continue;
             for(int j = 1; j <= nums[i]; j++) {
                 if(i + j >= n) break;
                 dp[i + j] = min(dp[i + j], dp[i] + 1);
