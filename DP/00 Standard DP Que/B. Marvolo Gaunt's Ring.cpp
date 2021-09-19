@@ -17,18 +17,7 @@ dp[i][2] = max(dp[i - 1][2], dp[i][1] + r·ai)
 The answer will be stored in dp[n][2]
 */
 
- vi a, p;
-// int dp[100005][5];
- 
-// int go(int i, int j) {
-// 	if(j == p.size()) return 0;
-// 	if(i == n) return -3*INF;
- 
-// 	if(dp[i][j] != -1) return dp[i][j];
- 
-// 	return dp[i][j] = max(a[i]*p[j] + go(i, j+1), go(i+1, j));
-// }
- 
+ vi a, p; 
 void solve() {
 	int x, y, z;
 	p.resize(3);
@@ -49,4 +38,32 @@ void solve() {
 		dp[i][2] = max(dp[i-1][2], dp[i][1] + a[i] * p[2]);
 	}
 	cout << dp[n-1][2] << endl;
+}
+
+
+
+
+
+// TLE
+vi a, p;
+int dp[100005][5];
+ 
+int go(int i, int j) {
+	if(j == 3) return 0;
+	if(i == n) return -3*INF;
+ 
+	if(dp[i][j] != -1) return dp[i][j];
+ 
+	return dp[i][j] = max(a[i]*p[j] + go(i, j+1), go(i+1, j));
+}
+ 
+void solve() {
+	int x, y, z, k;
+	p.resize(3);
+	cin >> n >> p[0] >> p[1] >> p[2];
+	a.resize(n);
+	f(i, n) cin >> a[i];
+ 
+	memset(dp, -1, sizeof dp);
+	cout << go(0, 0) << endl;
 }
