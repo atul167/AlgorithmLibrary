@@ -1,5 +1,6 @@
 // https://leetcode.com/problems/word-break/
 // https://leetcode.com/problems/word-break-ii/
+// https://www.lintcode.com/problem/683/
 
 
 /*
@@ -197,7 +198,7 @@ public:
      */
 
     int n;
-    unordered_set<string> words;
+    unordered_set<string> wordSet;
 
     int go(int pos, string s, vector<int>& dp) {
         if (pos == n)  return 1;
@@ -207,7 +208,7 @@ public:
 
         int res = 0;
         for (int i = pos; i < n; i++) {
-            if (words.count(s.substr(pos, i - pos + 1))) {
+            if (wordSet.count(s.substr(pos, i - pos + 1))) {
                 res +=  go(i + 1, s, dp);
             }
         }
@@ -219,12 +220,52 @@ public:
         for (auto &it : dict) {
             string tmp = it;
             transform(tmp.begin(), tmp.end(), tmp.begin(), ::tolower);
-            words.insert(tmp);
+            wordSet.insert(tmp);
         }
         transform(s.begin(), s.end(), s.begin(), ::tolower);
 
         n = s.size();
         vector<int> dp(n, -1);
         return go(0, s, dp);
+    }
+};
+
+
+
+
+class Solution {
+public:
+    /**
+     * @param s: A string
+     * @param dict: A set of word
+     * @return: the number of possible sentences.
+     */
+
+    int n;
+    unordered_set<string> wordSet;
+
+    int wordBreak3(string &s, unordered_set<string> &dict) {
+        // ignoring case
+        for (auto &it : dict) {
+            string tmp = it;
+            transform(tmp.begin(), tmp.end(), tmp.begin(), ::tolower);
+            wordSet.insert(tmp);
+        }
+        transform(s.begin(), s.end(), s.begin(), ::tolower);
+
+        int n = s.size();
+        vector<int> dp(n + 1, 0);
+        dp[0] = 1;
+
+        for (int i = 1; i <= n; i ++) {
+            for (int j = 1; j <= i; j ++) {
+                string tmp = s.substr(i - j, j);
+                if (wordSet.find(tmp) != wordSet.end()) {
+                    dp[i] += dp[i - j];
+                }
+            }
+        }
+
+        return dp[n];
     }
 };
