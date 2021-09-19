@@ -62,6 +62,39 @@ public:
 
 
 
+class Solution {
+public:
+    int minSubarray(vector<int>& nums, int p) {
+        int n = nums.size();
+        int remainder = 0;
+
+        for (int num : nums) {
+            remainder = (remainder + num) % p;
+        }
+        if (remainder == 0) return 0;
+
+        map<int, int> prefixSumToIndex;
+        prefixSumToIndex[0] = -1;
+
+        int prefixSum = 0, res = n;
+
+        for (int i = 0; i < n; ++i) {
+            prefixSum = (prefixSum + nums[i]) % p;
+            int key = (prefixSum - remainder + p) % p;
+
+            if (prefixSumToIndex.count(key)) {
+                res = min(res, i - prefixSumToIndex[key]);
+            }
+
+            prefixSumToIndex[prefixSum] = i;
+        }
+
+        return res < n ? res : -1;
+    }
+};
+
+
+
 
 
 
