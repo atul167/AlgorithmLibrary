@@ -46,22 +46,27 @@ public:
                     return (dp[s][p] = 0);
                 }
             }
-            return (dp[s][p] = 1);
+            return dp[s][p] = 1;
         }
 
         if (dp[s][p] != -1) return dp[s][p];
 
+        bool res;
+        
         // ? -> match one
         if (pat[p] == '?' or pat[p] == str[s]) {
-            return dp[s][p] = go(s + 1, p + 1, dp);
+            res = go(s + 1, p + 1, dp);
         }
-
         // * -> match all or match none
-        if (pat[p] == '*') {
-            return dp[s][p] = go(s + 1, p, dp) or go(s, p + 1, dp);
+        else if (pat[p] == '*') {
+            res = go(s + 1, p, dp) || go(s, p + 1, dp);
         }
-
-        return dp[s][p] = 0;
+        // characters don't match
+        else {
+            res = false;
+        }
+        
+        return dp[s][p] = res;
     }
 
     bool isMatch(string str, string pattern) {
