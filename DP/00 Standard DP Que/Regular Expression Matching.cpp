@@ -48,10 +48,56 @@ It is guaranteed for each appearance of the character '*', there will be a previ
 We define dp[i][j] to be true if s[0..i) matches p[0..j) and false otherwise. 
 The state equations will be:
 
-dp[i][j] = dp[i - 1][j - 1], if p[j - 1] != '*' && (s[i - 1] == p[j - 1] || p[j - 1] == '.');
-dp[i][j] = dp[i][j - 2], if p[j - 1] == '*' and the pattern repeats for 0 time;
-dp[i][j] = dp[i - 1][j] && (s[i - 1] == p[j - 2] || p[j - 2] == '.'), if p[j - 1] == '*' and the pattern repeats for at least 1 time.
+if p[j - 1] != '*':
+      dp[i][j] = dp[i - 1][j - 1], if (s[i - 1] == p[j - 1] || p[j - 1] == '.');
+else:
+      dp[i][j] = dp[i][j - 2], if pattern repeats for 0 time;
+      dp[i][j] = dp[i - 1][j] && (s[i - 1] == p[j - 2] || p[j - 2] == '.'), if pattern repeats for at least 1 time.
 */
+
+
+
+
+class Solution {
+public:
+    int n, m;
+
+    bool go(int i, int j, string& str, string &pat) {
+        if (j == m) return i == str.size();
+
+        if (pat[j + 1] == '*') {
+            // if pattern repeats for 0 time
+            if (go(i, j + 2, str, pat)) return 1;
+
+            // if pattern repeats for at least 1 time
+            while (i < n && (pat[j] == str[i] || pat[j] == '.')) {
+                if (go(i + 1, j + 2, str, pat)) return 1;
+                i++;
+            }
+        }
+        // Current characters are considered as matching in two cases
+        // (a) current character of pattern is '.'
+        // (b) characters actually match
+        else if (i < n && (pat[j] == '.' || str[i] == pat[j])) {
+            return go(i + 1, j + 1, str, pat);
+        }
+        // no match
+        return 0;
+    }
+
+    bool isMatch(string str, string pat) {
+        n = str.size(), m = pat.size();
+        return go(0, 0, str, pat);
+    }
+};
+
+
+
+
+
+
+
+
 
 
 class Solution {
