@@ -57,21 +57,22 @@ else:
 
 
 
-
 class Solution {
 public:
     int n, m;
 
-    bool go(int i, int j, string& str, string &pat) {
+    bool go(int i, int j, string& str, string &pat, vector<vector<int>>& dp) {
         if (j == m) return i == str.size();
+
+        if (i < n && dp[i][j] != -1) return dp[i][j];
 
         if (pat[j + 1] == '*') {
             // if pattern repeats for 0 time
-            if (go(i, j + 2, str, pat)) return 1;
+            if (go(i, j + 2, str, pat, dp)) return dp[i][j] = 1;
 
             // if pattern repeats for at least 1 time
             while (i < n && (pat[j] == str[i] || pat[j] == '.')) {
-                if (go(i + 1, j + 2, str, pat)) return 1;
+                if (go(i + 1, j + 2, str, pat, dp)) return dp[i][j] = 1;
                 i++;
             }
         }
@@ -79,15 +80,16 @@ public:
         // (a) current character of pattern is '.'
         // (b) characters actually match
         else if (i < n && (pat[j] == '.' || str[i] == pat[j])) {
-            return go(i + 1, j + 1, str, pat);
+            return dp[i][j] = go(i + 1, j + 1, str, pat, dp);
         }
         // no match
-        return 0;
+        return dp[i][j] = 0;
     }
 
     bool isMatch(string str, string pat) {
         n = str.size(), m = pat.size();
-        return go(0, 0, str, pat);
+        vector<vector<int>> dp(n + 1, vector<int>(m + 1, -1));
+        return go(0, 0, str, pat, dp);
     }
 };
 
