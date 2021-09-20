@@ -130,9 +130,12 @@ public:
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= m; j++) {
                 if (pat[j - 1] == '*') {
-                    dp[i][j] = dp[i][j - 2];
                     if (pat[j - 2] == '.' || pat[j - 2] == str[i - 1]) {
-                        dp[i][j] = dp[i][j] || dp[i - 1][j];
+                        // a* counts as multiple a || counts as empty
+                        dp[i][j] = dp[i - 1][j] || dp[i][j - 2];
+                    } else {
+                        // a* only counts as empty
+                        dp[i][j] = dp[i][j - 2];
                     }
                 }
 
@@ -148,6 +151,74 @@ public:
             }
         }
 
+        return dp[n][m];
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+1) If p[j] == s[i]: dp[i][j] = dp[i-1][j-1];
+2) If p[j] == '.' : dp[i][j] = dp[i-1][j-1];
+3) If p[j] == '*':
+    Two sub conditions:
+    3.1) if p[j-1] == s[i] or p[i-1] == '.':
+                  dp[i][j] = dp[i-1][j]  // in this case, a* counts as multiple a
+               or dp[i][j] = dp[i][j-2]  // in this case, a* counts as empty
+    3.2) if p[j-1] != s[i] and p[j-1] != '.': dp[i][j] = dp[i][j-2]  // in this case, a* only counts as empty
+*/
+
+class Solution {
+public:
+    bool isMatch(string str, string pat) {
+        int n = str.size(), m = pat.size();
+        if (n == 0 || m == 0) return false;
+
+        vector<vector<bool>> dp(n + 1, vector<bool>(m + 1, 0));
+
+        // empty pattern can match with empty string
+        dp[0][0] = true;
+
+        // empty str
+        for (int j = 1; j <= m; j++) {
+            // assuming (j - 2 >= 0) since pat will not start with '*'
+            if (pat[j - 1] == '*') {
+                dp[0][j] = dp[0][j - 2];
+            }
+        }
+        for (int i = 1 ; i <= n; i++) {
+            for (int j = 1; j <= m; j++) {
+                if (pat[j - 1] == '.') {
+                    dp[i][j] = dp[i - 1][j - 1];
+                }
+                if (pat[j - 1] == str[i - 1]) {
+                    dp[i][j] = dp[i - 1][j - 1];
+                }
+                if (pat[j - 1] == '*') {
+                    if (pat[j - 2] == str[i - 1] || pat[j - 2] == '.') {
+                        dp[i][j] = dp[i - 1][j] || dp[i][j - 2];
+                    } else {
+                        dp[i][j] = dp[i][j - 2];
+                    }
+                }
+            }
+        }
         return dp[n][m];
     }
 };
