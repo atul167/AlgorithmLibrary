@@ -94,9 +94,6 @@ public:
     bool isMatch(string str, string pat) {
         int n = str.size(), m = pat.size();
 
-        // empty pattern can only match with empty string
-        if (m == 0) return (n == 0);
-
         int dp[n + 1][m + 1];
         memset(dp, 0, sizeof dp);
 
