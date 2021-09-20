@@ -44,6 +44,16 @@ It is guaranteed for each appearance of the character '*', there will be a previ
 */
 
 
+/*
+We define dp[i][j] to be true if s[0..i) matches p[0..j) and false otherwise. 
+The state equations will be:
+
+dp[i][j] = dp[i - 1][j - 1], if p[j - 1] != '*' && (s[i - 1] == p[j - 1] || p[j - 1] == '.');
+dp[i][j] = dp[i][j - 2], if p[j - 1] == '*' and the pattern repeats for 0 time;
+dp[i][j] = dp[i - 1][j] && (s[i - 1] == p[j - 2] || p[j - 2] == '.'), if p[j - 1] == '*' and the pattern repeats for at least 1 time.
+*/
+
+
 class Solution {
 public:
     bool isMatch(string str, string pat) {
@@ -53,7 +63,7 @@ public:
         // empty pattern can match with empty string
         dp[0][0] = 1;
 
-        //
+        // empty str
         for (int j = 1; j <= m; j++) {
             // assuming (j-2 >= 0) since pat will not start with '*'
             if (pat[j - 1] == '*' && (j - 2 >= 0)) {
