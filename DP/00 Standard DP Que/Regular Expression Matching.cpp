@@ -44,15 +44,16 @@ It is guaranteed for each appearance of the character '*', there will be a previ
 */
 
 
-/*
-We define dp[i][j] to be true if s[0..i) matches p[0..j) and false otherwise. 
-The state equations will be:
 
-if p[j - 1] != '*':
-      dp[i][j] = dp[i - 1][j - 1], if (s[i - 1] == p[j - 1] || p[j - 1] == '.');
-else:
-      dp[i][j] = dp[i][j - 2], if pattern repeats for 0 time;
-      dp[i][j] = dp[i - 1][j] && (s[i - 1] == p[j - 2] || p[j - 2] == '.'), if pattern repeats for at least 1 time.
+/*
+1) If p[j] == s[i]: dp[i][j] = dp[i-1][j-1];
+2) If p[j] == '.' : dp[i][j] = dp[i-1][j-1];
+3) If p[j] == '*':
+    Two sub conditions:
+    3.1) if p[j-1] == s[i] or p[i-1] == '.':
+                  dp[i][j] = dp[i-1][j]  // in this case, a* counts as multiple a
+               or dp[i][j] = dp[i][j-2]  // in this case, a* counts as empty
+    3.2) if p[j-1] != s[i] and p[j-1] != '.': dp[i][j] = dp[i][j-2]  // in this case, a* only counts as empty
 */
 
 
@@ -114,6 +115,7 @@ public:
         // empty str
         for (int j = 1; j <= m; j++) {
             // assuming (j-2 >= 0) since pat will not start with '*'
+            // a* only counts as empty
             if (pat[j - 1] == '*' && (j - 2 >= 0)) {
                 dp[0][j] = dp[0][j - 2];
             } else {
@@ -198,6 +200,7 @@ public:
         // empty str
         for (int j = 1; j <= m; j++) {
             // assuming (j - 2 >= 0) since pat will not start with '*'
+            // a* only counts as empty
             if (pat[j - 1] == '*') {
                 dp[0][j] = dp[0][j - 2];
             }
