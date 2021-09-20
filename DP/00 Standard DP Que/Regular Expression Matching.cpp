@@ -72,8 +72,8 @@ public:
             if (go(i, j + 2, str, pat, dp)) return dp[i][j] = 1;
 
             // if pattern repeats for at least 1 time
-            while (i < n && (pat[j] == str[i] || pat[j] == '.')) {
-                if (go(i + 1, j + 2, str, pat, dp)) return dp[i][j] = 1;
+            if (i < n && (pat[j] == str[i] || pat[j] == '.')) {
+                if (go(i + 1, j, str, pat, dp)) return dp[i][j] = 1;
                 i++;
             }
         }
