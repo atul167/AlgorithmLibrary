@@ -1,4 +1,5 @@
 // https://leetcode.com/problems/arithmetic-slices/
+// https://youtu.be/rSi4MpGEz1M
 
 /*
 An integer array is called arithmetic if it consists of at least three elements and if the difference between any two consecutive elements is the same.
