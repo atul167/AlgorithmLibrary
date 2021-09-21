@@ -4,6 +4,34 @@
 
 
 
+/*
+Helpful youtube comment:
+------------------------
+
+3:59 Instead of extending BookItem with Book. I feel we should prefer composition over inheritance?  
+And in actual application it would be helpful for storing it as two tables. What do you think are the drawbacks for the below design?
+
+class BookInfo {
+
+    String uniqueIdNumber;
+    String title;
+    List<Author> authors;
+    BookType bookType;
+}
+
+class BookItem  {
+
+    BookInfo bookInfo;
+
+    String barcode;
+    Date publicationDate;
+    Rack rackLocation;
+    BookStatus bookStatus;
+    BookFormat bookFormat;
+    Date issueDate;
+}
+*/
+
 
 
 class Library {
