@@ -28,6 +28,12 @@ Constraints:
 
 
 /*
+Note:
+Bellman ford works when there is no negative weight cycle.
+But in this problem even if there is a cycle in graph but not a part of path between vertex 1 and n is tolerable.
+So we have to vis, revVis, g, revG to handle this case.
+
+Approach:
 We will calculate shortest path by negating the weights to find the longest weight path.
 But in this problem even if there is a cycle in graph but not a part of path between vertex 1 and n is tolerable.
 So we use g and revG.
