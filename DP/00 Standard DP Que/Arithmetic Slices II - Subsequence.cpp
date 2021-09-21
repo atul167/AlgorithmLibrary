@@ -10,7 +10,7 @@ For example, [1, 3, 5, 7, 9], [7, 7, 7, 7], and [3, -1, -5, -9] are arithmetic s
 
 /*
 dp[i] = hashmap {key = common difference, value = APs having atleast 2 elements}
-dp[i][j] = no of APs having atleast 2 elements ending at index i whose common difference is j 
+dp[i][j] = no of APs having >= 2 elements ending at index i whose common difference is j 
 */
 
 class Solution {
