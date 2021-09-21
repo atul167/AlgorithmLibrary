@@ -1,6 +1,10 @@
 // https://www.codechef.com/ZCOPRAC/problems/ZCO16002
 // https://unacademy.com/class/learn-dp-through-problem-solving-3/URYJEHRL
 
+/*
+Given an array of n distinct numbers. Select a max size subset from it which forms an arithmetic progression.  
+*/
+
 // AC Brute Force
 void solve() {
 	int x, y;
