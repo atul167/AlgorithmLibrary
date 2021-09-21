@@ -39,7 +39,9 @@ But in this problem even if there is a cycle in graph but not a part of path bet
 So we use g and revG.
 vis[u] is used to check if there exists path from 1 to u.
 revVis[v] is used to check if there exists path from v to n.
-This majorly helps in eliminating relaxation of loops which are not part of 1 to n path.
+This majorly helps in eliminating relaxation of loops which are not part of 1 to n path (which may conatin negative weight cycle).
+
+Note: When we negate the weights, we are implicitly talking about positive weight cycles. 
 */
 
 void dfs(int u, vector<int>& vis, vector<vector<int>>& g) {
