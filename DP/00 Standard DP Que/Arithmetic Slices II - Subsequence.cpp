@@ -14,17 +14,17 @@ public:
         int n = nums.size();
         if (n < 3) return 0;
 
-        vector<unordered_map<ll, ll>> a(n);
+        vector<unordered_map<ll, ll>> dp(n);
         int res = 0;
 
         for (int i = 1; i < n; i++) {
             for (int j = 0; j < i; j++) {
                 ll dif = (ll)nums[i] - (ll)nums[j];
-                ll APsEndingOnJ = a[j][dif];
+                ll APsEndingOnJ = dp[j][dif];
 
                 res += APsEndingOnJ;
 
-                a[i][dif] += APsEndingOnJ + 1;
+                dp[i][dif] += APsEndingOnJ + 1;
             }
         }
 
