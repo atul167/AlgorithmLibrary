@@ -18,6 +18,15 @@ Output: 0
 
 
 
+/*
+base case:
+dp[0] = dp[1] = 0
+
+dp[i] = count of all AP subarrays ending at index i
+*/
+
+
+
 class Solution {
 public:
     int numberOfArithmeticSlices(vector<int>& nums) {
