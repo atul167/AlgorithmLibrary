@@ -73,6 +73,41 @@ public:
 
 
 
+class Solution {
+public:
+    int minSubArrayLen(int target, vector<int>& nums) {
+        int n = nums.size();
+        deque<int> d;
+        int res = n + 1;
+
+        for (int i = 0; i < n; i++) {
+            if (i > 0) nums[i] += nums[i - 1];
+
+            if (nums[i] >= target) res = min(res, i + 1);
+
+            while (!d.empty() && nums[i] - nums[d.front()] >= target) {
+                res = min(res, i - d.front());
+                d.pop_front();
+            }
+            while (!d.empty() && nums[i] <= nums[d.back()]) {
+                d.pop_back();
+            }
+
+            d.push_back(i);
+        }
+        return res <= n ? res : 0;
+    }
+};
+
+
+
+
+
+
+
+
+
+
 
 
 // Method 2.1: Binary Search (FFFFFFFFFTTTTTTTTTT)
