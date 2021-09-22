@@ -83,5 +83,4 @@ public:
         }
         return secondLargest == -1 ? -1 : arr[secondLargest];
     }
-
 };
