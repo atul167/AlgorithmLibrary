@@ -38,14 +38,12 @@ int maxSumWithK(int a[], int n, int k) {
 
     // Use the concept of sliding window
     for (int i = k; i < n; i++) {
-        // Compute sum of k elements ending with a[i].
         sum = sum + a[i] - a[i - k];
-
-        // Update res if required
         res = max(res, sum);
 
         // Include maximum sum till [i - k] also if it increases overall max.
-        res = max(res, sum + maxSum[i - k]);
+        int moreThanKEle = sum + maxSum[i - k];
+        res = max(res, moreThanKEle);
     }
 
     return res;
