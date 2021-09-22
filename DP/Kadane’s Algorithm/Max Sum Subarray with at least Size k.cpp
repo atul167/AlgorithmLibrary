@@ -5,7 +5,7 @@
 /*
 This problem is an extension of Largest Sum Subarray Problem. 
 1) We first compute maximum sum till every index i (such that a[i] is part of the sum) and store it in an array maxSum[]. 
-   maxSum[i] = maximum sum subarray ending at index i such that a[i] is part of the sum
+   maxSum[i] = maximum sum till index i including a[i] (i.e. a[i] is the ending index of subarray)
 2) After filling the array, we use the sliding window concept of size k. Keep track of sum of current k elements. 
    After getting the sum of current window, we add the maxSum of the previous window, if it is greater than current max, then update it.
 */
@@ -15,10 +15,8 @@ This problem is an extension of Largest Sum Subarray Problem.
 #include<bits/stdc++.h>
 using namespace std;
 
-// Returns maximum sum of a subarray with at-least k elements.
 int maxSumWithK(int a[], int n, int k) {
-    // maxSum[i] is going to store maximum sum till index i
-    // such that a[i] is part of the sum.
+    // maxSum[i] is going to store maximum sum till index i including a[i] (i.e. a[i] is the ending index of subarray)
     int maxSum[n];
 
     // We use Kadane's algorithm to fill maxSum[]
@@ -45,14 +43,13 @@ int maxSumWithK(int a[], int n, int k) {
         // Update result if required
         result = max(result, sum);
 
-        // Include maximum sum till [i-k] also if it increases overall max.
+        // Include maximum sum till [i - k] also if it increases overall max.
         result = max(result, sum + maxSum[i - k]);
     }
 
     return result;
 }
 
-// Driver code
 int main() {
     int a[] = {1, 2, 3, -10, -3};
     int k = 4;
