@@ -202,6 +202,29 @@ You may complete at most k transactions.
 
 class Solution {
 public:
+    int maxProfit(int k, vector<int>& prices) {
+        if (k >= prices.size() / 2) {
+            int ans = 0;
+            for (int i = 1; i < prices.size(); ++i) {
+                if (prices[i] > prices[i - 1]) ans += prices[i] - prices[i - 1];
+            }
+            return ans;
+        }
+
+        vector<int> buy(k + 1, INT_MIN), sell(k + 1, 0);
+        for (int x: prices) {
+            for (int i = 1; i <= k; ++i) {
+                buy[i] = max(buy[i], sell[i - 1] - x);
+                sell[i] = max(sell[i], buy[i] + x);
+            }
+        }
+        return sell[k];
+    }
+};
+
+
+class Solution {
+public:
     int n, k;
 
     int fun(int pos, int buy, int cnt, vector<int>& prices, vector<vector<vector<int>>>& dp) {
@@ -311,7 +334,7 @@ class Solution {
             vector < int > noStock(n, 0), inHand(n, 0), Sold(n, 0);
 
             noStock[0] = 0;
-            inHand[0] = -prices[0]; //bcoz we have bought a stock and never sold it
+            inHand[0] = -prices[0]; // bcoz we have bought a stock and never sold it
             Sold[0] = 0;
 
             for (int i = 1; i < n; ++i) {
