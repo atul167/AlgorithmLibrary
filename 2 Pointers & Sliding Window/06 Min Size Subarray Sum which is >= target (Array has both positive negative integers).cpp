@@ -26,5 +26,34 @@ Constraints:
 
 
 /*
+// https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/discuss/143726/C%2B%2BJavaPython-O(N)-Using-Deque
+
 What makes this problem hard is that we have negative values (otherwise we could have used sliding window or binary search).
 */
+
+
+class Solution {
+public:
+    int shortestSubarray(vector<int>& nums, int k) {
+        int n = nums.size();
+        int res = n + 1;
+        deque<int> d;
+
+        for (int i = 0; i < n; i++) {
+            if (i > 0) nums[i] += nums[i - 1];
+
+            if (nums[i] >= k) res = min(res, i + 1);
+
+            while (d.size() > 0 && nums[i] - nums[d.front()] >= k) {
+                res = min(res, i - d.front());
+                d.pop_front();
+            }
+            while (d.size() > 0 && nums[i] <= nums[d.back()]) {
+                d.pop_back();
+            }
+
+            d.push_back(i);
+        }
+        return res <= n ? res : -1;
+    }
+};
