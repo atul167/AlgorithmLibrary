@@ -11,7 +11,8 @@ This problem is an extension of Largest Sum Subarray Problem.
 */
 
 
-// C++ program to find largest subarray sum with at-least k elements in it.
+// Time = O(n), Space = O(n)
+
 #include<bits/stdc++.h>
 using namespace std;
 
@@ -48,6 +49,55 @@ int maxSumWithK(int a[], int n, int k) {
     }
 
     return res;
+}
+
+int main() {
+    int a[] = {1, 2, 3, -5, -3};
+    int k = 4;
+    int n = sizeof(a) / sizeof(a[0]);
+    cout << maxSumWithK(a, n, k);
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Time = O(n), Space = O(1)
+
+#include<bits/stdc++.h>
+using namespace std;
+
+int maxSumWithK(int a[], int n, int k) {
+    if (n == 1) return a[0];
+
+    long long cur_sum = 0, best_ps = INT_MAX, cur_ps = 0;
+    for (int i = 0; i < k; i++) cur_sum += a[i];
+
+    long long ans = cur_sum;
+
+    for (int i = k; i < n; i++) {
+        cur_sum += a[i];
+        ans = max(ans, cur_sum);
+
+        cur_ps += a[i - k];
+        best_ps = min(best_ps, cur_ps);
+
+        ans = max(ans, cur_sum - best_ps);
+    }
+    return ans;
 }
 
 int main() {
