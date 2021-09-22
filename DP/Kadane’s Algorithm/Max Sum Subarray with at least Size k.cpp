@@ -83,10 +83,10 @@ using namespace std;
 int maxSumWithK(int a[], int n, int k) {
     if (n == 1) return a[0];
 
-    long long cur_sum = 0, best_ps = INT_MAX, cur_ps = 0;
+    int cur_sum = 0, best_ps = INT_MAX, cur_ps = 0;
     for (int i = 0; i < k; i++) cur_sum += a[i];
 
-    long long ans = cur_sum;
+    int ans = cur_sum;
 
     for (int i = k; i < n; i++) {
         cur_sum += a[i];
