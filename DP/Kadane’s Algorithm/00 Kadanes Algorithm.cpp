@@ -48,8 +48,13 @@ void kadane() {
 
 
 
-
 // Method 2
+
+/*
+For i'th index:
+curr_max = max contiguous subarray sum ending at index i (including a[i]) 
+*/
+
 class Solution {
 public:
     long long maxSubarraySum(int a[], int n) {
