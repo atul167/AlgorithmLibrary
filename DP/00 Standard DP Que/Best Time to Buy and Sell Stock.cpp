@@ -35,31 +35,6 @@ https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/
 You can do as many transactions as you like
 */
 
-class Solution {
-public:
-    int n;
-
-    int fun(int pos, int buy, vector<int>& prices, vector<vector<int>>& dp) {
-        if(pos >= n) return 0;
-
-        if(dp[pos][buy] != -1) return dp[pos][buy];
-
-        if(buy) {
-            return dp[pos][buy] = max(-prices[pos] + fun(pos + 1, 0, prices, dp), fun(pos + 1, 1, prices, dp));
-        } else {
-            return dp[pos][buy] = max(prices[pos] + fun(pos + 1, 1, prices, dp), fun(pos + 1, 0, prices, dp));
-        }
-    }
-
-    int maxProfit(vector<int>& prices) {
-        n = prices.size();
-        vector<vector<int>> dp(n + 1, vector<int>(2, -1));
-        //passing here buy=1 because we will first buy then sell 
-        return fun(0, 1, prices, dp);
-    }
-};
-
-
 // PEAK_VALLEY APPROACH
 class Solution {
 public:
@@ -98,6 +73,31 @@ public:
 };
 
 
+class Solution {
+public:
+    int n;
+
+    int fun(int pos, int buy, vector<int>& prices, vector<vector<int>>& dp) {
+        if(pos >= n) return 0;
+
+        if(dp[pos][buy] != -1) return dp[pos][buy];
+
+        if(buy) {
+            return dp[pos][buy] = max(-prices[pos] + fun(pos + 1, 0, prices, dp), fun(pos + 1, 1, prices, dp));
+        } else {
+            return dp[pos][buy] = max(prices[pos] + fun(pos + 1, 1, prices, dp), fun(pos + 1, 0, prices, dp));
+        }
+    }
+
+    int maxProfit(vector<int>& prices) {
+        n = prices.size();
+        vector<vector<int>> dp(n + 1, vector<int>(2, -1));
+        //passing here buy=1 because we will first buy then sell 
+        return fun(0, 1, prices, dp);
+    }
+};
+
+
 
 
 
@@ -112,6 +112,23 @@ https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/
 
 You may complete at most two transactions.
 */
+
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int buy1 = INT_MIN, buy2 = INT_MIN, sell1 = 0, sell2 = 0;
+        for (auto &x : prices) {
+            // Keeping profit in mind that's why -x
+            buy1 = max(buy1, -x);
+            sell1 = max(sell1, buy1 + x);
+            buy2 = max(buy2, sell1 - x);
+            sell2 = max(sell2, buy2 + x);
+        }
+        return sell2;
+    }
+};
+
+
 
 class Solution {
 public:
