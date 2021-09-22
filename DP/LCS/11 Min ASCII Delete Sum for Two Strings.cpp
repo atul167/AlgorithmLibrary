@@ -25,8 +25,9 @@ s1 and s2 consist of lowercase English letters.
 */
 
 
+// Method 1:
 /*
-If we find the maximum ASCII sum common subsequence, then the deletion part of s1 and s2 will have minimum value.
+If we find the maximum ASCII sum common subsequence, then the deletion part of s1 and s2 will give minimum value.
 lcs = Maximum ASCII sum common subsequence
 res = (ASCIIsumOfS1 - lcs) + (ASCIIsumOfS2 - lcs)
 */
