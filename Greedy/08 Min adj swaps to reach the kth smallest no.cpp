@@ -25,7 +25,7 @@ To get this number:
 
 class Solution {
 public:
-    // Function to return the minimum swaps required
+    // Function to return min no of adjacent swaps to convert a string s1 into its given anagram s2
     int minAdjSwaps(string s1, string s2) {
         int n = s1.size();
         int result = 0;
@@ -106,7 +106,7 @@ public:
         return true;
     }
 
-    // Function to return the minimum swaps required
+    // Function to return min no of adjacent swaps to convert a string s1 into its given anagram s2
     int minAdjSwaps(string s1, string s2) {
         int n = s1.size();
         int result = 0;
