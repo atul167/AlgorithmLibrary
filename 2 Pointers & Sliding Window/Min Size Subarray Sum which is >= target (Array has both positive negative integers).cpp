@@ -1,11 +1,9 @@
 // https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/
 
 /*
-Given an integer array nums and an integer k, return the length of the shortest non-empty subarray of nums with a sum of at least k. If there is no such subarray, return -1.
+Given an integer array nums and an integer k, return the length of the shortest non-empty subarray of nums with a sum of at least k. 
+If there is no such subarray, return -1.
 
-A subarray is a contiguous part of an array.
-
- 
 
 Example 1:
 Input: nums = [1], k = 1
@@ -24,4 +22,9 @@ Constraints:
 1 <= nums.length <= 10^5
 -10^5 <= nums[i] <= 10^5
 1 <= k <= 10^9
+*/
+
+
+/*
+What makes this problem hard is that we have negative values (otherwise we could have used sliding window or binary search).
 */
