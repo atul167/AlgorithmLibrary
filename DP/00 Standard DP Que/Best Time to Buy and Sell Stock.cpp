@@ -60,7 +60,7 @@ public:
 };
 
 
-//PEAK_VALLEY APPROACH
+// PEAK_VALLEY APPROACH
 class Solution {
 public:
     int maxProfit(vector<int>& prices) {
@@ -74,6 +74,28 @@ public:
     }
 };
 
+// PEAK_VALLEY APPROACH2 (give us the exact days when buying and selling occurs)
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+        int n = prices.size();
+
+        int profit = 0;
+        for (int i = 0; i < n - 1; i++) {
+            while (i < n - 1 && prices[i] > prices[i + 1]) {
+                i++;
+            }
+            int valley = prices[i];
+            while (i < n - 1 && prices[i] < prices[i + 1]) {
+                i++;
+            }
+            int peak = prices[i];
+
+            profit += (peak - valley);
+        }
+        return profit;
+    }
+};
 
 
 
