@@ -1,4 +1,18 @@
+// https://practice.geeksforgeeks.org/problems/minimize-the-heights-i/0/
+// https://practice.geeksforgeeks.org/problems/minimize-the-heights3351/1
 // https://youtu.be/Av7vSnPSCtw
+
+
+
+/*
+Given an array arr[] denoting heights of N towers and a positive integer K, 
+you have to modify the height of each tower either by increasing or decreasing them by K only once.
+Find out what could be the possible minimum difference of the height of shortest and longest towers after you have modified each tower.
+
+Note: Assume that height of the tower can be negative.
+(It is mandatory to either decrease or increase height of every tower by k)
+*/
+
 
 
 /*
@@ -14,25 +28,6 @@ For Minimize the Heights II
 We need not consider where a[i] < k because the height of the tower can’t be negative so we have to neglect that case.
 */
 
-
-
-
-
-
-
-
-
-// Minimize the Heights I 
-// https://practice.geeksforgeeks.org/problems/minimize-the-heights-i/0/
-
-/*
-Given an array arr[] denoting heights of N towers and a positive integer K, 
-you have to modify the height of each tower either by increasing or decreasing them by K only once.
-Find out what could be the possible minimum difference of the height of shortest and longest towers after you have modified each tower.
-
-Note: Assume that height of the tower can be negative.
-(It is mandatory to either decrease or increase height of every tower by k)
-*/
 
 class Solution{   
 public:
@@ -59,8 +54,7 @@ public:
 
 
 
-// Minimize the Heights II
-// https://practice.geeksforgeeks.org/problems/minimize-the-heights3351/1
+
 
 /*
 Given an array arr[] denoting heights of N towers and a positive integer K, 
