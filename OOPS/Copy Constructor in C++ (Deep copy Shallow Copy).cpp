@@ -2,6 +2,64 @@
 
 
 // Following is a simple example of copy constructor. 
+
+// Default Copy Constructor
+#include<iostream>
+using namespace std;
+
+class Point {
+private:
+    int x, y;
+public:
+    Point(int x1, int y1) {
+        x = x1;
+        y = y1;
+    }
+
+    void setX(int _x) {
+        x = _x;
+    }
+    void setY(int _y) {
+        y = _y;
+    }
+    int getX() {
+        return x;
+    }
+    int getY() {
+        return y;
+    }
+};
+
+int main() {
+    Point p1(10, 15); // Normal constructor is called here
+    Point p2 = p1; // Copy constructor is called here
+
+    cout << "p1 {x, y} = {" << p1.getX() << ", " << p1.getY() << "}\n";
+    cout << "p2 {x, y} = {" << p2.getX() << ", " << p2.getY() << "}\n";
+
+    p2.setX(100);
+    p2.setY(200);
+
+    cout << "p1 {x, y} = {" << p1.getX() << ", " << p1.getY() << "}\n";
+    cout << "p2 {x, y} = {" << p2.getX() << ", " << p2.getY() << "}\n";
+
+    return 0;
+}
+
+/*
+p1 {x, y} = {10, 15}
+p2 {x, y} = {10, 15}
+p1 {x, y} = {10, 15}
+p2 {x, y} = {100, 200}
+*/
+
+
+
+
+
+
+
+// User-defined Copy Constructor
 #include<iostream>
 using namespace std;
 
@@ -20,6 +78,12 @@ public:
         y = p1.y;
     }
 
+    void setX(int _x) {
+        x = _x;
+    }
+    void setY(int _y) {
+        y = _y;
+    }
     int getX() {
         return x;
     }
@@ -32,13 +96,24 @@ int main() {
     Point p1(10, 15); // Normal constructor is called here
     Point p2 = p1; // Copy constructor is called here
 
-    // Let us access values assigned by constructors
-    cout << "p1.x = " << p1.getX() << ", p1.y = " << p1.getY();
-    cout << "\np2.x = " << p2.getX() << ", p2.y = " << p2.getY();
+    cout << "p1 {x, y} = {" << p1.getX() << ", " << p1.getY() << "}\n";
+    cout << "p2 {x, y} = {" << p2.getX() << ", " << p2.getY() << "}\n";
+
+    p2.setX(100);
+    p2.setY(200);
+
+    cout << "p1 {x, y} = {" << p1.getX() << ", " << p1.getY() << "}\n";
+    cout << "p2 {x, y} = {" << p2.getX() << ", " << p2.getY() << "}\n";
 
     return 0;
 }
 
+/*
+p1 {x, y} = {10, 15}
+p2 {x, y} = {10, 15}
+p1 {x, y} = {10, 15}
+p2 {x, y} = {100, 200}
+*/
 
 
 
