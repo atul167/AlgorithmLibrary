@@ -61,16 +61,15 @@ class Solution {
 public:
     int offerings(int n, int A[]) {
         int B[n];
-
-        // Distribute 1 chocolate to each
-        for (int i = 0; i < n; i++) {
-            B[i] = 1;
-        }
+        
+        B[0] = 1;
 
         // Traverse from left to right
         for (int i = 1; i < n; i++) {
             if (A[i] > A[i - 1])
                 B[i] = B[i - 1] + 1;
+            else 
+                B[i] = 1;
         }
 
         // Traverse from right to left
