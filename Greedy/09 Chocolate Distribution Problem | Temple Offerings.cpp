@@ -45,8 +45,6 @@ Explaination: offerings = {1, 2, 1, 3, 2, 1}
 
 
 
-
-
 /*
 If we somehow manage to make sure that the temple at higher mountain is getting more offerings than our problem is solved. 
 For this we can make use of greedy (since we have to compare only the neighbors of current index). 
@@ -79,6 +77,42 @@ public:
                 B[i] = max(B[i + 1] + 1, B[i]);
 
             res += B[i];
+        }
+
+        return res;
+    }
+};
+
+
+
+
+
+class Solution {
+public:
+    int offerings(int n, int A[]) {
+        int left[n], right[n];
+
+        left[0] = 1;
+        // Traverse from left to right
+        for (int i = 1; i < n; i++) {
+            if (A[i] > A[i - 1])
+                left[i] = left[i - 1] + 1;
+            else
+                left[i] = 1;
+        }
+
+        right[n - 1] = 1;
+        // Traverse from right to left
+        for (int i = n - 2; i >= 0; i--) {
+            if (A[i] > A[i + 1])
+                right[i] = right[i + 1] + 1;
+            else
+                right[i] = 1;
+        }
+
+        int res = 0;
+        for (int i = 0; i < n; i++) {
+            res += max(left[i], right[i]);
         }
 
         return res;
