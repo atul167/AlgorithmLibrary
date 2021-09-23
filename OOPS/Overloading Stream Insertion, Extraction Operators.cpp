@@ -29,6 +29,13 @@ istream & operator >> (istream &in, Complex &c) {
     in >> c.imag;
     return in;
 }
+/*
+istream & operator >> (istream &in, Complex &c) {
+    cout << "Enter Real and Imaginary Parts:\n";
+    in >> c.real >> c.imag;
+    return in;
+}
+*/
 
 int main() {
     Complex c1;
