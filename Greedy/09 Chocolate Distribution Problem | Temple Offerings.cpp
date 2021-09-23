@@ -61,32 +61,26 @@ class Solution {
 public:
     int offerings(int n, int A[]) {
         int B[n];
-        
+
         B[0] = 1;
 
         // Traverse from left to right
         for (int i = 1; i < n; i++) {
             if (A[i] > A[i - 1])
                 B[i] = B[i - 1] + 1;
-            else 
+            else
                 B[i] = 1;
         }
 
         // Traverse from right to left
+        int res = B[n - 1];
         for (int i = n - 2; i >= 0; i--) {
             if (A[i] > A[i + 1])
                 B[i] = max(B[i + 1] + 1, B[i]);
+
+            res += B[i];
         }
 
-        // Initialize sum
-        int sum = 0;
-
-        // Find total sum
-        for (int i = 0; i < n; i++) {
-            sum += B[i];
-        }
-
-        // Return sum
-        return sum;
+        return res;
     }
 };
