@@ -30,12 +30,10 @@ If two adjacent temples are at different altitudes, then the temple that is high
 If two adjacent temples are at the same height, then their offerings relative to each other does not matter. 
 The height of the N temples are given in the array arr[]. Find the minimum number of offerings required.
 
-
 Example 1:
 Input: heights = {1, 2, 2}
 Output: 4
 Explaination: offerings = {1, 2, 3}
- 
 
 Example 2:
 Input: heights = {1, 4, 3, 6, 2, 1}
@@ -45,7 +43,19 @@ Explaination: offerings = {1, 2, 1, 3, 2, 1}
 
 
 
-// Time = O(n), Space = O(n)
+
+
+
+
+/*
+If we somehow manage to make sure that the temple at higher mountain is getting more offerings than our problem is solved. 
+For this we can make use of greedy (since we have to compare only the neighbors of current index). 
+The approach is to do two traversals (in two directions), 
+first one to make sure that the temple at higher position from left gets more offerings
+second one to make sure that the temple at higher position from the right gets more offerings
+
+Time = O(n), Space = O(n)
+*/
 
 class Solution {
 public:
