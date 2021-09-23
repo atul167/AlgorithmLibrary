@@ -48,10 +48,6 @@ int main() {
 
 
 
-
-
-
-
 /*
 When is a user-defined copy constructor needed? 
 If we don’t define our own copy constructor, the C++ compiler creates a default copy constructor for each class 
@@ -84,28 +80,28 @@ public:
     // constructor
     String(const char *str = NULL) {
         size = strlen(str);
-        s = new char[size+1];
+        s = new char[size + 1];
         strcpy(s, str);
     }
     // destructor
-    ~String() { 
-        delete [] s; 
+    ~String() {
+        delete[] s;
     }
     // copy constructor
     String(const String& old_str) {
         size = old_str.size;
-        s = new char[size+1];
+        s = new char[size + 1];
         strcpy(s, old_str.s);
     }
     // Function to change
     void change(const char *str) {
         delete [] s;
         size = strlen(str);
-        s = new char[size+1];
+        s = new char[size + 1];
         strcpy(s, str);
     }
-    void print() { 
-        cout << s << endl; 
+    void print() {
+        cout << s << endl;
     }
 };
 
@@ -145,7 +141,6 @@ If we remove copy constructor from the above program, we don’t get the expecte
 The changes made to str2 reflect in str1 as well which is never expected. 
 */
 
-
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -157,22 +152,22 @@ public:
     // constructor
     String(const char *str) {
         size = strlen(str);
-        s = new char[size+1];
+        s = new char[size + 1];
         strcpy(s, str);
     }
     // destructor
-    ~String() { 
-        delete [] s; 
+    ~String() {
+        delete[] s;
     }
     // Function to change
     void change(const char *str) {
         delete [] s;
         size = strlen(str);
-        s = new char[size+1];
+        s = new char[size + 1];
         strcpy(s, str);
     }
-    void print() { 
-        cout << s << endl; 
+    void print() {
+        cout << s << endl;
     }
 };
 
