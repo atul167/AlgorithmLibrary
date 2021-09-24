@@ -64,7 +64,7 @@ int Solution::solve(vector<int> &a, vector<int> &b, int c, int d) {
 
 
 
-
+// Monotonic queue or monoque concept
 // Time = O(n)
 int Solution::solve(vector<int> &a, vector<int> &b, int c, int d) {
     int n = a.size();
