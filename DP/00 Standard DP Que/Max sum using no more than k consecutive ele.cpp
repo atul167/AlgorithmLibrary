@@ -29,13 +29,6 @@ void solve() {
     vector<int> a = vector<int>(n + 1);
     for (int i = 1; i <= n; i++) cin >> a[i];
 
-    if (n <= k) {
-        int res = 0;
-        for (int i = 1; i <= n; i++) res += a[i];
-        cout << res << endl;
-        return;
-    }
-
     vector<int> dp(n + 1);
     dp[0] = 0;
     for (int i = 1; i <= k; i++) {
@@ -87,4 +80,62 @@ void solve() {
     f(i, n) cin >> a[i];
     memset(dp, -1, sizeof dp);
     cout << go(0, 0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// https://www.hackerrank.com/challenges/billboards/editorial
+
+/*
+Instead of getting the maximum profit, it is equivalent to consider losing the minimum profit. Here, an Time = O(n * k) DP solution is straightforward.
+
+Let dp[i] denote, for given the first i billboards, the minimum profit we have to sacrifice. 
+Obviously, dp[i] = 0 if i <= k. 
+When i > k, we have to give up some billboards. Specifically, among the rightmost k+1 billboards, we have to give up at least one. 
+(For a concrete example, see the figure below, where n = 8, and k = 2. Then, at least one of the three red billboards has to be abandoned)
+*/
+
+const int N = 1e5 + 5;
+int n, m, k;
+
+void solve() {
+    cin >> n >> k;
+    vector<int> a = vector<int>(n + 1);
+    int sum = 0;
+    for (int i = 1; i <= n; i++) cin >> a[i], sum += a[i];
+
+    vector<int> dp(n + 1);
+    dp[0] = 0;
+    for (int i = 1; i <= k; i++) {
+        dp[i] = 0;
+    }
+
+    for (int i = k + 1; i <= n; i++) {
+        dp[i] = INF;
+        for (int j = i; j >= i - k; j--) {
+            dp[i] = min(dp[i], a[j] + dp[j - 1]);
+        }
+    }
+
+    cout << sum - dp[n] << endl;
 }
