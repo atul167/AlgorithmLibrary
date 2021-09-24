@@ -27,6 +27,7 @@ Constraints:
 
 /*
 // https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/discuss/143726/C%2B%2BJavaPython-O(N)-Using-Deque
+// Monotonic queue or monoque concept
 
 What makes this problem hard is that we have negative values (otherwise we could have used sliding window or binary search).
 
