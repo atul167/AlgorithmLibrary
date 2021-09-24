@@ -27,9 +27,15 @@ Problem Constraints
 
 */
 
+
+// O(n ^ 2) solution (LIS type) will give TLE
+
+
+
+// Time = O(n * logn)
 int Solution::solve(vector<int> &a, vector<int> &b, int c, int d) {
     int n = a.size();
-    int mod = 1000000007;
+    int mod=1000000007;
     vector<long long> dp1(n), dp2(n);
     multiset<long long> st1, st2;
 
@@ -42,16 +48,56 @@ int Solution::solve(vector<int> &a, vector<int> &b, int c, int d) {
     	dp1[i] = a[i] + min(*st1.begin(), *st2.begin() + d);
     	dp2[i] = b[i] + min(*st2.begin(), *st1.begin() + d);
 
-    	if(i >= c) {
-    		auto it = st1.find(dp1[i - c]);
-    		st1.erase(it);
-    		it = st2.find(dp2[i - c]);
-    		st2.erase(it);
+        if(st1.size() >= c) {
+    		st1.erase(st1.find(dp1[i - c]));
+    		st2.erase(st2.find(dp2[i - c]));
     	}
 
-    	st1.insert(dp1[i]);
+        st1.insert(dp1[i]);
     	st2.insert(dp2[i]);
     }
 
-    return min(dp1[n-1], dp2[n-1]) % mod;
+    return min(dp1[n-1], dp2[n-1])%mod;
+}
+
+
+
+
+
+
+// Time = O(n)
+int Solution::solve(vector<int> &a, vector<int> &b, int c, int d) {
+    int n = a.size();
+    int mod = 1000000007;
+    vector<long long> dp1(n), dp2(n);
+    deque<int> dq1, dq2;
+
+    dp1[0] = a[0];
+    dp2[0] = b[0];
+    dq1.push_back(0);
+    dq2.push_back(0);
+
+    for (int i = 1; i < n; i++) {
+        int x1 = dq1.empty() ? 0 : dp1[dq1.front()];
+        int x2 = dq2.empty() ? 0 : dp2[dq2.front()];
+        dp1[i] = a[i] + min(x1, x2 + d);
+        dp2[i] = b[i] + min(x2, x1 + d);
+
+        while ((!dq1.empty()) && dq1.front() <= i - c) {
+            dq1.pop_front();
+        }
+        while ((!dq2.empty()) && dq2.front() <= i - c) {
+            dq2.pop_front();
+        }
+        while ((!dq1.empty()) && dp1[i] <= dp1[dq1.back()]) {
+            dq1.pop_back();
+        }
+        while ((!dq2.empty()) && dp2[i] <= dp2[dq2.back()]) {
+            dq2.pop_back();
+        }
+        dq1.push_back(i);
+        dq2.push_back(i);
+    }
+
+    return min(dp1[n - 1], dp2[n - 1]) % mod;
 }
