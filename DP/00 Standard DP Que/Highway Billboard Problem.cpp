@@ -166,28 +166,19 @@ int main() {
     // dp[i] = max revenue till mile i.
     vector<int> dp(M + 1, 0);
 
-    // actual minimum distance between 2 billboards.
-    int nxtBb = 0;
+    int nxtBoardIdx = 0;
     for (int i = 1; i <= M; i++) {
-        // check if all billboards are not already placed.
-        if (nxtBb < n) {
-            // if we do not have billboard for that particular mile, copy the previous maximum revenue.
-            if (x[nxtBb] != i) {
-                dp[i] = dp[i - 1];
-            }
-            // we do have billboard for this mile
-            else {
-                // We have 2 options, we either take current or we ignore current billboard.
+        if (nxtBoardIdx < n && x[nxtBoardIdx] == i) {
+            // We have 2 options, we either take current or we ignore current billboard.
 
-                // If current position is less than or equal to t, then we can have only one billboard.
-                if (i <= t) {
-                    dp[i] = max(dp[i - 1], revenue[nxtBb]);
-                } else {
-                    dp[i] = max(dp[i - 1], dp[i - t - 1] + revenue[nxtBb]);
-                }
-
-                nxtBb++;
+            // If current position is less than or equal to t, then we can have only one billboard.
+            if (i <= t) {
+                dp[i] = max(dp[i - 1], revenue[nxtBoardIdx]);
+            } else {
+                dp[i] = max(dp[i - 1], dp[i - t - 1] + revenue[nxtBoardIdx]);
             }
+
+            nxtBoardIdx++;
         } else {
             dp[i] = dp[i - 1];
         }
