@@ -146,6 +146,7 @@ So dp[i] = max(dp[i - 1], dp[i - t - 1] + revenue[i])
 */
 
 // Method 2
+// Time = O(m), Space = O(m)
 
 #include <bits/stdc++.h>
 using namespace std;
