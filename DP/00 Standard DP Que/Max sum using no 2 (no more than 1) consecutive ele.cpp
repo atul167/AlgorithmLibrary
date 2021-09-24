@@ -48,31 +48,83 @@ class Solution {
 
 
 
+
+
+
 // Method 2: Space = O(n)
 class Solution {
 public:
-    static const int N = 1e5+5;
+    static const int N = 1e5 + 5;
     int dp[N][2];
     int n;
 
     int go(int pos, int state, int a[]) {
-    	if(pos >= n) return 0;
-    
-    	if(dp[pos][state] != -1) return dp[pos][state]; 
-    
-    	int x = 0, y = 0;
-    	if(state == 0) {
-    		x = a[pos] + go(pos+1, 1, a);
-    	}
-    	y = go(pos+1, 0, a);
-    
-    	return dp[pos][state] = max(x, y);
+        if (pos >= n) return 0;
+
+        if (dp[pos][state] != -1) return dp[pos][state];
+
+        int x = 0, y = 0;
+        if (state == 0) {
+            x = a[pos] + go(pos + 1, 1, a);
+        }
+        y = go(pos + 1, 0, a);
+
+        return dp[pos][state] = max(x, y);
     }
 
     //Function to find the maximum money the thief can get.
     int FindMaxSum(int arr[], int n) {
         this->n = n;
         memset(dp, -1, sizeof dp);
-	    return go(0, 0, arr);
+        return go(0, 0, arr);
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Time = O(n * k), Space = O(n)
+const int N = 1e5 + 5;
+int n, m, k;
+
+
+void solve() {
+    cin >> n;
+    vector<int> a = vector<int>(n + 1);
+    for (int i = 1; i <= n; i++) cin >> a[i];
+
+    k = 1;
+
+    if (n <= k) {
+        int res = 0;
+        for (int i = 1; i <= n; i++) res += a[i];
+        cout << res << endl;
+        return;
+    }
+
+    vector<int> dp(n + 1);
+    dp[0] = 0;
+    for (int i = 1; i <= k; i++) {
+        dp[i] = dp[i - 1] + a[i];
+    }
+
+    for (int i = k + 1; i <= n; i++) {
+        dp[i] = dp[i - 1];
+        int sum = 0;
+        for (int j = i; j > i - k; j--) {
+            sum += a[j];
+            dp[i] = max(dp[i], sum + dp[j - 2]);
+        }
+    }
+
+    cout << dp[n] << endl;
+}
