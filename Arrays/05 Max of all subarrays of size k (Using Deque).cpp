@@ -15,6 +15,11 @@ Algorithm:
    if it is so remove the element from the back of the deque, until all elements left in the deque are greater than the current element. 
    Then insert the current element, at the back of the deque.
 7) Print the maximum element of the window.
+
+
+NOTE:
+This technique is known as monotonic queue or monoque where elements in deque are maintained either in increasin or decreasingorder 
+so as to resemble priority queue but with linear time.
 */
 
 
