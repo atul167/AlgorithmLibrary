@@ -174,6 +174,10 @@ void solve() {
     for (int i = 1; i <= n; i++) cin >> a[i], sum += a[i];
 
     vector<int> dp(n + 1);
+    dp[0] = 0;
+    for (int i = 0; i <= k; i++) {
+        dp[i] = 0;
+    }
 
     function<int(int)> get = [&a, &dp](int i)->int {
         return a[i] + dp[i - 1];
