@@ -25,6 +25,19 @@ Output : 18
 
 
 
+/*
+Two Solutions:
+--------------
+Method 1: It depends on the number of billboards
+Time = O(n ^ 2)
+
+Method 2: It depends on the number of miles
+Time = O(m)
+*/
+
+
+
+
 
 // Method 1.1
 // Time = O(n ^ 2), Space = O(n ^ 2)
