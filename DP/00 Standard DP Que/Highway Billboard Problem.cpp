@@ -128,3 +128,68 @@ int main() {
 
 
 
+
+
+
+
+/*
+Let dp[i] (1 <= i <= M) = max revenue generated from beginning to i miles
+
+Now for each mile on the highway, we need to check whether this mile has the option for any billboard,
+if not then the maximum revenue generated till that mile would be same as maximum revenue generated till one mile before.
+
+But if that mile has the option for billboard then we have 2 options:
+a) Either we will place the billboard, ignore the billboard in previous t miles, and add the revenue of the billboard placed.
+b) Ignore this billboard. 
+
+So dp[i] = max(dp[i - 1], dp[i - t - 1] + revenue[i])
+*/
+
+// Method 2
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int M, t, n;
+vector<int> x, revenue;
+
+int main() {
+    M = 15;
+    x = {6, 9, 12, 14};
+    revenue = {5, 6, 3, 7};
+    t = 2;
+
+    n = x.size();
+
+    // dp[i] = max revenue till mile i.
+    vector<int> dp(M + 1, 0);
+
+    // actual minimum distance between 2 billboards.
+    int nxtBb = 0;
+    for (int i = 1; i <= M; i++) {
+        // check if all billboards are not already placed.
+        if (nxtBb < n) {
+            // if we do not have billboard for that particular mile, copy the previous maximum revenue.
+            if (x[nxtBb] != i) {
+                dp[i] = dp[i - 1];
+            }
+            // we do have billboard for this mile
+            else {
+                // We have 2 options, we either take current or we ignore current billboard.
+
+                // If current position is less than or equal to t, then we can have only one billboard.
+                if (i <= t) {
+                    dp[i] = max(dp[i - 1], revenue[nxtBb]);
+                } else {
+                    dp[i] = max(dp[i - 1], dp[i - t - 1] + revenue[nxtBb]);
+                }
+
+                nxtBb++;
+            }
+        } else {
+            dp[i] = dp[i - 1];
+        }
+    }
+
+    cout << dp[M];
+}
