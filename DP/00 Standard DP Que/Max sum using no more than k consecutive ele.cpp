@@ -201,3 +201,54 @@ void solve() {
 
     cout << sum - dp[n] << endl;
 }
+
+
+
+
+
+
+
+
+
+
+
+const int N = 1e5 + 5;
+int n, m, k;
+
+void solve() {
+    cin >> n >> k;
+    vector<int> a = vector<int>(n + 1);
+    int sum = 0;
+    for (int i = 1; i <= n; i++) cin >> a[i], sum += a[i];
+
+    vector<int> dp(n + 1);
+    dp[0] = 0;
+    for (int i = 0; i <= k; i++) {
+        dp[i] = 0;
+    }
+
+    function<int(int)> get = [&a, &dp](int i)->int {
+        return a[i] + dp[i - 1];
+    };
+
+    deque<int> dq;
+    for (int i = 1; i <= k; i++) {
+        while (!dq.empty() && get(i) <= get(dq.back())) {
+            dq.pop_back();
+        }
+        dq.push_back(i);
+
+        while (dq.front() <= i - k) dq.pop_front();
+    }
+    for (int i = k + 1; i <= n; i++) {
+        while (!dq.empty() && get(i) <= get(dq.back())) {
+            dq.pop_back();
+        }
+        dq.push_back(i);
+        dp[i] = get(dq.front());
+
+        while (dq.front() <= i - k) dq.pop_front();
+    }
+
+    cout << sum - dp[n] << endl;
+}
