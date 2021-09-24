@@ -9,6 +9,16 @@ Constraints:
 
 
 
+/*
+Note:
+Maximum subsequence sum such that no K elements are consecutive.
+https://www.geeksforgeeks.org/maximum-subsequence-sum-such-that-no-k-elements-are-consecutive/
+For this problem - replace k with (k - 1)
+*/
+
+
+
+
 // Time = O(n * k), Space = O(n)
 const int N = 1e5 + 5;
 int n, m, k;
