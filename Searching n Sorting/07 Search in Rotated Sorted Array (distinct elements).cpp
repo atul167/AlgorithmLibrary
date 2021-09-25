@@ -1,7 +1,15 @@
 // https://leetcode.com/problems/search-in-rotated-sorted-array/
 // https://leetcode.com/problems/search-in-rotated-sorted-array/discuss/14436/Revised-Binary-Search/191339
-
 // https://youtu.be/oTfPJKGEHcc
+
+
+/*
+My intuitive thinking: 
+The main idea is that we need to find some parts of array that we could adopt binary search on that, 
+which means we need to find some completed sorted parts, then determine whether target is in left part or right part. 
+There is at least one segment (left part or right part) is monotonically increasing.
+*/
+
 
 class Solution {
 public:
