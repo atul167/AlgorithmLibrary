@@ -71,7 +71,7 @@ public:
     int pop() {
         /* Stack underflow */
         if (count == 0) {
-            cout << "Stack is empty\n";
+            cout << "Stack is empty!\n";
             return -1;
         }
 
@@ -84,7 +84,7 @@ public:
             head->prev = NULL;
         }
 
-        count -= 1;
+        count--;
 
         // update the mid pointer when we have odd number of elements in the stack,
         //i,e move down the mid pointer.
@@ -98,19 +98,32 @@ public:
 
     int findMiddle() {
         if (count == 0) {
-            cout << "Stack is empty now\n";
+            cout << "Stack is empty!\n";
             return -1;
         }
         return mid->data;
     }
 
     int deletemiddle() {
+        if (count == 0) {
+            cout << "Stack is empty!\n";
+            return -1;
+        }
+        if (count <= 2) {
+            int midValue = mid->data;
+            head = mid->prev;
+            count--;
+            delete mid;
+            return midValue;
+        }
+
         int midValue = mid->data;
         DLLNode *tempMid = mid;
         mid->prev->next = mid->next;
         mid->next->prev = mid->prev->next;
 
         mid = mid->next;
+        count--;
         delete tempMid;
         return midValue;
     }
@@ -122,9 +135,6 @@ int main() {
     st.push(22);
     st.push(33);
     st.push(44);
-    st.push(55);
-    st.push(66);
-    st.push(77);
 
     cout << "Middle Element = " << st.findMiddle() << endl;
     cout << "Item popped = " << st.pop() << endl;
