@@ -26,50 +26,54 @@ class Singleton {
 private:
     static Singleton *instance;
     int data;
- 
+
     Singleton() {
         data = 0;
-        cout << "Private Constructor\n";
+        cout << "Private Constructor called.\n";
     }
 
 public:
+    // Static method to create instance of Singleton class
     static Singleton *getInstance() {
         if (!instance) instance = new Singleton;
         return instance;
     }
 
-    int getData() {
-        return this -> data;
-    }
-
     void setData(int data) {
         this -> data = data;
+    }
+
+    int getData() {
+        return this -> data;
     }
 };
 
 // Initialize pointer to NULL so that it can be initialized in first call to getInstance
-Singleton *Singleton::instance = NULL;
+Singleton* Singleton::instance = NULL;
 
 int main() {
-   Singleton *s;
-   s = s->getInstance();
-   cout << s->getData() << endl;
-   s->setData(100);
-   cout << s->getData() << endl;
+    Singleton *s;
+    s = s->getInstance();
+    cout << s->getData() << endl;
+    s->setData(100);
+    cout << s->getData() << endl;
 
-   Singleton *newS = newS->getInstance();
-   cout << newS->getData() << endl;
-   return 0;
+    Singleton *newS = newS->getInstance();
+    newS->setData(200);
+    cout << newS->getData() << endl;
+    cout << s->getData() << endl;
+    return 0;
 }
 
 // Note that constructor is called only once.
 
 /*
 Output:
-Private Constructor
+Private Constructor called.
 0
 100
-100
+200
+200
 */
 
 
@@ -99,15 +103,15 @@ private:
 public:
     int id = 5;
     SingletonClass* getInstance() {
-        if(!instance) instance = new SingletonClass;
+        if (!instance) instance = new SingletonClass;
         return instance;
-    }    
+    }
 };
 
-SingletonClass *SingletonClass::instance = NULL;
- 
+SingletonClass* SingletonClass::instance = NULL;
+
 int main() {
-   SingletonClass *obj;
-   obj = obj->getInstance();
-   cout << obj->id << endl;
+    SingletonClass *obj;
+    obj = obj->getInstance();
+    cout << obj->id << endl;
 }
