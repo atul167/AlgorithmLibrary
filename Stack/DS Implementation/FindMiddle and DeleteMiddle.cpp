@@ -37,7 +37,7 @@ public:
         head = mid = NULL;
     };
 
-    void print() {
+    void printDLL() {
         DLLNode *tmp = head;
         while (tmp) {
             cout << tmp->data << " -> ";
@@ -161,30 +161,30 @@ int main() {
     st.push(44);
     st.push(55);
 
-    st.print();
+    st.printDLL();
 
     cout << "Middle Element = " << st.findMiddle() << endl;
     cout << "Deleted Middle Element = " << st.deletemiddle() << endl;
-    st.print();
+    st.printDLL();
 
     cout << "Item popped = " << st.pop() << endl;
-    st.print();
+    st.printDLL();
 
     cout << "Middle Element = " << st.findMiddle() << endl;
     cout << "Deleted Middle Element = " << st.deletemiddle() << endl;
-    st.print();
+    st.printDLL();
 
     cout << "Middle Element = " << st.findMiddle() << endl;
     cout << "Deleted Middle Element = " << st.deletemiddle() << endl;
-    st.print();
+    st.printDLL();
 
     cout << "Middle Element = " << st.findMiddle() << endl;
     cout << "Deleted Middle Element = " << st.deletemiddle() << endl;
-    st.print();
+    st.printDLL();
 
     cout << "Middle Element = " << st.findMiddle() << endl;
     cout << "Deleted Middle Element = " << st.deletemiddle() << endl;
-    st.print();
+    st.printDLL();
     return 0;
 }
 
