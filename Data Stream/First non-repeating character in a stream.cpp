@@ -5,6 +5,8 @@ Given an input stream of A of n characters consisting only of lower case alphabe
 The task is to find the first non repeating character, each time a character is inserted to the stream. 
 If there is no such character then append '#' to the answer.
 
+Note: You need to tell the first non-repeating character in O(1) time at any moment.
+
 Input: A = "aabc"
 Output: "a#bb"
 */
