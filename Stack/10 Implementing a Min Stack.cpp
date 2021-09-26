@@ -1,3 +1,4 @@
+// https://leetcode.com/problems/min-stack/
 // https://practice.geeksforgeeks.org/problems/special-stack/1
 // https://www.geeksforgeeks.org/design-a-stack-that-supports-getmin-in-o1-time-and-o1-extra-space/
 
@@ -218,14 +219,9 @@ class SpecialStack: public Stack {
     Stack st, minSt;
 public:
     void push(int x) {
-        if (st.isEmpty()) {
-            st.push(x);
+        st.push(x);
+        if (minSt.isEmpty() || x <= minSt.top()) {
             minSt.push(x);
-        } else {
-            st.push(x);
-            if (x <= minSt.top()) {
-                minSt.push(x);
-            }
         }
     }
     int pop() {
@@ -239,6 +235,89 @@ public:
         return minSt.top();
     }
 
+};
+
+int main() {
+    SpecialStack s;
+    s.push(20);
+    s.push(30);
+    s.push(10);
+    cout << s.getMin() << endl;
+    s.push(5);
+    cout << s.getMin() << endl;
+    s.pop();
+    cout << s.getMin() << endl;
+    s.pop();
+    cout << s.getMin() << endl;
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+/* A simple stack class with basic stack funtionalities */
+class Stack {
+    vector<int> arr;
+public:
+    Stack() {
+        arr = {};
+    }
+    bool isEmpty() {
+        return arr.empty();
+    }
+    int pop() {
+        if (isEmpty()) {
+            cout << "Stack Underflow";
+            abort();
+        }
+        int x = arr.back();
+        arr.pop_back();
+        return x;
+    }
+    void push(int x) {
+        arr.push_back(x);
+    }
+    int top() {
+        if (isEmpty()) {
+            cout << "Stack Underflow";
+            abort();
+        }
+        return arr.back();
+    }
+};
+
+
+class SpecialStack: public Stack {
+    Stack st, minSt;
+public:
+    void push(int x) {
+        st.push(x);
+        if (minSt.isEmpty() || x <= minSt.top()) {
+            minSt.push(x);
+        }
+    }
+    int pop() {
+        int x = st.pop();
+        if (minSt.top() == x) {
+            minSt.pop();
+        }
+        return x;
+    }
+    int getMin() {
+        return minSt.top();
+    }
 };
 
 int main() {
