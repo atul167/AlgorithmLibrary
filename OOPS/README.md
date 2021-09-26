@@ -18,8 +18,8 @@ The vPTR is non-static data member, hence a static member function can't access 
 There is one difference between static function and not static (member) function.
 That is static function doesn't have this pointer but member function have this pointer.
 The virtual function is handled by vptr and vtable vptr is a pointer which initialized by constructor of a class 
-and vptr is accessible by this pointer only because it is the member of that class and vptr points to vtable where the address of virtual function stored 
-and it will call that function.
+and vptr is accessible by this pointer only because it is the member of that class 
+and vptr points to vtable where the address of virtual function stored and it will call that function.
 And you any static function doesn't have this pointer so that static functions are unable to access vptr.
 Thats why any static function can't be virtual.
 You can check it your class has at least one virtual function then class size will increase by 4 (size of pointer)
