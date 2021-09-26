@@ -37,6 +37,15 @@ public:
         head = mid = NULL;
     };
 
+    void print() {
+        DLLNode *tmp = head;
+        while (tmp) {
+            cout << tmp->data << " -> ";
+            tmp = tmp->next;
+        }
+        cout << endl << endl;
+    }
+
     // adds elements at the beginning of doubly linkedlist
     void push(int data) {
         DLLNode* node = new DLLNode(data);
@@ -109,21 +118,36 @@ public:
             cout << "Stack is empty!\n";
             return -1;
         }
-        if (count <= 2) {
+        if (count == 1) {
             int midValue = mid->data;
-            head = mid->prev;
-            count--;
+            count = 0;
+
             delete mid;
+            head = mid = NULL;
+            return midValue;
+        }
+        if (count == 2) {
+            int midValue = mid->data;
+            count = 1;
+
+            head = mid->next;
+            head->prev = head->next = NULL;
+            delete mid;
+            mid = head;
             return midValue;
         }
 
         int midValue = mid->data;
         DLLNode *tempMid = mid;
-        mid->prev->next = mid->next;
-        mid->next->prev = mid->prev->next;
+        mid->prev->next = tempMid->next;
+        mid->next->prev = tempMid->prev;
 
-        mid = mid->next;
         count--;
+        if (count % 2 == 0) {
+            mid = tempMid->prev;
+        } else {
+            mid = tempMid->next;
+        }
         delete tempMid;
         return midValue;
     }
@@ -135,13 +159,61 @@ int main() {
     st.push(22);
     st.push(33);
     st.push(44);
+    st.push(55);
+
+    st.print();
 
     cout << "Middle Element = " << st.findMiddle() << endl;
+    cout << "Deleted Middle Element = " << st.deletemiddle() << endl;
+    st.print();
+
     cout << "Item popped = " << st.pop() << endl;
-    cout << "Item popped = " << st.pop() << endl;
-    cout << "Item popped = " << st.pop() << endl;
+    st.print();
+
     cout << "Middle Element = " << st.findMiddle() << endl;
     cout << "Deleted Middle Element = " << st.deletemiddle() << endl;
+    st.print();
+
     cout << "Middle Element = " << st.findMiddle() << endl;
+    cout << "Deleted Middle Element = " << st.deletemiddle() << endl;
+    st.print();
+
+    cout << "Middle Element = " << st.findMiddle() << endl;
+    cout << "Deleted Middle Element = " << st.deletemiddle() << endl;
+    st.print();
+
+    cout << "Middle Element = " << st.findMiddle() << endl;
+    cout << "Deleted Middle Element = " << st.deletemiddle() << endl;
+    st.print();
     return 0;
 }
+
+
+/*
+55 -> 44 -> 33 -> 22 -> 11 -> 
+
+Middle Element = 33
+Deleted Middle Element = 33
+55 -> 44 -> 22 -> 11 -> 
+
+Item popped = 55
+44 -> 22 -> 11 -> 
+
+Middle Element = 22
+Deleted Middle Element = 22
+44 -> 11 -> 
+
+Middle Element = 44
+Deleted Middle Element = 44
+11 -> 
+
+Middle Element = 11
+Deleted Middle Element = 11
+
+
+Middle Element = Stack is empty!
+-1
+Deleted Middle Element = Stack is empty!
+-1
+
+*/
