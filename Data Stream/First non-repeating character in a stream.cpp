@@ -35,9 +35,7 @@ public:
         for (int i = 0; i < s.size(); ++i) {
             int idx = s[i] - 'a';
             v[idx].first++;
-            if (v[idx].first == 1) {
-                v[idx].second = i;
-            }
+            v[idx].second = i;
 
             idx = getIdx();
             if (idx == -1) res += "#";
