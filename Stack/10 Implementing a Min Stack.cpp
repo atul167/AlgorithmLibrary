@@ -137,3 +137,121 @@ void solve() {
     cout << s.getMin() << endl;
     s.pop();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <bits/stdc++.h>
+using namespace std;
+
+/* A simple stack class with basic stack funtionalities */
+class Stack {
+    static const int max = 100;
+    int arr[max];
+    int topIdx;
+public:
+    Stack() {
+        topIdx = -1;
+    }
+    bool isEmpty() {
+        return topIdx == -1;
+    }
+    bool isFull() {
+        return topIdx == max - 1;
+    }
+    int pop() {
+        if (isEmpty()) {
+            cout << "Stack Underflow";
+            abort();
+        }
+        int x = arr[topIdx];
+        topIdx--;
+        return x;
+    }
+    void push(int x) {
+        if (isFull()) {
+            cout << "Stack Overflow";
+            abort();
+        }
+        topIdx++;
+        arr[topIdx] = x;
+    }
+    int top() {
+        if (isEmpty()) {
+            cout << "Stack Underflow";
+            abort();
+        }
+        return arr[topIdx];
+    }
+};
+
+
+class SpecialStack: public Stack {
+    Stack st, minSt;
+public:
+    void push(int x) {
+        if (st.isEmpty()) {
+            st.push(x);
+            minSt.push(x);
+        } else {
+            st.push(x);
+            if (x <= minSt.top()) {
+                minSt.push(x);
+            }
+        }
+    }
+    int pop() {
+        int x = st.pop();
+        if (minSt.top() == x) {
+            minSt.pop();
+        }
+        return x;
+    }
+    int getMin() {
+        return minSt.top();
+    }
+
+};
+
+int main() {
+    SpecialStack s;
+    s.push(20);
+    s.push(30);
+    s.push(10);
+    cout << s.getMin() << endl;
+    s.push(5);
+    cout << s.getMin() << endl;
+    s.pop();
+    cout << s.getMin() << endl;
+    s.pop();
+    cout << s.getMin() << endl;
+    return 0;
+}
