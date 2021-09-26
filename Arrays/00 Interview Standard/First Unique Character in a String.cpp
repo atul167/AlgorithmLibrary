@@ -1,4 +1,5 @@
 // https://leetcode.com/problems/first-unique-character-in-a-string/
+// https://www.geeksforgeeks.org/given-a-string-find-its-first-non-repeating-character/
 
 /*
 Given a string s, find the first non-repeating character in it and return its index. If it does not exist, return -1.
