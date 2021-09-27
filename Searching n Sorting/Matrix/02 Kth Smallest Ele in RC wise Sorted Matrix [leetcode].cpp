@@ -39,3 +39,80 @@ public:
         return lo;
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+/* 
+Method 2: Using Heap
+Time Complexity:- O(NlogN)
+Space Complexity:- O(N)
+*/
+
+/*
+Here, we know that the row and column is already sorted. 
+Therefore, instead of traversing in the entire matrix we can take advantage of that. 
+We can take a Min Heap and push the First column(value, indexes) into Min heap. 
+You can push first row also, and write your answer according to that.
+*/
+
+
+// Method 2.1
+class Solution {
+public:
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        priority_queue<array<int, 3>, vector<array<int, 3>> , greater<array<int, 3>>> pq;
+        int n = matrix.size(), m = matrix[0].size();
+        for (int i = 0; i < n; i++) {
+            pq.push({matrix[i][0], i, 0});
+        }
+
+        int res;
+        while (k--) {
+            int val = pq.top()[0];
+            int i = pq.top()[1];
+            int j = pq.top()[2];
+            pq.pop();
+            res = val;
+
+            if (j + 1 < m) {
+                pq.push({matrix[i][j + 1], i, j + 1});
+            }
+        }
+        return res;
+    }
+};
+
+
+// Method 2.2
+class Solution {
+public:
+    int kthSmallest(vector<vector<int>>& matrix, int k) {
+        priority_queue<array<int, 3>, vector<array<int, 3>> , greater<array<int, 3>>> pq;
+        int n = matrix.size(), m = matrix[0].size();
+        for (int j = 0; j < m; j++) {
+            pq.push({matrix[0][j], 0, j});
+        }
+
+        int res;
+        while (k--) {
+            int val = pq.top()[0];
+            int i = pq.top()[1];
+            int j = pq.top()[2];
+            pq.pop();
+            res = val;
+
+            if (i + 1 < n) {
+                pq.push({matrix[i + 1][j], i + 1, j});
+            }
+        }
+        return res;
+    }
+};
