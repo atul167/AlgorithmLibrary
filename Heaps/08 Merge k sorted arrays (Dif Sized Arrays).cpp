@@ -41,9 +41,8 @@ vector<int> mergeKArrays(vector<vector<int> > arr) {
         pq.push({ arr[i][0], { i, 0 } });
     }
 
-    // Now one by one get the minimum element from min heap
-    // and replace it with next element of its array
-    while (pq.empty() == false) {
+    // Now one by one get the minimum element from min heap and replace it with next element of its array
+    while (!pq.empty()) {
         ppi cur = pq.top();
         pq.pop();
 
