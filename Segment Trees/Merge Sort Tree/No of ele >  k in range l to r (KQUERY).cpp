@@ -2,7 +2,7 @@
 // https://youtu.be/R0KRKi_LL6c
 
 /*
-Given a sequence of n numbers a1, a2, ..., an and a number of k- queries. A k-query is a triple (i, j, k) (1 ≤ i ≤ j ≤ n). 
+Given a sequence of n numbers a1, a2, ..., an and a number of k-queries. A k-query is a triple (i, j, k) (1 ≤ i ≤ j ≤ n). 
 For each k-query (i, j, k), you have to return the number of elements greater than k in the subsequence ai, ai+1, ..., aj.
 */
 
