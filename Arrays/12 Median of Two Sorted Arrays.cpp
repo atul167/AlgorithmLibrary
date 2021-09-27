@@ -6,6 +6,10 @@ The overall run time complexity should be O(log(n + m)).
 */
 
 
+/*
+Using median of row-wise sorted matrix concept.
+*/
+
 class Solution {
 public:
     int bs(vector<int>& a, vector<int>& b, int target) {
