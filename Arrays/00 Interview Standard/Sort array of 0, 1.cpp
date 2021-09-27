@@ -1,6 +1,62 @@
 // https://www.geeksforgeeks.org/segregate-0s-and-1s-in-an-array-by-traversing-array-once/
 
 
+// Dutch National Flag Algorithm for sorting 0, 1, 2 elements array (ignoring '2' for this question) 
+#include <bits/stdc++.h>
+using namespace std;
+
+void segregate0and1(int arr[], int n) {
+    int lo = 0;
+    int hi = n - 1;
+    int mid = 0;
+
+    while (mid <= hi) {
+        int x = arr[mid];
+
+        if (x == 0) {
+            swap(arr[lo++], arr[mid++]);
+        }
+
+        if (x == 1) {
+            mid++;
+        }
+
+        // if(x == 2) {
+        //     swap(arr[mid], arr[hi--]);
+        // }
+    }
+}
+
+int main() {
+    int arr[] = {0, 1, 0, 1, 1, 1};
+    int i, arr_size = sizeof(arr) / sizeof(arr[0]);
+
+    segregate0and1(arr, arr_size);
+
+    for (i = 0; i < arr_size; i++) {
+        cout << arr[i] << " ";
+    }
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // C++ program to sort a binary array in one pass
 #include <bits/stdc++.h>
