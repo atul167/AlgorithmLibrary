@@ -55,6 +55,5 @@ public:
             row = kSmallestPairs(row, mat[r], k);
         }
         return row[k-1];
-        
     }
 };
