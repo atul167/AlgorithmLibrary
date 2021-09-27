@@ -13,6 +13,32 @@ If we sort this segment, we get (2, 3, 5, 6), the third number is 5, and therefo
 */
 
 
+
+/*
+Solution Idea:
+
+Firstly, we maintain a vector of pairs where each pair {value, index} is such that first element of pair represents the element of the input array 
+and the second element of the pair represents the index at which it occurs.
+
+Now we sort this vector of pairs on the basis of the first element of each pair.
+
+After this we build a Merge Sort Tree where each node has a vector of indices in the sorted range.
+
+When we have to answer a query we find if the Kth smallest number lies in the left sub-tree or in the right sub-tree. 
+The idea is to use two binary searches and find the number of elements in the left sub-tree such that that the indices lie within the given query range.
+Let the number of such indices be X.
+
+If X >= K, it means we will be able to find the Kth smallest Number in the left sub-tree thus we call on the left sub-tree.
+
+Else the Kth smallest number lies in the right sub-tree but this time we don’t have to look for the K th smallest number 
+as we already have first X smallest numbers of the range in the left sub-tree thus we should look for the remaining part 
+ie the (K - X)th number in the right sub-tree.
+
+This is the Index of Kth smallest number the value at this index is the required number.
+*/
+
+
+
 const int N = 1e5 + 5;
 int n, m;
 
@@ -35,11 +61,13 @@ void build(int si, int ss, int se) {
 
 int query(int si, int ss, int se, int qs, int qe, int k) {
     if (ss == se) {
-        return st[si].back();
+        return st[si][0];
     }
 
     int mid = (ss + se) / 2;
+
     int x = upper_bound(all(st[si * 2]), qe) - lower_bound(all(st[si * 2]), qs);
+    
     if (x >= k) {
         return query(si * 2, ss, mid, qs, qe, k);
     } else {
