@@ -20,9 +20,10 @@ Explanation The merged array would be {1 2 3 4 6 20}. The 2nd smallest element w
 */
 
 
+// Method 1: Minheap
+
 #include <bits/stdc++.h>
 using namespace std;
-
 
 int mergeKArrays(vector<vector<int> > arr, int m) {
     int res;
@@ -56,6 +57,68 @@ int mergeKArrays(vector<vector<int> > arr, int m) {
     }
 
     return res;
+}
+
+int main() {
+    vector<vector<int> > arr = { {1, 3},
+        {2, 4, 6},
+        {0, 9, 10, 11}
+    } ;
+    int m = 5;
+    cout << mergeKArrays(arr, m);
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Method 2: Binary Search (Median in row-wise sorted matrix concept)
+// FFFFFFFTTTTTTT
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int mergeKArrays(vector<vector<int> > arr, int m) {
+    int lo = INT_MAX, hi = INT_MIN;
+    for (int i = 0; i < arr.size(); i++) {
+        // Finding the minimum element
+        lo = min(lo, arr[i][0]);
+        // Finding the maximum element
+        hi = max(hi, arr[i][arr[i].size() - 1]);
+    }
+
+    while (lo < hi) {
+        int mid = lo + (hi - lo) / 2;
+
+        int cnt = 0;
+        // Find count of elements smaller than or equal to mid
+        for (int i = 0; i < arr.size(); ++i) {
+            cnt += upper_bound(arr[i].begin(), arr[i].end(), mid) - arr[i].begin();
+        }
+
+        if (cnt >= m)
+            hi = mid;
+        else
+            lo = mid + 1;
+    }
+    return lo;
 }
 
 int main() {
