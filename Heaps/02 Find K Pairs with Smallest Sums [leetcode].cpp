@@ -15,6 +15,9 @@ and we only need to maintain K possible candidates in the data structure.
 Some observations: 
 i) For every numbers in nums1, its best partner (yields min sum) always strats from nums2[0] since arrays are all sorted.
 ii) And for a specific number in nums1, its next candidate sould be [this specific number] + nums2[current_index + 1]
+
+The run time complexity is O(kLogk) since que.size <= k and we do at most k loop.
+The above solution is essentially a multiple-way merge sort
 */
 
 class Solution {
