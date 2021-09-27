@@ -90,8 +90,12 @@ public:
 
 
 
+/* 
+Method 1: Using BS
+Time Complexity:- O(NlogN)
+Space Complexity:- O(1)
+*/
 
-// Method 2
 // FFFFFFTTTTTTTT
 
 class Solution {
