@@ -63,37 +63,31 @@ public:
 
 class Solution {
 public:
-    struct Data {
-        int firstVal, secondVal, idx;
-        Data(int a, int b, int c) {
-            firstVal = a;
-            secondVal = b;
-            idx = c;
-        }
-    };
-    struct Comparator {
-        bool operator() (Data& a, Data& b) {
-            return !(a.firstVal + a.secondVal < b.firstVal + b.secondVal);
+    struct comparator {
+        bool operator() (array<int, 3>& a, array<int, 3>& b) {
+            return !(a[0] + a[1] < b[0] + b[1]);
         }
     };
     vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
-        // minheap
-        priority_queue <Data, vector <Data>, Comparator> pq;
+        // minheap {nums[i], nums2[j], j}
+        priority_queue <array<int, 3>, vector<array<int, 3>>, comparator> pq;
         int n1 = nums1.size(), n2 = nums2.size();
+        if (!n1 || !n2) return {};
 
-        vector < vector <int> > ret;
+        vector<vector<int>> res;
         for (int i = 0; i < n1; i++) {
-            pq.push(Data(nums1[i], nums2[0], 0));
+            pq.push({nums1[i], nums2[0], 0});
         }
         while (!pq.empty() && k--) {
-            Data it = pq.top();
+            auto it = pq.top();
             pq.pop();
-            ret.push_back({it.firstVal, it.secondVal});
+            res.push_back({it[0], it[1]});
+            int idx = it[2];
 
-            if (it.idx + 1 < n2) {
-                pq.push(Data(it.firstVal, nums2[it.idx + 1], it.idx + 1));
+            if (idx + 1 < n2) {
+                pq.push({it[0], nums2[idx + 1], idx + 1});
             }
         }
-        return ret;
+        return res;
     }
 };
