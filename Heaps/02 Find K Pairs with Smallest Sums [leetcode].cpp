@@ -51,3 +51,49 @@ public:
         return res;
     }
 };
+
+
+
+
+
+
+
+
+
+
+class Solution {
+public:
+    struct Data {
+        int firstVal, secondVal, idx;
+        Data(int a, int b, int c) {
+            firstVal = a;
+            secondVal = b;
+            idx = c;
+        }
+    };
+    struct Comparator {
+        bool operator() (Data& a, Data& b) {
+            return !(a.firstVal + a.secondVal < b.firstVal + b.secondVal);
+        }
+    };
+    vector<vector<int>> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
+        // minheap
+        priority_queue <Data, vector <Data>, Comparator> pq;
+        int n1 = nums1.size(), n2 = nums2.size();
+
+        vector < vector <int> > ret;
+        for (int i = 0; i < n1; i++) {
+            pq.push(Data(nums1[i], nums2[0], 0));
+        }
+        while (!pq.empty() && k--) {
+            Data it = pq.top();
+            pq.pop();
+            ret.push_back({it.firstVal, it.secondVal});
+
+            if (it.idx + 1 < n2) {
+                pq.push(Data(it.firstVal, nums2[it.idx + 1], it.idx + 1));
+            }
+        }
+        return ret;
+    }
+};
