@@ -57,3 +57,51 @@ public:
         return row[k-1];
     }
 };
+
+
+
+
+
+
+
+
+class Solution {
+public:
+    struct comparator {
+        bool operator() (array<int, 3>& a, array<int, 3>& b) {
+            return !(a[0] + a[1] < b[0] + b[1]);
+        }
+    };
+    // reused function of previous problem - Find K Pairs with Smallest Sums
+    vector<int> kSmallestPairs(vector<int>& nums1, vector<int>& nums2, int k) {
+        // minheap {nums[i], nums2[j], j}
+        priority_queue <array<int, 3>, vector<array<int, 3>>, comparator> pq;
+        int n1 = nums1.size(), n2 = nums2.size();
+        if (!n1 || !n2) return {};
+
+        vector<int> res;
+        for (int i = 0; i < n1; i++) {
+            pq.push({nums1[i], nums2[0], 0});
+        }
+        while (!pq.empty() && k--) {
+            auto it = pq.top();
+            pq.pop();
+            res.push_back(it[0] + it[1]);
+            int idx = it[2];
+
+            if (idx + 1 < n2) {
+                pq.push({it[0], nums2[idx + 1], idx + 1});
+            }
+        }
+        return res;
+    }
+
+    int kthSmallest(vector<vector<int>>& mat, int k) {
+        vector<int> row = mat[0];
+        for (int r = 1; r < mat.size(); r++) {
+            row = kSmallestPairs(row, mat[r], k);
+        }
+        return row[k - 1];
+
+    }
+};
