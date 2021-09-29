@@ -6,6 +6,7 @@ The overall run time complexity should be O(log(n + m)).
 */
 
 
+// Time = O(log(min(n, m)))
 
 class Solution {
 public:
@@ -54,7 +55,7 @@ public:
 
 
 
-
+// Using K-th largest ele of two sorted arrays concept
 
 class Solution {
 public:
