@@ -26,20 +26,16 @@ public:
     // old values move to back, new ones enter at front
     list<int> dq;
     int cap;
-    
+
     LRUCache(int capacity) {
         cap = capacity;
     }
 
     int get(int key) {
         if (!cache.count(key)) return -1;
-        
+
         int value = cache[key].val;
-        dq.erase(cache[key].itr);
-        cache.erase(key);
-        
-        dq.push_front(key);
-        cache[key] = {value, dq.begin()};
+        put(key, value);
         return value;
     }
 
@@ -57,11 +53,3 @@ public:
         cache[key] = {value, dq.begin()};
     }
 };
-
-
-/**
- * Your LRUCache object will be instantiated and called as such:
- * LRUCache* obj = new LRUCache(capacity);
- * int param_1 = obj->get(key);
- * obj->put(key,value);
- */
