@@ -53,11 +53,10 @@ public:
                 cache.erase(keyToDelete);
                 freq.erase(keyToDelete);
             }
-            cache[key].value = value;
             freq[key] = 0;
             minFrequency = 0;
             m_countKeyMap[freq[key]].push_front(key);
-            cache[key].itr = m_countKeyMap[0].begin();
+            cache[key] = {value, m_countKeyMap[freq[key]].begin()};
         }
         // Just update value and frequency
         else {
@@ -68,10 +67,10 @@ public:
                 }
                 m_countKeyMap.erase(freq[key]);
             }
-            cache[key].value = value;
+
             freq[key]++;
             m_countKeyMap[freq[key]].push_front(key);
-            cache[key].itr = m_countKeyMap[freq[key]].begin();
+            cache[key] = {value, m_countKeyMap[freq[key]].begin()};
         }
     }
 };
@@ -251,11 +250,10 @@ public:
                 cache.erase(keyToDelete);
                 freq.erase(keyToDelete);
             }
-            cache[key].value = value;
             freq[key] = 0;
             minFrequency = 0;
             m_countKeyMap[freq[key]].push_front(key);
-            cache[key].itr = m_countKeyMap[0].begin();
+            cache[key] = {value, m_countKeyMap[freq[key]].begin()};
         }
         // Just update value and frequency
         else {
@@ -266,10 +264,10 @@ public:
                 }
                 m_countKeyMap.erase(freq[key]);
             }
-            cache[key].value = value;
+
             freq[key]++;
             m_countKeyMap[freq[key]].push_front(key);
-            cache[key].itr = m_countKeyMap[freq[key]].begin();
+            cache[key] = {value, m_countKeyMap[freq[key]].begin()};
         }
     }
 };
