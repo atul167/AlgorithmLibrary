@@ -1,5 +1,26 @@
 // https://www.geeksforgeeks.org/k-th-element-two-sorted-arrays/
 // https://practice.geeksforgeeks.org/problems/k-th-element-of-two-sorted-array1317/1
+// Google interview
+
+/*
+Given two sorted arrays nums1 and nums2 of size m and n respectively and an int k. Find the k-th largest element of these arrays.
+Note that it is the k-th largest element in the sorted order, not the k-th distinct element.
+
+Example 1:
+Input: nums1 = [-2, -1, 3, 5, 6, 8], nums2 = [0, 1, 2, 5, 9], k = 4
+Output: 5
+Explanation: Union of above arrays will be [-2, -1, 0, 1, 2, 3, 5, 5, 6, 8, 9] and the 4th largest element is 5.
+
+Example 2:
+Input: nums1 = [2, 4], nums2 = [6], k = 1
+Output: 6
+Explanation: union of above arrays will be [2, 4, 6] and the 1st largest element is 6.
+
+You may assume k is always valid, 1 ≤ k ≤ m + n.
+
+Follow-up
+Can you do it in O(logk) time?
+*/
 
 
 class Solution {
