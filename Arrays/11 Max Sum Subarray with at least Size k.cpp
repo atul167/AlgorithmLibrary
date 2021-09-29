@@ -22,9 +22,8 @@ int maxSumWithK(int a[], int n, int k) {
 
     // We use Kadane's algorithm to fill maxSum[]
     // Below code is taken from method 3 of https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/
-    int curr_max = a[0];
-    maxSum[0] = a[0];
-    for (int i = 1; i < n; i++) {
+    int curr_max = 0;
+    for (int i = 0; i < n; i++) {
         curr_max = max(a[i], curr_max + a[i]);
         maxSum[i] = curr_max;
     }
@@ -50,12 +49,13 @@ int maxSumWithK(int a[], int n, int k) {
 }
 
 int main() {
-    int a[] = {1, 2, 3, -5, -3};
+    int a[] = {1, 2, 3, -3, -5};
     int k = 4;
     int n = sizeof(a) / sizeof(a[0]);
     cout << maxSumWithK(a, n, k);
     return 0;
 }
+
 
 
 
