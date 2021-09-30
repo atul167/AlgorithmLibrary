@@ -23,6 +23,13 @@ Output: -1
 Explanation: The final subarray needs to be non-empty. You can't choose [-1] and delete -1 from it, then get an empty subarray to make the sum equals to 0.
 */
 
+
+/*
+maxEndHere[i] is going to store maximum sum till index i including a[i] (i.e. a[i] is the ending index of subarray)
+maxStartHere[i] is going to store maximum sum starting from index i including a[i] (i.e. a[i] is the starting index of subarray)
+*/
+
+
 class Solution {
 public:
     int maximumSum(vector<int>& arr) {
