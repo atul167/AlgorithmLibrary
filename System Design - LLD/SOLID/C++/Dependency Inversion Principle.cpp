@@ -69,9 +69,19 @@ int main() {
     return EXIT_SUCCESS;
 }
 
+/*
+John has a child called Chris
+John has a child called Matt
+*/
 
 
 
+/*
+1) When later on the container of Relationships changes from vector to set or any other container, 
+   you need to change in many places which isn’t a very good design. 
+   Even if just the name of data member i.e. Relationships::m_relations changes, you will find yourself breaking other parts of code.
+2) As you can see Low-level module i.e. Relationships directly depend on High-level module i.e. Research which is essentially a violation of DIP.
+*/
 
 
 
@@ -146,3 +156,22 @@ int main() {
 
     return EXIT_SUCCESS;
 }
+
+/*
+John has a child called Chris
+John has a child called Matt
+*/
+
+
+
+/*
+1) Rather we should create an abstraction and bind Low-level & High-level module to that abstraction.
+2) Now no matter, the name of container or container itself changes in Low-level module, 
+   High-level module or other parts of code which followed DIP will be in-tact.
+3) The Dependency Inversion Principle (DIP) suggest that the most flexible systems are those in which 
+   source code dependencies refer only to abstractions, not to concretions.
+4) This is the reason why most experienced dev uses STL or library functions along with generic containers. 
+   Even using an auto keyword at appropriate places may help in creating generic behaviour with less fragile code.
+5) There are many ways you can implement DIP, as long as C++ concerns most people use static polymorphism(i.e. CRTP unless they need dynamic one), 
+   template specialization, Adapter Design Pattern, type-erasure, etc.
+*/
