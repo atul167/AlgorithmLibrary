@@ -29,6 +29,13 @@ n == nums.length
 */
 
 
+/*
+Binary search for the answer and heck how many pairs have distance <= X.
+
+FFFFFTTTTTTTT
+*/
+
+
 class Solution {
 public:
     bool check(int mid, vector<int>& nums, int k) {
