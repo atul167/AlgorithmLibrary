@@ -1,3 +1,28 @@
+// https://hackernoon.com/solid-design-dependency-inversion-principle-in-c-weq3ujp
+
+
+/*
+Intent
+--------
+1. High-level modules should not depend on low-level modules. Both should depend on abstractions.
+2. Abstractions should not depend on details. Details should depend on abstractions.
+
+What are the High-level & Low-level modules?
+---------------------------------------------
+High-level modules: 
+describes operations which is more abstract in nature & contain more complex logic. These modules orchestrate low-level modules in our application.
+
+Low-level modules: 
+describes implementations more specific & individual to components focusing on details & smaller parts of the application. 
+These modules are used inside the high-level modules.
+*/
+
+
+
+
+
+// Motivation: Violating Dependency Inversion Principle
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -59,6 +84,8 @@ int main() {
 
 
 
+
+// Solution: Example of Dependency Inversion Principle in C++
 
 #include<bits/stdc++.h>
 using namespace std;
