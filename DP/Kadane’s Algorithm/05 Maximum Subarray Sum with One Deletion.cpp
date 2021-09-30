@@ -30,6 +30,7 @@ maxStartHere[i] is going to store maximum sum starting from index i including a[
 */
 
 
+// Space = O(n)
 class Solution {
 public:
     int maximumSum(vector<int>& arr) {
@@ -53,6 +54,25 @@ public:
             if (i > 0 && i < n - 1) {
                 res = max(res, maxEndHere[i - 1] + maxStartHere[i + 1]);
             }
+        }
+        return res;
+    }
+};
+
+
+
+
+// Space = O(1)
+class Solution {
+public:
+    int maximumSum(vector<int>& arr) {
+        int n = arr.size();
+        int onedelete = 0, nodelete = arr[0], res = arr[0];
+        
+        for(int i = 1; i < n; i++) {
+            onedelete = max(onedelete + arr[i], nodelete);
+            nodelete = max(nodelete + arr[i], arr[i]);
+            res = max({res, nodelete, onedelete});
         }
         return res;
     }
