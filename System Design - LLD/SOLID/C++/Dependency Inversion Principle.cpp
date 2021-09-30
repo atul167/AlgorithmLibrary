@@ -1,4 +1,5 @@
 // https://hackernoon.com/solid-design-dependency-inversion-principle-in-c-weq3ujp
+// http://www.vishalchovatiya.com/dependency-inversion-principle-in-cpp-solid-as-a-rock/
 
 
 /*
