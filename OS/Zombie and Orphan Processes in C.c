@@ -9,7 +9,7 @@ The parent process reads the exit status of the child process which reaps off th
 
 What are orphan processes?
 ----------------------------
-A process whose parent process no more exists i.e. either finished or terminated without waiting for its child process to terminate is called an orphan process.
+A process whose parent process no more exists (either finished or terminated without waiting for its child process to terminate) is called an orphan process.
 */
 
 
