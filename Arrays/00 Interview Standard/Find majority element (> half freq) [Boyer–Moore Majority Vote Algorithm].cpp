@@ -9,6 +9,25 @@ A majority element appears more than ⌊n / 2⌋ times (rounded down), where n i
 */
 
 
+// Boyer–Moore majority vote algorithm
+// Assumption: Frequency of majority element > n / 2
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int majority, count = 0;
+        for (int x : nums) {
+            if (count == 0) {
+                majority = x;
+            }
+
+            if (majority == x) count++;
+            else count--;
+        }
+        return majority;
+    }
+};
+
+
 
 // Time = O(n), Space = O(n)
 #include <bits/stdc++.h>
@@ -42,26 +61,5 @@ public:
         sort(nums.begin(), nums.end());
         int n = nums.size();
         return nums[n / 2];
-    }
-};
-
-
-
-
-// Boyer–Moore majority vote algorithm
-// Assumption: Frequency of majority element > n / 2
-class Solution {
-public:
-    int majorityElement(vector<int>& nums) {
-        int majority, count = 0;
-        for (int x : nums) {
-            if (count == 0) {
-                majority = x;
-            }
-
-            if (majority == x) count++;
-            else count--;
-        }
-        return majority;
     }
 };
