@@ -69,7 +69,7 @@ void bfs() {
             vis[temp->left] = 1;
             q.push({temp->left, dis + 1});
         }
-        if(temp->left && vis[temp->right]) {
+        if(temp->right && !vis[temp->right]) {
             vis[temp->right] = 1;
             q.push({temp->right, dis + 1});
         }
