@@ -6,22 +6,20 @@ class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
         // base case
-        if (root == NULL || root == p || root == q) {
+        if (!root || root == p || root == q) {
             return root;
         }
-        
+
         TreeNode* left = lowestCommonAncestor(root->left, p, q);
         TreeNode* right = lowestCommonAncestor(root->right, p, q);
 
-        // result
-        if(left == NULL) {
+        if (!left) {
             return right;
-        } else if(right == NULL) {
+        }
+        if (!right) {
             return left;
         }
         // both left and right are not null, we found our result
-        else {
-            return root;
-        }
+        return root;
     }
 };
