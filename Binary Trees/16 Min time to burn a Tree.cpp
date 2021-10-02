@@ -33,28 +33,27 @@ struct Node {
     }
 };
 
-
 // returns -> { start node present in root's subtree or not (1 or 0), height of subtree, distance to the given node having value start }
 array<int, 3> burn_tree(Node* root, int start, int &maxx) {
     if (!root) return {0, 0, 0};
 
-    array<int, 3> v1 = burn_tree(root->left, start, maxx);
-    array<int, 3> v2 = burn_tree(root->right, start, maxx);
+    array<int, 3> leftV = burn_tree(root->left, start, maxx);
+    array<int, 3> rightV = burn_tree(root->right, start, maxx);
 
     if (root->val == start) {
-        maxx = max(maxx, max(v1[1], v2[1]));
-        return {1, max(v1[1], v2[1]) + 1, 1};
+        maxx = max(maxx, max(leftV[1], rightV[1]));
+        return {1, max(leftV[1], rightV[1]) + 1, 1};
     }
 
-    if (v1[0] && !v2[0]) {
-        maxx = max(maxx, v1[2] + v2[1]);
-        return {1, max(v1[1], v2[1]) + 1, v1[2] + 1};
+    if (leftV[0] && !rightV[0]) {
+        maxx = max(maxx, leftV[2] + rightV[1]);
+        return {1, max(leftV[1], rightV[1]) + 1, leftV[2] + 1};
     }
-    if (!v1[0] && v2[0]) {
-        maxx = max(maxx, v2[2] + v1[1]);
-        return {1, max(v1[1], v2[1]) + 1, v2[2] + 1};
+    if (!leftV[0] && rightV[0]) {
+        maxx = max(maxx, rightV[2] + leftV[1]);
+        return {1, max(leftV[1], rightV[1]) + 1, rightV[2] + 1};
     }
-    return {0, max(v1[1], v2[1]) + 1, 0};
+    return {0, max(leftV[1], rightV[1]) + 1, 0};
 }
 
 int solve(Node* root, int start) {
