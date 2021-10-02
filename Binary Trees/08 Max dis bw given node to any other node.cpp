@@ -14,7 +14,7 @@ struct Node {
 };
 
 
-// returns -> {present(1 or 0), height of subtree, distance to the given node having value start }
+// returns -> { start node present in root's subtree or not (1 or 0), height of subtree, distance to the given node having value start }
 array<int, 3> burn_tree(Node* root, int start, int &maxx) {
     if (!root) return {0, 0, 0};
 
