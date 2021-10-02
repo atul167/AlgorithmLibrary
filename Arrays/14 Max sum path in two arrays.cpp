@@ -35,6 +35,14 @@ Input: ar1[] = 1 1 2 2 2 2 1 1 2 2 2
 Output: 22
 */
 
+
+/*
+Efficient Approach: 
+The idea is to do something similar to merge process of merge sort. 
+This involves calculating the sum of elements between all common points of both arrays. 
+Whenever there is a common point, compare the two sums and add the maximum of two to the result.
+*/
+
 class Solution {
 public:
     int max_path_sum(int a1[], int a2[], int n1, int n2) {
