@@ -19,6 +19,88 @@ Output: 2
 
 
 
+// Using: Max dis bw given node to any other node
+
+#include <bits/stdc++.h>
+using namespace std;
+
+struct Node {
+    Node *left, *right;
+    int val;
+    Node(int d) {
+        val = d;
+        left = right = NULL;
+    }
+};
+
+
+// returns -> {start node present in roots subtree or not(1 or 0), height of subtree, distance to the given node having value start }
+array<int, 3> burn_tree(Node* root, int start, int &maxx) {
+    if (!root) return {0, 0, 0};
+
+    array<int, 3> v1 = burn_tree(root->left, start, maxx);
+    array<int, 3> v2 = burn_tree(root->right, start, maxx);
+
+    if (root->val == start) {
+        maxx = max(maxx, max(v1[1], v2[1]));
+        return {1, max(v1[1], v2[1]) + 1, 1};
+    }
+
+    if (v1[0] && !v2[0]) {
+        maxx = max(maxx, v1[2] + v2[1]);
+        return {1, max(v1[1], v2[1]) + 1, v1[2] + 1};
+    }
+    if (!v1[0] && v2[0]) {
+        maxx = max(maxx, v2[2] + v1[1]);
+        return {1, max(v1[1], v2[1]) + 1, v2[2] + 1};
+    }
+    return {0, max(v1[1], v2[1]) + 1, 0};
+}
+
+int solve(Node* root, int start) {
+    int maxx = 0;
+    burn_tree(root, start, maxx);
+    return maxx;
+}
+
+int main() {
+    /*
+        1
+       / \
+      2   3
+         / \
+        4   5
+    */
+    Node * root = new Node(1);
+    root->left = new Node(2);
+    root->right = new Node(3);
+    root->right->left = new Node(4);
+    root->right->right = new Node(5);
+
+    cout << "Start = " << 1 << ", time = " << solve(root, 1) << endl;
+    cout << "Start = " << 2 << ", time = " << solve(root, 2) << endl;
+    cout << "Start = " << 3 << ", time = " << solve(root, 3) << endl;
+    cout << "Start = " << 4 << ", time = " << solve(root, 4) << endl;
+    cout << "Start = " << 5 << ", time = " << solve(root, 5) << endl;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 template<typename T>
 class BinaryTreeNode {
 public :
