@@ -10,6 +10,10 @@ Additionally, there is a boolean array hasApple, where hasApple[i] = true means 
 */
 
 
+/*
+Res = 2 * (Toal no of edges from root till last nodes having apple and neglecting further below nodes edges)
+*/
+
 class Solution {
 public:
     int res = 0;
