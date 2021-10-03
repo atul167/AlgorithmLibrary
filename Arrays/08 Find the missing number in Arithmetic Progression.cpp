@@ -19,8 +19,6 @@ int findMissingUtil(int arr[], int low, int high, int diff) {
     int mid = low + (high - low) / 2;
 
     // The element just after the middle element is missing.
-    // The arr[mid+1] must exist, because we return when
-    // (low == high) and take floor of (high-low)/2
     if (arr[mid + 1] - arr[mid] != diff) return (arr[mid] + diff);
 
     // The element just before mid is missing
@@ -39,11 +37,9 @@ int findMissingUtil(int arr[], int low, int high, int diff) {
 // and may give incorrect result when there is no missing element or more than one missing elements.
 // This function also assumes that the difference in AP is an integer.
 int findMissing(int arr[], int n) {
-    // If exactly one element is missing, then we can find
-    // difference of arithmetic progression using following
-    // formula. Example, 2, 4, 6, 10, diff = (10-2)/4 = 2.
-    // The assumption in formula is that the difference is
-    // an integer.
+    // If exactly one element is missing, then we can find difference of arithmetic progression using following formula. 
+    // Example, 2, 4, 6, 10, diff = (10 - 2) / 4 = 2.
+    // The assumption in formula is that the difference is an integer.
     int diff = (arr[n - 1] - arr[0]) / n;
 
     // Binary search for the missing number using above calculated diff
