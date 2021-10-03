@@ -23,7 +23,7 @@ array<int, 3> burn_tree(Node* root, int start, int &maxx) {
 
     if (root->val == start) {
         maxx = max(maxx, max(v1[1], v2[1]));
-        return {1, max(v1[1], v2[1]) + 1, 1};
+        return {1, max(v1[1], v2[1]) + 1, 0 + 1};
     }
 
     if (v1[0] && !v2[0]) {
@@ -97,7 +97,7 @@ public:
 
         if (root->data == start) {
             maxx = max(maxx, max(leftV[1], rightV[1]));
-            return {1, max(leftV[1], rightV[1]) + 1, 1};
+            return {1, max(leftV[1], rightV[1]) + 1, 0 + 1};
         }
 
         if (leftV[0] && !rightV[0]) {
