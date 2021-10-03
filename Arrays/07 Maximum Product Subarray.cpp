@@ -1,6 +1,55 @@
 // https://www.geeksforgeeks.org/maximum-product-subarray/
 // https://leetcode.com/problems/maximum-product-subarray/
 
+
+// Method 1
+/*
+Let me try to give some explanations for this solution.
+
+Case 1: If there's no zero in the array
+Then the subarray with maximum product must start with the first element or end with the last element. 
+And therefore, the maximum product must be some prefix product or suffix product. 
+
+Case 2: If there are zeros in the array
+We can split the array into several smaller ones. 
+That's to say, when the prefix product is 0, we start over and compute prefix profuct from the current element instead. 
+And this is exactly what A[i] *= (A[i - 1]) or 1 does.
+*/
+
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        int n = nums.size();
+        int res = nums[0];
+        int prefix = 0, suffix = 0;
+        for (int i = 0; i < n; i++) {
+            if (prefix == 0) prefix = 1;
+            prefix *= nums[i];
+            if (suffix == 0) suffix = 1;
+            suffix *= nums[n - 1 - i];
+            res = max({res, prefix, suffix});
+        }
+        return res;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Method 2
 /*
 When we are at index j:
 
@@ -16,9 +65,6 @@ NOTE:
 Same problem can be extended to calculate Minimum Product Subarray
 */
 
-
-
-// Method 1
 class Solution {
 public:
     long long maxProduct(vector<int> arr, int n) {
@@ -63,7 +109,7 @@ public:
 
 
 
-// Method 2
+// Method 3
 // Maximum Product Subarray
 class Solution {
 public:
@@ -82,8 +128,7 @@ public:
 };
 
 
-
-// Method 2
+// Method 3
 // Minimum Product Subarray
 class Solution {
 public:
@@ -98,50 +143,5 @@ public:
             ans = min<long long>(ans, minp);
         }
         return ans;
-    }
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-Let me try to give some explanations for this solution.
-
-Case 1: If there's no zero in the array
-Then the subarray with maximum product must start with the first element or end with the last element. 
-And therefore, the maximum product must be some prefix product or suffix product. 
-
-Case 2: If there are zeros in the array
-We can split the array into several smaller ones. 
-That's to say, when the prefix product is 0, we start over and compute prefix profuct from the current element instead. 
-And this is exactly what A[i] *= (A[i - 1]) or 1 does.
-*/
-
-// Method 3
-class Solution {
-public:
-    int maxProduct(vector<int>& nums) {
-        int n = nums.size();
-        int res = nums[0];
-        int prefix = 0, suffix = 0;
-        for (int i = 0; i < n; i++) {
-            if (prefix == 0) prefix = 1;
-            prefix *= nums[i];
-            if (suffix == 0) suffix = 1;
-            suffix *= nums[n - 1 - i];
-            res = max({res, prefix, suffix});
-        }
-        return res;
     }
 };
