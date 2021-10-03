@@ -1,4 +1,4 @@
-// https://www.codingninjas.com/codestudio/problems/time-to-burn-tree_630563
+// https://practice.geeksforgeeks.org/problems/burning-tree/1
 
 /*
 You have been given a binary tree of unique nodes and a Start node from where the tree will start to burn. 
