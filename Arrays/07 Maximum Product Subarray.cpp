@@ -45,10 +45,6 @@ public:
 
 
 
-
-
-
-
 // Method 2
 /*
 When we are at index j:
