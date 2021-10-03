@@ -3,6 +3,51 @@
 
 
 
+
+/*
+// Iterative heapify-down algorithm.
+void heapify_down(int i) {
+    while (1) {
+        // get left and right child of node at index `i`
+        int left = LEFT(i);
+        int right = RIGHT(i);
+
+        int largest = i;
+
+        // compare `A[i]` with its left and right child
+        // and find the largest value
+        if (left < size() && A[left] > A[largest]) {
+            largest = left;
+        }
+
+        if (right < size() && A[right] > A[largest]) {
+            largest = right;
+        }
+
+        // swap with a child having greater value and
+        // call heapify-down on the child
+        if (largest == i) {
+            break;
+        }
+
+        swap(A[i], A[largest]);
+        i = largest;
+    }
+}
+
+// Iterative heapify-up algorithm
+void heapify_up(int i) {
+    // check if the node at index `i` and its parent violate the heap property
+    while (i > 0 && A[PARENT(i)] < A[i]) {
+        // swap the two if heap property is violated
+        swap(A[i], A[PARENT(i)]);
+        i = PARENT(i);
+    }
+}
+*/
+
+
+
 // Max Heap
 
 #include<bits/stdc++.h>
