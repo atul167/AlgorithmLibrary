@@ -1,4 +1,4 @@
-// https://www.codingninjas.com/codestudio/problem-details/time-to-burn-tree_630563
+// https://practice.geeksforgeeks.org/problems/burning-tree/1
 
 
 #include <bits/stdc++.h>
@@ -71,3 +71,52 @@ int main() {
     cout << 7 << " " << solve(root, 7) << endl;
     cout << 8 << " " << solve(root, 8) << endl;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class Solution {
+public:
+    // returns -> { start node present in root's subtree or not (1 or 0), height of subtree, distance to the given node having value start }
+    array<int, 3> burn_tree(Node* root, int start, int &maxx) {
+        if (!root) return {0, 0, 0};
+
+        array<int, 3> leftV = burn_tree(root->left, start, maxx);
+        array<int, 3> rightV = burn_tree(root->right, start, maxx);
+
+        if (root->data == start) {
+            maxx = max(maxx, max(leftV[1], rightV[1]));
+            return {1, max(leftV[1], rightV[1]) + 1, 1};
+        }
+
+        if (leftV[0] && !rightV[0]) {
+            maxx = max(maxx, leftV[2] + rightV[1]);
+            return {1, max(leftV[1], rightV[1]) + 1, leftV[2] + 1};
+        }
+        if (!leftV[0] && rightV[0]) {
+            maxx = max(maxx, rightV[2] + leftV[1]);
+            return {1, max(leftV[1], rightV[1]) + 1, rightV[2] + 1};
+        }
+        return {0, max(leftV[1], rightV[1]) + 1, 0};
+    }
+
+
+    int minTime(Node* root, int target)
+    {
+        // Your code goes here
+        int maxx = 0;
+        burn_tree(root, target, maxx);
+        return maxx;
+    }
+};
