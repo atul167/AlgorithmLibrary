@@ -17,6 +17,7 @@ The functions get and put must each run in O(1) average time complexity.
 
 
 // Method 1: Using STL List or Deque
+
 class LRUCache {
 public:
     struct Node {
@@ -35,9 +36,8 @@ public:
     int get(int key) {
         if (!cache.count(key)) return -1;
 
-        int value = cache[key].val;
-        put(key, value);
-        return value;
+        put(key, cache[key].val);
+        return cache[key].val;
     }
 
     void put(int key, int value) {
@@ -192,10 +192,8 @@ public:
     int get(int key) {
         if (!cache.count(key)) return -1;
 
-
-        int value = cache[key].val;
-        put(key, value);
-        return value;
+        put(key, cache[key].val);
+        return cache[key].val;
     }
 
     void put(int key, int value) {
