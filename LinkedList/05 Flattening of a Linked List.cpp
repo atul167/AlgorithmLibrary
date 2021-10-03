@@ -1,4 +1,29 @@
+// https://www.geeksforgeeks.org/flattening-a-linked-list/
 // https://practice.geeksforgeeks.org/problems/flattening-a-linked-list/1
+// https://youtu.be/ysytSSXpAI0
+
+
+/*
+Given a linked list where every node represents a linked list and contains two pointers of its type: 
+a) next = Pointer to next node in the main list (we call it ‘right’ pointer in the code below) 
+b) bottom = Pointer to a linked list where this node is headed (we call it the ‘bottom’ pointer in the code below). 
+All linked lists are sorted. See the following example  
+
+       5 -> 10 -> 19 -> 28
+       |    |     |     |
+       V    V     V     V
+       7    20    22    35
+       |          |     |
+       V          V     V
+       8          50    40
+       |                |
+       V                V
+       30               45
+Write a function flatten() to flatten the lists into a single linked list. The flattened linked list should also be sorted. 
+For example, for the above input list, output list should be 5->7->8->10->19->20->22->28->30->35->40->45->50. 
+*/
+
+
 
 
 /* Node structure  used in the program
