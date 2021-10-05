@@ -1,9 +1,6 @@
 // https://www.geeksforgeeks.org/find-a-repeating-and-a-missing-number/
+// https://youtu.be/5nMGY4VUoRY
 
-/*
-Aditya Verma Playlist
-Swap Sort Concept
-*/
 
 /*
 Given an unsorted array of size n. Array elements are in the range from 1 to n. 
