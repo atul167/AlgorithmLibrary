@@ -10,18 +10,20 @@ The resultant array will satisfy the given constraints.
 
 */
 
+
 #include <iostream>
 #include <algorithm>
 using namespace std;
 
 void partition(int a[], int n) {
+    int pivot = 0;
     int pIndex = 0;
 
     // each time we find a negative number, `pIndex` is incremented,
     // and that element would be placed before the pivot
     for (int i = 0; i < n; i++) {
-        // pivot is 0 
-        if (a[i] < 0) {
+        // pivot is 0
+        if (a[i] < pivot) {
             swap(a[i], a[pIndex]);
             pIndex++;
         }
