@@ -76,7 +76,8 @@ Once we have this info, we can use first row and first column as auxiliary array
 (matrix excluding first row and first column) of size (M-1)*(N-1).
 1) Scan the first row and set a variable rowFlag to indicate whether we need to set all 1s in first row or not. 
 2) Scan the first column and set a variable colFlag to indicate whether we need to set all 1s in first column or not. 
-3) Use first row and first column as the auxiliary arrays row[] and col[] respectively, consider the matrix as submatrix starting from second row and second column and apply method 1. 
+3) Use first row and first column as the auxiliary arrays row[] and col[] respectively, 
+   consider the matrix as submatrix starting from second row and second column and apply method 1. 
 4) Finally, using rowFlag and colFlag, update first row and first column if needed.
 Time Complexity: O(M*N) 
 */
