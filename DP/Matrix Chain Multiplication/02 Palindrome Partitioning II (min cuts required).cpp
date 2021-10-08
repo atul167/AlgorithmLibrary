@@ -1,6 +1,12 @@
 // https://leetcode.com/problems/palindrome-partitioning-ii/
 // https://www.geeksforgeeks.org/palindrome-partitioning-dp-17/
 
+/*
+Given a string s, partition s such that every substring of the partition is a palindrome.
+Return the minimum cuts needed for a palindrome partitioning of s.
+*/
+
+
 // TLE solution O(n^3) (MCM - memoized)
 class Solution {
 public:
