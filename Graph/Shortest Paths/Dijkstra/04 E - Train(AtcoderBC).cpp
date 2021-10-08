@@ -1,5 +1,15 @@
 // https://atcoder.jp/contests/abc192/tasks/abc192_e
 
+/*
+In the Republic of AtCoder, there are N cities numbered 1 through N and M railroads numbered 1 through M.
+Railroad i connects City Ai and City Bi bidirectionally. At time 0, Ki, and all subsequent multiples of Ki, 
+a train departs from each of these cities and head to the other city. The time each of these trains takes to reach the destination is Ti.
+You are now at City X. 
+Find the earliest time you can reach City Y when you start the journey by taking a train that departs City X not earlier than time 0. 
+If City Y is unreachable, report that fact.
+The time it takes to transfer is ignorable. That is, at every city, you can transfer to a train that departs at the exact time your train arrives at that city.
+*/
+
 
 // AC solution using BFS (Dijkstra)
 const int N = 1e5 + 5;
