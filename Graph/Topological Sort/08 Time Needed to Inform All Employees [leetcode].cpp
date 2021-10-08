@@ -13,7 +13,7 @@ The i-th employee needs informTime[i] minutes to inform all of his direct subord
 Return the number of minutes needed to inform all the employees about the urgent news.
 */
 
-// Method 1.1
+// Method 1
 class Solution {
 public:
     int n, m;
@@ -74,92 +74,6 @@ public:
         return topologicalSort(informTime);
     }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Method 1.2
-class Solution {
-public:
-    int n, m;
-
-    vector<vector<int>> g, revG;
-    vector<int> inDegree, dp;
-    
-    int topologicalSort(vector<int>& informTime) {
-        queue<int> q;
-        for(int i = 0; i < n; i++) {
-            if(inDegree[i] == 0) {
-                q.push(i);
-                dp[i] = informTime[i];
-            }
-        }
-
-        while(!q.empty()) {
-            int node = q.front();
-            q.pop();
-
-            for(int next: g[node]) {
-                inDegree[next]--;
-                if(inDegree[next] == 0) q.push(next);
-            }
-
-            // The below block computes the DP
-            int mx = 0;
-            for(int prev: revG[node]) {
-                mx = max(mx, dp[prev] + informTime[node]);
-            }
-
-            dp[node] = max(dp[node], mx);
-        }
-
-        int res = 0;
-        for(int i = 0; i < n; i++) {
-            res = max(res, dp[i]);
-        }
-        return res;
-    }
-
-    int numOfMinutes(int n, int headID, vector<int>& manager, vector<int>& informTime) {
-        this->n = n;
-        g = vector<vector<int>>(n);
-        revG = vector<vector<int>>(n);
-        inDegree = vector<int>(n, 0);
-        dp = vector<int>(n, 0);
-        
-        for(int i = 0; i < n; i++) {
-            int u = manager[i];
-            int v = i;
-            if(u != -1) {
-                g[u].push_back(v);
-                revG[v].push_back(u);
-                inDegree[v]++;
-            }
-        }
-        return topologicalSort(informTime);
-    }
-};
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
