@@ -141,6 +141,11 @@ public:
 
 
 // Method 3 (O(n^2))
+/*
+dp[i] = min no of palindromic strings in length i
+res = dp[n] - 1
+*/
+
 class Solution {
 public:
     vector<vector<bool>> isPalindrome;
