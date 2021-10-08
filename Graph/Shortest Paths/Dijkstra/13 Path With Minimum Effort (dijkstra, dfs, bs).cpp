@@ -189,8 +189,7 @@ public:
     int minimumEffortPath(vector<vector<int>>& heights) {
         n = heights.size(), m = heights[0].size();
 
-        int left = 0;
-        int ans = 1e6, right = 1e6;
+        int left = 0, right = 1e6;
         while (left < right) {
             int mid = left + (right - left) / 2;
             if (canReachDestination(mid, heights)) {
