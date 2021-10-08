@@ -1,11 +1,11 @@
 // https://leetcode.com/problems/majority-element/
 // https://www.geeksforgeeks.org/majority-element/
 
-
 /*
 Given an integer array containing duplicates, return the majority element if present. 
 A majority element appears more than ⌊n / 2⌋ times (rounded down), where n is the array size.
 */
+
 
 
 // Boyer–Moore majority vote algorithm
@@ -25,6 +25,40 @@ public:
         return majority;
     }
 };
+
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int majority, cnt = 0;
+        for (int x : nums) {
+            if (cnt == 0) {
+                majority = x;
+            }
+
+            if (majority == x) cnt++;
+            else cnt--;
+        }
+
+        // second iteration to simply counts the frequency of that value to confirm
+        cnt = 0;
+        for (int x : nums) {
+            if (x == majority) {
+                cnt++;
+            }
+        }
+
+        assert(cnt > nums.size() / 2);
+        return majority;
+    }
+};
+
+
+
+
+
+
+
 
 
 
@@ -48,8 +82,6 @@ int main() {
 
     return 0;
 }
-
-
 
 
 
