@@ -171,13 +171,11 @@ void solve() {
 
     loop(i, 0, n) vis[i] = 0;
 
-    ll totalSCC = 0;
     while(!st.empty()) {
         int node = st.top();
         st.pop();
         if(!vis[node]) {
             revDfs(node, node);
-            totalSCC++;
         }
     }
 
