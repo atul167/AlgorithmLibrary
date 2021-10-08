@@ -1,5 +1,4 @@
 // https://leetcode.com/problems/majority-element/
-// https://www.techiedelight.com/find-majority-element-in-an-array-boyer-moore-majority-vote-algorithm/
 // https://www.geeksforgeeks.org/majority-element/
 
 
