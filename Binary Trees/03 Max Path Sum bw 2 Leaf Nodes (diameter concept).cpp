@@ -10,7 +10,6 @@ NOTE: Here Leaf node is a node which is connected to exactly one different node.
 class Solution {
 public:
     int maxPathSumUtil(struct Node *root, int &res) {
-        // Base cases
         if (!root) return 0;
 
         // Find maximum sum in left and right subtree.
@@ -44,10 +43,7 @@ public:
         //      Null  -3
         // value of res will be INT_MIN but the answer is 4 , which is returned by the function maxPathSumUtil().
 
-        if (res == INT_MIN) {
-            return val;
-        }
-
+        if (res == INT_MIN) return val;
         return res;
     }
 };
