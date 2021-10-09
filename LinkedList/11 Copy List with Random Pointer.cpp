@@ -24,7 +24,7 @@ class Solution {
 public:
     Node* copyRandomList(Node* head) {
         Node *temp = head;
-        Node *tempNext = head;
+        Node *tempNext;
 
         // First round:
         // make copy of each node, and link them together side-by-side in a single list.
