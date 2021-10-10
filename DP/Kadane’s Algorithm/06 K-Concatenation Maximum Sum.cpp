@@ -49,16 +49,18 @@ int kConcatenationMaxSum(vector<int>& arr, int k) {
     for (int x : arr) {
         sum += x;
     }
-    vector<int> temp(arr.begin(), arr.end());
-    for (int x : arr) temp.push_back(x);
 
-    // case 2: 
+    // generate tempArr = arr + arr
+    vector<int> tempArr(arr.begin(), arr.end());
+    for (int x : arr) tempArr.push_back(x);
+
+    // case 2:
     if (sum < 0) {
-        return kadanes(temp);
+        return kadanes(tempArr);
     }
 
     // case 3:
-    return kadanes(temp) + (k - 2) * sum;
+    return kadanes(tempArr) + (k - 2) * sum;
 }
 
 int main() {
