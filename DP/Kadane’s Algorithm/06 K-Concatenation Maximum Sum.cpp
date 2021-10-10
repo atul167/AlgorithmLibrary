@@ -17,6 +17,32 @@ Output: 2
 */
 
 
+/*
+Let sum = a1+a2+...+an
+
+Case 1: k = 1
+Normal kadanes algorithm
+
+
+
+Case 2: k > 1 and sum < 0
+a1, a2, a3, ..., an-2, an-1, an, a1, a2, a3, ..., an-2, an-1, an
+                 ----------------------
+res = sum of dotted elements
+res = kadanes(arr + arr, i.e. double the array)
+   
+
+
+Case 3: k > 1 and sum >= 0
+
+a1, a2, a3, ..., an-2, an-1, an, a1, a2, a3, ..., an-2, an-1, an, a1, a2, a3, ..., an-2, an-1, an, a1, a2, a3, ..., an-2, an-1, an
+                 --------------------------------------------------------------------------------------------
+res = sum of dotted elements
+res = kadanes(arr + arr, i.e. double the array) + (k - 2) * sum
+*/
+
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
