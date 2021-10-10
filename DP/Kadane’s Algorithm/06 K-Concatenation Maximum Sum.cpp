@@ -71,3 +71,56 @@ int main() {
     cin >> k;
     cout << kConcatenationMaxSum(a, k) << endl;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Leetcode version
+// https://leetcode.com/problems/k-concatenation-maximum-sum/
+// Note that the length of the sub-array can be 0 and its sum in that case is 0.
+
+class Solution {
+public:
+    const int mod = 1e9 + 7;
+
+    int kadanes(vector<int>& arr) {
+        int cur = 0, res = 0;
+        for (int i = 0; i < arr.size(); i++) {
+            cur = max(arr[i], cur + arr[i]);
+            res = max(res, cur);
+        }
+        return res;
+    }
+
+    int kConcatenationMaxSum(vector<int>& arr, int k) {
+        // case 1:
+        if (k == 1) {
+            return kadanes(arr) % mod;
+        }
+
+        long long sum = accumulate(arr.begin(), arr.end(), 0);
+        vector<int> temp(arr.begin(), arr.end());
+        for (int x : arr) temp.push_back(x);
+
+        // case 2:
+        if (sum < 0) {
+            return kadanes(temp) % mod;
+        }
+
+        // case 3:
+        long long res = (kadanes(temp) + (k - 2) * sum) % mod;
+        return res;
+    }
+};
