@@ -27,18 +27,14 @@ unsigned long int catalanDP(unsigned int n) {
 
 // Function to find possible ways to put balanced parenthesis in an expression of length n
 unsigned long int findWays(unsigned n) {
-	// If n is odd, not possible to
-	// create any valid parentheses
-	if (n & 1)
-		return 0;
+	// If n is odd, not possible to create any valid parentheses
+	if (n & 1) return 0;
 
 	// Otherwise return n/2'th Catalan Numer
 	return catalan(n / 2);
 }
 
-// Driver program to test above functions
-int main()
-{
+int main() {
 	int n = 6;
 	cout << "Total possible expressions of length " << n << " is " << findWays(6);
 	return 0;
