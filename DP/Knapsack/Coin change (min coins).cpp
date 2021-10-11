@@ -18,21 +18,6 @@ ll fun(ll a[], ll sum) {
     }
     return dp[sum];
 }
-// or this way
-ll fun(ll a[], ll sum) {
-    ll dp[sum + 1];
-    f(i, sum + 1) dp[i] = INF;
-    // for sum = 0, coins requires = 0;
-    dp[0] = 0;
-    for (ll j = 1; j <= sum; j++) {
-        for (ll i = 0; i < n; i++) {
-            if (j >= a[i] && dp[j - a[i]] != INF) {
-                dp[j] = min(dp[j], dp[j - a[i]] + 1);
-            }
-        }
-    }
-    return dp[sum];
-}
 
 
 // order n*m space
