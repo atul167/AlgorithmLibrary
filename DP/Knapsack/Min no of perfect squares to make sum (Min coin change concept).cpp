@@ -27,7 +27,7 @@ public:
 
         for (ll i = 0; i < n; i++) {
             for (ll j = 1; j <= sum; j++) {
-                if (j >= a[i] && dp[j - a[i]] != INF) {
+                if (j >= a[i]) {
                     dp[j] = min(dp[j], dp[j - a[i]] + 1);
                 }
             }
