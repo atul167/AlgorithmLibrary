@@ -6,35 +6,6 @@ Input: s = "lee(t(c)o)de)"
 Output: "lee(t(c)o)de"
 */
 
-/*
-Note: This will give TLE
-    string res = "";
-    while(!st.empty()) {
-        char x = st.top();
-        st.pop();
-        if(cnt > 0 && x == '(') {
-            cnt--;
-        } else {
-            res = x + res;
-        }
-    }
-    
-Use this:
-    int n = st.size() - cnt;
-    string res(n, ' ');
-    int idx = n - 1;
-    while(!st.empty()) {
-        char x = st.top();
-        st.pop();
-        if(cnt > 0 && x == '(') {
-            cnt--;
-        } else {
-            res[idx] = x;
-            idx--;
-        }
-    }
-*/
-
 
 class Solution {
 public:
@@ -57,19 +28,18 @@ public:
         }
 
         int n = st.size() - cnt;
-        string res(n, ' ');
-        int idx = n - 1;
+        string res;
         while (!st.empty()) {
             char x = st.top();
             st.pop();
             if (cnt > 0 && x == '(') {
                 cnt--;
             } else {
-                res[idx] = x;
-                idx--;
+                res.push_back(x);
             }
         }
 
+        reverse(res.begin(), res.end());
         return res;
     }
 };
