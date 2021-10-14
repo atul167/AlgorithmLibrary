@@ -34,24 +34,26 @@ public:
 
 // recursive
 
-ListNode* reverseList(ListNode* head) {
-  // too confusing to always call current node "head"
-  ListNode* current = head;
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* cur = head;
 
-  // new head found
-  if (!current || !current->next) return current;
+        // new head found
+        if (!cur || !cur->next) return cur;
 
-  // search for new head via recursion
-  ListNode* new_head = reverseList(current->next);
+        // search for new head via recursion
+        ListNode* new_head = reverseList(cur->next);
 
-  // reverse list: make next node point to this node
-  current->next->next = current;
+        // reverse list: make next node point to this node
+        cur->next->next = cur;
 
-  // tricky part: make current node point to null. Only stays null for new tail
-  // otherwise, the line above sets this node to point to the previous node
-  // on the next recursion
-  current->next = NULL;
+        // tricky part: make cur node point to null. Only stays null for new tail
+        // otherwise, the line above sets this node to point to the previous node
+        // on the next recursion
+        cur->next = NULL;
 
-  // continue to pass new head along to original function call
-  return new_head;
-}
+        // continue to pass new head along to original function call
+        return new_head;
+    }
+};
