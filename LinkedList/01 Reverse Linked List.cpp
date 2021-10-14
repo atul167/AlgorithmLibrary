@@ -27,3 +27,31 @@ public:
         return prev;
     }
 };
+
+
+
+
+
+// recursive
+
+ListNode* reverseList(ListNode* head) {
+  // too confusing to always call current node "head"
+  ListNode* current = head;
+
+  // new head found
+  if (!current || !current->next) return current;
+
+  // search for new head via recursion
+  ListNode* new_head = reverseList(current->next);
+
+  // reverse list: make next node point to this node
+  current->next->next = current;
+
+  // tricky part: make current node point to null. Only stays null for new tail
+  // otherwise, the line above sets this node to point to the previous node
+  // on the next recursion
+  current->next = NULL;
+
+  // continue to pass new head along to original function call
+  return new_head;
+}
