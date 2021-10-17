@@ -1,6 +1,7 @@
 // https://www.geeksforgeeks.org/smart-pointers-cpp/
 // https://youtu.be/UOB7-B2MfwA
 
+
 /*
 Types of Smart Pointers
 1. unique_ptr
@@ -96,3 +97,148 @@ Constructor
 1
 Destructor
 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#include <iostream>
+using namespace std;
+
+class SmartPtr {
+    // Actual pointer
+    int* ptr;
+public:
+    // Refer https:// www.geeksforgeeks.org/g-fact-93/
+    // for use of explicit keyword
+    explicit SmartPtr(int* p = NULL) {
+        ptr = p;
+    }
+
+    // Destructor
+    ~SmartPtr() {
+        delete (ptr);
+    }
+
+    // Overloading dereferencing operator
+    int& operator*() {
+        return *ptr;
+    }
+};
+
+int main() {
+    SmartPtr ptr(new int());
+    *ptr = 20;
+    cout << *ptr;
+
+    // We don't need to call delete ptr:
+    // when the object ptr goes out of scope, the destructor for it is automatically called
+    // and destructor does delete ptr.
+    return 0;
+}
+
+
+
+
+
+
+#include <iostream>
+using namespace std;
+
+// A generic smart pointer class
+template <class T>
+class SmartPtr {
+    // Actual pointer
+    T* ptr;
+public:
+    explicit SmartPtr(T* p = NULL) {
+        ptr = p;
+    }
+
+    ~SmartPtr() {
+        delete (ptr);
+    }
+
+    // Overloading dereferncing operator
+    T& operator*() {
+        return *ptr;
+    }
+
+    // Overloading arrow operator so that members of T can be accessed like a pointer
+    // (useful if T represents a class or struct or union type)
+    T* operator->() {
+        return ptr;
+    }
+};
+
+int main() {
+    SmartPtr<int> ptr(new int());
+    *ptr = 20;
+    cout << *ptr;
+    return 0;
+}
+
+
+
+
+
+
+#include <iostream>
+using namespace std;
+
+class Entity {
+public:
+    Entity() {
+        cout << "Constructor\n";
+    }
+    ~Entity() {
+        cout << "Destructor\n";
+    }
+    void fun() {
+        cout << "Fun called\n";
+    }
+};
+
+// A generic smart pointer class
+template <class T>
+class SmartPtr {
+    // Actual pointer
+    T* ptr;
+public:
+    explicit SmartPtr(T* p = NULL) {
+        ptr = p;
+    }
+
+    ~SmartPtr() {
+        delete (ptr);
+    }
+
+    // Overloading dereferncing operator
+    T& operator*() {
+        return *ptr;
+    }
+
+    // Overloading arrow operator so that members of T can be accessed like a pointer
+    // (useful if T represents a class or struct or union type)
+    T* operator->() {
+        return ptr;
+    }
+};
+
+int main() {
+    SmartPtr<Entity> ptr(new Entity());
+    ptr->fun();
+    return 0;
+}
