@@ -158,7 +158,7 @@ int main() {
 using namespace std;
 
 // A generic smart pointer class
-template <class T>
+template <typename T>
 class SmartPtr {
     // Actual pointer
     T* ptr;
@@ -212,7 +212,7 @@ public:
 };
 
 // A generic smart pointer class
-template <class T>
+template <typename T>
 class SmartPtr {
     // Actual pointer
     T* ptr;
