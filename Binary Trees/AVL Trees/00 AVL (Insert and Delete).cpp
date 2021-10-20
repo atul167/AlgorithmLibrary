@@ -117,21 +117,21 @@ Node* insert(Node* node, int key) {
 
     // If this node becomes unbalanced, then there are 4 cases
 
-    // Left Left Case
+    // Left Left Imbalance
     if (balance > 1 && key < node->left->data)
         return rightRotate(node);
 
-    // Right Right Case
+    // Right Right Imbalance
     if (balance < -1 && key > node->right->data)
         return leftRotate(node);
 
-    // Left Right Case
+    // Left Right Imbalance
     if (balance > 1 && key > node->left->data) {
         node->left = leftRotate(node->left);
         return rightRotate(node);
     }
 
-    // Right Left Case
+    // Right Left Imbalance
     if (balance < -1 && key < node->right->data) {
         node->right = rightRotate(node->right);
         return leftRotate(node);
@@ -155,7 +155,6 @@ Node* minValueNode(Node* node) {
 // Recursive function to delete a node with given key from subtree with given root.
 // It returns root of the modified subtree.
 Node* deleteNode(Node* root, int key) {
-
     // STEP 1: PERFORM STANDARD BST DELETE
     if (root == NULL) return root;
 
@@ -213,23 +212,23 @@ Node* deleteNode(Node* root, int key) {
 
     // If this node becomes unbalanced, then there are 4 cases
 
-    // Left Left Case
+    // Left Left Imbalance
     if (balance > 1 && getBalance(root->left) >= 0) {
         return rightRotate(root);
     }
 
-    // Left Right Case
+    // Left Right Imbalance
     if (balance > 1 && getBalance(root->left) < 0) {
         root->left = leftRotate(root->left);
         return rightRotate(root);
     }
 
-    // Right Right Case
+    // Right Right Imbalance
     if (balance < -1 && getBalance(root->right) <= 0) {
         return leftRotate(root);
     }
 
-    // Right Left Case
+    // Right Left Imbalance
     if (balance < -1 && getBalance(root->right) > 0) {
         root->right = rightRotate(root->right);
         return leftRotate(root);
