@@ -29,35 +29,30 @@ So BST property is not violated anywhere.
 using namespace std;
 
 // An AVL tree node
-class Node {
+class TreeNode {
 public:
     int data;
-    Node *left;
-    Node *right;
+    TreeNode *left;
+    TreeNode *right;
     int height;
+    TreeNode(int d) {
+        data = d;
+        left = right = NULL;
+        // new node is initially added at leaf
+        height = 1;
+    }
 };
 
-
 // A utility function to get height of the tree
-int height(Node *N) {
+int height(TreeNode *N) {
     if (!N) return 0;
     return N->height;
 }
 
-/* Helper function that allocates a new node with the given key and NULL left and right pointers. */
-Node* newNode(int key) {
-    Node* node = new Node();
-    node->data = key;
-    node->left = node->right = NULL;
-    // new node is initially added at leaf
-    node->height = 1;
-    return node;
-}
-
 // A utility function to right rotate subtree rooted with y
-Node* rightRotate(Node *y) {
-    Node *x = y->left;
-    Node *T2 = x->right;
+TreeNode* rightRotate(TreeNode *y) {
+    TreeNode *x = y->left;
+    TreeNode *T2 = x->right;
 
     // Perform rotation
     x->right = y;
@@ -72,9 +67,9 @@ Node* rightRotate(Node *y) {
 }
 
 // A utility function to left rotate subtree rooted with x
-Node* leftRotate(Node *x) {
-    Node *y = x->right;
-    Node *T2 = y->left;
+TreeNode* leftRotate(TreeNode *x) {
+    TreeNode *y = x->right;
+    TreeNode *T2 = y->left;
 
     // Perform rotation
     y->left = x;
@@ -89,14 +84,14 @@ Node* leftRotate(Node *x) {
 }
 
 // Get Balance factor of node N
-int getBalance(Node *N) {
+int getBalance(TreeNode *N) {
     if (!N) return 0;
     return height(N->left) - height(N->right);
 }
 
-Node* insert(Node* node, int key) {
+TreeNode* insert(TreeNode* node, int key) {
     /* 1. Perform the normal BST rotation */
-    if (node == NULL) return newNode(key);
+    if (!node) return new TreeNode(key);
 
     if (key < node->data) {
         node->left = insert(node->left, key);
@@ -109,7 +104,7 @@ Node* insert(Node* node, int key) {
         return node;
     }
 
-    /* 2. Update height of this ancestor node */
+    /* 2. Update height of this ancestor Treenode */
     node->height = 1 + max(height(node->left), height(node->right));
 
     /* 3. Get the balance factor of this ancestor node to check whether this node became unbalanced */
@@ -141,8 +136,8 @@ Node* insert(Node* node, int key) {
     return node;
 }
 
-Node* minValueNode(Node* node) {
-    Node* current = node;
+TreeNode* minValueNode(TreeNode* node) {
+    TreeNode* current = node;
 
     /* loop down to find the leftmost leaf */
     while (current->left != NULL) {
@@ -154,17 +149,17 @@ Node* minValueNode(Node* node) {
 
 // Recursive function to delete a node with given key from subtree with given root.
 // It returns root of the modified subtree.
-Node* deleteNode(Node* root, int key) {
+TreeNode* deleteNode(TreeNode* root, int key) {
     // STEP 1: PERFORM STANDARD BST DELETE
-    if (root == NULL) return root;
+    if (!root) return root;
 
-    // If the key to be deleted is smaller than the root's key, 
+    // If the key to be deleted is smaller than the root's key,
     // then it lies in left subtree
     if ( key < root->data ) {
         root->left = deleteNode(root->left, key);
     }
 
-    // If the key to be deleted is greater than the root's key, 
+    // If the key to be deleted is greater than the root's key,
     // then it lies in right subtree
     else if ( key > root->data ) {
         root->right = deleteNode(root->right, key);
@@ -172,26 +167,26 @@ Node* deleteNode(Node* root, int key) {
 
     // if key is same as root's key, then this is the node to be deleted
     else {
-        // node with only one child or no child
-        if ( (root->left == NULL) || (root->right == NULL) ) {
-            Node *temp = root->left ? root->left : root->right;
-
-            // No child case
-            if (temp == NULL) {
-                temp = root;
-                root = NULL;
-            }
-            // One child case
-            // Copy the contents of the non-empty child
-            else {
-                *root = *temp;
-            }
-            
-            free(temp);
+        // Case 1: node has no child
+        if (!root->left and !root->right) {
+            delete root;
+            return NULL;
         }
+
+        // Case 2: node with only one child
+        else if (!root->left) {
+            TreeNode* temp = root->right;
+            delete root;
+            return temp;
+        } else if (!root->right) {
+            TreeNode* temp = root->left;
+            delete root;
+            return temp;
+        }
+        // Case 3: node with two children:
         else {
-            // node with two children: Get the inorder successor (smallest in the right subtree)
-            Node* temp = minValueNode(root->right);
+            // Get the inorder successor (smallest in the right subtree)
+            TreeNode* temp = minValueNode(root->right);
 
             // Copy the inorder successor's data to this node
             root->data = temp->data;
@@ -202,7 +197,7 @@ Node* deleteNode(Node* root, int key) {
     }
 
     // If the tree had only one node then return
-    if (root == NULL) return root;
+    if (!root) return root;
 
     // STEP 2: UPDATE HEIGHT OF THE CURRENT NODE
     root->height = 1 + max(height(root->left), height(root->right));
@@ -237,7 +232,7 @@ Node* deleteNode(Node* root, int key) {
     return root;
 }
 
-void preOrder(Node *root) {
+void preOrder(TreeNode *root) {
     if (!root) return;
 
     cout << root->data << " ";
@@ -246,7 +241,7 @@ void preOrder(Node *root) {
 }
 
 int main() {
-    Node *root = NULL;
+    TreeNode *root = NULL;
 
     /* Constructing tree given in the above figure */
     root = insert(root, 9);
