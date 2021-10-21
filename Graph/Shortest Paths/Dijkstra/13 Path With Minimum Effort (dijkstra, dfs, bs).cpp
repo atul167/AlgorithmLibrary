@@ -201,3 +201,80 @@ public:
         return left;
     }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// normal graph version
+
+#define ll long long
+const ll INF = 1e18; 
+const int N = 1e5+5;
+int n, m;
+vector<pair<int, int>> g[N];
+
+int dijkstra(int src, int dest) {
+    vector<ll> dis(n+1, INF);
+    priority_queue<pair<ll, int>, vector<pair<ll, int>>, greater<pair<ll, int>>> pq;
+    pq.push({0, src});
+    
+    while(!pq.empty()) {
+        auto it = pq.top();
+        pq.pop();
+        
+        ll cost = it.first;
+        int u = it.second; 
+        
+        if(cost > dis[u]) continue;
+        
+        if(u == dest) return cost;
+        
+        for(auto x: g[u]) {
+            int v = x.first, w = x.second;
+            int newDist = max<ll>(cost, w);
+            if(dis[v] > newDist) {
+                dis[v] = newDist;
+                pq.push({dis[v], v});
+            }
+        }
+    }
+    return -1;
+}
+
+int getMinimumStress(int graph_nodes, vector<int> graph_from, vector<int> graph_to, vector<int> graph_weight, int source, int destination) {
+    n = graph_nodes;
+    
+    for(int i = 0; i <= n; i++) {
+        g[i].clear();
+    }
+    
+    for(int i = 0; i < (int)graph_from.size(); i++) {
+        int u = graph_from[i], v = graph_to[i], w = graph_weight[i];
+        g[u].push_back({v, w});
+        g[v].push_back({u, w});
+    }
+    
+    return dijkstra(source, destination);
+}
