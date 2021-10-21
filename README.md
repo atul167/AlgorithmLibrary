@@ -1,4 +1,4 @@
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%232107F7&size=24&height=40&lines=AlgorithmLibrary)](https://git.io/typing-svg)
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?color=%231705F7&size=24&lines=Algorithm+Library)](https://git.io/typing-svg)
 
 Algos, DS and my online handle submissions
 
