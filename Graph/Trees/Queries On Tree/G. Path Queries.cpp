@@ -36,6 +36,13 @@ output
 
 
 
+/*
+Hint:
+i) Pairs which are valid for qi = 2 are also valid for qj = 3
+ii) Try utilizing DSU
+*/
+
+
 #include<bits/stdc++.h>
 #define int long long
 using namespace std;
