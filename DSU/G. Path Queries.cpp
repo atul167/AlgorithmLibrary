@@ -98,7 +98,9 @@ signed main() {
         arr[i] = {u, v, w};
     }
 
-    sort(arr + 1, arr + n, comp);
+    sort(arr + 1, arr + n, [](edge a, edge b) {
+        return a.w < b.w;
+    });
 
     for (int i = 1; i <= q; i++) {
         cin >> x;
@@ -113,8 +115,7 @@ signed main() {
     for (int i = 1; i <= q; i++) {
         int W = query[i].first, idx = query[i].second;
 
-        while (index <= (n - 1) && arr[index].w <= W)
-        {
+        while (index <= (n - 1) && arr[index].w <= W) {
             count += dsu.unionSet(arr[index].u , arr[index].v);
             index++;
         }
