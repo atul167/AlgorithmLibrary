@@ -126,3 +126,51 @@ signed main() {
     for (int i = 1; i <= q; i++) cout << res[i] << " ";
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Method 2
+struct DSU {
+    vector<int> par;
+    DSU(int n) {
+        par.resize(n + 1, -1);
+    }
+    int findParent(int a) {
+        if (par[a] < 0) return a;
+        return par[a] = findParent(par[a]);
+    }
+    int unionSet(int a, int b) {
+        a = findParent(a);
+        b = findParent(b);
+
+        int rankA = -par[a], rankB = -par[b];
+        int res = rankA * rankB;
+
+        if (a == b) return res;
+
+        if (par[a] > par[b]) swap(a, b);
+        par[a] += par[b];
+        par[b] = a;
+
+        return res;
+    }
+};
