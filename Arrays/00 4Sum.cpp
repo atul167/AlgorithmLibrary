@@ -32,10 +32,10 @@ public:
                 }
                 
                 // to handle duplicates
-                while(j + 1 < n && nums[j + 1] == nums[j]) j++;
+                while(j + 1 < n && nums[j] == nums[j + 1]) j++;
             }
             // to handle duplicates
-            while(i + 1 < n && nums[i + 1] == nums[i]) i++;
+            while(i + 1 < n && nums[i] == nums[i + 1]) i++;
         }
         
         return res;
