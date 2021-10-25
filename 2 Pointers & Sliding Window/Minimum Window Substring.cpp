@@ -19,90 +19,36 @@ Output: "a"
 class Solution {
 public:
     map<char, int> freqS, freqT;
-    
+
     bool check() {
-        for(char ch = 'A'; ch <= 'Z'; ch++) if(freqS[ch] < freqT[ch]) return false;
-        for(char ch = 'a'; ch <= 'z'; ch++) if(freqS[ch] < freqT[ch]) return false;
+        for (char ch = 'A'; ch <= 'Z'; ch++) if (freqS[ch] < freqT[ch]) return false;
+        for (char ch = 'a'; ch <= 'z'; ch++) if (freqS[ch] < freqT[ch]) return false;
         return true;
     }
-    
+
     string minWindow(string s, string t) {
         int n = s.size();
-        for(char ch: t) freqT[ch]++;
+        for (char ch : t) freqT[ch]++;
         int res = INT_MAX;
-        
-        int l = 0, r = 0;
+
+        int l = 0;
         int lPtr = 0, rPtr = 0;
         bool  flag = 0;
-        while(r < n) {
+        for (int r = 0; r < n; r++) {
             freqS[s[r]]++;
-            
-            while(freqS[s[l]] > freqT[s[l]]) {
+
+            while (freqS[s[l]] > freqT[s[l]]) {
                 freqS[s[l]]--;
                 l++;
             }
-            
-            if(check() && (r - l + 1 < res)) {
+
+            if (check() && (r - l + 1 < res)) {
                 flag = 1;
                 res = r - l + 1;
                 lPtr = l, rPtr = r;
             }
-            
-            r++;
         }
-        
-        return flag ? s.substr(lPtr, res) : "";
-    }
-};
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-class Solution {
-public:
-    map<char, int> freqS, freqT;
-    
-    bool check() {
-        for(char ch = 'A'; ch <= 'Z'; ch++) if(freqS[ch] < freqT[ch]) return false;
-        for(char ch = 'a'; ch <= 'z'; ch++) if(freqS[ch] < freqT[ch]) return false;
-        return true;
-    }
-    
-    string minWindow(string s, string t) {
-        int n = s.size();
-        for(char ch: t) freqT[ch]++;
-        int res = INT_MAX;
-        
-        int l = 0, r = 0;
-        int lPtr = 0, rPtr = 0;
-        bool  flag = 0;
-        while(r < n) {
-            freqS[s[r]]++;
-            
-            while(l < r && freqS[s[l]] > freqT[s[l]]) {
-                freqS[s[l]]--;
-                l++;
-            }
-            
-            if(check() && (r - l + 1 < res)) {
-                flag = 1;
-                res = r - l + 1;
-                lPtr = l, rPtr = r;
-            }
-            
-            r++;
-        }
-        
         return flag ? s.substr(lPtr, res) : "";
     }
 };
