@@ -1,9 +1,26 @@
 // https://www.geeksforgeeks.org/smallest-window-contains-characters-string/
 // https://practice.geeksforgeeks.org/problems/smallest-distant-window3132/1
 
-
-// Length of the smallest sub-string consisting of maximum distinct characters
 // Smallest window that contains all characters of string itself
+
+/*
+Given a string 's'. Find the smallest window length that contains all the characters of the given string at least one time.
+
+Example 1:
+Input : "AABBBCBBAC"
+Output : 3
+Explanation : Sub-string -> "BAC"
+
+Example 2:
+Input : "aaab"
+Output : 2
+Explanation : Sub-string -> "ab"
+
+Example 3:
+Input : "GEEKSGEEKSFOR"
+Output : 8
+Explanation : Sub-string -> "GEEKSFOR"
+*/
 
 
 class Solution {
@@ -31,14 +48,12 @@ public:
             // if all the characters are matched
             if (count == dist_count) {
                 // Try to minimize the window
-                // i.e., check if any character is occurring more no. of times than its occurrence in pattern,
-                // if yes then remove it from starting and also remove the useless characters.
+                // i.e., check if any character is occurring more no. of times than its occurrence in pattern
                 while (curr_count[str[left]] > 1) {
                     curr_count[str[left]]--;
                     left++;
                 }
 
-                // Update window size
                 int cur_window = right - left + 1;
                 if (min_len > cur_window) {
                     min_len = cur_window;
@@ -47,8 +62,7 @@ public:
             }
         }
 
-        // Return substring starting from start_index
-        // and length min_len
+        // Return substring starting from start_index and length min_len
         return str.substr(start_index, min_len);
     }
 };
