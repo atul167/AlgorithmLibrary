@@ -16,6 +16,7 @@ Input: s = "a", t = "a"
 Output: "a"
 */
 
+
 class Solution {
 public:
     map<char, int> freqS, freqT;
@@ -31,8 +32,7 @@ public:
         for (char ch : t) freqT[ch]++;
         int res = INT_MAX;
 
-        int l = 0;
-        int lPtr = 0, rPtr = 0;
+        int l = 0, startIdx = 0;
         bool  flag = 0;
         for (int r = 0; r < n; r++) {
             freqS[s[r]]++;
@@ -45,10 +45,10 @@ public:
             if (check() && (r - l + 1 < res)) {
                 flag = 1;
                 res = r - l + 1;
-                lPtr = l, rPtr = r;
+                startIdx = l;
             }
         }
 
-        return flag ? s.substr(lPtr, res) : "";
+        return flag ? s.substr(startIdx, res) : "";
     }
 };
