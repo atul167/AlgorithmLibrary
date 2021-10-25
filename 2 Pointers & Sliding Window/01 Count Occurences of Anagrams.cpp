@@ -8,8 +8,12 @@ txt = forxxorfxdofr
 pat = for
 Output: 
 3
-Explanation: for, orf and ofr appears
-in the txt, hence answer is 3.
+
+Example:
+txt = catca
+pat = cat
+Output: 
+3
 */
 
 class Solution {
