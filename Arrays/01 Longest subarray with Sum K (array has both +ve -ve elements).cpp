@@ -1,5 +1,8 @@
 // https://practice.geeksforgeeks.org/problems/longest-sub-array-with-sum-k0809/1
 
+// Another variation with no extra space used
+// https://www.geeksforgeeks.org/find-subarray-with-given-sum-with-negatives-allowed-in-constant-space/
+
 class Solution {
 public:
     int lenOfLongSubarr(int arr[],  int n, int k)  {
