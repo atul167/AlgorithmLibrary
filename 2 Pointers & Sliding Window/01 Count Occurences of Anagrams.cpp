@@ -16,24 +16,51 @@ Output:
 3
 */
 
+// Method 1
 class Solution {
 public:
-    int search(string pat, string txt) {
+    int search(string pat, string str) {
         // code here
-        vector<int> freqP(26), freqT(26);
-        for (char x : pat) freqP[x - 'a']++;
+        vector<int> freqPat(26), freqStr(26);
+        for (char x : pat) freqPat[x - 'a']++;
 
         int l = 0, res = 0;
-        for (int r = 0; r < txt.size(); r++) {
-            freqT[txt[r] - 'a']++;
-            while (freqT[txt[l] - 'a'] > freqP[txt[l] - 'a']) {
-                freqT[txt[l] - 'a']--;
+        for (int r = 0; r < str.size(); r++) {
+            freqStr[str[r] - 'a']++;
+            while (freqStr[str[r] - 'a'] > freqPat[str[r] - 'a']) {
+                freqStr[str[l] - 'a']--;
                 l++;
             }
 
-            if (freqT == freqP) res++;
+            if (freqStr == freqPat) res++;
         }
 
         return res;
     }
+};
+
+
+
+
+// Method 2
+class Solution{
+public:
+	int search(string pat, string str) {
+	    // code here
+	    vector<int> freqPat(26), freqStr(26);
+	    for(char x: pat) freqPat[x - 'a']++;
+	    
+	    int l = 0, res = 0;
+	    for(int r = 0; r < str.size(); r++) {
+	        freqStr[str[r] - 'a']++;
+	        while(freqStr[str[l] - 'a'] > freqPat[str[l] - 'a']) {
+	            freqStr[str[l] - 'a']--;
+	            l++;
+	        }
+	        
+	        if(freqStr == freqPat) res++;
+	    }
+	    
+	    return res;
+	}
 };
