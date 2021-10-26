@@ -10,6 +10,9 @@ pos[] = { 3, 2, 4, 1, 0 }
  
 Output:
 arr[] = { 5, 4, 2, 1, 3 }
+
+i.e., if pos[i] = j, then update nums[j] = nums[i] for every index i.
+In other words, update nums[pos[i]] = nums[i] for every index i.
 */
 
 
