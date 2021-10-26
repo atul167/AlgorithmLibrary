@@ -39,3 +39,31 @@ public:
         return res;
     }
 };
+
+
+
+
+
+
+// More optimized
+class Solution {
+public:
+    int longSubarrWthSumDivByK(int arr[], int n, int k) {
+        vector<int> mp(k + 1, -2);
+        mp[0] = -1;
+        int res = 0, prefSumMod = 0;
+
+        for (int i = 0; i < n; i++) {
+            prefSumMod = (prefSumMod + arr[i]) % k;
+            if (prefSumMod < 0) prefSumMod += k;
+
+            if (mp[prefSumMod] != -2) {
+                res = max(res, i - mp[prefSumMod]);
+            } else {
+                mp[prefSumMod] = i;
+            }
+        }
+
+        return res;
+    }
+};
