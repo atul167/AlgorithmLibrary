@@ -57,7 +57,7 @@ Correct (equality on right side)
 res = 1*3 + 1*2 + 1*1 = 6
 
 Correct (equality on left side)
-res = 1*1 + 1*2 + 1*3 = 6
+res = 1*1 + 2*1 + 3*1 = 6
 */
 
 class Solution {
