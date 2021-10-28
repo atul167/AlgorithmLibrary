@@ -24,53 +24,34 @@ Each 1 will produce sum 2 with any 1.
 
 class Solution {
 public:
-    int getPairsCount(int arr[], int n, int k) {
-        sort(arr, arr + n);
+    int getPairsCount(int A[], int n, int k) {
+        sort(A, A + n);
         int i = 0, j = n - 1;
         int res = 0;
 
         while (i < j) {
-            if (arr[i] + arr[j] == k) {
-                int tempI = i;
-                while (tempI < j && (arr[tempI] + arr[j]) == k) {
-                    res++;
-                    tempI++;
+            int sum = A[i] + A[j];
+            if (sum == k) {
+                if (A[i] != A[j]) {
+                    int a = 1, b = 1;
+                    while (i + 1 < j && A[i] == A[i + 1]) i++, a++;
+                    while (j - 1 > i && A[j] == A[j - 1]) j--, b++;
+
+                    res += a * b;
+                    i++, j--;
                 }
-                j--;
-            }
-            else if (arr[i] + arr[j] < k) {
-                i++;
-            }
-            else if (arr[i] + arr[j] > k) {
-                j--;
-            }
-        }
-        return res;
-    }
-};
-
-
-class Solution {
-public:
-    int getPairsCount(int arr[], int n, int k) {
-        sort(arr, arr + n);
-        int i = 0, j = n - 1;
-        int res = 0;
-
-        while (i < j) {
-            if (arr[i] + arr[j] == k) {
-                int tempI = i;
-                while (tempI < j && (arr[tempI] == arr[i])) {
-                    res++;
-                    tempI++;
+                // equal A[i] == A[j]
+                else {
+                    int temp = (j - i + 1);
+                    res += (temp * (temp - 1) / 2);
+                    break;
                 }
+            }
+            else if (sum > k) {
                 j--;
             }
-            else if (arr[i] + arr[j] < k) {
+            else {
                 i++;
-            }
-            else if (arr[i] + arr[j] > k) {
-                j--;
             }
         }
         return res;
