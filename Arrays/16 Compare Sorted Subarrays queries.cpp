@@ -72,10 +72,7 @@ unordered_map < int, ll > Hash;
 
 // generates 46bit random number
 ll rand46() {
-    ll ret = 0LL, x;
-    ret |= (ll)rand() % RANGE;
-    x = (((ll)rand()) << 15);
-    ret |= x;
+    ll ret = (ll)rand() % RANGE;
     return ret;
 }
 
