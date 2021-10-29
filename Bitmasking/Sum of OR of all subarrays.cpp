@@ -40,6 +40,15 @@ Output 2:
 */
 
 
+/*
+Hint:
+Think in term of a single bit of the number. If we find the number of times that bit will contribite in the answer. 
+
+See scaler video editorial from Scaler TA account.
+*/
+
+
+
 
 #define ll long long
 int Solution::solve(vector < int > & A) {
