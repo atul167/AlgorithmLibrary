@@ -8,6 +8,36 @@ Problem Constraints
 1 <= A, B <= 5e5
 */
 
+/*
+Fermats Little Theorem:
+-----------------------
+a^p ≡ a (mod p)
+a^(p-1) ≡ 1 (mod p)
+
+
+Misconception:
+--------------
+{A^(B!)} % p = {A^(B! % p)} % p
+above equation is not true
+modulo only applies to +, -, *, / and not to exponents
+
+
+Solution:
+---------
+
+Let:
+A^(B!) = [A^(p-1)] * [A^(p-1)] * ... * [A^(p-1)] * [A^x]
+such that B! = (p-1) + (p-1) + ... + (p-1) + x
+
+taking % p
+{A^(B!)} % p = {[A^(p-1)] * [A^(p-1)] * ... * [A^(p-1)] * [A^x]} % p
+{A^(B!)} % p = {1 * 1 * ... * 1 * [A^x]} % p
+{A^(B!)} % p = [A^x] % p
+
+where:
+x = (B!) % (p-1)
+*/
+
 int fast_power(long long A, long long B, long long mod) {
     long long ans = 1;
     while (B > 0) {
