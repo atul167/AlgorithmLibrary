@@ -5,125 +5,104 @@
 Find number of rectangles from a given set of coordinates. The edges of rectangle should be parallel to coordinate axes.
 */
 
-/*
-(x, y), (x, y2), (x2, y), (x2, y2) -> points of rectangle
-x != x2 && y != y2
-*/
-
-void solve() {
-    int x, y;
-    cin >> n;
-    vector<pair<int, int>> points;
-    f(i, n) {
-        cin >> x >> y;
-        points.pb({x, y});
-    }
-
-    map<pair<int, int>, int> count;
-    int res = 0;
-
-    for(auto p: points) {
-        for(auto p_above: points) {
-            // check if these 2 points are on the same vertical line
-            if(p.first == p_above.first && p.second < p_above.second) {
-                // count all 2 points pairs which are on the same vertical line
-                res += count[{p.second, p_above.second}];
-                count[{p.second, p_above.second}]++;
-            }
-        }
-    }
-
-    cout << res << endl;
-}
 
 
-
-
-
-void solve() {
-    int x, y;
-    cin >> n;
-    vector<pair<int, int>> points;
-    f(i, n) {
-        cin >> x >> y;
-        points.pb({x, y});
-    }
-
-    // sorting so that all x coordinates are in order to reduce complexity little bit
-    sort(all(points));
-
-    map<pair<int, int>, int> count;
-    int res = 0;
-
-    for(int i = 0; i < n; i++) {
-        for(int j = i+1; j < n; j++) {
-            auto p = points[i];
-            auto p_above = points[j];
-            // check if these 2 points are on the same vertical line
-            if(p.first == p_above.first && p.second < p_above.second) {
-                // count all 2 points pairs which are on the same vertical line
-                res += count[{p.second, p_above.second}];
-                count[{p.second, p_above.second}]++;
-            } else {
-                break;
-            }
-        }
-    }
-
-    cout << res << endl;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Method 1:
 /*
 For every pair of points, say (x1, y1) and (x2, y2) consider it to be the diagonal of some rectangle. 
 If there exist points (x1, y2) and (x2, y1) in the initial set then we have found our rectangle. 
 It should be noted that there will exist 2 diagonals which will represent the same rectangle so we divide the final answer by 2.
 */
 
-void solve() {
-    int x, y;
-    cin >> n;
-
-    set<pair<int, int>> points;
-
-    f(i, n) {
-        cin >> x >> y;
-        points.insert({x, y});
+int Solution::solve(vector < int > & X, vector < int > & Y) {
+    map < pair < int, int > , int > mp;
+    int ans = 0;
+    for (int i = 0; i < X.size(); i++) {
+        mp[{X[i], Y[i]}]++;
     }
 
+    for (int i = 0; i < X.size(); i++) {
+        for (int j = i + 1; j < X.size(); j++) {
+            if (X[i] != X[j] && Y[i] != Y[j])
+                if (mp[{X[i], Y[j]}] != 0 && mp[{X[j], Y[i]}] != 0)
+                    ans++;
+        }
+    }
+    return ans / 2;
+}
+
+
+
+
+
+
+
+
+
+// Method 2
+
+/*
+(x, y), (x, y2), (x2, y), (x2, y2) -> points of rectangle
+x != x2 && y != y2
+*/
+
+int Solution::solve(vector < int > & X, vector < int > & Y) {
+    int n = X.size();
+    vector<pair<int, int>> points;
+    for (int i = 0; i < n; i++) {
+        points.push_back({X[i], Y[i]});
+    }
+
+    map<pair<int, int>, int> count;
     int res = 0;
 
-    for(auto i = points.begin(); i != points.end(); i++) {
-        for(auto j = i; j != points.end(); j++) {
-            pair<int, int> p1 = *i;
-            pair<int, int> p2 = *j;
-
-            if(p1.first == p2.first || p1.second == p2.second) {
-                continue;
-            }
-
-            // now p1 and p2 are end points of diagonal
-            // thus p3 and p4 should also be end points of diagonal
-
-            pair<int, int> p3 = make_pair(p1.first, p2.second);
-            pair<int, int> p4 = make_pair(p2.first, p1.second);
-
-            if(points.find(p3) != points.end() && points.find(p4) != points.end()) {
-                ++res;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            auto p = points[i];
+            auto p_above = points[j];
+            // check if these 2 points are on the same vertical line
+            if (p.first == p_above.first && p.second < p_above.second) {
+                // count all 2 points pairs which are on the same vertical line
+                res += count[ {p.second, p_above.second}];
+                count[ {p.second, p_above.second}]++;
             }
         }
     }
 
-    cout << res / 2 << endl;
+    return res;
+}
+
+
+
+
+
+int Solution::solve(vector < int > & X, vector < int > & Y) {
+    int n = X.size();
+    vector<pair<int, int>> points;
+    for (int i = 0; i < n; i++) {
+        points.push_back({X[i], Y[i]});
+    }
+
+    // sorting so that all x coordinates are in order to reduce complexity little bit
+    sort(points.begin(), points.end());
+
+    map<pair<int, int>, int> count;
+    int res = 0;
+
+    for (int i = 0; i < n; i++) {
+        for (int j = i + 1; j < n; j++) {
+            auto p = points[i];
+            auto p_above = points[j];
+            // check if these 2 points are on the same vertical line
+            if (p.first == p_above.first && p.second < p_above.second) {
+                // count all 2 points pairs which are on the same vertical line
+                res += count[ {p.second, p_above.second}];
+                count[ {p.second, p_above.second}]++;
+            } else {
+                break;
+            }
+        }
+    }
+
+    return res;
 }
