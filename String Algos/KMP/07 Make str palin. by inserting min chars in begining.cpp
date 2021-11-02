@@ -24,34 +24,26 @@ There is no need to insert any character at the beginning as the string is alrea
 */
 
 
-vector < int > computeLPSArray(string str) {
-    int M = str.length();
-    vector < int > lps(M);
-    int len = 0;
-    lps[0] = 0;
-    int i = 1;
-    while (i < M) {
-        if (str[i] == str[len]) {
-            len++;
-            lps[i] = len;
-            i++;
-        } else {
-            if (len != 0) {
-                len = lps[len - 1];
-
-            } else {
-                lps[i] = 0;
-                i++;
-            }
+vector<int> prefix_function(string &s) {
+    int n = (int)s.length();
+    vector<int> pi(n);
+    for (int i = 1; i < n; i++) {
+        int j = pi[i-1];
+        while (j > 0 && s[i] != s[j]) {
+            j = pi[j-1];
         }
+        if (s[i] == s[j]) {
+            j++;
+        }
+        pi[i] = j;
     }
-    return lps;
+    return pi;
 }
 
 int Solution::solve(string str) {
     string revStr = str;
     reverse(revStr.begin(), revStr.end());
     string concat = str + "$" + revStr;
-    vector < int > lps = computeLPSArray(concat);
+    vector < int > lps = prefix_function(concat);
     return (str.length() - lps.back());
 }
