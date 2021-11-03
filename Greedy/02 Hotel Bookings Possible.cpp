@@ -12,6 +12,46 @@ Problem Constraints
 0 <= arrive[i] <= depart[i] <= 10^8
 */
 
+
+
+
+bool Solution::hotel(vector<int> &arrive, vector<int> &depart, int K) {
+    if (K == 0) return false;
+    int n = arrive.size();
+
+    vector<pair<int, int> > vec;
+    for (int i = 0; i < n; ++i) {
+        vec.push_back({arrive[i], 0});
+        vec.push_back({depart[i], 1});
+    }
+
+    sort(vec.begin(), vec.end());
+
+    int curActive = 0;
+    int res = 0;
+    for (int i = 0; i < vec.size(); i++) {
+        // arrival
+        if (vec[i].second == 0) {
+            curActive++;
+            res = max(res, curActive);
+        } else {
+            curActive--;
+        }
+    }
+
+    return K >= res;
+}
+
+
+
+
+
+
+
+
+
+
+
 bool Solution::hotel(vector<int> &arr, vector<int> &dep, int K) {
     int n = arr.size();
     // Sort arrival and departure vectors
