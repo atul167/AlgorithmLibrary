@@ -16,7 +16,45 @@ Output:
 3
 */
 
+
+
 // Method 1
+
+class Solution {
+public:
+    int search(string pat, string str) {
+        vector<int> freqPat(26), freqStr(26);
+        for (char x : pat) freqPat[x - 'a']++;
+
+        int res = 0;
+        for (int i = 0; i < pat.size(); i++) {
+            freqStr[str[i] - 'a']++;
+        }
+
+        if (freqStr == freqPat) res++;
+
+        for (int i = pat.size(); i < str.size(); i++) {
+            freqStr[str[i - pat.size()] - 'a']--;
+            freqStr[str[i] - 'a']++;
+
+            if (freqStr == freqPat) res++;
+        }
+
+        return res;
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+// Method 2.1
 class Solution {
 public:
     int search(string pat, string str) {
@@ -42,7 +80,7 @@ public:
 
 
 
-// Method 2
+// Method 2.2
 class Solution{
 public:
 	int search(string pat, string str) {
