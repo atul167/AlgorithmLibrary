@@ -55,23 +55,23 @@ TreeNode<int> *cloneBinaryTreeRandomPointer(TreeNode<int> *root) {
 unordered_map<TreeNode<int>*, TreeNode<int>*> vis;
 
 TreeNode<int>* dfs(TreeNode<int>* root) {
-    if(root == NULL) return root;
-    
-    if(vis[root]) return vis[root];
+    if (root == NULL) return root;
+
+    if (vis[root]) return vis[root];
 
     TreeNode<int>* cloned = new TreeNode<int>(root->data);
     vis[root] = cloned;
 
-	cloned->left = dfs(root->left);
-	cloned->right = dfs(root->right);
+    cloned->left = dfs(root->left);
+    cloned->right = dfs(root->right);
 
     return cloned;
 }
 
 void copyRandomNode(TreeNode<int>* root, TreeNode<int>* clonedRoot) {
-    if(!root) return;
+    if (!root) return;
 
-	clonedRoot->random =  vis[root->random];
+    clonedRoot->random =  vis[root->random];
 
     copyRandomNode(root->left, clonedRoot->left);
     copyRandomNode(root->right, clonedRoot->right);
@@ -80,6 +80,6 @@ void copyRandomNode(TreeNode<int>* root, TreeNode<int>* clonedRoot) {
 TreeNode<int> *cloneBinaryTreeRandomPointer(TreeNode<int> *root) {
     vis.clear();
     TreeNode<int> *cloned = dfs(root);
- 	copyRandomNode(root, cloned);
+    copyRandomNode(root, cloned);
     return cloned;
 }
