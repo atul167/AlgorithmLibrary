@@ -9,6 +9,22 @@ and all nodes in the last level are as far left as possible. It can have between
 Design an algorithm that runs in less than O(n) time complexity.
 */
 
+
+
+/*
+Time Complexity = O((logn)^2)
+
+         *
+       /   \
+      *      *
+     / \     / \
+    *   *   *   *
+   /
+   *
+
+Use this tree to visualize time complexity
+*/
+
 class Solution {
 public:
     int findHeightLeft(TreeNode* node) {
