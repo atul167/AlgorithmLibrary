@@ -69,12 +69,13 @@ public:
     // add leaves traversing by inorder traversal 
     // (since it gaurantees sortedness and leaf nodes are sorted from left to right in BST)
     void addLeaves(TreeNode* root, vector<int>& res) {
-        if (root->left) addLeaves(root->left, res);
+        if(!root) return;
+        
+        addLeaves(root->left, res);
         if (isLeaf(root)) {
             res.push_back(root->val);
-            return;
         }
-        if (root->right) addLeaves(root->right, res);
+        addLeaves(root->right, res);
     }
 
     vector<int> boundaryOfBinaryTree(TreeNode * root) {
