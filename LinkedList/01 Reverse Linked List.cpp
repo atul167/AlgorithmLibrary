@@ -32,28 +32,41 @@ public:
 
 
 
+
 // recursive
 
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
-        ListNode* cur = head;
-
-        // new head found
-        if (!cur || !cur->next) return cur;
+        if (!head || !head->next) return head;
 
         // search for new head via recursion
-        ListNode* new_head = reverseList(cur->next);
+        ListNode* new_head = reverseList(head->next);
 
         // reverse list: make next node point to this node
-        cur->next->next = cur;
+        head->next->next = head;
 
         // tricky part: make cur node point to null. Only stays null for new tail
         // otherwise, the line above sets this node to point to the previous node
         // on the next recursion
-        cur->next = NULL;
+        head->next = NULL;
 
         // continue to pass new head along to original function call
+        return new_head;
+    }
+};
+
+
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if (!head || !head->next) return head;
+
+        ListNode* new_head = reverseList(head->next);
+
+        head->next->next = head;
+        head->next = NULL;
+        
         return new_head;
     }
 };
