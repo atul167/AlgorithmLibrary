@@ -23,7 +23,7 @@ public:
 unordered_map<TreeNode<int>*, TreeNode<int>*> vis;
 
 TreeNode<int>* dfs(TreeNode<int>* root) {
-  if (root == NULL) return root;
+  if (!root) return root;
 
   if (vis[root]) return vis[root];
 
@@ -55,7 +55,7 @@ TreeNode<int> *cloneBinaryTreeRandomPointer(TreeNode<int> *root) {
 unordered_map<TreeNode<int>*, TreeNode<int>*> vis;
 
 TreeNode<int>* dfs(TreeNode<int>* root) {
-    if (root == NULL) return root;
+    if (!root) return root;
 
     if (vis[root]) return vis[root];
 
