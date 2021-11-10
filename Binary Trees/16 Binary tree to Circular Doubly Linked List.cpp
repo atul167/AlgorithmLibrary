@@ -69,8 +69,8 @@ TreeNode *concatenate(TreeNode *leftList, TreeNode *rightList) {
     TreeNode *leftListLast = leftList->left;
     TreeNode *rightListLast = rightList->left;
 
-    rightList->left = leftListLast;
     leftList->left = rightListLast;
+    rightList->left = leftListLast;
 
     if (leftListLast) leftListLast->right = rightList;
 
