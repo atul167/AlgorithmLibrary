@@ -73,8 +73,8 @@ TreeNode *concatenate(TreeNode *leftList, TreeNode *rightList) {
     rightList->left = leftListLast;
 
     if (leftListLast) leftListLast->right = rightList;
-
     if (rightListLast) rightListLast->right = leftList;
+      
     return leftList;
 }
 
