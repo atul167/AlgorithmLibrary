@@ -2,53 +2,87 @@
 
 
 /*
+template <typename T>
 class TreeNode {
 public:
-    int val;
-    TreeNode *left, *right, *random;
-    TreeNode(int val) {
-        this->val = val;
-        this->left = this->right = this->random = NULL;
+    T data;
+    TreeNode<T> *left;
+    TreeNode<T> *right;
+    TreeNode<T> *random;
+
+    TreeNode(T data) {
+        this->data = data;
+        left = NULL;
+        right = NULL;
+        random = NULL;
     }
 };
 */
 
-class Solution {
-public:
-    unordered_map<TreeNode*, TreeNode*> vis;
+
+// https://www.codingninjas.com/codestudio/problems/clone-a-binary-tree-with-random-pointers_982797
+
+
+unordered_map<TreeNode<int>*, TreeNode<int>*> vis;
+
+TreeNode<int>* dfs(TreeNode<int>* root) {
+  if (root == NULL) return root;
+
+  if (vis[root]) return vis[root];
+
+  TreeNode<int>* cloned = new TreeNode<int>(root->data);
+  vis[root] = cloned;
+
+  cloned->left = dfs(root->left);
+  cloned->right = dfs(root->right);
+  cloned->random = dfs(root->random);
+
+  return cloned;
+}
+
+TreeNode<int> *cloneBinaryTreeRandomPointer(TreeNode<int> *root) {
+  vis.clear();
+  return dfs(root);
+}
+
+
+
+
+
+
+
+
+
+
+
+unordered_map<TreeNode<int>*, TreeNode<int>*> vis;
+
+TreeNode<int>* dfs(TreeNode<int>* root) {
+    if(root == NULL) return root;
     
-    TreeNode* copyLeftRightNode(TreeNode* root) {
-        if(!root) return root;
-        
-        if(vis[root]) return vis[root];
-        
-        TreeNode* cloned = new TreeNode(root->val);
-        vis[root] = cloned;
-        
-        if(root->left) {
-            cloned->left = copyLeftRightNode(root->left);
-        }
-        if(root->right) {
-            cloned->right = copyLeftRightNode(root->right);
-        }
-        
-        return cloned;
-    }
+    if(vis[root]) return vis[root];
 
-    void copyRandomNode(TreeNode* root, TreeNode* clonedRoot) {
-        if(!root) return;
-        
-        if(root->random) {
-            clonedRoot->random =  vis[root->random];
-        }
-        
-        copyRandomNode(root->left, clonedRoot->left);
-        copyRandomNode(root->right, clonedRoot->right);
-    }
+    TreeNode<int>* cloned = new TreeNode<int>(root->data);
+    vis[root] = cloned;
 
-    TreeNode * cloneTree(TreeNode * root) {
-        TreeNode* clonedRoot = copyLeftRightNode(root);
-        copyRandomNode(root, clonedRoot);
-        return clonedRoot;
-    }
-};
+	cloned->left = dfs(root->left);
+	cloned->right = dfs(root->right);
+
+    return cloned;
+}
+
+void copyRandomNode(TreeNode<int>* root, TreeNode<int>* clonedRoot) {
+    if(!root) return;
+
+	clonedRoot->random =  vis[root->random];
+
+    copyRandomNode(root->left, clonedRoot->left);
+    copyRandomNode(root->right, clonedRoot->right);
+}
+
+TreeNode<int> *cloneBinaryTreeRandomPointer(TreeNode<int> *root) {
+    vis.clear();
+    TreeNode<int> *cloned = dfs(root);
+ 	copyRandomNode(root, cloned);
+    return cloned;
+}
