@@ -1,18 +1,10 @@
-// https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/
-// https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/
-
-// Smallest Subtree with all the Deepest Nodes
-// https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes/
-
 /*
 2 questions same solution.
 */
 
 
-
-/*
-Given the root of a binary tree, return the lowest common ancestor of its deepest leaves.
-*/
+// Given the root of a binary tree, return the lowest common ancestor of its deepest leaves.
+// https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/
 
 class Solution {
 public:
@@ -52,13 +44,8 @@ public:
 
 
 
-
-
-
-
-
-
-
+// Smallest Subtree with all the Deepest Nodes
+// https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes/
 
 /*
 Given the root of a binary tree, the depth of each node is the shortest distance to the root.
