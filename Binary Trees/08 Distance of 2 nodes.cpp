@@ -2,9 +2,10 @@
 // https://practice.geeksforgeeks.org/problems/min-distance-between-two-given-nodes-of-a-binary-tree/1
 
 /*
+Normal Solution:
 Dist(n1, n2) = Dist(root, n1) + Dist(root, n2) - 2*Dist(root, lca) 
 
-Better Solution : 
+Better Solution: 
 We first find the LCA of two nodes. Then we find the distance from LCA to two nodes. 
 */
 
