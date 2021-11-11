@@ -47,7 +47,12 @@ int main() {
 
 
 
-// C++ program to find the missing number in a given arithmetic progression
+
+
+
+
+
+
 #include<iostream>
 using namespace std;
 
