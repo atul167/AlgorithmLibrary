@@ -28,7 +28,7 @@ public:
     ListNode* middleNode(ListNode* head) {
         ListNode *slow = head, *fast = head;
 
-        while(fast->next && fast->next->next) {
+        while(fast && fast->next) {
             slow = slow->next;
             fast = fast->next->next;
         }
@@ -42,7 +42,7 @@ public:
         ListNode *middle = middleNode(head);
         
         // now reverse the right half of linkedlist and get its head
-        ListNode *start2 = reverse(middle->next);
+        ListNode *start2 = reverse(middle);
         
         ListNode *start1 = head;
         
