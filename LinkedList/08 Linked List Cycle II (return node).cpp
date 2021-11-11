@@ -1,13 +1,5 @@
 // https://leetcode.com/problems/linked-list-cycle-ii/
 
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
 
 /*
 Given a linked list, return the node where the cycle begins. If there is no cycle, return null.
@@ -26,10 +18,10 @@ public:
             
             // for getting the intersection point
             if(slow == fast) {
-                ListNode* slow2 = head;
-                while(slow != slow2) {
+                ListNode* slow = head;
+                while(slow != fast) {
                     slow = slow->next;
-                    slow2 = slow2->next;
+                    fast = fast->next;
                 }
                 return slow;
             };
