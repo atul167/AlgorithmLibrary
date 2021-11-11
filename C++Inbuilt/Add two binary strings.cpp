@@ -3,14 +3,13 @@ using namespace std;
 
 string addBinary(string a, string b) {
     string result = "";
-    // Initialize digit sum
-    int total = 0, carry = 0;
 
     // Traverse both strings starting from last characters
     int i = a.size() - 1, j = b.size() - 1;
+    int carry = 0;
+
     while (i >= 0 || j >= 0 || carry > 0) {
-        total = 0;
-        // Comput sum of last digits and carry
+        int total = 0;
         if (i >= 0) {
             total += a[i] - '0';
             i--;
