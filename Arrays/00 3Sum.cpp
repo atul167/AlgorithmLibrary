@@ -16,11 +16,11 @@ public:
         
         for(int i = 0; i < n - 2; i++) {
             int l = i + 1, r = n - 1;
-            int x = nums[i];
             
             while(l < r) {
-                if(x + nums[l] + nums[r] == 0) {
-                    res.push_back({x, nums[l], nums[r]});
+                int sum = nums[i] + nums[l] + nums[r];
+                if(sum  == 0) {
+                    res.push_back({nums[i], nums[l], nums[r]});
                     
                     // to handle duplicates
                     while(l < r && nums[l] == nums[l + 1]) l++;
@@ -28,7 +28,7 @@ public:
                     l++;
                     r--;
                     
-                } else if(x + nums[l] + nums[r] > 0) {
+                } else if(sum > 0) {
                     r--;
                 } else {
                     l++;
