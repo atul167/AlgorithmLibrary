@@ -3,21 +3,19 @@
 // Another variation with no extra space used
 // https://www.geeksforgeeks.org/find-subarray-with-given-sum-with-negatives-allowed-in-constant-space/
 
+
 class Solution {
 public:
     int lenOfLongSubarr(int arr[],  int n, int k)  {
         unordered_map<int, int> mp;
         int sum = 0, maxLen = 0, startIdx, endIdx;
 
+        mp[0] = -1;
+
         // traverse the given array
         for (int i = 0; i < n; i++) {
             sum += arr[i];
-            if (sum == k) {
-                maxLen = i + 1;
-                startIdx = 0;
-                endIdx = i;
-            }
-
+  
             if (mp.find(sum - k) != mp.end()) {
                 if (maxLen < (i - mp[sum - k])) {
                     maxLen = i - mp[sum - k];
@@ -41,27 +39,21 @@ public:
 
 
 
-
-
-
-
-
-
-
-
-
 class Solution {
 public:
     int lenOfLongSubarr(int arr[],  int n, int k)  {
         unordered_map<int, int> mp;
         int sum = 0, maxLen = 0, startIdx, endIdx;
 
-        mp[0] = -1;
-
         // traverse the given array
         for (int i = 0; i < n; i++) {
             sum += arr[i];
-  
+            if (sum == k) {
+                maxLen = i + 1;
+                startIdx = 0;
+                endIdx = i;
+            }
+
             if (mp.find(sum - k) != mp.end()) {
                 if (maxLen < (i - mp[sum - k])) {
                     maxLen = i - mp[sum - k];
