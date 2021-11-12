@@ -9,40 +9,6 @@ Sum these water heights for all columns;
 */
 
 
-// O(n^2) time, O(1) space
-class Solution {
-public:
-    int trap(vector<int>& height) {
-        int n = height.size();
-        int res = 0;
-        
-        // 0th and (n-1)th column will contain no water above it
-        // i.e first and last column cannot hold any water since it will flow off from other side
-        for(int i = 1; i < n-1; i++) {
-            int mxleft = height[i], mxright = height[i];
-            
-            for(int j = i-1; j >= 0; j--) {
-                mxleft = max(mxleft, height[j]);
-            }
-            
-            for(int j = i+1; j < n; j++) {
-                mxright = max(mxright, height[j]);
-            }
-            
-            res += (min(mxleft, mxright) - height[i]);
-        }
-        
-        return res;
-    }
-};
-
-
-
-
-
-
-
-
 
 // O(n) time, O(n) space
 class Solution {
