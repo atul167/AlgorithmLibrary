@@ -67,7 +67,7 @@ public:
         // Similar to merge in merge sort to process all events in sorted order
         while (i < n && j < n) {
             // If next event in sorted order is arrival, increment count of platforms needed
-            // if (arr[i] <= dep[j]) { // use this if necessary
+            // if (arr[i] < dep[j]) { // use this if necessary
             if (arr[i] <= dep[j]) {
                 plat_needed++;
                 i++;
