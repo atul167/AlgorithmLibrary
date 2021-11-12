@@ -23,10 +23,10 @@ public:
             // arrival
             if (vec[i].second == 0) {
                 curActive++;
-                res = max(res, curActive);
             } else {
                 curActive--;
             }
+            res = max(res, curActive);
         }
 
         return res;
