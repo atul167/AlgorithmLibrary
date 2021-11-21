@@ -37,23 +37,22 @@ class Solution {
 public:
     int maxPoints(int X[], int Y[], int n) {
         if (n < 2) return n;
-
+     
         int maxPoint = 0;
         int curMax, overlapPoints, verticalPoints;
-
-        map<pair<int, int>, int> slopeMap;
-
+     
         // looping for each point
         for (int i = 0; i < n; i++) {
+            map<pair<int, int>, int> slopeMap;
             curMax = overlapPoints = verticalPoints = 0;
-
+     
             // looping from i + 1 to ignore same pair again
             for (int j = i + 1; j < n; j++) {
                 // If both point are equal then just increase overlapPoint count
                 if (X[i] == X[j] && Y[i] == Y[j]) {
                     overlapPoints++;
                 }
-
+     
                 // If x co-ordinate is same, then both point are vertical to each other
                 else if (X[i] == X[j]) {
                     verticalPoints++;
@@ -62,26 +61,23 @@ public:
                     int yDif = Y[j] - Y[i];
                     int xDif = X[j] - X[i];
                     int g = __gcd(xDif, yDif);
-
+     
                     // reducing the difference by their gcd
                     yDif /= g;
                     xDif /= g;
-
+     
                     // increasing the frequency of current slope in map
                     slopeMap[make_pair(yDif, xDif)]++;
-                    curMax = max(curMax, slopeMap[ {yDif, xDif}]);
+                    curMax = max(curMax, slopeMap[{yDif, xDif}]);
                 }
-
+     
                 curMax = max(curMax, verticalPoints);
             }
-
+     
             // updating global maximum by current point's maximum
             maxPoint = max(maxPoint, curMax + overlapPoints + 1);
-
-            // clear slope map
-            slopeMap.clear();
         }
-
+     
         return maxPoint;
     }
 };
