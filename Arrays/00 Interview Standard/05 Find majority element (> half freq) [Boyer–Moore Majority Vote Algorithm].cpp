@@ -13,16 +13,27 @@ A majority element appears more than ⌊n / 2⌋ times (rounded down), where n i
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
-        int majority, count = 0;
-        for (int x : nums) {
-            if (count == 0) {
-                majority = x;
-            }
+        int n = nums.size();
 
-            if (majority == x) count++;
-            else count--;
+        int num1 = 0, cnt1 = 0;
+
+        for (int val : nums) {
+            if (num1 == val) {
+                cnt1++;
+            }  else if (cnt1 == 0) {
+                num1 = val;
+                cnt1++;
+            }  else {
+                cnt1--;
+            }
         }
-        return majority;
+
+        cnt1 = 0;
+        for (int val : nums) {
+            if (num1 == val) cnt1++;
+        }
+        if (cnt1 > n / 2) return num1;
+        return -1;
     }
 };
 
@@ -61,27 +72,6 @@ public:
 
 
 
-
-// Time = O(n), Space = O(n)
-#include <bits/stdc++.h>
-using namespace std;
-
-int main() {
-    int arr[] = {2, 2, 2, 2, 5, 5, 2, 3, 3};
-    int n = sizeof(arr) / sizeof(arr[0]);
-
-    unordered_map<int, int> mp;
-    for (int i = 0; i < n; i++) {
-        mp[arr[i]]++;
-        if (mp[arr[i]] > n / 2) {
-            cout << "Majority found :- " << arr[i] << endl;
-            return 0;
-        }
-    }
-    cout << "No Majority element" << endl;
-
-    return 0;
-}
 
 
 
