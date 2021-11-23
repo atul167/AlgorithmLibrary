@@ -18,16 +18,40 @@ public:
         int num1 = 0, cnt1 = 0;
 
         for (int val : nums) {
-            if (num1 == val) {
-                cnt1++;
-            }  else if (cnt1 == 0) {
+            if (cnt1 == 0) {
                 num1 = val;
+                cnt1++;
+            } else if (num1 == val) {
+                cnt1++;
+            }  else {
+                cnt1--;
+            }
+        }
+        
+        return num1;
+    }
+};
+
+
+class Solution {
+public:
+    int majorityElement(vector<int>& nums) {
+        int n = nums.size();
+
+        int num1 = 0, cnt1 = 0;
+
+        for (int val : nums) {
+            if (cnt1 == 0) {
+                num1 = val;
+                cnt1++;
+            } else if (num1 == val) {
                 cnt1++;
             }  else {
                 cnt1--;
             }
         }
 
+        // second iteration to simply counts the frequency of that value to confirm
         cnt1 = 0;
         for (int val : nums) {
             if (num1 == val) cnt1++;
@@ -36,36 +60,6 @@ public:
         return -1;
     }
 };
-
-
-class Solution {
-public:
-    int majorityElement(vector<int>& nums) {
-        int majority, cnt = 0;
-        for (int x : nums) {
-            if (cnt == 0) {
-                majority = x;
-            }
-
-            if (majority == x) cnt++;
-            else cnt--;
-        }
-
-        // second iteration to simply counts the frequency of that value to confirm
-        cnt = 0;
-        for (int x : nums) {
-            if (x == majority) {
-                cnt++;
-            }
-        }
-
-        assert(cnt > nums.size() / 2);
-        return majority;
-    }
-};
-
-
-
 
 
 
