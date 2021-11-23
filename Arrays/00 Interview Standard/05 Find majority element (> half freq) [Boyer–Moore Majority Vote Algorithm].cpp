@@ -10,6 +10,7 @@ A majority element appears more than ⌊n / 2⌋ times (rounded down), where n i
 
 // Boyer–Moore majority vote algorithm
 // Assumption: Frequency of majority element > n / 2
+
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
@@ -18,21 +19,22 @@ public:
         int num1 = 0, cnt1 = 0;
 
         for (int val : nums) {
-            if (cnt1 == 0) {
+            if (num1 == val) {
+                cnt1++;
+            } else if (cnt1 == 0) {
                 num1 = val;
                 cnt1++;
-            } else if (num1 == val) {
-                cnt1++;
-            }  else {
+            } else {
                 cnt1--;
             }
         }
-        
+
         return num1;
     }
 };
 
 
+
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
@@ -41,12 +43,12 @@ public:
         int num1 = 0, cnt1 = 0;
 
         for (int val : nums) {
-            if (cnt1 == 0) {
+            if (num1 == val) {
+                cnt1++;
+            } else if (cnt1 == 0) {
                 num1 = val;
                 cnt1++;
-            } else if (num1 == val) {
-                cnt1++;
-            }  else {
+            } else {
                 cnt1--;
             }
         }
@@ -60,8 +62,6 @@ public:
         return -1;
     }
 };
-
-
 
 
 
