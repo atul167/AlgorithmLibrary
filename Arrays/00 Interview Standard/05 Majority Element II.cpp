@@ -35,17 +35,17 @@ public:
         int cnt1 = 0, cnt2 = 0;
 
         for (int val : nums) {
-            if (val == num1)
+            if (val == num1) {
                 cnt1++;
-            else if (val == num2)
+            } else if (val == num2) {
                 cnt2++;
-            else if (cnt1 == 0) {
+            } else if (cnt1 == 0) {
                 num1 = val;
                 cnt1++;
             } else if (cnt2 == 0) {
                 num2 = val;
                 cnt2++;
-            } else {
+            } else  {
                 cnt1--;
                 cnt2--;
             }
