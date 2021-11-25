@@ -1,3 +1,5 @@
+// https://www.scaler.com/problems/largest-number/
+
 bool compareNum(string a, string b) {
     return a + b > b + a;
 }
