@@ -10,17 +10,11 @@ public:
         int mid = 0; 
 
         while (mid <= hi) { 
-            int x = nums[mid];
-            
-            if(x == 0) {
+            if(nums[mid] == 0) {
                 swap(nums[lo++], nums[mid++]); 
-            }
-            
-            if(x == 1) {
+            } else if(nums[mid] == 1) {
                 mid++; 
-            }
-            
-            if(x == 2) {
+            } else if(nums[mid] == 2) {
                 swap(nums[mid], nums[hi--]); 
             }
         }
