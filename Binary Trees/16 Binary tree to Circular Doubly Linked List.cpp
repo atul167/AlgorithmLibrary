@@ -1,4 +1,5 @@
 // https://www.scaler.com/problems/binary-tree-to-circular-doubly-linked-list/
+// https://practice.geeksforgeeks.org/problems/binary-tree-to-cdll/1/
 
 /*
 Given a binary tree convert it into circular doubly linked list based on the following rules:
@@ -51,7 +52,7 @@ To Concatenate two circular DLLs, we will follow below steps:
 
 
 
-
+// Scaler wrong soln
 /*
 Definition for binary tree
 struct TreeNode {
@@ -93,3 +94,71 @@ TreeNode *bTreeToCList(TreeNode *root) {
 TreeNode *solve(TreeNode *A) {
     return bTreeToCList(A);
 }
+
+
+
+
+
+
+
+
+// GFG practise soln
+class Solution
+{
+  public:
+    // A function that appends rightList at the end
+    // of leftList.
+    Node *concatenate(Node *leftList, Node *rightList)
+    {
+        // If either of the list is empty
+        // then return the other list
+        if (leftList == NULL)
+            return rightList;
+        if (rightList == NULL)
+            return leftList;
+      
+        // Store the last Node of left List
+        Node *leftLast = leftList->left;
+      
+        // Store the last Node of right List
+        Node *rightLast = rightList->left;
+      
+        // Connect the last node of Left List
+        // with the first Node of the right List
+        leftLast->right = rightList;
+        rightList->left = leftLast;
+      
+        // Left of first node points to
+        // the last node in the list
+        leftList->left = rightLast;
+      
+        // Right of last node refers to the first
+        // node of the List
+        rightLast->right = leftList;
+      
+        return leftList;
+    }
+  
+    //Function to convert binary tree into circular doubly linked list.
+    Node *bTreeToCList(Node *root)
+    {
+    //add code here.
+        if (root == NULL)
+            return NULL;
+      
+        // Recursively convert left and right subtrees
+        Node *left = bTreeToCList(root->left);
+        Node *right = bTreeToCList(root->right);
+      
+        // Make a circular linked list of single node
+        // (or root). To do so, make the right and
+        // left pointers of this node point to itself
+        root->left = root->right = root;
+      
+        // Step 1 (concatenate the left list with the list 
+        //         with single node, i.e., current node)
+        // Step 2 (concatenate the returned list with the
+        //         right List)
+        return concatenate(concatenate(left, root), right);
+    }
+};
