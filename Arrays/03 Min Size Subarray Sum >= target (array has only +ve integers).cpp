@@ -56,7 +56,7 @@ public:
         
         if(res == INF) return 0;
         
-        if(res >= n && sum < target) return 0;
+        if(sum < target) return 0;
         return res;
     }
 };
