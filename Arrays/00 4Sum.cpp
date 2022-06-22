@@ -19,8 +19,10 @@ public:
                         res.push_back({x, y, nums[l], nums[r]});
 
                         // to handle duplicates
-                        while(l < r && nums[l] == nums[l + 1]) l++;
-                        while(l < r && nums[r] == nums[r - 1]) r--;
+                        while(l + 1 < r && nums[l] == nums[l + 1]) l++;
+                        while(l < r - 1 && nums[r] == nums[r - 1]) r--;
+                        // while(l < r && nums[l] == nums[l + 1]) l++;
+                        // while(l < r && nums[r] == nums[r - 1]) r--;
                         l++;
                         r--;
 
@@ -67,19 +69,18 @@ public:
                 int l = j + 1, r = n - 1;
 
                 while (l < r) {
-                    // if (x + y + nums[l] + nums[r] == target) {
-                    if (nums[l] + nums[r] == target - x - y) {
+                    long long sum = (long)x + (long)y + (long)nums[l] + (long)nums[r];
+                    if (sum == target) {
                         res.push_back({x, y, nums[l], nums[r]});
 
                         // to handle duplicates
-                        while (l < r && nums[l] == nums[l + 1]) l++;
-                        while (l < r && nums[r] == nums[r - 1]) r--;
+                        while (l + 1 < r && nums[l] == nums[l + 1]) l++;
+                        while (l < r - 1 && nums[r] == nums[r - 1]) r--;
                         l++;
                         r--;
 
                     }
-                    // else if (x + y + nums[l] + nums[r] > target) {
-                    else if (nums[l] + nums[r] > target - x - y) {
+                    else if (sum > target) {
                         r--;
                     } else {
                         l++;
