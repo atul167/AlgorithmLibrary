@@ -1,6 +1,10 @@
 // https://www.geeksforgeeks.org/sliding-window-maximum-maximum-of-all-subarrays-of-size-k/
 
 /*
+Given an array and an integer K, find the maximum for each and every contiguous subarray of size k.
+*/
+
+/*
 Algorithm:  
 
 1) Create a deque to store k elements.
