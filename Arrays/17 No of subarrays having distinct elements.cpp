@@ -82,7 +82,7 @@ public:
 
         for (int r = 0; r < n; r++) {
             mp[A[r]]++;
-            while (mp[A[l]] > 1) {
+            while (mp[A[r]] > 1) {
                 mp[A[l]]--;
                 l++;
             }
