@@ -33,18 +33,14 @@ int Solution::solve(vector<int> &A) {
     long long l = 0, n = A.size();
 
     // create a map to store unique elements
-    unordered_set <int> st;
+    map <int, int> mp;
     long long res = 0;
 
     for (int r = 0; r < n; r++) {
-        if (st.count(A[r])) {
-            while (A[l] != A[r]) {
-                st.erase(A[l]);
-                l++;
-            }
+        mp[A[r]]++;
+        while (mp[A[r]] > 1) {
+            mp[A[l]]--;
             l++;
-        } else {
-            st.insert(A[r]);
         }
 
         int len = (r - l + 1);
