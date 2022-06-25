@@ -18,6 +18,7 @@ After swapiing A = "111111100"
 */
 
 
+
 int maximum_one(string &s) {
     // To count all 1's in the string
     int cnt_one = 0;
@@ -39,6 +40,7 @@ int maximum_one(string &s) {
         right[n - 1] = 1;
     else
         right[n - 1] = 0;
+        
     for (int i = 1; i < n; i++) {
         if (s[i] == '1')
             left[i] = left[i - 1] + 1;
@@ -54,21 +56,19 @@ int maximum_one(string &s) {
             right[i] = 0;
     }
 
-    int cnt = 0, max_cnt = 0;
+    int max_cnt = 0;
+    
     for(int i=0; i<n; ++i )
-    max_cnt=max(max_cnt,max(right[i],left[i]));
+        max_cnt=max(max_cnt,max(right[i],left[i]));
+    
     for (int i = 1; i < n - 1; i++) {
         if (s[i] == '0') {
             int sum = left[i - 1] + right[i + 1];
 
             if (sum < cnt_one)
-                cnt = sum + 1;
+                sum++;
 
-            else
-                cnt = sum;
-
-            max_cnt = max(max_cnt, cnt);
-            cnt = 0;
+            max_cnt = max(max_cnt, sum);
         }
     }
 
