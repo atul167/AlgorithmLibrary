@@ -41,3 +41,57 @@ public:
     }
     
 };
+
+
+
+
+
+
+
+// Floyd cycle detection
+
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        if(nums.size() == 0) return -1;
+        
+        int slow = nums[0];
+        int fast = nums[0];
+        while(1){
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+            if(slow == fast) break;
+        }
+        slow = nums[0];
+        while(slow!=fast){
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+        return slow; // fast
+    }
+};
+
+
+
+
+// Floyd cycle detection
+
+class Solution {
+public:
+    int findDuplicate(vector<int>& nums) {
+        if(nums.size() == 0) return -1;
+        
+        int slow = nums[nums[0]];
+        int fast = nums[nums[nums[0]]];
+        while(slow != fast){
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        }
+        slow = nums[0];
+        while(slow!=fast){
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+        return slow; // fast
+    }
+};
