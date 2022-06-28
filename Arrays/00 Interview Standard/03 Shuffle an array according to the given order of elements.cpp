@@ -58,24 +58,6 @@ int main() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // naive solution
 
 void shuffle(int arr[], int pos[], int n) {
