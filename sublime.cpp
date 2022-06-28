@@ -27,8 +27,4 @@ int main(){
       cout<<var * i+1<<endl;
   }
   return 0;
-/*
-Run using Cmd+B
-*/
-
 }
