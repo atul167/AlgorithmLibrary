@@ -135,16 +135,20 @@ vector<int> Solution::repeatedNumber(const vector<int> &A) {
         xo = xo ^ A[i];
         xo = xo ^ (i + 1);
     }
+    
     int setbit = xo & (~(xo - 1));
     int x = 0, y = 0;
+    
     for (int i = 0; i < n; i++) {
         if (A[i] & setbit)
             x = x ^ A[i];
         else
             y = y ^ A[i];
-        if ((i + 1)&setbit)
+            
+        if ((i + 1) & setbit)
             x = x ^ (i + 1);
-        else y = y ^ (i + 1);
+        else 
+            y = y ^ (i + 1);
     }
     vector<int> res(2);
     for (int i = 0; i, n; i++) {
