@@ -48,35 +48,49 @@ keep track of sum of the elements present in heap
 class Solution {
 public:
     #define ll long long
-    #define MOD 1000000007
+    #define mod 1000000007
     
     int maxPerformance(int n, vector<int>& speed, vector<int>& efficiency, int k) {
-        vector<pair<ll, ll>> a;
-        for(ll i = 0; i < n; i++) {
-            a.push_back({efficiency[i], speed[i]});
+        // to store ans
+        ll ans = 0;
+        
+        // to maintain top k-1 sum
+        priority_queue <int, vector <int>, greater <int>> pq;
+        
+        vector <pair<ll, ll>> v;
+        for(int i = 0; i < n; i++) {
+            v.push_back({efficiency[i], speed[i]});
         }
         
-        // sort in desc order on basis of efficiency
-        sort(a.rbegin(), a.rend());
+        // sorting in decreasing order of efficiency
+        sort(v.rbegin(), v.rend());
         
-        // stores sum of k maximum speeds upto current index whose minimum efficiency is current element
-        // we can use minHeap as well
-        multiset<int> st;
+        // running top k-1 sum
+        ll topksum = 0;
         
-        ll res = 0, speedSum = 0;
-        
-        for(ll i = 0; i < n; i++) {
-            ll minEff = a[i].first, spd = a[i].second;
-            speedSum += spd;
-            res = max(res, speedSum * minEff);
+        for(int i = 0; i < n; i++) {
+            // ith is the min for values from 1 to i-1
+            ll cur_min = v[i].first;
+            ll spd = v[i].second;
             
-            st.insert(spd);
-            // track sum of (k-1) maximum speeds
-            if(st.size() >= k) {
-                speedSum -= (*st.begin());
-                st.erase(st.begin());
+            // finding best sum, note here topksum is actually sum of top k-1
+            ll speed_sum = spd + topksum;
+            
+            // updaing answer
+            ans = max(ans, speed_sum * cur_min);
+            
+            pq.push(spd);
+            
+            // updating topksum
+            topksum += spd;
+            if(pq.size() > k - 1) {
+                topksum -= pq.top();
+                pq.pop();
             }
         }
-        return (int)(res % MOD);
+        
+        // finally taking mod
+        ans %= mod;
+        return ans;
     }
 };
