@@ -43,13 +43,9 @@ public:
         for(int right = 0; right < n; right++) {
             sum += nums[right];
             
-            while(1) {
-                if(sum - nums[left] >= target) {
-                    sum -= nums[left];
-                    left++;
-                } else {
-                    break;
-                }
+            while(sum - nums[left] >= target) {
+                sum -= nums[left];
+                left++;
             }
             
             if(sum >= target) res = min(res, right - left + 1);
@@ -60,7 +56,7 @@ public:
         
         if(res == INF) return 0;
         
-        if(res >= n && sum < target) return 0;
+        if(sum < target) return 0;
         return res;
     }
 };
