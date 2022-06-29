@@ -11,28 +11,32 @@ such that the minimum distance between any two of them is as large as possible. 
 
 // TTTTTFFFFF
 
+const int N = 1e6+5;
+int n, m;
 
+bool check(int mid, int c, vector<int>& a) {
+    int cnt = 1, prevPos = 0;
+    for(int i = 1; i < n; i++) {
+        if(a[i] - a[prevPos] >= mid) {
+            prevPos = i, cnt++;
+        }
+    }
+    return cnt >= c;
+}
+ 
 void solve() {
     int x, y, c;
     cin >> n >> c;
     vector<int> a(n);
     f(i, n) cin >> a[i];
-
+ 
     sort(all(a));
-
+ 
     int lo = 0, hi = a[n-1];
     while(lo < hi) {
-        // int mid = (lo + hi + 1) / 2;
         int mid = lo + (hi - lo + 1) / 2;
 
-        int cnt = 1, prevPos = 0;
-        for(int i = 1; i < n; i++) {
-            if(a[i] - a[prevPos] >= mid) {
-                prevPos = i, cnt++;
-            }
-        }
-
-        if(cnt >= c) {
+        if(check(mid, c, a)) {
             lo = mid;
         } else {
             hi = mid - 1;
@@ -40,7 +44,7 @@ void solve() {
     }
     cout << lo << endl;
 }
-
+ 
 signed main() {
     IOS
     clock_t begin = clock();
