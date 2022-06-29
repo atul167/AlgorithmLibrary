@@ -67,6 +67,35 @@ public:
 
 
 
+class Solution {
+public:
+    int shortestSubarray(vector<int>& nums, int k) {
+        int n = nums.size();
+        vector<int> pref(n);
+        pref[0] = nums[0];
+        for (int i = 1; i < n; i++) {
+            pref[i] = nums[i] + pref[i - 1];
+        }
+
+        deque<int> d;
+        int res = n + 1;
+
+        for (int i = 0; i < n; i++) {
+            if (pref[i] >= k) res = min(res, i + 1);
+
+            while (!d.empty() && pref[i] - pref[d.front()] >= k) {
+                res = min(res, i - d.front());
+                d.pop_front();
+            }
+            while (!d.empty() && pref[i] <= pref[d.back()]) {
+                d.pop_back();
+            }
+
+            d.push_back(i);
+        }
+        return res <= n ? res : -1;
+    }
+};
 
 
 class Solution {
