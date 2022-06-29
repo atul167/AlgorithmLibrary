@@ -48,3 +48,42 @@ public:
         return res;
     }
 };
+
+
+
+
+
+
+// O(n) time, O(n) space
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n = height.size();
+        if(n == 0) return 0;
+        
+        vector<int> prefixMax(n), suffixMax(n);
+        
+        prefixMax[0] = height[0];
+        for(int i = 1; i < n; i++) {
+            prefixMax[i] = max(height[i], prefixMax[i-1]);
+        }
+        
+        suffixMax[n-1] = height[n-1];
+        for(int i = n-2; i >= 0; i--) {
+            suffixMax[i] = max(height[i], suffixMax[i+1]);
+        }
+        
+        int res = 0;
+        
+        // 0th and (n-1)th column will contain no water above it
+        // i.e first and last column cannot hold any water since it will flow off from other side
+        for(int i = 1; i < n-1; i++) {
+            int mxleft = prefixMax[i];
+            int mxright = suffixMax[i];
+            
+            res += (min(mxleft, mxright) - height[i]);
+        }
+        
+        return res;
+    }
+};
