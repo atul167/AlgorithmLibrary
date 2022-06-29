@@ -18,6 +18,20 @@ Input: nums = [7,8,9,11,12]
 Output: 1
 */
 
+
+
+/*
+Input:
+nums = [1 3 2 -1 -3 5 5 2 -9 -1]
+
+After swapping nums will look like this
+nums = [1 2 3 -1 5 -3 5 2 -9 -1]
+
+Output
+4
+*/
+
+
 // Time = O(n), Space = O(1)
 class Solution {
 public:
