@@ -51,10 +51,7 @@ public:
     #define mod 1000000007
     
     int maxPerformance(int n, vector<int>& speed, vector<int>& efficiency, int k) {
-        // to store ans
-        ll ans = 0;
-        
-        // to maintain top k-1 sum
+        // to maintain top k sum
         priority_queue <int, vector <int>, greater <int>> pq;
         
         vector <pair<ll, ll>> v;
@@ -65,32 +62,22 @@ public:
         // sorting in decreasing order of efficiency
         sort(v.rbegin(), v.rend());
         
-        // running top k-1 sum
-        ll topksum = 0;
-        
+        // running top k sum
+        ll sum = 0, res = 0;
         for(int i = 0; i < n; i++) {
-            // ith is the min for values from 1 to i-1
-            ll cur_min = v[i].first;
-            ll spd = v[i].second;
+            ll cur_min = v[i].first, spd = v[i].second;
             
-            // finding best sum, note here topksum is actually sum of top k-1
-            ll speed_sum = spd + topksum;
-            
-            // updaing answer
-            ans = max(ans, speed_sum * cur_min);
-            
+            sum += spd;
             pq.push(spd);
-            
-            // updating topksum
-            topksum += spd;
-            if(pq.size() > k - 1) {
-                topksum -= pq.top();
+            while(pq.size() > k){
+                sum -= pq.top();
                 pq.pop();
-            }
+            } 
+            res = max(res, sum * cur_min);
         }
         
         // finally taking mod
-        ans %= mod;
-        return ans;
+        res %= mod;
+        return res;
     }
 };
