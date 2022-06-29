@@ -28,8 +28,8 @@ public:
         map<char, int> freq;
         int res = 0;
         
-        int l = 0, r = 0;
-        while(r < n) {
+        int l = 0;
+        for(int r = 0; r < n; r++) {
             st.insert(s[r]);
             freq[s[r]]++;
             while(st.size() > k) {
@@ -40,7 +40,6 @@ public:
             }
 
             res = max(res, r - l + 1);
-            r++;
         }
 
         return res;
