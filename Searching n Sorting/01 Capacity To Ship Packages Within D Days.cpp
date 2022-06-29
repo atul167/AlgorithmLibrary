@@ -16,11 +16,11 @@ public:
         int n = weights.size();
         int cnt = 0, sum = 0;
         for(int i = 0; i < n; i++) {
-            if(sum + weights[i] > mid) {
-                cnt++;
-                sum = 0;
-            }
             sum += weights[i];
+            if(sum > mid) {
+                cnt++;
+                sum = weights[i];
+            }
         }
         // if currently i have some sum, then i require one more day
         if(sum) cnt++;
