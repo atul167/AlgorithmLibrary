@@ -22,11 +22,11 @@ public:
     bool check(int mid, vector<int>& nums, int m) {
         ll sum = 0, cnt = 0;
         for(ll x: nums) {
-            if(sum + x > mid) {
-                cnt++;
-                sum = 0;
-            }
             sum += x;
+            if(sum > mid) {
+                cnt++;
+                sum = x;
+            }
         }
         if(sum) cnt++;
 
