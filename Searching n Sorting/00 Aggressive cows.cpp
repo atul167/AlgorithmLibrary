@@ -11,6 +11,7 @@ such that the minimum distance between any two of them is as large as possible. 
 
 // TTTTTFFFFF
 
+
 const int N = 1e6+5;
 int n, m;
 
@@ -34,6 +35,7 @@ void solve() {
  
     int lo = 0, hi = a[n-1];
     while(lo < hi) {
+        // int mid = (lo + hi + 1) / 2;
         int mid = lo + (hi - lo + 1) / 2;
 
         if(check(mid, c, a)) {
