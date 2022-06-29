@@ -27,11 +27,11 @@ Therefore, the minimum of these cases is 113, which is selected as the output.
 bool check(int mid, int m, vector<int>& pages) {
     int cnt = 0, sum = 0;
     for (int i = 0; i < pages.size(); i++) {
-        if (sum + pages[i] > mid) {
-            sum = 0;
+        sum += pages[i];
+        if (sum > mid) {
+            sum = pages[i];
             cnt++;
         }
-        sum += pages[i];
     }
     if (sum) cnt++;
 
