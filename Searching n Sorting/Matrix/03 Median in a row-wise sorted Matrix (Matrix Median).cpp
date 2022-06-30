@@ -95,3 +95,33 @@ public:
         return lo;
     }
 };
+
+
+
+
+
+
+class Solution {
+public:
+    int median(vector<vector<int>> &matrix, int n, int m) {
+        priority_queue<array<int, 3>, vector<array<int, 3>> , greater<array<int, 3>>> pq;
+        for (int i = 0; i < n; i++) {
+            pq.push({matrix[i][0], i, 0});
+        }
+
+        int k = (n * m + 1) / 2;
+        int res;
+        while (k--) {
+            int val = pq.top()[0];
+            int i = pq.top()[1];
+            int j = pq.top()[2];
+            pq.pop();
+            res = val;
+
+            if (j + 1 < m) {
+                pq.push({matrix[i][j + 1], i, j + 1});
+            }
+        }
+        return res;
+    }
+};
