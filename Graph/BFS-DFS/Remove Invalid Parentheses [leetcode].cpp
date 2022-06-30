@@ -34,9 +34,8 @@ public:
         return (cnt == 0);
     }
 
-    map<string, bool> vis;
-
     vector<string> removeInvalidParentheses(string s) {
+        map<string, bool> vis;
         queue<string> q;
         q.push(s);
         vis[s] = 1;
@@ -74,6 +73,7 @@ public:
 
 
 
+
 // Method 2: Full concept of layer
 class Solution {
 public:
@@ -87,9 +87,8 @@ public:
         return (cnt == 0);
     }
 
-    map<string, bool> vis;
-
     vector<string> removeInvalidParentheses(string s) {
+        map<string, bool> vis;
         queue<string> q;
         q.push(s);
         vis[s] = 1;
