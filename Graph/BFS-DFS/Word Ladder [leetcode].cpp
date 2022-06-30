@@ -36,6 +36,45 @@ All the words in wordList are unique.
 
 
 
+
+// Method 1
+class Solution {
+public:
+    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
+        unordered_set<string> dict(wordList.begin(), wordList.end());
+        queue<pair<string, int>> q;
+        q.push({beginWord, 1});
+        map<string, int> vis;
+        vis[beginWord] = 1;
+        
+        while (!q.empty()) {
+            string u = q.front().first;
+            int level = q.front().second;
+            q.pop();
+
+            if (u == endWord) return level;
+
+            for (int j = 0; j < u.size(); j++) {
+                char c = u[j];
+                for (int k = 0; k < 26; k++) {
+                    u[j] = 'a' + k;
+                    if (dict.find(u) != dict.end() && !vis[u]) {
+                        q.push({u, level + 1});
+                        vis[u] = 1;
+                    }
+                 }
+                u[j] = c;
+            }
+        }
+        return 0;
+    }
+};
+
+
+
+
+
+// Method 2
 class Solution {
 public:
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
@@ -74,8 +113,7 @@ public:
 
 
 
-
-
+// Method 2.1
 class Solution {
 public:
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
