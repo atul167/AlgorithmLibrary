@@ -4,7 +4,6 @@
 Kathiresan is initially locked at cell (0,0) in a highly guarded rectangular prison of order RxC. 
 He must reach the gate at (R-1,C-1) in order to escape from the prison. 
 Kathiresan can move from any cell, to any of it's 4 adjacent cells (North, East, West and South). 
-If Kathiresan is currently at (x1,y1), then he can move to (x2,y2) if and only if abs(x2-x1)+abs(y2-y1) == 1 and 0 <= x2 < R and 0 <= y2 < C
 
 Kathiresan somehow manages to get the map of the prison.
 If map[x1][y1] == map[x2][y2] then Kathiresan can move from (x1,y1) to (x2,y2) without killing any guards.
