@@ -13,7 +13,9 @@ Now you would like to determine for each cell whether there exists a sequence of
 How many cells of the board have this property?
 */
 
-
+int dx[] = {0, 1, 0, -1, -1, 1, -1, 1};
+int dy[] = { -1, 0, 1, 0, -1, 1, 1, -1};
+string stepDir = "LDRU";
 const int N = 2e3+5;
 int n, m;
  
@@ -110,25 +112,9 @@ void solve() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+int dx[] = {0, 1, 0, -1, -1, 1, -1, 1};
+int dy[] = { -1, 0, 1, 0, -1, 1, 1, -1};
+string stepDir = "LDRU";
 const int N = 2e3+5;
 int n, m;
  
@@ -232,19 +218,9 @@ void solve() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+int dx[] = {0, 1, 0, -1, -1, 1, -1, 1};
+int dy[] = { -1, 0, 1, 0, -1, 1, 1, -1};
+string stepDir = "LDRU";
 const int N = 2e3+5;
 int n, m;
  
