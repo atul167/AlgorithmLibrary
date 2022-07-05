@@ -1,3 +1,4 @@
+// https://www.hackerearth.com/practice/algorithms/graphs/minimum-spanning-tree/tutorial/
 // https://github.com/Ashishgup1/Competitive-Coding/blob/master/Prim's%20MST.cpp
 
 // Pepcoding = https://youtu.be/Vw-sktU1zmc
