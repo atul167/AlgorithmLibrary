@@ -26,23 +26,23 @@ const int N = 2e5+5;
 int n, m;
 
 const int height = 30;
-int parent[N][height + 1]; // parent[node][i] == [node] 's [2^i]th parent
+int LCA[N][height + 1]; // LCA[node][i] == [node] 's [2^i]th parent
 int par[N];
 
 void initLCA() {
     // 2^0
     for(int i = 1; i <= n; i++) {
-        parent[i][0] = par[i];
+        LCA[i][0] = par[i];
     }
 
     // 2^i
     for(int i = 1; i < height; i++) {
         for(int node = 1; node <= n; node++) {
-            int parNode = parent[node][i-1];
+            int parNode = LCA[node][i-1];
             if(parNode != -1) {
-              parent[node][i] = parent[parNode][i-1];
+              LCA[node][i] = LCA[parNode][i-1];
             } else {
-              parent[node][i] = -1;
+              LCA[node][i] = -1;
             }
         }
     }
@@ -51,7 +51,7 @@ void initLCA() {
 int getKthParent(int node, int k) {
     for(int i = 0; i < height; i++) {
         if(k & (1 << i)) {
-            node = parent[node][i];
+            node = LCA[node][i];
             if(node == -1) return -1;
         }
     }
