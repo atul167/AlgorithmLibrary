@@ -3,7 +3,7 @@
 
 /*
 You are given a connected undirected graph consisting of n vertices and m edges. There are no self-loops or multiple edges in the given graph.
-You have to direct its edges in such a way that the obtained directed graph does not contain any paths of length greater then 1 
+You have to direct its edges in such a way that the obtained directed graph does not contain any paths of length greater than 1 
 (where the length of path is denoted as the number of traversed edges).
 */
 
