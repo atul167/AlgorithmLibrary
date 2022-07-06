@@ -4,8 +4,10 @@ class Solution {
 public:
     int dx[4] = {0, 1, 0, -1};
     int dy[4] = {-1, 0, 1, 0};
+    
     int n, m, perimeter = 0;
     vector<vector<int>> vis;
+    
     bool isSafe(int i, int j, vector<vector<int>>& grid) {
         if(i < 0 || i >= n || j < 0 || j >= m || grid[i][j] == 0 || vis[i][j]) return false;
         return true;
@@ -14,13 +16,13 @@ public:
     void dfs(int i, int j, vector<vector<int>>& grid) {
         if(!isSafe(i, j, grid)) return;
 
-        int ct = 0;
-        if(i - 1 >= 0 && grid[i-1][j] == 1) ct++;
-        if(i +1 < n && grid[i+1][j] == 1) ct++;
-        if(j + 1 < m && grid[i][j+1] == 1) ct++;
-        if(j - 1 >= 0 && grid[i][j-1] == 1) ct++;
+        int cnt = 4;
+        if(i - 1 >= 0 && grid[i-1][j] == 1) cnt--;
+        if(i +1 < n && grid[i+1][j] == 1) cnt--;
+        if(j + 1 < m && grid[i][j+1] == 1) cnt--;
+        if(j - 1 >= 0 && grid[i][j-1] == 1) cnt--;
         
-        perimeter += (4 - ct);
+        perimeter += cnt;
         
         vis[i][j] = 1;
 
