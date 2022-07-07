@@ -50,7 +50,7 @@ void reorder(BinaryTreeNode < int > * root) {
     
     int childSum = getChildSum(root);
     
-    if(childSum >= root->data) {
+    if(childSum > root->data) {
         root->data = childSum;
     } else {
         if(root->left) root->left->data = root->data; 
