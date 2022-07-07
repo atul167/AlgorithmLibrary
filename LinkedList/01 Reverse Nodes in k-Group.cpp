@@ -41,13 +41,13 @@ public:
 class Solution {
 public:
     ListNode* reverse(ListNode* head, int k) {
-        ListNode *prev = NULL, *next = NULL;
+        ListNode *prev = NULL, *cur = head, *next = NULL;
         int cnt = 0;
-        while (head && cnt < k) {
-            next = head->next;
-            head->next = prev;
-            prev = head;
-            head = next;
+        while (cur && cnt < k) {
+            next = cur->next;
+            cur->next = prev;
+            prev = cur;
+            cur = next;
             cnt++;
         }
         return prev;
