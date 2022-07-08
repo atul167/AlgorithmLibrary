@@ -1,3 +1,20 @@
+// https://stackoverflow.com/questions/47830379/minimum-sum-of-two-arrays-choosing-half-of-the-elements-in-each
+
+/*
+You have two arrays a1 and a2 of integers with same length n (n is even). 
+Find the minimum total sum of elements in a1 and a2 by selecting one element for each index 
+and half of the selected elements should reside in a1 and the rest is in a2.
+
+Example:
+
+ a1 = [36, 72];  
+ a2 = [35, 61];
+ 
+The result should be 97 since we should choose 36 from a1 and 61 from a2. 
+One solution would be choosing all possible n/2 elements in a1 and a2 and computing their results. Can a more efficient solution be found?
+*/
+
+
 /*
 Amazon has hired n new employees (n is even). You have to send half of these employees to Bangalore and other half to Hyderabad. 
 The cost for each employee for each city is given in a form of array. Find the minimum cost.
@@ -25,7 +42,6 @@ Ans = 1000
 
 
 
-// https://stackoverflow.com/questions/47830379/minimum-sum-of-two-arrays-choosing-half-of-the-elements-in-each
 
 bool compare(vector<int>& a, vector<int>& b) {
     return (a[0] - a[1]) < (b[0] - b[1]);
