@@ -43,16 +43,24 @@ Ans = 1000
 
 
 
+
+
 bool compare(vector<int>& a, vector<int>& b) {
     return (a[0] - a[1]) < (b[0] - b[1]);
 }
 
 void solve() {
     cin >> n;
-    vector<vector<int>> cost(n, vector<int>(2));
+    vector<int> BLR(n), HYD(n);
 
     for(int i = 0; i < n; i++) {
-        cin >> cost[i][0] >> cost[i][1];
+        cin >> BLR[i] >> HYD[i];
+    }
+
+    vector<vector<int>> cost(n, vector<int>(2));
+    for(int i = 0; i < n; i++) {
+        cost[i][0] = BLR[i]; 
+        cost[i][1] = HYD[i];
     }
     
     sort(cost.begin(), cost.end(), compare);
