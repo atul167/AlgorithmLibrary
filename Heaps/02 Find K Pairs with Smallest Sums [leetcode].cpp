@@ -9,8 +9,11 @@ Return the k pairs (u1, v1), (u2, v2), ..., (uk, vk) with the smallest sums.
 */
 
 /*
-Basic idea: Use min_heap to keep track on next minimum pair sum, 
+Basic idea: 
+Use min_heap to keep track on next minimum pair sum, 
 and we only need to maintain K possible candidates in the data structure.
+
+Think with respect to i variable and not both i, j variables
 
 Some observations: 
 i) For every numbers in nums1, its best partner (yields min sum) always strats from nums2[0] since arrays are all sorted.
