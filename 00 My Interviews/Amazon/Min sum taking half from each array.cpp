@@ -14,6 +14,23 @@ The result should be 97 since we should choose 36 from a1 and 61 from a2.
 One solution would be choosing all possible n/2 elements in a1 and a2 and computing their results. Can a more efficient solution be found?
 */
 
+/*
+Solution:
+
+Let's represent arrays a1 and a2
+    a1 = [36, 72];  
+    a2 = [35, 61];
+    
+In a different way: we combine i-th indexes and compute a penalty = a1[i] - a2[i]:
+Here penalty is a price we have to pay when we choose a1 value instead of a2. 
+
+Let's sort by penalty
+
+Now let's choose n/2 items with the lowest penalties and take a1 items; choose n/2 items with highest penalties and take a2 items:
+*/
+
+
+
 
 /*
 Amazon has hired n new employees (n is even). You have to send half of these employees to Bangalore and other half to Hyderabad. 
@@ -38,9 +55,6 @@ Emp2     700       1000
 
 Ans = 1000
 */
-
-
-
 
 
 
