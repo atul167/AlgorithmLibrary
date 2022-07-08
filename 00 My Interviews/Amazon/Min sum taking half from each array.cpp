@@ -22,3 +22,31 @@ Emp2     700       1000
 Ans = 1000
 */
 
+
+
+
+// https://stackoverflow.com/questions/47830379/minimum-sum-of-two-arrays-choosing-half-of-the-elements-in-each
+
+bool compare(vector<int>& a, vector<int>& b) {
+    return (a[0] - a[1]) < (b[0] - b[1]);
+}
+
+void solve() {
+    cin >> n;
+    vector<vector<int>> cost(n, vector<int>(2));
+
+    for(int i = 0; i < n; i++) {
+        cin >> cost[i][0] >> cost[i][1];
+    }
+    
+    sort(cost.begin(), cost.end(), compare);
+
+    int sum = 0;
+    for(int i = 0; i < n/2; i++) {
+        sum += cost[i][0];
+    }
+    for(int i = n/2; i < n; i++) {
+        sum += cost[i][1];
+    }
+    cout << sum;
+}
