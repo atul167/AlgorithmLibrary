@@ -7,3 +7,13 @@ Example:
 T = 5
 playlist = [2, 3, 5, 4, 1]
 */
+
+
+/*
+Solution:
+
+It is a 0-1 knapsack problem with 
+Knapsack capacity = Journey time T
+Weight array = Playlist array
+Value array = [1, 1, 1, 1, ...]
+*/
