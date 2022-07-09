@@ -88,3 +88,67 @@ void solve() {
     }
     cout << sum;
 }
+
+
+
+
+
+
+
+
+
+
+int n;
+
+int dpfun(int i, int cntOfBLR, vector < vector < int > >& cost) {
+    if(i == n) return 0;
+
+    int x = 1e9, y = 1e9;
+    
+    if(cntOfBLR < n/2) {
+        x = cost[i][0] + dpfun(i + 1, cntOfBLR + 1, cost);
+    }
+    
+    int cntOfHyd = i - cntOfBLR;
+    if(cntOfHyd < n/2) {
+        y = cost[i][1] + dpfun(i + 1, cntOfBLR, cost);
+    }
+
+    return min(x, y);
+}
+
+
+
+bool compare(vector<int>& a, vector<int>& b) {
+    return (a[0] - a[1]) < (b[0] - b[1]);
+}
+int greedyfun(vector<vector<int> > cost) {
+    sort(cost.begin(), cost.end(), compare);
+
+    int sum = 0;
+    for(int i = 0; i < n/2; i++) {
+        sum += cost[i][0];
+    }
+    for(int i = n/2; i < n; i++) {
+        sum += cost[i][1];
+    }
+    return sum;
+}
+
+void solve() {
+    cin >> n;
+    vector<int> BLR(n), HYD(n);
+
+    for(int i = 0; i < n; i++) {
+        cin >> BLR[i] >> HYD[i];
+    }
+
+    vector<vector<int> > cost(n, vector<int>(2));
+    for(int i = 0; i < n; i++) {
+        cost[i][0] = BLR[i]; 
+        cost[i][1] = HYD[i];
+    }
+    
+    cout << dpfun(0, 0, cost) << endl; 
+    cout << greedyfun(cost) << endl; 
+}
