@@ -1,6 +1,8 @@
 /*
 https://cses.fi/problemset/task/1634/
-This problem can only be solved by this method
+
+Consider a money system consisting of n coins. Each coin has a positive integer value. 
+Your task is to produce a sum of money x using the available coins in such a way that the number of coins is minimal.
 */
 
 // order m space
