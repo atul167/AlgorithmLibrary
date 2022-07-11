@@ -33,8 +33,9 @@ int Solution::solve(const vector<int>& A){
 	
 	for(int i=0; i<=n; i++){
 		for(int j=0; j<=temp; j++){
-			if(i==0 || j==0) dp[i][j] = {0, 0};
-			else{
+			if(i==0 || j==0) {
+				dp[i][j] = {0, 0};
+			} else {
 				int prev_items = dp[i-1][j].items;
 				int prev_weight = dp[i-1][j].weight;
 				
@@ -48,8 +49,7 @@ int Solution::solve(const vector<int>& A){
 					else{
 						dp[i][j] = dp[i-1][j];
 					}
-				} 
-				else{
+				} else {
 					dp[i][j] = dp[i-1][j];
 				}
 			}
