@@ -80,11 +80,7 @@ void solve() {
 
     // reverse engineering
     queue < node > q;
-    q.push({
-        n,
-        sum,
-        ""
-    });
+    q.push({n, sum, ""});
 
     while (!q.empty()) {
         node x = q.front();
@@ -97,19 +93,11 @@ void solve() {
 
         // excluded
         if (dp[x.i - 1][x.j]) {
-            q.push({
-                x.i - 1,
-                x.j,
-                x.pathSoFar
-            });
+            q.push({x.i - 1, x.j, x.pathSoFar});
         }
         // included
         if ((x.j >= a[x.i - 1]) && dp[x.i - 1][x.j - a[x.i - 1]]) {
-            q.push({
-                x.i - 1,
-                x.j - a[x.i - 1],
-                to_string(a[x.i - 1]) + " " + x.pathSoFar
-            });
+            q.push({x.i - 1, x.j - a[x.i - 1], to_string(a[x.i - 1]) + " " + x.pathSoFar});
         }
     }
 }
