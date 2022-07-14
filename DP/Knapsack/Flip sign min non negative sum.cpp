@@ -1,8 +1,8 @@
 // https://www.scaler.com/problems/flip-array/
 
 /*
-Given an array A of positive elements, you have to flip the sign of some of its elements such that the resultant sum of the elements of array should be minimum non-negative 
-(as close to zero as possible).
+Given an array A of positive elements, you have to flip the sign of some of its elements such that 
+the resultant sum of the elements of array should be minimum non-negative (as close to zero as possible).
 Return the minimum number of elements whose sign needs to be flipped such that the resultant sum is minimum non-negative.
 */
 
