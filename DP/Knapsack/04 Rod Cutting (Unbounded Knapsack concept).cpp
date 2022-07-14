@@ -1,6 +1,11 @@
 // https://practice.geeksforgeeks.org/problems/rod-cutting0840/1
 
 /*
+Given a rod of length N inches and an array of prices, price[] that contains prices of all pieces of size smaller than N. 
+Determine the maximum value obtainable by cutting up the rod and selling the pieces.
+*/
+
+/*
 This problem is very similar to the Unbounded Knapsack Problem, where there are multiple occurrences of the same item. Here the pieces of the rod.
 
 An analogy between Unbounded Knapsack and the Rod Cutting Problem:
