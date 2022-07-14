@@ -1,8 +1,8 @@
 // https://practice.geeksforgeeks.org/problems/rod-cutting0840/1
 
 /*
-Given a rod of length N inches and an array of prices, price[] that contains prices of all pieces of size smaller than N. 
-Determine the maximum value obtainable by cutting up the rod and selling the pieces.
+Given a rod of length n and a list of rod prices of length i, where 1 <= i <= n, 
+find the optimal way to cut the rod into smaller rods to maximize profit.
 */
 
 /*
