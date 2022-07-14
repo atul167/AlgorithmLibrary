@@ -46,67 +46,79 @@ const int N = 500+5;
 int n, m;
 
 struct node {
-	int i, j;
-	string pathSoFar;
+    int i, j;
+    string pathSoFar;
 };
 
 void solve() {
-	int sum;
-	cin >> n >> sum;
-	vi a(n);
-	f(i, n) cin >> a[i];
+    int sum;
+    cin >> n >> sum;
+    vi a(n);
+    f(i, n) cin >> a[i];
 
-	int dp[n+1][sum + 1];
+    int dp[n + 1][sum + 1];
     for (int i = 0; i <= n; i++) {
         dp[i][0] = 1;
     }
     for (int j = 1; j <= sum; j++) {
         dp[0][j] = 0;
     }
-    for (int i = 1; i <= n; i++) { 
-        for (int j = 1; j <= sum; j++) { 
-            if(j < a[i - 1]){
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= sum; j++) {
+            if (j < a[i - 1]) {
                 dp[i][j] = dp[i - 1][j];
-            }else{
+            } else {
                 dp[i][j] = dp[i - 1][j] || dp[i - 1][j - a[i - 1]];
             }
         }
     }
-    
-    if(!dp[n][sum]) {
-    	cout << "Not possible" << endl;
-    	return;
+
+    if (!dp[n][sum]) {
+        cout << "Not possible" << endl;
+        return;
     }
 
     // reverse engineering
-    queue<node> q;
-    q.push({n, sum, ""});
+    queue < node > q;
+    q.push({
+        n,
+        sum,
+        ""
+    });
 
-    while(!q.empty()) {
-    	node x = q.front();
-    	q.pop();
+    while (!q.empty()) {
+        node x = q.front();
+        q.pop();
 
-    	if(x.i == 0 || x.j == 0) {
-    		cout << x.pathSoFar << endl;
-    		continue;
-    	}
+        if (x.i == 0 || x.j == 0) {
+            cout << x.pathSoFar << endl;
+            continue;
+        }
 
-    	// excluded
-    	if(dp[x.i - 1][x.j]) {
-    		q.push({x.i - 1, x.j, x.pathSoFar});
-    	}
-    	// included
-    	if((x.j >= a[x.i - 1]) && dp[x.i - 1][x.j - a[x.i - 1]]) {
-    		q.push({x.i - 1, x.j - a[x.i - 1], to_string(a[x.i - 1]) + " " + x.pathSoFar});
-    	}
+        // excluded
+        if (dp[x.i - 1][x.j]) {
+            q.push({
+                x.i - 1,
+                x.j,
+                x.pathSoFar
+            });
+        }
+        // included
+        if ((x.j >= a[x.i - 1]) && dp[x.i - 1][x.j - a[x.i - 1]]) {
+            q.push({
+                x.i - 1,
+                x.j - a[x.i - 1],
+                to_string(a[x.i - 1]) + " " + x.pathSoFar
+            });
+        }
     }
 }
 
 signed main() {
-	IOS
-	int T = 1;
-	// cin >> T;
-	while(T--)
-	solve();
-	return 0;
+    IOS
+    int T = 1;
+    // cin >> T;
+    while (T--)
+        solve();
+    return 0;
 }
