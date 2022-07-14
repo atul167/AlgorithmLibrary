@@ -1,4 +1,5 @@
 // https://practice.geeksforgeeks.org/problems/rod-cutting0840/1
+// https://www.techiedelight.com/rod-cutting/
 
 /*
 Given a rod of length n and a list of rod prices of length i, where 1 <= i <= n, 
