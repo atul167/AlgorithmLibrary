@@ -1,3 +1,4 @@
+// https://practice.geeksforgeeks.org/problems/kadanes-algorithm-1587115620/1
 // https://www.techiedelight.com/print-continuous-subarray-with-maximum-sum/
 
 void kadane() {
@@ -46,25 +47,24 @@ void kadane() {
 
 
 
-
-
 // Method 2
-
 /*
 For i'th index:
 curr_max = max contiguous subarray sum ending at index i (including a[i]) 
 */
-
-class Solution {
-public:
-    long long maxSubarraySum(int a[], int n) {
-        long long max_so_far = INT_MIN, curr_max = 0;
-
-        for (int i = 0; i < n; i++) {
-            curr_max = max<long long>(a[i], curr_max + a[i]);
-            max_so_far = max<long long>(max_so_far, curr_max);
+class Solution{
+    public:
+    // arr: input array
+    // n: size of array
+    //Function to find the sum of contiguous subarray with maximum sum.
+    long long maxSubarraySum(int arr[], int n){
+        
+        // Your code here
+        int cur_mx = 0, res = INT_MIN;
+        for(int i = 0; i < n; i++) {
+            cur_mx = max(arr[i], cur_mx + arr[i]);
+            res = max(res, cur_mx);
         }
-
-        return max_so_far;
+        return res;
     }
 };
