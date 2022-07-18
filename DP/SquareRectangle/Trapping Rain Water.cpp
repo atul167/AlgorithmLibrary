@@ -59,6 +59,12 @@ Always fill from lower boundary block heights [this will ensure min(left_max, ri
 For example, if current height of left pointer is lower, we fill water in the left bin 
 else if current height of right pointer is lower, we fill water in the right bin. 
 Until left pointer meets right pointer, we filled the whole container.
+
+
+Instead of maintaining two arrays of size n for storing the left and a right max of each element, 
+maintain two variables to store the maximum till that point. 
+Since water trapped at any element = min(max_left, max_right) – arr[i]. 
+Calculate water trapped on smaller elements out of A[lo] and A[hi] first, and move the pointers till lo doesn’t cross hi.
 */
 class Solution {
 public:
