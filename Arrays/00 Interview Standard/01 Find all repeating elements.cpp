@@ -17,6 +17,18 @@ Output:
 */
 
 
+/*
+Algorithm: 
+1) Traverse the given array from start to end.
+2) For every element in the array increment the (arr[i] % n)‘th element by n.
+3) Now traverse the array again and print all those indexes i for which arr[i]/n is greater than 1. 
+   Which guarantees that the number n has been added to that index
+
+This approach works because all elements are in the range from 0 to n-1 and arr[i] would be greater than n only 
+if a value “i” has appeared more than once.
+*/
+
+
 class Solution{
   public:
     vector<int> duplicates(int arr[], int n) {
