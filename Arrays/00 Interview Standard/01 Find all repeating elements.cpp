@@ -43,6 +43,8 @@ class Solution{
 
 
 
+
+
 /*
 Given an integer array nums of length n where all the integers of nums are in the range [1, n] and each integer appears once or twice, 
 return an array of all the integers that appears twice.
@@ -55,6 +57,7 @@ Input: nums = [4,3,2,7,8,2,3,1]
 Output: [2,3]
 */
 
+// Method 1
 class Solution {
 public:
     vector<int> findDuplicates(vector<int>& nums) {
@@ -75,6 +78,32 @@ public:
             if (nums[i] >= n * 2) {
                 // push i+1 and not i since original array is 1...n
                 res.push_back(i+1);
+            }
+        }
+        
+        return res;
+    }
+};
+
+
+
+// Method 2
+/*
+This approach will not work if duplicates' frequency >=3.
+In that case same elements will be printed twice or as many times as their (frequency - 1)
+Thus we wont be able to print uniquely duplicate elements
+*/
+class Solution {
+public:
+    vector<int> findDuplicates(vector<int>& nums) {
+        int n = nums.size();
+        vector<int> res;
+        for (int i = 0; i < n; ++i) {
+            int idx = abs(nums[i]) - 1;
+            if (nums[idx] < 0) {
+                res.push_back(idx + 1);
+            } else {
+                nums[idx] = -nums[idx];
             }
         }
         
