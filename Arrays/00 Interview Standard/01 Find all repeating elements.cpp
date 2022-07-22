@@ -1,5 +1,6 @@
 // https://www.geeksforgeeks.org/find-duplicates-in-on-time-and-constant-extra-space/
 // https://practice.geeksforgeeks.org/problems/find-duplicates-in-an-array/1
+// https://youtu.be/iiYc32-4ZJY
 
 /*
 Given an array of n elements that contains elements from 0 to n-1, with any of these numbers appearing any number of times. 
@@ -31,6 +32,52 @@ class Solution{
         }
         
         if(res.size() == 0) res.push_back(-1);
+        return res;
+    }
+};
+
+
+
+
+
+
+
+
+/*
+Given an integer array nums of length n where all the integers of nums are in the range [1, n] and each integer appears once or twice, 
+return an array of all the integers that appears twice.
+You must write an algorithm that runs in O(n) time and uses only constant extra space.
+
+ 
+
+Example 1:
+Input: nums = [4,3,2,7,8,2,3,1]
+Output: [2,3]
+*/
+
+class Solution {
+public:
+    vector<int> findDuplicates(vector<int>& nums) {
+        int n = nums.size();
+        
+        // Since elements are in range 1..n, make it in range o...n-1
+        for (int i = 0; i < n; i++) {
+            nums[i]--;
+        }
+        
+        
+        vector<int> res;
+        for (int i = 0; i < n; i++) {
+            nums[nums[i] % n] = nums[nums[i] % n] + n;
+        }
+        
+        for (int i = 0; i < n; i++) {
+            if (nums[i] >= n * 2) {
+                // push i+1 and not i since original array is 1...n
+                res.push_back(i+1);
+            }
+        }
+        
         return res;
     }
 };
