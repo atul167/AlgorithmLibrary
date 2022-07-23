@@ -1,4 +1,5 @@
 // https://practice.geeksforgeeks.org/problems/multiply-two-strings/1
+// https://www.geeksforgeeks.org/multiply-large-numbers-represented-as-strings/
 
 /*
 Input:
