@@ -1,6 +1,6 @@
 // https://cp-algorithms.com/string/prefix-function.html
-// https://youtu.be/eKOMXcmKF7w
-// https://youtu.be/My4eYV2sDfY
+// https://youtu.be/7daVV4Ac-YA
+// https://youtu.be/XOMePGIVJZA
 
 /*
 KMP algorithm depends on prefix function (PI array) for its implementation
