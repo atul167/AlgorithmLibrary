@@ -55,8 +55,7 @@ class Solution {
                 if (s1 >= s2) {
                     // Value of current symbol is greater or equal to the next symbol
                     res = res + s1;
-                }
-                else {
+                } else {
                     // Value of current symbol is less than the next symbol
                     res = res + s2 - s1;
                     // increment i since next symbol is used
