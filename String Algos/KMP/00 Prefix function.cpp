@@ -62,7 +62,7 @@ if (s[pi[i - 1]] == s[i]) {
 }
 */
 
-// generates PI array (or LPS [largest prefix suffix])
+// generates PI array (or LPS [largest prefix suffix]) in O(n) time
 vector<int> prefix_function(string &s) {
     int n = (int)s.length();
     vector<int> pi(n);
