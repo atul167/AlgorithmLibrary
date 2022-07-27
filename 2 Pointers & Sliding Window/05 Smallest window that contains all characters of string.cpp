@@ -23,6 +23,60 @@ Explanation : Sub-string -> "GEEKSFOR"
 */
 
 
+
+
+
+class Solution{
+public:
+    const int MAX_CHARS = 256;
+    
+    int findSubString(string str) {
+        int n = str.length();
+        if (n <= 1) return n;
+
+        // Count all distinct characters in input str
+        set<char> st;
+        for (char x : str) st.insert(x);
+        int dist_count = st.size();
+
+
+        int left = 0, start_index = 0, min_len = INT_MAX, count = 0;
+        int hash_str[MAX_CHARS] = { 0 };
+
+        for (int right = 0; right < n; right++) {
+            hash_str[str[right]]++;
+
+            if (hash_str[str[right]] == 1) count++;
+
+            // if all the characters are matched
+            if (count == dist_count) {
+                // Try to minimize the window
+                // i.e., check if any character is occurring more no. of times than its occurrence in pattern
+                while (hash_str[str[left]] > 1) {
+                    hash_str[str[left]]--;
+                    left++;
+                }
+
+                int cur_window = right - left + 1;
+                if (min_len > cur_window) {
+                    min_len = cur_window;
+                    start_index = left;
+                }
+            }
+        }
+
+        // Return substring starting from start_index and length min_len
+        // return str.substr(start_index, min_len);
+        return min_len;
+    }
+};
+
+
+
+
+
+
+
 class Solution {
 public:
     const int MAX_CHARS = 256;
@@ -38,19 +92,19 @@ public:
 
 
         int left = 0, start_index = 0, min_len = INT_MAX, count = 0;
-        int curr_count[MAX_CHARS] = { 0 };
+        int hash_str[MAX_CHARS] = { 0 };
 
         for (int right = 0; right < n; right++) {
-            curr_count[str[right]]++;
+            hash_str[str[right]]++;
 
-            if (curr_count[str[right]] == 1) count++;
+            if (hash_str[str[right]] == 1) count++;
 
             // if all the characters are matched
             if (count == dist_count) {
                 // Try to minimize the window
                 // i.e., check if any character is occurring more no. of times than its occurrence in pattern
-                while (curr_count[str[left]] > 1) {
-                    curr_count[str[left]]--;
+                while (hash_str[str[left]] > 1) {
+                    hash_str[str[left]]--;
                     left++;
                 }
 
