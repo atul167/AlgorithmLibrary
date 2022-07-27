@@ -22,7 +22,7 @@ Explanation: "toprac" is the smallest substring in which "toc" can be found.
 class Solution {
 public:
     const int MAX_CHARS = 256;
-  
+    
     // Function to find the smallest window in the string s consisting of all the characters of string p.
     string smallestWindow (string str, string pat) {
         int n = str.length();
@@ -32,7 +32,7 @@ public:
         int hash_str[MAX_CHARS] = { 0 };
         int hash_pat[MAX_CHARS] = { 0 };
 
-        for (int i = 0; i < m; i++)
+        for (int i = 0; i < m; i++) 
             hash_pat[pat[i]]++;
 
 
@@ -47,10 +47,8 @@ public:
             // if all the characters are matched
             if (count == m) {
                 // Try to minimize the window
-                while (hash_str[str[left]] > hash_pat[str[left]] || hash_pat[str[left]] == 0) {
-                    if (hash_str[str[left]] > hash_pat[str[left]]) {
-                        hash_str[str[left]]--;
-                    }
+                while (hash_str[str[left]] > hash_pat[str[left]]) {
+                    hash_str[str[left]]--;
                     left++;
                 }
 
