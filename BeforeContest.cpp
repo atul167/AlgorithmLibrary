@@ -40,9 +40,8 @@ void SieveOfEratosthenes(int N) {
 // O(n*log(log(n))) 
 ll spf[N];
 void SPF() { 
-	spf[1] = 1; 
 	// marking smallest prime factor for every number to be itself.
-	for (ll i = 2; i < N; i++) spf[i] = i; 
+	for (ll i = 1; i < N; i++) spf[i] = i; 
   
 	// separately marking spf for every even number as 2 
 	for (ll i=4; i<N; i+=2) spf[i] = 2;
