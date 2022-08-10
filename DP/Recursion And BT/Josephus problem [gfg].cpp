@@ -1,4 +1,5 @@
 // https://www.geeksforgeeks.org/josephus-problem-set-1-a-on-solution/
+// https://practice.geeksforgeeks.org/problems/josephus-problem/1
 
 
 /*
