@@ -15,7 +15,7 @@ public:
      
     bool isSafe(int node, int color[], bool graph[101][101], int n, int col) {
         for(int i = 0; i < n; i++) {
-            if(i != node && graph[i][node] == 1 && color[i] == col)
+            if(i != node && graph[node][i] == 1 && color[i] == col)
                 return false;
         }
         return true;
