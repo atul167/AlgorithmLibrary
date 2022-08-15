@@ -22,7 +22,91 @@ Return the step-by-step directions of the shortest path from node s to node t.
 
 
 
+
 // Method 1:
+
+/*
+3 Steps:
+
+1) Find LCA of given nodes
+
+2) Build directions for both start and destination from the LCA.
+Say we get "LRRL" and "RR".
+
+2) Replace all steps in the start direction to "U" and add destination direction.
+The result is "UUUU" + "RR".
+*/
+
+class Solution {
+public:
+    TreeNode* LCA(TreeNode* root, int p, int q) {
+        // base case
+        if (!root || root->val == p || root->val == q) {
+            return root;
+        }
+
+        TreeNode* left = LCA(root->left, p, q);
+        TreeNode* right = LCA(root->right, p, q);
+
+        if (!left) {
+            return right;
+        }
+        if (!right) {
+            return left;
+        }
+        // both left and right are not null, we found our result
+        return root;
+    }
+    
+    bool find(TreeNode* root, int val, string &path) {
+        if (root->val == val)
+            return true;
+        
+        if (root->left && find(root->left, val, path))
+            path.push_back('L');
+        
+        else if (root->right && find(root->right, val, path))
+            path.push_back('R');
+        
+        return !path.empty();
+    }
+    
+    string getDirections(TreeNode* root, int startValue, int destValue) {
+        root = LCA(root, startValue, destValue);
+        string start_path, dest_path;
+        
+        find(root, startValue, start_path);
+        find(root, destValue, dest_path);
+        
+        reverse(start_path.begin(), start_path.end());
+        reverse(dest_path.begin(), dest_path.end());
+        
+        string res =  "";
+        
+        for(int i = 0; i < start_path.size(); i++) {
+            res += 'U';
+        }
+        
+        for(int j = 0; j < dest_path.size(); j++) {
+            res += dest_path[j];
+        }
+
+        return res;   
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+// Method 2:
 
 /*
 3 Steps:
@@ -78,8 +162,7 @@ public:
             res += dest_path[j];
         }
 
-        return res;
-        
+        return res;   
     }
 };
 
@@ -134,7 +217,6 @@ public:
             res += dest_path[j];
         }
 
-        return res;
-        
+        return res;  
     }
 };
