@@ -15,26 +15,8 @@ The initial and the target position co-ordinates of Knight have been given accor
 class Solution {
 public:
     int n, m;
-    int row[8] = {
-        2,
-        2,
-        -2,
-        -2,
-        1,
-        1,
-        -1,
-        -1
-    };
-    int col[8] = {
-        -1,
-        1,
-        1,
-        -1,
-        2,
-        -2,
-        2,
-        -2
-    };
+    int row[8] = {2, 2, -2, -2, 1, 1, -1, -1};
+    int col[8] = { -1, 1, 1, -1, 2, -2, 2, -2};
     vector < vector < int >> vis;
 
     struct Node {
