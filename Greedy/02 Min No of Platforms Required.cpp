@@ -93,6 +93,38 @@ public:
 
 
 
+class Solution{
+    public:
+    //Function to find the minimum number of platforms required at the
+    //railway station such that no train waits.
+    int findPlatform(int arr[], int dep[], int n) {
+        sort(arr, arr + n);
+        sort(dep, dep + n);
+            
+        // min heap
+        priority_queue<int, vector<int>, greater<int>> heap;
+    
+        int rooms = 0;
+        heap.push(dep[0]);
+        rooms++;
+    
+        for (int i = 1; i < n; i++) {
+            // use < or <= as per question
+            if (arr[i] <= heap.top()) {
+                rooms++;
+            } else {
+                heap.pop();
+            }
+            heap.push(dep[i]);
+        }
+    
+        return rooms;
+    }
+};
+
+
+
+
 
 
 
