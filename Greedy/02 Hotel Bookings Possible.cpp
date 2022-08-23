@@ -80,3 +80,35 @@ bool Solution::hotel(vector<int> &arr, vector<int> &dep, int K) {
 
     return result <= K;
 }
+
+
+
+
+
+
+
+
+bool Solution::hotel(vector<int> &arrive, vector<int> &depart, int K) {
+    int n = arrive.size();
+    sort(arrive.begin(), arrive.end());
+    sort(depart.begin(), depart.end());
+        
+    // min heap
+    priority_queue<int, vector<int>, greater<int>> heap;
+
+    int rooms = 0;
+    heap.push(depart[0]);
+    rooms++;
+
+    for (int i = 1; i < n; i++) {
+        // use < or <= as per question
+        if (arrive[i] <= heap.top()) {
+            rooms++;
+        } else {
+            heap.pop();
+        }
+        heap.push(depart[i]);
+    }
+
+    return rooms <= K;
+}
