@@ -1,4 +1,3 @@
-// https://www.scaler.com/problems/binary-tree-to-circular-doubly-linked-list/
 // https://practice.geeksforgeeks.org/problems/binary-tree-to-cdll/1/
 
 /*
@@ -52,48 +51,39 @@ To Concatenate two circular DLLs, we will follow below steps:
 
 
 
-// Scaler wrong soln
-/*
-Definition for binary tree
-struct TreeNode {
-      int val;
-      TreeNode *left;
-      TreeNode *right;
-      TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+class Solution {
+  public:
+    
+    Node *concatenate(Node *leftList, Node *rightList) {
+        if (!leftList) return rightList;
+        if (!rightList) return leftList;
+    
+        Node *leftListLast = leftList->left;
+        Node *rightListLast = rightList->left;
+    
+        leftList->left = rightListLast;
+        rightList->left = leftListLast;
+    
+        leftListLast->right = rightList;
+        rightListLast->right = leftList;
+          
+        return leftList;
+    }
+
+    //Function to convert binary tree into circular doubly linked list.
+    Node *bTreeToCList(Node *root) {
+        //add code here.
+        if (!root) return root;
+    
+        Node *leftList = bTreeToCList(root->left);
+        Node *rightList = bTreeToCList(root->right);
+    
+        // make root circular
+        root->left = root->right = root;
+    
+        return concatenate(concatenate(leftList, root), rightList);
+    }
 };
-*/
-
-TreeNode *concatenate(TreeNode *leftList, TreeNode *rightList) {
-    if (!leftList) return rightList;
-    if (!rightList) return leftList;
-
-    TreeNode *leftListLast = leftList->left;
-    TreeNode *rightListLast = rightList->left;
-
-    leftList->left = rightListLast;
-    rightList->left = leftListLast;
-
-    if (leftListLast) leftListLast->right = rightList;
-    if (rightListLast) rightListLast->right = leftList;
-      
-    return leftList;
-}
-
-TreeNode *bTreeToCList(TreeNode *root) {
-    if (!root) return root;
-
-    TreeNode *leftList = bTreeToCList(root->left);
-    TreeNode *rightList = bTreeToCList(root->right);
-
-    // make root circular
-    root->left = root->right = root;
-
-    return concatenate(concatenate(leftList, root), rightList);
-}
-
-TreeNode *solve(TreeNode *A) {
-    return bTreeToCList(A);
-}
 
 
 
