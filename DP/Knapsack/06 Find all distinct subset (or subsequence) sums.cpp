@@ -33,5 +33,5 @@ public:
             if(dp[n][_sum]) res.push_back(_sum);
         }
         return res;
-   }
+    }
 };
