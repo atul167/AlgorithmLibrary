@@ -11,6 +11,8 @@ Since, it's time for the party, Geek wants to know the minimum time required in 
 Return an integer denoting the minimum time
 */
 
+// FFFFFFFTTTTTTTT
+
 class Solution {
 public:
     bool check(int mid, int N, vector < int > & a, int l) {
