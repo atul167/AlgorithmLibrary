@@ -49,7 +49,7 @@ class Solution {
     
             int cost = it.first, u = it.second;
     
-            // this step is awesome in priority queue method
+            // this step is required in priority queue method
             if(cost > dis[u]) continue;
        
             // for(auto it: g[u]) {
