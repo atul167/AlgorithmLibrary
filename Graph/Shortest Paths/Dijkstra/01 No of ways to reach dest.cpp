@@ -41,7 +41,8 @@ class Solution {
         priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
         
         pq.push({0, src});
-        numOfWays[src] = 1; dis[src] = 0;
+        dis[src] = 0;
+        numOfWays[src] = 1;
     
         while(!pq.empty()) {
             auto it = pq.top();
@@ -49,12 +50,10 @@ class Solution {
     
             int cost = it.first, u = it.second;
     
-            // this step is required in priority queue method
+            // this step is awesome in priority queue method
             if(cost > dis[u]) continue;
-       
-            // for(auto it: g[u]) {
-            for(int i = 0; i < g[u].size(); i++) {
-                pair<int, int> it = g[u][i];
+            
+            for(auto it: g[u]) {
                 int v = it.first, w = it.second;
                 if(dis[v] > dis[u] + w) {
                     dis[v] = dis[u] + w;
@@ -66,7 +65,6 @@ class Solution {
                 }
             }
         }
-        
         // djikstra ends
         
         return numOfWays[n-1];
