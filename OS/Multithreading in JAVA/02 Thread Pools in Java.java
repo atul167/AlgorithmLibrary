@@ -1,7 +1,7 @@
 // https://www.geeksforgeeks.org/thread-pools-java/
+// https://www.javatpoint.com/java-thread-pool
 
 
-// Java program to illustrate ThreadPool
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
@@ -62,5 +62,64 @@ public class Main {
 
         // pool shutdown (Step 4)
         pool.shutdown();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+class Task implements Runnable {
+    private String message;
+    public Task(String s) {
+        this.message = s;
+    }
+    public void run() {
+        System.out.println(Thread.currentThread().getName() + " (Start) message = " + message);
+        //call processmessage method that sleeps the thread for 2 seconds
+        processmessage();
+        //prints thread name
+        System.out.println(Thread.currentThread().getName()+" (End)");
+    }
+    private void processmessage() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+public class Main {
+    // Maximum number of threads in thread pool
+    static final int MAX_T = 5;
+
+    public static void main(String[] args) {
+        //creating a pool of MAX_T threads
+        ExecutorService executor = Executors.newFixedThreadPool(MAX_T);
+        for (int i = 0; i < 10; i++) {
+            Runnable worker = new Task("task-" + i);
+            executor.execute(worker);//calling execute method of ExecutorService
+        }
+
+        executor.shutdown();
+
+        while (!executor.isTerminated()) {   }
+
+        System.out.println("Finished all threads");
     }
 }
